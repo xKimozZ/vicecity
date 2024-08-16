@@ -1,0 +1,15 @@
+.buttonContainer {
+    font-family: Pricedown;
+    padding: 0.3em;
+    width: 140px;
+    max-height: 56px;
+    font-size: 48px;
+    color: white;
+    user-select: none;
+    clip-path: polygon(6% 3%, 97% 13%, 99% 94%, 3% 96%);
+    transition: linear 0.1s;
+}
+
+.buttonContainer:hover {
+    background-color: #198344;
+}
