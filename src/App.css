@@ -1,5 +1,36 @@
+#root {
+  background-color: black;
+  cursor: url('./assets/mouse.png'),auto;
+  position: relative;
+}
+
+.viceLogo {
+  position: absolute;
+  z-index: 9999;
+  width: 256px;
+  height: 256px;
+  top: 4%;
+  left: 3%;
+}
+
 .App {
+  background-image: url('./assets/background1024.png');
+  background-position: center;
+  clip-path: polygon(3% 4%, 99% 5%, 96% 86%, 3% 89%);
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.frame {
+  display: flex;
+  height: 20vh;
+  max-width: 80%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5em;
 }
 
 .App-logo {
