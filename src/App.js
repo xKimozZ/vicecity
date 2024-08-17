@@ -31,6 +31,108 @@ function App() {
 
   const [hoveredOption, setHoveredOption] = useState(1);
 
+  const renderButtons = () => {
+    return(
+      <>
+      <Button
+            buttonNumber={1}
+            buttonText={"map"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+            <Button
+              buttonNumber={2}
+              buttonText={"brief"}
+              hoverFunction={handleHover}
+              selectFunction={handleSelect}
+              hoveredOption={hoveredOption}
+              setHoveredOption={setHoveredOption}
+            />
+          <Button
+            buttonNumber={3}
+            buttonText={"load"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={4}
+            buttonText={"stats"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+      </>
+    )
+  }
+
+  const renderButtons1 = () => {
+    return(
+      <>
+          <Button
+            buttonNumber={5}
+            buttonText={"controls"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={6}
+            buttonText={"audio"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={7}
+            buttonText={"display"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={8}
+            buttonText={"language"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          {/* <Button
+            buttonNumber={9}
+            buttonText={"credits"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          /> */}
+          {/* <Button
+            buttonNumber={9}
+            buttonText={"error"}
+            hoverFunction={handleBack}
+            selectFunction={handleError}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={10}
+            buttonText={"error"}
+            hoverFunction={pb}
+            selectFunction={pe}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          /> */}
+      </>
+    )
+  }
+
   useEffect(()=> {
     console.log(hoveredOption);
   },[hoveredOption]);
