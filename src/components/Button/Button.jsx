@@ -29,7 +29,7 @@ const getRandomNumber = (min, max) => {
   setHoveredOption,
 }) => {
   const [clipPathStyle, setClipPathStyle] = useState({
-    transition: 'linear 0.1s',
+    transition: 'linear 0.05s',
     clipPath: generateRandomClipPath(),
 });
 
@@ -39,6 +39,12 @@ const isHovered = () => {
 useEffect(()=> {
   console.log(clipPathStyle);
 },[clipPathStyle]);
+
+useEffect(()=> {
+    if (isHovered())
+    setClipPathStyle({ clipPath: generateRandomClipPath() });
+}
+,[hoveredOption]);
 
 const handleHover = () => {
     if ( isHovered() ) return;
@@ -56,7 +62,10 @@ const handleHover = () => {
       onClick={selectFunction}
       style={clipPathStyle}
     >
+        <span className={styles.text}>
       {buttonText}
+
+        </span>
     </div>
   );
 };
