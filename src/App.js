@@ -18,6 +18,7 @@ import infoEcho from './assets/infoecho.wav'
 import { menuOptions } from './constants/menuOptions';
 
 function App() {
+  const optionsPerRow = [4,4];
   const [playHoverRight] = useSound(hoverRight);
   const [playHoverLeft] = useSound(hoverLeft);
   const [playSelectRight] = useSound(selectRight);
@@ -86,7 +87,12 @@ function App() {
   },[]);
 
 const handleKeyDown = (event) => {
-      console.log(event);
+      const firstRowStart = 1;
+      const firstRowEnd = optionsPerRow[0];
+      const secondRowStart = optionsPerRow[1] + 1;
+      const secondRowEnd = menuOptions.length;
+      const vertical = menuOptions.length / 2;
+
       if (event.key === "Escape") {
         handleBack();
       }
@@ -98,35 +104,35 @@ const handleKeyDown = (event) => {
       }
       if (event.key === "ArrowRight") {
         handleHover();
-        if (hoveredOption + 1 > 8)
-          setHoveredOption(hoveredOption - 3);
-        else if (hoveredOption + 1 === 5)
-          setHoveredOption(hoveredOption - 3)
+        if (hoveredOption + 1 > secondRowEnd)
+          setHoveredOption( secondRowStart );
+        else if (hoveredOption + 1 === firstRowEnd + 1)
+          setHoveredOption( firstRowStart )
         else
         setHoveredOption(hoveredOption+1);
       }
       if (event.key === "ArrowLeft") {
         handleHover();
-        if (hoveredOption - 1 < 1)
-          setHoveredOption(hoveredOption + 3);
-        else if (hoveredOption - 1 === 4)
-          setHoveredOption(hoveredOption + 3)
+        if (hoveredOption - 1 < firstRowStart)
+          setHoveredOption(firstRowEnd);
+        else if (hoveredOption - 1 === secondRowStart - 1)
+          setHoveredOption( secondRowEnd )
           else
         setHoveredOption(hoveredOption - 1);
       }
       if (event.key === "ArrowDown") {
         handleHover();
-        if (hoveredOption + 4 > 8)
-          setHoveredOption( hoveredOption - 4);
+        if (hoveredOption + vertical > secondRowEnd)
+          setHoveredOption( hoveredOption - vertical);
         else
-        setHoveredOption(hoveredOption+4);
+        setHoveredOption(hoveredOption + vertical);
       }
       if (event.key === "ArrowUp") {
         handleHover();
-        if (hoveredOption - 4 < 1)
-          setHoveredOption(hoveredOption + 4);
+        if (hoveredOption - vertical < firstRowStart)
+          setHoveredOption(hoveredOption + vertical);
         else
-        setHoveredOption(hoveredOption-4);
+        setHoveredOption(hoveredOption- vertical);
       }
     };
 
@@ -142,10 +148,10 @@ const handleKeyDown = (event) => {
       <div style={{display:'flex',alignItems:'center',flexDirection:'column',  position:'absolute', bottom:'8%', width:'100%', backgroundColor:'black'}}
       onKeyDown={handleKeyDown} tabIndex="0">
       <div className="frame">
-          {renderButtons(0,4) }
+          {renderButtons(0, optionsPerRow[0]) }
         </div>
         <div className="frame">
-          {renderButtons(4,8) }
+          {renderButtons(optionsPerRow[1], menuOptions.length) }
         </div>
 
       </div>
