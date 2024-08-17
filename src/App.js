@@ -113,22 +113,6 @@ function App() {
             hoveredOption={hoveredOption}
             setHoveredOption={setHoveredOption}
           /> */}
-          {/* <Button
-            buttonNumber={9}
-            buttonText={"error"}
-            hoverFunction={handleBack}
-            selectFunction={handleError}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={10}
-            buttonText={"error"}
-            hoverFunction={pb}
-            selectFunction={pe}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          /> */}
       </>
     )
   }
@@ -214,40 +198,6 @@ const handleKeyDown = (event) => {
         setHoveredOption(hoveredOption-4);
       }
     };
-
-  async function pbr() {
-    const audio = new Audio(backRight);
-    audio.volume = 1.0; // Ensure volume is set
-    audio.play().catch(err => console.error("Audio playback error:", err));
-  };
-
-  async function pbl() {
-    const audio = new Audio(backLeft);
-    audio.volume = 1.0; // Ensure volume is set
-    audio.play().catch(err => console.error("Audio playback error:", err));
-  };
-
-  async function pel() {
-    const audio = new Audio(errorLeft);
-    audio.volume = 1.0; // Ensure volume is set
-    audio.play().catch(err => console.error("Audio playback error:", err));
-  };
-
-  async function per() {
-    const audio = new Audio(errorRight);
-    audio.volume = 1.0; // Ensure volume is set
-    audio.play().catch(err => console.error("Audio playback error:", err));
-  };
-
-  const pb = () => {
-    pbl();
-    pbr();
-  };
-
-  const pe = () => {
-    pel();
-    per();
-  };
 
   return (
     <div>
