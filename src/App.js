@@ -178,6 +178,41 @@ const handleKeyDown = (event) => {
       if (event.key === "Backspace") {
         handleError();
       }
+      if (event.key === "Enter") {
+        handleSelect();
+      }
+      if (event.key === "ArrowRight") {
+        handleHover();
+        if (hoveredOption + 1 > 8)
+          setHoveredOption(hoveredOption - 3);
+        else if (hoveredOption + 1 === 5)
+          setHoveredOption(hoveredOption - 3)
+        else
+        setHoveredOption(hoveredOption+1);
+      }
+      if (event.key === "ArrowLeft") {
+        handleHover();
+        if (hoveredOption - 1 < 1)
+          setHoveredOption(hoveredOption + 3);
+        else if (hoveredOption - 1 === 4)
+          setHoveredOption(hoveredOption + 3)
+          else
+        setHoveredOption(hoveredOption - 1);
+      }
+      if (event.key === "ArrowDown") {
+        handleHover();
+        if (hoveredOption + 4 > 8)
+          setHoveredOption( hoveredOption - 4);
+        else
+        setHoveredOption(hoveredOption+4);
+      }
+      if (event.key === "ArrowUp") {
+        handleHover();
+        if (hoveredOption - 4 < 1)
+          setHoveredOption(hoveredOption + 4);
+        else
+        setHoveredOption(hoveredOption-4);
+      }
     };
 
   async function pbr() {
@@ -222,88 +257,16 @@ const handleKeyDown = (event) => {
         onKeyDown={handleKeyDown} // Attach the onKeyDown event here
         tabIndex="0"
       >
-        <div className="frame">
-          <Button
-            buttonNumber={1}
-            buttonText={"map"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={2}
-            buttonText={"load"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={3}
-            buttonText={"brief"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={4}
-            buttonText={"stats"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={5}
-            buttonText={"controls"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={6}
-            buttonText={"sound"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={7}
-            buttonText={"language"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={8}
-            buttonText={"credits"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={9}
-            buttonText={"error"}
-            hoverFunction={handleBack}
-            selectFunction={handleError}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={10}
-            buttonText={"error"}
-            hoverFunction={pb}
-            selectFunction={pe}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
+      </div>
+      <div style={{display:'flex',alignItems:'center',flexDirection:'column',  position:'absolute', bottom:'8%', width:'100%', backgroundColor:'black'}}
+      onKeyDown={handleKeyDown} tabIndex="0">
+      <div className="frame">
+          {renderButtons() }
         </div>
+        <div className="frame">
+          {renderButtons1() }
+        </div>
+
       </div>
     </div>
   );

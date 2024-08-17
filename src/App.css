@@ -28,11 +28,10 @@
 
 .frame {
   display: flex;
-  height: 20vh;
-  max-width: 80%;
+  justify-content: center;
+
+  width: 50%;
   flex-direction: row;
-  flex-wrap: wrap;
-  gap: 0.5em;
 }
 
 .App-logo {
