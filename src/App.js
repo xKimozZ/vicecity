@@ -29,6 +29,12 @@ function App() {
   const [playInfoLeft] = useSound(infoLeft, { preload: true });
   const [playInfoEcho] = useSound(infoEcho, { preload: true });
 
+  const [hoveredOption, setHoveredOption] = useState(1);
+
+  useEffect(()=> {
+    console.log(hoveredOption);
+  },[hoveredOption]);
+
   const handleInfo = () => {
     playInfoRight();
     playInfoLeft();
@@ -108,22 +114,95 @@ const handleKeyDown = (event) => {
 
   return (
     <div>
-    <img src={vclogo} className='viceLogo'/>
-    <div className="App" onKeyDown={handleKeyDown} // Attach the onKeyDown event here
-      tabIndex="0">
-      <div className="frame">
-        <Button buttonText={'map'} hoverFunction={handleHover} selectFunction={handleSelect}/>
-        <Button buttonText={'load'} hoverFunction={handleHover} selectFunction={handleSelect}/>
-        <Button buttonText={'brief'} hoverFunction={handleHover} selectFunction={handleSelect}/>
-        <Button buttonText={'stats'} hoverFunction={handleHover} selectFunction={handleSelect}/>
-        <Button buttonText={'controls'} hoverFunction={handleHover} selectFunction={handleSelect}/>
-        <Button buttonText={'sound'} hoverFunction={handleHover} selectFunction={handleSelect}/>
-        <Button buttonText={'language'} hoverFunction={handleHover} selectFunction={handleSelect}/>
-        <Button buttonText={'credits'} hoverFunction={handleHover} selectFunction={handleSelect}/>
-        <Button buttonText={'error'} hoverFunction={handleBack} selectFunction={handleError}/>
-        <Button buttonText={'error'} hoverFunction={pb} selectFunction={pe}/>
+      <img src={vclogo} className="viceLogo" />
+      <div
+        className="App"
+        onKeyDown={handleKeyDown} // Attach the onKeyDown event here
+        tabIndex="0"
+      >
+        <div className="frame">
+          <Button
+            buttonNumber={1}
+            buttonText={"map"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={2}
+            buttonText={"load"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={3}
+            buttonText={"brief"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={4}
+            buttonText={"stats"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={5}
+            buttonText={"controls"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={6}
+            buttonText={"sound"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={7}
+            buttonText={"language"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={8}
+            buttonText={"credits"}
+            hoverFunction={handleHover}
+            selectFunction={handleSelect}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={9}
+            buttonText={"error"}
+            hoverFunction={handleBack}
+            selectFunction={handleError}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+          <Button
+            buttonNumber={10}
+            buttonText={"error"}
+            hoverFunction={pb}
+            selectFunction={pe}
+            hoveredOption={hoveredOption}
+            setHoveredOption={setHoveredOption}
+          />
+        </div>
       </div>
-    </div>
     </div>
   );
 }
