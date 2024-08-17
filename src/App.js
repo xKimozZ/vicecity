@@ -145,7 +145,7 @@ const handleKeyDown = (event) => {
         tabIndex="0"
       >
       </div>
-      <div style={{display:'flex',alignItems:'center',flexDirection:'column',  position:'absolute', bottom:'8%', width:'100%', backgroundColor:'black'}}
+      <div className='buttonContainer'
       onKeyDown={handleKeyDown} tabIndex="0">
       <div className="frame">
           {renderButtons(0, optionsPerRow[0]) }

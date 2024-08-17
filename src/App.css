@@ -34,6 +34,15 @@
   flex-direction: row;
 }
 
+.buttonContainer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  bottom: 4%;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
