@@ -15,6 +15,7 @@ import errorRight from "./assets/errorright.wav";
 import infoLeft from './assets/infoleft.wav'
 import infoRight from './assets/inforight.wav'
 import infoEcho from './assets/infoecho.wav'
+import { menuOptions } from './constants/menuOptions';
 
 function App() {
   const [playHoverRight] = useSound(hoverRight);
@@ -31,95 +32,25 @@ function App() {
 
   const [hoveredOption, setHoveredOption] = useState(1);
 
-  const renderButtons = () => {
-    return(
+  const renderButtons = (start, end) => {
+    const menuRow = menuOptions.slice(start,end);
+    return (
       <>
-      <Button
-            buttonNumber={1}
-            buttonText={"map"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-            <Button
-              buttonNumber={2}
-              buttonText={"brief"}
-              hoverFunction={handleHover}
-              selectFunction={handleSelect}
-              hoveredOption={hoveredOption}
-              setHoveredOption={setHoveredOption}
-            />
+        {
+          menuRow.map((option) => (
           <Button
-            buttonNumber={3}
-            buttonText={"load"}
+            key={option.buttonNumber}
+            buttonNumber={option.buttonNumber}
+            buttonText={option.buttonText}
             hoverFunction={handleHover}
             selectFunction={handleSelect}
             hoveredOption={hoveredOption}
             setHoveredOption={setHoveredOption}
           />
-          <Button
-            buttonNumber={4}
-            buttonText={"stats"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
+        ))}
       </>
-    )
-  }
-
-  const renderButtons1 = () => {
-    return(
-      <>
-          <Button
-            buttonNumber={5}
-            buttonText={"controls"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={6}
-            buttonText={"audio"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={7}
-            buttonText={"display"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          <Button
-            buttonNumber={8}
-            buttonText={"language"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          />
-          {/* <Button
-            buttonNumber={9}
-            buttonText={"credits"}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
-          /> */}
-      </>
-    )
-  }
-
-  useEffect(()=> {
-    console.log(hoveredOption);
-  },[hoveredOption]);
+    );
+  };
 
   const handleInfo = () => {
     playInfoRight();
@@ -211,10 +142,10 @@ const handleKeyDown = (event) => {
       <div style={{display:'flex',alignItems:'center',flexDirection:'column',  position:'absolute', bottom:'8%', width:'100%', backgroundColor:'black'}}
       onKeyDown={handleKeyDown} tabIndex="0">
       <div className="frame">
-          {renderButtons() }
+          {renderButtons(0,4) }
         </div>
         <div className="frame">
-          {renderButtons1() }
+          {renderButtons(4,8) }
         </div>
 
       </div>
