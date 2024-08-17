@@ -9,6 +9,7 @@
     transition: linear 0.05s;
     position: relative; /* Ensure proper stacking context */
     z-index: 2;
+    text-transform: lowercase;
 }
 
 .text {
