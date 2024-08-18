@@ -183,7 +183,7 @@ const handleKeyDown = (event) => {
     <div className={`${marginState ? 'margin' : ''} AppContainer`}>
       <Cursor buttonRectangle={currentRectangle}/>
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}}>
-        <Button textColor='pink' buttonText='margin' buttonNumber={69} hoverFunction={handleHover} selectFunction={handleMargin}/>
+        <Button textColor='pink' buttonText='margin' buttonNumber={69} hoveredOption={hoveredOption} setHoveredOption={setHoveredOption} hoverFunction={handleHover} selectFunction={handleMargin} locationFunction={setCurrentRectangle}/>
       </div>
       <img src={vclogo} className="viceLogo" />
       <div
