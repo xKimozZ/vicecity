@@ -37,6 +37,15 @@
   align-items: center;
 }
 
+.AppContainer {
+  position: relative;
+}
+
+.margin {
+  margin-left: 20vh;
+  margin-right: 20vh;
+}
+
 .frame {
   animation: fadeIn 0.4s;
   display: flex;

@@ -31,6 +31,8 @@ function App() {
   const [playInfoLeft] = useSound(infoLeft, { preload: true });
   const [playInfoEcho] = useSound(infoEcho, { preload: true });
 
+  const [marginState, setMarginState] = useState(false);
+
   const [clipPathStyle, setClipPathStyle] = useState(
     {
       transition: '0.1s linear',
@@ -168,8 +170,17 @@ const handleKeyDown = (event) => {
       interfaceRef.current.focus();
     }, []);
 
+    const handleMargin = () => {
+      handleSelect();
+      interfaceRef.current.focus();
+      setMarginState(!marginState)
+    };
+
   return (
-    <div>
+    <div className={`${marginState ? 'margin' : ''} AppContainer`}>
+      <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}}>
+        <Button textColor='pink' buttonText='margin' buttonNumber={69} hoverFunction={handleHover} selectFunction={handleMargin}/>
+      </div>
       <img src={vclogo} className="viceLogo" />
       <div
         className="App"
