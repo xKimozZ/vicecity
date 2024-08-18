@@ -37,10 +37,10 @@ const Cursor = ({ buttonRectangle }) => {
     if (buttonRectangle)
     {
         setPositionStyle({
-        top: `${buttonRectangle.top*0.99}%`,
-        left: `${buttonRectangle.left*0.99}%`,
-        width: `${buttonRectangle.width*1.1}%`,
-        height: `${buttonRectangle.height*1.6}%`,
+        top: `${buttonRectangle.top * getRandomNumber(0.98,1)}%`,
+        left: `${buttonRectangle.left* getRandomNumber(0.99,1)}%`,
+        width: `${buttonRectangle.width* getRandomNumber(1,1.1)}%`,
+        height: `${buttonRectangle.height* getRandomNumber(1,1.8)}%`,
       });
         setClipPathStyle({ clipPath: generateRandomClipPath() });
     }
