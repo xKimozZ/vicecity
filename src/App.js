@@ -3,7 +3,7 @@ import './App.css';
 import vclogo from './assets/vclogo1024.png';
 import Button from './components/Button/Button'
 import useSound from 'use-sound';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import hoverRight from "./assets/hoverright.wav";
 import hoverLeft from "./assets/hoverleft.wav";
 import selectRight from "./assets/selectright.wav";
@@ -31,12 +31,27 @@ function App() {
   const [playInfoLeft] = useSound(infoLeft, { preload: true });
   const [playInfoEcho] = useSound(infoEcho, { preload: true });
 
+  const [clipPathStyle, setClipPathStyle] = useState(
+    {
+      transition: '0.1s linear',
+      clipPath: menuOptions[0].frameClip,
+    }
+  );
+  const [clipPathContainer, setClipPathContainer] = useState([]);
 
   const interfaceRef = useRef(null);
   const [hoveredOption, setHoveredOption] = useState(1);
 
+  useEffect(() => {
+    const newClipPaths = menuOptions.map((option) => {
+      return option.frameClip;
+    });
+    setClipPathContainer(newClipPaths);
+  }, []);
+
   const renderButtons = (start, end) => {
     const menuRow = menuOptions.slice(start,end);
+
     return (
       <>
         {
@@ -54,6 +69,17 @@ function App() {
       </>
     );
   };
+
+  
+
+  useEffect(() => {
+    if (clipPathContainer.length === 0)
+      return;
+    setClipPathStyle({
+      transition: '0.1s linear', // Apply transition
+      clipPath: clipPathContainer[hoveredOption-1],
+    });
+  },[hoveredOption]);
 
   const handleInfo = () => {
     playInfoRight();
@@ -149,6 +175,7 @@ const handleKeyDown = (event) => {
         className="App"
         onKeyDown={handleKeyDown} // Attach the onKeyDown event here
         tabIndex="0"
+        style={clipPathStyle}
       >
       </div>
       <div className='buttonContainer' ref={interfaceRef}
