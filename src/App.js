@@ -82,7 +82,7 @@ function App() {
       return;
     setClipPathStyle({
       transition: '0.1s linear', // Apply transition
-      clipPath: clipPathContainer[hoveredOption-1],
+      clipPath: clipPathContainer[hoveredOption-1] ? clipPathContainer[hoveredOption-1] : menuOptions[0].frameClip,
     });
   },[hoveredOption]);
 
