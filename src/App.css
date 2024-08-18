@@ -12,9 +12,22 @@
   pointer-events: none;
   top: 4%;
   left: 3%;
+  animation: fadeIn 0.4s;
 }
 
+@keyframes rollout {
+  0% { transform: translateY(-100px); }
+  100% { transform: none; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* clip-path: polygon(3% 4%, 99% 5%, 96% 86%, 3% 89%); */
 .App {
+  animation: fadeIn 0.4s;
   background-image: url('./assets/background1024.png');
   background-position: center;
   /* clip-path: polygon(3% 4%, 99% 5%, 96% 86%, 3% 89%); */
@@ -27,6 +40,7 @@
 }
 
 .frame {
+  animation: fadeIn 0.4s;
   display: flex;
   justify-content: center;
 
