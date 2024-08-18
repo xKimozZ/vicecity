@@ -27,10 +27,15 @@ const getRandomNumber = (min, max) => {
   buttonNumber = 0,
   hoveredOption = 0,
   setHoveredOption,
+  textColor = 'white',
 }) => {
   const [clipPathStyle, setClipPathStyle] = useState({
     transition: 'linear 0.05s',
     clipPath: generateRandomClipPath(),
+});
+
+const [textStyle, setTextStyle] = useState({
+  color: textColor,
 });
 
 const isHovered = () => {
@@ -60,11 +65,10 @@ const handleHover = () => {
       }`}
       onMouseEnter={handleHover}
       onClick={selectFunction}
-      style={clipPathStyle}
+      style={{...clipPathStyle, ...textStyle}}
     >
         <span className={styles.text}>
       {buttonText}
-
         </span>
     </div>
   );
