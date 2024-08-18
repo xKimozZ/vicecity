@@ -1,0 +1,6 @@
+.cursorBackground {
+    z-index: 1;
+    background-color: #198344;
+    position: fixed;
+    transition: linear 0.1s;
+}

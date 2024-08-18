@@ -16,6 +16,7 @@ import infoLeft from './assets/infoleft.wav'
 import infoRight from './assets/inforight.wav'
 import infoEcho from './assets/infoecho.wav'
 import { menuOptions } from './constants/menuOptions';
+import Cursor from './components/Cursor/Cursor'
 
 function App() {
   const optionsPerRow = [4,4];
@@ -43,6 +44,7 @@ function App() {
 
   const interfaceRef = useRef(null);
   const [hoveredOption, setHoveredOption] = useState(1);
+  const [currentRectangle, setCurrentRectangle] = useState();
 
   useEffect(() => {
     const newClipPaths = menuOptions.map((option) => {
@@ -66,6 +68,7 @@ function App() {
             selectFunction={handleSelect}
             hoveredOption={hoveredOption}
             setHoveredOption={setHoveredOption}
+            locationFunction={setCurrentRectangle}
           />
         ))}
       </>
@@ -178,6 +181,7 @@ const handleKeyDown = (event) => {
 
   return (
     <div className={`${marginState ? 'margin' : ''} AppContainer`}>
+      <Cursor buttonRectangle={currentRectangle}/>
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}}>
         <Button textColor='pink' buttonText='margin' buttonNumber={69} hoverFunction={handleHover} selectFunction={handleMargin}/>
       </div>

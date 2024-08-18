@@ -1,72 +1,66 @@
 import styles from "./Button.module.css";
-import { useEffect, useState } from "react";
-
-const getRandomNumber = (min, max) => {
-    return Math.random() * (max - min) + min
-  }  
-
-  const generateRandomClipPath = () => {
-    // Ensure the points are within the 20% range
-    const x1 = getRandomNumber(0, 13);
-    const y1 = getRandomNumber(0, 13);
-    const x2 = getRandomNumber(87, 100);
-    const y2 = getRandomNumber(0, 13);
-    const x3 = getRandomNumber(87, 100);
-    const y3 = getRandomNumber(87, 100);
-    const x4 = getRandomNumber(0, 13);
-    const y4 = getRandomNumber(87, 100);
-  
-    return `polygon(${x1}% ${y1}%, ${x2}% ${y2}%, ${x3}% ${y3}%, ${x4}% ${y4}%)`;
-  };
-
+import { useEffect, useState, useRef } from "react";
   
   const Button = ({
   buttonText = "Sample",
   hoverFunction,
   selectFunction,
+  locationFunction,
   buttonNumber = 0,
   hoveredOption = 0,
   setHoveredOption,
   textColor = 'white',
 
 }) => {
-  const [clipPathStyle, setClipPathStyle] = useState({
-    transition: 'linear 0.05s',
-    clipPath: generateRandomClipPath(),
-});
 
 const [textStyle, setTextStyle] = useState({
   color: textColor,
 });
+const buttonRef = useRef(null);
 
 const isHovered = () => {
     return hoveredOption === buttonNumber;
 };
-useEffect(()=> {
-  console.log(clipPathStyle);
-},[clipPathStyle]);
 
-useEffect(()=> {
-    if (isHovered())
-    setClipPathStyle({ clipPath: generateRandomClipPath() });
-}
-,[hoveredOption]);
+useEffect(() => {
+  const updatePosition = () => {
+    if (isHovered() && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      const rectInPercentages = {
+        top: (rect.top / viewportHeight) * 100,
+        left: (rect.left / viewportWidth) * 100,
+        width: (rect.width / viewportWidth) * 100,
+        height: (rect.height / viewportHeight) * 100,
+      };
+
+      locationFunction?.(rectInPercentages);
+    }
+  };
+
+  updatePosition(); // Initial call
+  window.addEventListener('resize', updatePosition); // Update on resize
+
+  return () => {
+    window.removeEventListener('resize', updatePosition); // Clean up
+  };
+}, [hoveredOption]);
 
 const handleHover = () => {
     if ( isHovered() ) return;
     hoverFunction?.();
     setHoveredOption?.(buttonNumber);
-    setClipPathStyle({ clipPath: generateRandomClipPath() });
   };
 
   return (
     <div
-      className={`${styles.buttonContainer} ${
-        isHovered() ? styles.buttonContainerHover : ""
-      }`}
+      ref={buttonRef}
+      className={`${styles.buttonContainer}`}
       onMouseEnter={handleHover}
       onClick={selectFunction}
-      style={{...clipPathStyle, ...textStyle}}
+      style={{...textStyle}}
     >
         <span className={styles.text}>
       {buttonText}
