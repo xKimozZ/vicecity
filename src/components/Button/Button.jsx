@@ -28,6 +28,7 @@ const getRandomNumber = (min, max) => {
   hoveredOption = 0,
   setHoveredOption,
   textColor = 'white',
+
 }) => {
   const [clipPathStyle, setClipPathStyle] = useState({
     transition: 'linear 0.05s',
@@ -53,7 +54,7 @@ useEffect(()=> {
 
 const handleHover = () => {
     if ( isHovered() ) return;
-    hoverFunction();
+    hoverFunction?.();
     setHoveredOption?.(buttonNumber);
     setClipPathStyle({ clipPath: generateRandomClipPath() });
   };
