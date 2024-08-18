@@ -31,6 +31,8 @@ function App() {
   const [playInfoLeft] = useSound(infoLeft, { preload: true });
   const [playInfoEcho] = useSound(infoEcho, { preload: true });
 
+
+  const interfaceRef = useRef(null);
   const [hoveredOption, setHoveredOption] = useState(1);
 
   const renderButtons = (start, end) => {
@@ -136,6 +138,10 @@ const handleKeyDown = (event) => {
       }
     };
 
+    useEffect(() => {
+      interfaceRef.current.focus();
+    }, []);
+
   return (
     <div>
       <img src={vclogo} className="viceLogo" />
@@ -145,7 +151,7 @@ const handleKeyDown = (event) => {
         tabIndex="0"
       >
       </div>
-      <div className='buttonContainer'
+      <div className='buttonContainer' ref={interfaceRef}
       onKeyDown={handleKeyDown} tabIndex="0">
       <div className="frame">
           {renderButtons(0, optionsPerRow[0]) }
