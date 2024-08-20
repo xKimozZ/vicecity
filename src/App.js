@@ -20,9 +20,8 @@ function App() {
   const interfaceRef = useRef(null);
   const [hoveredOption, setHoveredOption] = useState(1);
   const [currentRectangle, setCurrentRectangle] = useState();
+  const { playHover, playSelect, playBack, playError, playInfo } = useSoundManager();
 
-  const { playHover, playSelect, playBack, playError, playInfo } =
-    useSoundManager;
 
   useEffect(() => {
     const newClipPaths = menuOptions.map((option) => {
