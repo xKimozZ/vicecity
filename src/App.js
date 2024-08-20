@@ -2,38 +2,14 @@ import logo from './logo.svg';
 import './App.css';
 import vclogo from './assets/vclogo1024.png';
 import Button from './components/Button/Button'
-import useSound from 'use-sound';
 import { useEffect, useState, useRef } from 'react';
-import hoverRight from "./assets/hoverright.wav";
-import hoverLeft from "./assets/hoverleft.wav";
-import selectRight from "./assets/selectright.wav";
-import selectLeft from "./assets/selectleft.wav";
-import backLeft from "./assets/backleft.wav";
-import backRight from "./assets/backright.wav";
-import errorLeft from "./assets/errorleft.wav";
-import errorRight from "./assets/errorright.wav";
-import infoLeft from './assets/infoleft.wav'
-import infoRight from './assets/inforight.wav'
-import infoEcho from './assets/infoecho.wav'
 import { menuOptions } from './constants/menuOptions';
 import Cursor from './components/Cursor/Cursor'
+import useSoundManager from './hooks/useSoundManager';
 
 function App() {
   const optionsPerRow = [4,4];
-  const [playHoverRight] = useSound(hoverRight);
-  const [playHoverLeft] = useSound(hoverLeft);
-  const [playSelectRight] = useSound(selectRight);
-  const [playSelectLeft] = useSound(selectLeft);
-  const [playBackRight] = useSound(backRight, { preload: true });
-  const [playBackLeft] = useSound(backLeft, { preload: true });
-  const [playErrorRight] = useSound(errorRight, { preload: true });
-  const [playErrorLeft] = useSound(errorLeft, { preload: true });
-  const [playInfoRight] = useSound(infoRight, { preload: true });
-  const [playInfoLeft] = useSound(infoLeft, { preload: true });
-  const [playInfoEcho] = useSound(infoEcho, { preload: true });
-
   const [marginState, setMarginState] = useState(false);
-
   const [clipPathStyle, setClipPathStyle] = useState(
     {
       transition: '0.1s linear',
@@ -41,10 +17,12 @@ function App() {
     }
   );
   const [clipPathContainer, setClipPathContainer] = useState([]);
-
   const interfaceRef = useRef(null);
   const [hoveredOption, setHoveredOption] = useState(1);
   const [currentRectangle, setCurrentRectangle] = useState();
+
+  const { playHover, playSelect, playBack, playError, playInfo } =
+    useSoundManager;
 
   useEffect(() => {
     const newClipPaths = menuOptions.map((option) => {
@@ -87,36 +65,28 @@ function App() {
   },[hoveredOption]);
 
   const handleInfo = () => {
-    playInfoRight();
-    playInfoLeft();
-    playInfoEcho();
+    playInfo();
   };
 
   const handleHover = () => {
-    playHoverRight();
-    playHoverLeft();
+    playHover();
   };
 
   const handleSelect = () => {
-    playSelectRight();
-    playSelectLeft();
+    playSelect();
   };
 
   const handleBack = () => {
-    console.log('back');
-    playBackRight();
-    playBackLeft();
+    playBack();
   };
 
   const handleError = () => {
-    console.log('error');
-    playErrorRight();
-    playErrorLeft();
+    playError();
   };
 
   useEffect(() =>
   {
-    handleInfo(); 
+    playInfo(); 
   },[]);
 
 const handleKeyDown = (event) => {
