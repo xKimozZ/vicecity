@@ -163,7 +163,6 @@ const handleKeyDown = (event) => {
         tabIndex="0"
         style={clipPathStyle}
         >
-      <LanguageMenu hoverFunction/>
       </div>
       <div className='buttonContainer' ref={interfaceRef}
       onKeyDown={handleKeyDown} tabIndex="0">
