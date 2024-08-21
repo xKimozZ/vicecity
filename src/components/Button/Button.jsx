@@ -10,7 +10,7 @@ const Button = ({
   buttonNumber = 0,
   hoveredOption = 0,
   setHoveredOption,
-  textColor = "white",
+  textColor = "var(--white)",
 }) => {
   const [textStyle, setTextStyle] = useState({
     color: textColor,
