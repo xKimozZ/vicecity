@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store'
 import Cursor from './components/Cursor/Cursor'
 import useSoundManager from './hooks/useSoundManager';
+import LanguageMenu from './components/MenuComponents/LanguageMenu/LanguageMenu';
 
 function App() {
   const optionsPerRow = [4,4];
@@ -150,10 +151,10 @@ const handleKeyDown = (event) => {
 
   return (
     <Provider store={store}>
-    <div className={`${marginState ? 'margin' : ''} AppContainer`}>
       <Cursor />
+    <div className={`${marginState ? 'margin' : ''} AppContainer`}>
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}}>
-        <Button textColor='pink' buttonText='margin' buttonNumber={69} hoveredOption={hoveredOption} setHoveredOption={setHoveredOption} hoverFunction={handleHover} selectFunction={handleMargin}/>
+        <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} hoveredOption={hoveredOption} setHoveredOption={setHoveredOption} hoverFunction={handleHover} selectFunction={handleMargin}/>
       </div>
       <img src={vclogo} className="viceLogo" />
       <div
@@ -162,6 +163,7 @@ const handleKeyDown = (event) => {
         tabIndex="0"
         style={clipPathStyle}
         >
+      <LanguageMenu hoverFunction/>
       </div>
       <div className='buttonContainer' ref={interfaceRef}
       onKeyDown={handleKeyDown} tabIndex="0">
