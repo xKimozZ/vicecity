@@ -1,55 +1,55 @@
+import { useDispatch } from "react-redux";
 import styles from "./Button.module.css";
 import { useEffect, useState, useRef } from "react";
-  
-  const Button = ({
+import { changeLocation } from "../../store/cursorSlice";
+
+const Button = ({
   buttonText = "Sample",
   hoverFunction,
   selectFunction,
-  locationFunction,
   buttonNumber = 0,
   hoveredOption = 0,
   setHoveredOption,
-  textColor = 'white',
-
+  textColor = "white",
 }) => {
+  const [textStyle, setTextStyle] = useState({
+    color: textColor,
+  });
+  const buttonRef = useRef(null);
+  const dispatch = useDispatch();
 
-const [textStyle, setTextStyle] = useState({
-  color: textColor,
-});
-const buttonRef = useRef(null);
-
-const isHovered = () => {
+  const isHovered = () => {
     return hoveredOption === buttonNumber;
-};
-
-useEffect(() => {
-  const updatePosition = () => {
-    if (isHovered() && buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
-
-      const rectInPercentages = {
-        top: (rect.top / viewportHeight) * 100,
-        left: (rect.left / viewportWidth) * 100,
-        width: (rect.width / viewportWidth) * 100,
-        height: (rect.height / viewportHeight) * 100,
-      };
-
-      locationFunction?.(rectInPercentages);
-    }
   };
 
-  updatePosition(); // Initial call
-  window.addEventListener('resize', updatePosition); // Update on resize
+  useEffect(() => {
+    const updatePosition = () => {
+      if (isHovered() && buttonRef.current) {
+        const rect = buttonRef.current.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
 
-  return () => {
-    window.removeEventListener('resize', updatePosition); // Clean up
-  };
-}, [hoveredOption]);
+        const rectInPercentages = {
+          top: (rect.top / viewportHeight) * 100,
+          left: (rect.left / viewportWidth) * 100,
+          width: (rect.width / viewportWidth) * 100,
+          height: (rect.height / viewportHeight) * 100,
+        };
 
-const handleHover = () => {
-    if ( isHovered() ) return;
+        dispatch(changeLocation(rectInPercentages));
+      }
+    };
+
+    updatePosition(); // Initial call
+    window.addEventListener("resize", updatePosition); // Update on resize
+
+    return () => {
+      window.removeEventListener("resize", updatePosition); // Clean up
+    };
+  }, [hoveredOption]);
+
+  const handleHover = () => {
+    if (isHovered()) return;
     hoverFunction?.();
     setHoveredOption?.(buttonNumber);
   };
@@ -60,11 +60,9 @@ const handleHover = () => {
       className={`${styles.buttonContainer}`}
       onMouseEnter={handleHover}
       onClick={selectFunction}
-      style={{...textStyle}}
+      style={{ ...textStyle }}
     >
-        <span className={styles.text}>
-      {buttonText}
-        </span>
+      <span className={styles.text}>{buttonText}</span>
     </div>
   );
 };

@@ -4,6 +4,8 @@ import vclogo from './assets/vclogo1024.png';
 import Button from './components/Button/Button'
 import { useEffect, useState, useRef } from 'react';
 import { menuOptions } from './constants/menuOptions';
+import { Provider } from 'react-redux';
+import { store } from './store/store'
 import Cursor from './components/Cursor/Cursor'
 import useSoundManager from './hooks/useSoundManager';
 
@@ -19,7 +21,6 @@ function App() {
   const [clipPathContainer, setClipPathContainer] = useState([]);
   const interfaceRef = useRef(null);
   const [hoveredOption, setHoveredOption] = useState(1);
-  const [currentRectangle, setCurrentRectangle] = useState();
   const { playHover, playSelect, playBack, playError, playInfo } = useSoundManager();
 
 
@@ -45,7 +46,6 @@ function App() {
             selectFunction={handleSelect}
             hoveredOption={hoveredOption}
             setHoveredOption={setHoveredOption}
-            locationFunction={setCurrentRectangle}
           />
         ))}
       </>
@@ -149,10 +149,11 @@ const handleKeyDown = (event) => {
     };
 
   return (
+    <Provider store={store}>
     <div className={`${marginState ? 'margin' : ''} AppContainer`}>
-      <Cursor buttonRectangle={currentRectangle}/>
+      <Cursor />
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}}>
-        <Button textColor='pink' buttonText='margin' buttonNumber={69} hoveredOption={hoveredOption} setHoveredOption={setHoveredOption} hoverFunction={handleHover} selectFunction={handleMargin} locationFunction={setCurrentRectangle}/>
+        <Button textColor='pink' buttonText='margin' buttonNumber={69} hoveredOption={hoveredOption} setHoveredOption={setHoveredOption} hoverFunction={handleHover} selectFunction={handleMargin}/>
       </div>
       <img src={vclogo} className="viceLogo" />
       <div
@@ -160,7 +161,7 @@ const handleKeyDown = (event) => {
         onKeyDown={handleKeyDown} // Attach the onKeyDown event here
         tabIndex="0"
         style={clipPathStyle}
-      >
+        >
       </div>
       <div className='buttonContainer' ref={interfaceRef}
       onKeyDown={handleKeyDown} tabIndex="0">
@@ -173,6 +174,7 @@ const handleKeyDown = (event) => {
 
       </div>
     </div>
+        </Provider>
   );
 }
 
