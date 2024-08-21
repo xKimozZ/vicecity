@@ -62,7 +62,7 @@ const Button = ({
       onClick={selectFunction}
       style={{ ...textStyle }}
     >
-      <span className={styles.text}>{buttonText}</span>
+      <span>{buttonText}</span>
     </div>
   );
 };
