@@ -2,8 +2,7 @@ import './App.css';
 import Button from './components/Button/Button'
 import { useEffect, useState, useRef } from 'react';
 import { menuOptions } from './constants/menuOptions';
-import { Provider } from 'react-redux';
-import { store } from './store/store'
+import { useDispatch, useSelector } from 'react-redux';
 import Cursor from './components/Cursor/Cursor'
 import useSoundManager from './hooks/useSoundManager';
 import { imageImports } from './assets/imageImports';
@@ -149,7 +148,7 @@ const handleKeyDown = (event) => {
     };
 
   return (
-    <Provider store={store}>
+    <>
       <Cursor />
     <div className={`${marginState ? 'margin' : ''} AppContainer`}>
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}}>
@@ -174,7 +173,7 @@ const handleKeyDown = (event) => {
 
       </div>
     </div>
-        </Provider>
+    </>
   );
 }
 
