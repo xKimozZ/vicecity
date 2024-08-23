@@ -2,9 +2,10 @@ import './App.css';
 import Button from './components/Button/Button'
 import { useEffect, useState, useRef } from 'react';
 import { menuOptions } from './constants/menuOptions';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Cursor from './components/Cursor/Cursor'
-import useSoundManager from './hooks/useSoundManager';
+import useEventHandler from './hooks/useEventHandler';
+import useKeyNavigation from './hooks/useKeyNavigation';
 import { imageImports } from './assets/imageImports';
 import LanguageMenu from './components/MenuComponents/LanguageMenu/LanguageMenu';
 import { navigationSelector, setHoveredOption } from './store/navigationSlice';
@@ -20,9 +21,9 @@ function App() {
   );
   const [clipPathContainer, setClipPathContainer] = useState([]);
   const interfaceRef = useRef(null);
-  const { playHover, playSelect, playBack, playError, playInfo } = useSoundManager();
+  const { handleKeyDown } = useKeyNavigation(optionsPerRow);
   const { hoveredOption } = useSelector(navigationSelector);
-  const dispatch = useDispatch();
+  const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandler();
 
 
   useEffect(() => {
@@ -51,8 +52,6 @@ function App() {
     );
   };
 
-  
-
   useEffect(() => {
     if (clipPathContainer.length === 0)
       return;
@@ -62,80 +61,10 @@ function App() {
     });
   },[hoveredOption]);
 
-  const handleInfo = () => {
-    playInfo();
-  };
-
-  const handleHover = () => {
-    playHover();
-  };
-
-  const handleSelect = () => {
-    playSelect();
-  };
-
-  const handleBack = () => {
-    playBack();
-  };
-
-  const handleError = () => {
-    playError();
-  };
-
   useEffect(() =>
   {
-    playInfo(); 
+    handleInfo(); 
   },[]);
-
-const handleKeyDown = (event) => {
-      const firstRowStart = 1;
-      const firstRowEnd = optionsPerRow[0];
-      const secondRowStart = optionsPerRow[1] + 1;
-      const secondRowEnd = menuOptions.length;
-      const vertical = menuOptions.length / 2;
-
-      if (event.key === "Escape") {
-        handleBack();
-      }
-      if (event.key === "Backspace") {
-        handleError();
-      }
-      if (event.key === "Enter") {
-        handleSelect();
-      }
-      if (event.key === "ArrowRight") {
-        handleHover();
-        if (hoveredOption + 1 > secondRowEnd)
-          dispatch(setHoveredOption( secondRowStart ));
-        else if (hoveredOption + 1 === firstRowEnd + 1)
-          dispatch(setHoveredOption( firstRowStart ));
-        else
-        dispatch(setHoveredOption(hoveredOption+1));
-      }
-      if (event.key === "ArrowLeft") {
-        handleHover();
-        if (hoveredOption - 1 < firstRowStart)
-          dispatch(setHoveredOption(firstRowEnd));
-        else if (hoveredOption - 1 === secondRowStart - 1)
-          dispatch(setHoveredOption( secondRowEnd ));
-          else
-        dispatch(setHoveredOption(hoveredOption - 1));
-      }
-      if (event.key === "ArrowDown") {
-        handleHover();
-        if (hoveredOption + vertical > secondRowEnd)
-          dispatch(setHoveredOption( hoveredOption - vertical));
-        else
-        dispatch(setHoveredOption(hoveredOption + vertical));
-      }
-      if (event.key === "ArrowUp") {
-        handleHover();
-        if (hoveredOption - vertical < firstRowStart)
-          dispatch(setHoveredOption(hoveredOption + vertical));
-        else
-        dispatch(setHoveredOption(hoveredOption- vertical));
-      }
-    };
 
     useEffect(() => {
       interfaceRef.current.focus();
