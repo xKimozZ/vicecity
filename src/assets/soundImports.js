@@ -1,14 +1,14 @@
-import hoverRight from "../assets/hoverright.wav";
-import hoverLeft from "../assets/hoverleft.wav";
-import selectRight from "../assets/selectright.wav";
-import selectLeft from "../assets/selectleft.wav";
-import backLeft from "../assets/backleft.wav";
-import backRight from "../assets/backright.wav";
-import errorLeft from "../assets/errorleft.wav";
-import errorRight from "../assets/errorright.wav";
-import infoLeft from "../assets/infoleft.wav";
-import infoRight from "../assets/inforight.wav";
-import infoEcho from "../assets/infoecho.wav";
+import hoverRight from "../assets/sounds/hoverright.wav";
+import hoverLeft from "../assets/sounds/hoverleft.wav";
+import selectRight from "../assets/sounds/selectright.wav";
+import selectLeft from "../assets/sounds/selectleft.wav";
+import backLeft from "../assets/sounds/backleft.wav";
+import backRight from "../assets/sounds/backright.wav";
+import errorLeft from "../assets/sounds/errorleft.wav";
+import errorRight from "../assets/sounds/errorright.wav";
+import infoLeft from "../assets/sounds/infoleft.wav";
+import infoRight from "../assets/sounds/inforight.wav";
+import infoEcho from "../assets/sounds/infoecho.wav";
 
 export const soundImports = {
   menuSounds: {

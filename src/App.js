@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import vclogo from './assets/vclogo1024.png';
+import vclogo from './assets/images/vclogo1024.png';
 import Button from './components/Button/Button'
 import { useEffect, useState, useRef } from 'react';
 import { menuOptions } from './constants/menuOptions';

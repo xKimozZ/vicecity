@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Pricedown'; /* Name your font family */
-  src: url('assets/Pricedown.ttf'); /* Locate the .ttf file within your directory*/
+  src: url('assets/fonts/Pricedown.ttf'); /* Locate the .ttf file within your directory*/
 }
 
 body {
