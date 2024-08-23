@@ -1,15 +1,14 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Button.module.css";
 import { useEffect, useState, useRef } from "react";
 import { changeLocation } from "../../store/cursorSlice";
+import { navigationSelector, setHoveredOption } from "../../store/navigationSlice";
 
 const Button = ({
   buttonText = "Sample",
   hoverFunction,
   selectFunction,
   buttonNumber = 0,
-  hoveredOption = 0,
-  setHoveredOption,
   textColor = "var(--white)",
 }) => {
   const [textStyle, setTextStyle] = useState({
@@ -17,6 +16,7 @@ const Button = ({
   });
   const buttonRef = useRef(null);
   const dispatch = useDispatch();
+  const { hoveredOption } = useSelector(navigationSelector);
 
   const isHovered = () => {
     return hoveredOption === buttonNumber;
@@ -51,7 +51,7 @@ const Button = ({
   const handleHover = () => {
     if (isHovered()) return;
     hoverFunction?.();
-    setHoveredOption?.(buttonNumber);
+    dispatch(setHoveredOption(buttonNumber));
   };
 
   return (

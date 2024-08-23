@@ -7,6 +7,7 @@ import Cursor from './components/Cursor/Cursor'
 import useSoundManager from './hooks/useSoundManager';
 import { imageImports } from './assets/imageImports';
 import LanguageMenu from './components/MenuComponents/LanguageMenu/LanguageMenu';
+import { navigationSelector, setHoveredOption } from './store/navigationSlice';
 
 function App() {
   const optionsPerRow = [4,4];
@@ -19,8 +20,9 @@ function App() {
   );
   const [clipPathContainer, setClipPathContainer] = useState([]);
   const interfaceRef = useRef(null);
-  const [hoveredOption, setHoveredOption] = useState(1);
   const { playHover, playSelect, playBack, playError, playInfo } = useSoundManager();
+  const { hoveredOption } = useSelector(navigationSelector);
+  const dispatch = useDispatch();
 
 
   useEffect(() => {
@@ -43,8 +45,6 @@ function App() {
             buttonText={option.buttonText}
             hoverFunction={handleHover}
             selectFunction={handleSelect}
-            hoveredOption={hoveredOption}
-            setHoveredOption={setHoveredOption}
           />
         ))}
       </>
@@ -106,34 +106,34 @@ const handleKeyDown = (event) => {
       if (event.key === "ArrowRight") {
         handleHover();
         if (hoveredOption + 1 > secondRowEnd)
-          setHoveredOption( secondRowStart );
+          dispatch(setHoveredOption( secondRowStart ));
         else if (hoveredOption + 1 === firstRowEnd + 1)
-          setHoveredOption( firstRowStart )
+          dispatch(setHoveredOption( firstRowStart ));
         else
-        setHoveredOption(hoveredOption+1);
+        dispatch(setHoveredOption(hoveredOption+1));
       }
       if (event.key === "ArrowLeft") {
         handleHover();
         if (hoveredOption - 1 < firstRowStart)
-          setHoveredOption(firstRowEnd);
+          dispatch(setHoveredOption(firstRowEnd));
         else if (hoveredOption - 1 === secondRowStart - 1)
-          setHoveredOption( secondRowEnd )
+          dispatch(setHoveredOption( secondRowEnd ));
           else
-        setHoveredOption(hoveredOption - 1);
+        dispatch(setHoveredOption(hoveredOption - 1));
       }
       if (event.key === "ArrowDown") {
         handleHover();
         if (hoveredOption + vertical > secondRowEnd)
-          setHoveredOption( hoveredOption - vertical);
+          dispatch(setHoveredOption( hoveredOption - vertical));
         else
-        setHoveredOption(hoveredOption + vertical);
+        dispatch(setHoveredOption(hoveredOption + vertical));
       }
       if (event.key === "ArrowUp") {
         handleHover();
         if (hoveredOption - vertical < firstRowStart)
-          setHoveredOption(hoveredOption + vertical);
+          dispatch(setHoveredOption(hoveredOption + vertical));
         else
-        setHoveredOption(hoveredOption- vertical);
+        dispatch(setHoveredOption(hoveredOption- vertical));
       }
     };
 
@@ -152,7 +152,7 @@ const handleKeyDown = (event) => {
       <Cursor />
     <div className={`${marginState ? 'margin' : ''} AppContainer`}>
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}}>
-        <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} hoveredOption={hoveredOption} setHoveredOption={setHoveredOption} hoverFunction={handleHover} selectFunction={handleMargin}/>
+        <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} hoverFunction={handleHover} selectFunction={handleMargin}/>
       </div>
       <img src={imageImports.global.vclogo1024} className="viceLogo" />
       <div
