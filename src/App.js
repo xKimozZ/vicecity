@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import vclogo from './assets/images/vclogo1024.png';
 import Button from './components/Button/Button'
 import { useEffect, useState, useRef } from 'react';
 import { menuOptions } from './constants/menuOptions';
@@ -8,6 +6,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store'
 import Cursor from './components/Cursor/Cursor'
 import useSoundManager from './hooks/useSoundManager';
+import { imageImports } from './assets/imageImports';
 import LanguageMenu from './components/MenuComponents/LanguageMenu/LanguageMenu';
 
 function App() {
@@ -156,7 +155,7 @@ const handleKeyDown = (event) => {
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}}>
         <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} hoveredOption={hoveredOption} setHoveredOption={setHoveredOption} hoverFunction={handleHover} selectFunction={handleMargin}/>
       </div>
-      <img src={vclogo} className="viceLogo" />
+      <img src={imageImports.global.vclogo1024} className="viceLogo" />
       <div
         className="App"
         onKeyDown={handleKeyDown} // Attach the onKeyDown event here
