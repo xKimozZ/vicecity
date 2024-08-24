@@ -80,8 +80,8 @@ function App() {
     <>
       <Cursor />
     <div className={`${marginState ? 'margin' : ''} AppContainer`}>
-      <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}}>
-        <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} hoverFunction={handleHover} selectFunction={handleMargin}/>
+      <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}} onClick={handleMargin}>
+        <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69}/>
       </div>
       <img src={imageImports.global.vclogo1024} className="viceLogo" />
       <div
