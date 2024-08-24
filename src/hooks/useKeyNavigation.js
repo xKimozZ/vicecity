@@ -1,68 +1,80 @@
-import { useDispatch, useSelector } from "react-redux";
-import { navigationSelector, setHoveredOption } from "../store/navigationSlice";
-import useEventHandler from './useEventHandler';
+import { useSelector } from "react-redux";
+import { navigationSelector } from "../store/navigationSlice";
+import useEventHandler from "./useEventHandler";
+import { buttonGroups } from "../constants/buttonGroups";
 import { menuOptions } from "../constants/menuOptions";
 
-const useKeyNavigation = ( optionsPerRow ) => {
-    const dispatch = useDispatch();
-    const {hoveredOption} = useSelector(navigationSelector);
-    const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandler();
+const useKeyNavigation = (optionsPerRow) => {
+  const { hoveredOption, nextButtonGroup, activeButtonGroup } = useSelector(navigationSelector);
+  const { handleHover, handleSelect, handleError, handleBack } = useEventHandler();
 
-    const handleKeyDown = (event) => {
-        const firstRowStart = 1;
-        const firstRowEnd = optionsPerRow[0];
-        const secondRowStart = optionsPerRow[1] + 1;
-        const secondRowEnd = menuOptions.length;
-        const vertical = menuOptions.length / 2;
-    
-        if (event.key === "Escape") {
-          handleBack();
-        }
-        if (event.key === "Backspace") {
-          handleError();
-        }
-        if (event.key === "Enter") {
-          handleSelect();
-        }
-        if (event.key === "ArrowRight") {
-          handleHover();
-          if (hoveredOption + 1 > secondRowEnd)
-            dispatch(setHoveredOption( secondRowStart ));
-          else if (hoveredOption + 1 === firstRowEnd + 1)
-            dispatch(setHoveredOption( firstRowStart ));
-          else
-          dispatch(setHoveredOption(hoveredOption+1));
-        }
-        if (event.key === "ArrowLeft") {
-          handleHover();
-          if (hoveredOption - 1 < firstRowStart)
-            dispatch(setHoveredOption(firstRowEnd));
-          else if (hoveredOption - 1 === secondRowStart - 1)
-            dispatch(setHoveredOption( secondRowEnd ));
-            else
-          dispatch(setHoveredOption(hoveredOption - 1));
-        }
-        if (event.key === "ArrowDown") {
-          handleHover();
-          if (hoveredOption + vertical > secondRowEnd)
-            dispatch(setHoveredOption( hoveredOption - vertical));
-          else
-          dispatch(setHoveredOption(hoveredOption + vertical));
-        }
-        if (event.key === "ArrowUp") {
-          handleHover();
-          if (hoveredOption - vertical < firstRowStart)
-            dispatch(setHoveredOption(hoveredOption + vertical));
-          else
-          dispatch(setHoveredOption(hoveredOption- vertical));
-        }
-      };
-    
-    
-
-  return {
-    handleKeyDown,
+  const getNavigationLimits = () => {
+    const firstRowStart = 1;
+    const firstRowEnd = optionsPerRow[0];
+    const secondRowStart = optionsPerRow[1] + 1;
+    const secondRowEnd = menuOptions.length;
+    const vertical = menuOptions.length / 2;
+    return { firstRowStart, firstRowEnd, secondRowStart, secondRowEnd, vertical };
   };
+
+  const handleArrowNavigation = (direction) => {
+    const { firstRowStart, firstRowEnd, secondRowStart, secondRowEnd, vertical } = getNavigationLimits();
+
+    if (activeButtonGroup !== buttonGroups.MAIN) {
+      if (direction === "down") {
+        if ( hoveredOption + 1 > 5)
+          handleHover(1);
+        else
+          handleHover( hoveredOption + 1); 
+      };
+      if (direction === "up") {
+        if ( hoveredOption - 1 < 1)
+          handleHover(5);
+        else
+          handleHover( hoveredOption - 1); 
+      };
+      return;
+    }
+
+    if (direction === "right") {
+      if (hoveredOption + 1 > secondRowEnd) handleHover(secondRowStart);
+      else if (hoveredOption + 1 === firstRowEnd + 1) handleHover(firstRowStart);
+      else handleHover(hoveredOption + 1);
+    }
+
+    if (direction === "left") {
+      if (hoveredOption - 1 < firstRowStart) handleHover(firstRowEnd);
+      else if (hoveredOption - 1 === secondRowStart - 1) handleHover(secondRowEnd);
+      else handleHover(hoveredOption - 1);
+    }
+
+    if (direction === "down") {
+      if (hoveredOption + vertical > secondRowEnd) handleHover(hoveredOption - vertical);
+      else handleHover(hoveredOption + vertical);
+    }
+
+    if (direction === "up") {
+      if (hoveredOption - vertical < firstRowStart) handleHover(hoveredOption + vertical);
+      else handleHover(hoveredOption - vertical);
+    }
+  };
+
+  const keyHandlers = {
+    ArrowRight: () => handleArrowNavigation("right"),
+    ArrowLeft: () => handleArrowNavigation("left"),
+    ArrowDown: () => handleArrowNavigation("down"),
+    ArrowUp: () => handleArrowNavigation("up"),
+    Escape: handleBack,
+    Backspace: handleError,
+    Enter: () => handleSelect(),
+  };
+
+  const handleKeyDown = (event) => {
+    const handler = keyHandlers[event.key];
+    if (handler) handler();
+  };
+
+  return { handleKeyDown };
 };
 
 export default useKeyNavigation;

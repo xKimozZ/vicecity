@@ -5,6 +5,7 @@ const initialState = {
   hoveredOption: 1,
   nextButtonGroup: buttonGroups.MAIN,
   activeButtonGroup: buttonGroups.MAIN,
+  currentActions: {},
 };
 
 export const navigationSlice = createSlice({
@@ -23,11 +24,15 @@ export const navigationSlice = createSlice({
       const newButtonGroup = payload;
       state.nextButtonGroup = newButtonGroup;
     },
+    setCurrentActions: (state, { payload }) => {
+      const newActions = payload;
+      state.currentActions = newActions;
+    },
   },
 });
 
 const selectSelf = (state) => state.navigationReducer;
 export const navigationSelector = createSelector(selectSelf, (state) => state);
 
-export const { setHoveredOption, setButtonGroup, setNextGroup } = navigationSlice.actions;
+export const { setHoveredOption, setButtonGroup, setNextGroup, setCurrentActions } = navigationSlice.actions;
 export default navigationSlice.reducer;

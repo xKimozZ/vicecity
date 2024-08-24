@@ -9,6 +9,8 @@ import useKeyNavigation from './hooks/useKeyNavigation';
 import { imageImports } from './assets/imageImports';
 import LanguageMenu from './components/MenuComponents/LanguageMenu/LanguageMenu';
 import { navigationSelector, setHoveredOption } from './store/navigationSlice';
+import { buttonGroupMap, buttonGroups } from './constants/buttonGroups';
+import getNextGroupIndex from './utils/getNextGroupIndex';
 
 function App() {
   const optionsPerRow = [4,4];
@@ -20,9 +22,10 @@ function App() {
     }
   );
   const [clipPathContainer, setClipPathContainer] = useState([]);
+  const [componentContainer, setComponentContainer] = useState([]);
   const interfaceRef = useRef(null);
   const { handleKeyDown } = useKeyNavigation(optionsPerRow);
-  const { hoveredOption } = useSelector(navigationSelector);
+  const { hoveredOption, nextButtonGroup, activeButtonGroup } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandler();
 
 
@@ -31,6 +34,11 @@ function App() {
       return option.frameClip;
     });
     setClipPathContainer(newClipPaths);
+
+    const newComponents = menuOptions.map((option) => {
+      return option.component;
+    });
+    setComponentContainer(newComponents);
   }, []);
 
   const renderButtons = (start, end) => {
@@ -44,22 +52,33 @@ function App() {
             key={option.buttonNumber}
             buttonNumber={option.buttonNumber}
             buttonText={option.buttonText}
-            hoverFunction={handleHover}
-            selectFunction={handleSelect}
+            buttonGroup={option.buttonGroup}
+            actions={option.actions}
           />
         ))}
       </>
     );
   };
 
+  const renderHoveredComponent = () => {
+    if (hoveredOption > 0 && hoveredOption <= componentContainer.length) {
+      const nextButtonGroupIndex = getNextGroupIndex(nextButtonGroup);
+      const ComponentToRender = componentContainer[nextButtonGroupIndex - 1]; // assuming hoveredOption starts from 1
+      return ComponentToRender ? <ComponentToRender /> : null; // Render component if it exists
+    }
+    return null;
+  };
+
   useEffect(() => {
     if (clipPathContainer.length === 0)
       return;
+    
+    const nextButtonGroupIndex = getNextGroupIndex(nextButtonGroup);
     setClipPathStyle({
       transition: '0.1s linear', // Apply transition
-      clipPath: clipPathContainer[hoveredOption-1] ? clipPathContainer[hoveredOption-1] : menuOptions[0].frameClip,
+      clipPath: clipPathContainer[nextButtonGroupIndex] ? clipPathContainer[nextButtonGroupIndex] : menuOptions[0].frameClip,
     });
-  },[hoveredOption]);
+  },[nextButtonGroup]);
 
   useEffect(() =>
   {
@@ -90,9 +109,11 @@ function App() {
         tabIndex="0"
         style={clipPathStyle}
         >
+          <Cursor />
+          {renderHoveredComponent()}
       </div>
       <div className='buttonContainer' ref={interfaceRef}
-      onKeyDown={handleKeyDown} tabIndex="0">
+      onKeyDown={handleKeyDown} tabIndex="0" onClick={()=> {if (activeButtonGroup !== buttonGroups.MAIN) handleBack()}}>
       <div className="frame">
           {renderButtons(0, optionsPerRow[0]) }
         </div>

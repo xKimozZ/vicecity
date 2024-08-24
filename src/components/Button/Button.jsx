@@ -1,30 +1,37 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Button.module.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, act } from "react";
 import { changeLocation } from "../../store/cursorSlice";
-import { navigationSelector, setHoveredOption } from "../../store/navigationSlice";
+import { navigationSelector, setHoveredOption, setNextGroup } from "../../store/navigationSlice";
+import useEventHandler from "../../hooks/useEventHandler";
+import { buttonGroups } from "../../constants/buttonGroups";
 
 const Button = ({
   buttonText = "Sample",
-  hoverFunction,
-  selectFunction,
   buttonNumber = 0,
   textColor = "var(--white)",
+  buttonGroup = buttonGroups.MAIN,
+  actions = {},
 }) => {
   const [textStyle, setTextStyle] = useState({
     color: textColor,
   });
   const buttonRef = useRef(null);
   const dispatch = useDispatch();
-  const { hoveredOption } = useSelector(navigationSelector);
+  const { hoveredOption, activeButtonGroup } = useSelector(navigationSelector);
+  const { handleHover: hoverFunction, handleSelect: selectFunction } =  useEventHandler();
 
   const isHovered = () => {
     return hoveredOption === buttonNumber;
   };
 
+  const isActive = () => {
+    return activeButtonGroup === buttonGroup;
+  }
+
   useEffect(() => {
     const updatePosition = () => {
-      if (isHovered() && buttonRef.current) {
+      if (isHovered() && isActive() && buttonRef.current) {
         const rect = buttonRef.current.getBoundingClientRect();
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
@@ -37,6 +44,9 @@ const Button = ({
         };
 
         dispatch(changeLocation(rectInPercentages));
+
+        if (buttonGroup === buttonGroups.MAIN)
+        dispatch(setNextGroup(actions.triggerMenu));
       }
     };
 
@@ -46,12 +56,16 @@ const Button = ({
     return () => {
       window.removeEventListener("resize", updatePosition); // Clean up
     };
-  }, [hoveredOption]);
+  }, [hoveredOption, activeButtonGroup]);
 
   const handleHover = () => {
-    if (isHovered()) return;
-    hoverFunction?.();
-    dispatch(setHoveredOption(buttonNumber));
+    if (isHovered() || !isActive() ) return;
+    hoverFunction?.(buttonNumber, actions);
+  };
+
+  const handleSelect = () => {
+    if (!isActive() ) return;
+    selectFunction?.();
   };
 
   return (
@@ -59,7 +73,7 @@ const Button = ({
       ref={buttonRef}
       className={`${styles.buttonContainer}`}
       onMouseEnter={handleHover}
-      onClick={selectFunction}
+      onClick={handleSelect}
       style={{ ...textStyle }}
     >
       <span>{buttonText}</span>
