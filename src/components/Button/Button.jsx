@@ -60,7 +60,7 @@ const Button = ({
 
   const handleHover = () => {
     if (isHovered() || !isActive() ) return;
-    hoverFunction?.(buttonNumber, actions);
+    hoverFunction?.(buttonNumber);
   };
 
   const handleSelect = () => {
