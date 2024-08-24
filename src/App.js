@@ -76,7 +76,7 @@ function App() {
     const nextButtonGroupIndex = getNextGroupIndex(nextButtonGroup);
     setClipPathStyle({
       transition: '0.1s linear', // Apply transition
-      clipPath: clipPathContainer[nextButtonGroupIndex] ? clipPathContainer[nextButtonGroupIndex] : menuOptions[0].frameClip,
+      clipPath: clipPathContainer[nextButtonGroupIndex - 1] ? clipPathContainer[nextButtonGroupIndex - 1] : menuOptions[0].frameClip,
     });
   },[nextButtonGroup]);
 
