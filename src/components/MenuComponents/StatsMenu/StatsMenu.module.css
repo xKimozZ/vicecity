@@ -1,0 +1,33 @@
+.statsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+    gap: 0.25em;
+    width: 70%;
+    flex: 1 1;
+    font-family: 'SF Arborcrest Heavy';
+}
+
+.statsHeader {
+    font-family: Pricedown;
+    padding: 0.02em 0.5em;
+    font-size: 48px;
+    user-select: none;
+    z-index: 2;
+    color: var(--pink);
+    text-transform: lowercase;
+}
+
+.statsPanel {
+    background-color: rgb(69, 94, 122, 0.7);
+    width: 80%;
+    height: 40vh;
+    clip-path: polygon(2.5% 0%, 97% 9%, 95% 89%, 4% 100%);
+}
+
+.statsBottom {
+    display: flex;
+    justify-content: flex-start;
+    width: 65%;
+}

@@ -2,6 +2,7 @@ import LanguageMenu from "../components/MenuComponents/LanguageMenu/LanguageMenu
 import SampleMenuComponent from "../components/MenuComponents/SampleMenuComponent";
 import { menuStrings } from "./menuStrings";
 import { buttonGroups } from "./buttonGroups";
+import StatsMenu from "../components/MenuComponents/StatsMenu/StatsMenu";
 
 export const menuOptions = [
   {
@@ -37,7 +38,7 @@ export const menuOptions = [
   {
     buttonNumber: 4,
     buttonText: menuStrings.menu.stats,
-    component: SampleMenuComponent,
+    component: StatsMenu,
     frameClip: `polygon(10.94% 16.52%, 85.94% 3.75%, 90.94% 76.17%, 11.66% 78.71%)`,
     buttonGroup: buttonGroups.MAIN_MENU,
     actions: {
