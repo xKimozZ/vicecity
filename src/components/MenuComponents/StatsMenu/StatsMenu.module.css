@@ -17,7 +17,9 @@
     user-select: none;
     z-index: 2;
     color: var(--pink);
+    text-shadow: 3px 3px 0px black;
     text-transform: lowercase;
+    letter-spacing: -1px;
 }
 
 .statsPanel {

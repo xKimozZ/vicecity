@@ -6,5 +6,7 @@
     font-size: 48px;
     user-select: none;
     z-index: 2;
+    text-shadow: 3px 3px 0px black;
     text-transform: lowercase;
+    letter-spacing: -1px;
 }
