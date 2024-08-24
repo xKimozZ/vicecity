@@ -19,17 +19,18 @@ const useEventHandler = () => {
     playInfo();
   };
 
-  const handleHover = (buttonNumber, actions) => {
+  const handleHover = (buttonNumber) => {
     dispatch(setHoveredOption(buttonNumber));
-    if (actions?.triggerMenu) {
-      dispatch(setNextGroup(actions.triggerMenu));
-      dispatch(setCurrentActions(actions));
+    if ( activeButtonGroup === buttonGroups.MAIN ) {
+      const buttonActions = menuOptions[buttonNumber-1].actions;
+      dispatch(setNextGroup(buttonActions.triggerMenu));
+      dispatch(setCurrentActions(buttonActions));
     };
+
     playHover();
   };
 
   const handleSelect = () => {
-    playSelect();
     selectCase();
   };
 
