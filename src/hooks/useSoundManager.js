@@ -2,7 +2,7 @@ import useSound from 'use-sound';
 import { soundImports } from '../assets/soundImports';
 
 const {menuSounds} = soundImports;
-const defaultVolume = 0.5;
+const defaultVolume = 0.7;
 
 const useSoundManager = () => {
   const [playHover] = useSound(menuSounds.hover, {volume: defaultVolume});
