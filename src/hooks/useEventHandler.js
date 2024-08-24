@@ -8,6 +8,7 @@ import {
   setCurrentActions,
 } from "../store/navigationSlice";
 import { buttonGroupMap, buttonGroups } from "../constants/buttonGroups";
+import { menuOptions } from "../constants/menuOptions";
 
 const useEventHandler = () => {
   const { playHover, playSelect, playBack, playError, playInfo } =
@@ -38,8 +39,13 @@ const useEventHandler = () => {
     if (activeButtonGroup === buttonGroups.MAIN) {
       dispatch(setButtonGroup(currentActions.triggerMenu));
       dispatch(setHoveredOption(1));
+      playSelect();
     } else if (activeButtonGroup === buttonGroups.LANGUAGE) {
+      playSelect();
       // Change language here
+    }
+    else if (activeButtonGroup === buttonGroups.STATS) {
+      handleBack();
     }
   };
 
