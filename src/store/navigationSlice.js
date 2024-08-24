@@ -1,7 +1,10 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { buttonGroups } from "../constants/buttonGroups";
 
 const initialState = {
   hoveredOption: 1,
+  nextButtonGroup: buttonGroups.MAIN,
+  activeButtonGroup: buttonGroups.MAIN,
 };
 
 export const navigationSlice = createSlice({
@@ -12,11 +15,19 @@ export const navigationSlice = createSlice({
       const newHoveredOption = payload;
       state.hoveredOption = newHoveredOption;
     },
+    setButtonGroup: (state, { payload }) => {
+      const newButtonGroup = payload;
+      state.activeButtonGroup = newButtonGroup;
+    },
+    setNextGroup: (state, { payload }) => {
+      const newButtonGroup = payload;
+      state.nextButtonGroup = newButtonGroup;
+    },
   },
 });
 
 const selectSelf = (state) => state.navigationReducer;
 export const navigationSelector = createSelector(selectSelf, (state) => state);
 
-export const { setHoveredOption } = navigationSlice.actions;
+export const { setHoveredOption, setButtonGroup, setNextGroup } = navigationSlice.actions;
 export default navigationSlice.reducer;
