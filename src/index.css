@@ -3,6 +3,16 @@
   src: url('assets/fonts/Pricedown.ttf'); /* Locate the .ttf file within your directory*/
 }
 
+@font-face {
+  font-family: 'SF Arborcrest Medium'; /* Name your font family */
+  src: url('assets/fonts/SF Arborcrest Medium.ttf'); /* Locate the .ttf file within your directory*/
+}
+
+@font-face {
+  font-family: 'SF Arborcrest Heavy'; /* Name your font family */
+  src: url('assets/fonts/SF Arborcrest Heavy.ttf'); /* Locate the .ttf file within your directory*/
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
