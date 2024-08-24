@@ -100,7 +100,7 @@ function App() {
       <Cursor />
     <div className={`${marginState ? 'margin' : ''} AppContainer`}>
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}} onClick={handleMargin}>
-        <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69}/>
+        <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} buttonGroup='DEBUG'/>
       </div>
       <img src={imageImports.global.vclogo1024} className="viceLogo" />
       <div
