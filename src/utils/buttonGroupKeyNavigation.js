@@ -35,6 +35,17 @@ export const handleArrowNavigation = (
     return;
   }
 
+    // stats menu handling
+    if (activeButtonGroup === buttonGroups.STATS) {
+      if (direction === "down") {
+        handleHover();
+      }
+      if (direction === "up") {
+        handleHover();
+      }
+      return;
+    }
+
   // main menu handling
   if (activeButtonGroup === buttonGroups.MAIN) {
     if (direction === "right") {
