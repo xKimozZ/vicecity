@@ -2,10 +2,11 @@ import { useSelector } from "react-redux";
 import { navigationSelector } from "../store/navigationSlice";
 import useEventHandler from "./useEventHandler";
 import { buttonGroups } from "../constants/buttonGroups";
-import { menuOptions } from "../constants/menuOptions";
+import useMenuOptions from "./useMenuOptions";
 
 const useKeyNavigation = (optionsPerRow) => {
-  const { hoveredOption, nextButtonGroup, activeButtonGroup } = useSelector(navigationSelector);
+  const menuOptions = useMenuOptions();
+  const { hoveredOption, activeButtonGroup } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack } = useEventHandler();
 
   const getNavigationLimits = () => {

@@ -1,7 +1,7 @@
 import './App.css';
 import Button from './components/Button/Button'
 import { useEffect, useState, useRef } from 'react';
-import { menuOptions } from './constants/menuOptions';
+import useMenuOptions from './hooks/useMenuOptions';
 import { useSelector } from 'react-redux';
 import Cursor from './components/Cursor/Cursor'
 import useEventHandler from './hooks/useEventHandler';
@@ -11,8 +11,10 @@ import LanguageMenu from './components/MenuComponents/LanguageMenu/LanguageMenu'
 import { navigationSelector, setHoveredOption } from './store/navigationSlice';
 import { buttonGroupMap, buttonGroups } from './constants/buttonGroups';
 import getNextGroupIndex from './utils/getNextGroupIndex';
+import { menuStrings } from './constants/menuStrings';
 
 function App() {
+  const menuOptions = useMenuOptions();
   const optionsPerRow = [4,4];
   const [marginState, setMarginState] = useState(false);
   const [clipPathStyle, setClipPathStyle] = useState(

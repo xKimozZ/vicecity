@@ -8,13 +8,15 @@ import {
   setCurrentActions,
 } from "../store/navigationSlice";
 import { buttonGroupMap, buttonGroups } from "../constants/buttonGroups";
-import { menuOptions } from "../constants/menuOptions";
+import useMenuOptions from "./useMenuOptions";
+import { setLanguage } from "../store/localizationSlice";
 
 const useEventHandler = () => {
+  const menuOptions = useMenuOptions();
   const { playHover, playSelect, playBack, playError, playInfo } =
     useSoundManager();
   const dispatch = useDispatch();
-  const { activeButtonGroup, currentActions } = useSelector(navigationSelector);
+  const { activeButtonGroup, currentActions, hoveredOption } = useSelector(navigationSelector);
 
   const handleInfo = () => {
     playInfo();
@@ -42,6 +44,25 @@ const useEventHandler = () => {
       playSelect();
     } else if (activeButtonGroup === buttonGroups.LANGUAGE) {
       playSelect();
+      switch (hoveredOption) {
+        case 1:
+          dispatch(setLanguage('en'));
+          break;
+        case 2:
+          dispatch(setLanguage('fr'));
+          break;
+        case 3:
+          dispatch(setLanguage('de'));
+          break;
+        case 4:
+          dispatch(setLanguage('it'));
+          break;
+        case 5:
+          dispatch(setLanguage('es'));
+          break;
+        default:
+          break;
+      }
       // Change language here
     }
     else if (activeButtonGroup === buttonGroups.STATS) {
