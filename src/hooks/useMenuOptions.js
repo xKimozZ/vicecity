@@ -4,6 +4,7 @@ import { buttonGroups } from "../constants/buttonGroups";
 import StatsMenu from "../components/MenuComponents/StatsMenu/StatsMenu";
 import { stringSelector } from "../store/localizationSlice";
 import { useSelector } from "react-redux";
+import BriefMenu from "../components/MenuComponents/BriefMenu/BriefMenu";
 
 const useMenuOptions = () => {
   const strings = useSelector(stringSelector);
@@ -22,7 +23,7 @@ const useMenuOptions = () => {
     {
       buttonNumber: 2,
       buttonText: strings.menu.brief,
-      component: SampleMenuComponent,
+      component: BriefMenu,
       frameClip: `polygon(11.86% 14.38%, 89.06% 14.51%, 95.47% 74.61%, 15.63% 75.98%)`,
       buttonGroup: buttonGroups.MAIN_MENU,
       actions: {

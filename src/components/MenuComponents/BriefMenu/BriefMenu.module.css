@@ -1,0 +1,11 @@
+.briefContainer {
+    font-size: 32px;
+    width: 70%;
+    margin-left: 10%;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    font-family: 'SF Arborcrest Heavy';
+}
