@@ -42,10 +42,10 @@ export const menuStrings = {
     fr: {
       menu: {
         map: "Carte",
-        brief: "Résumé",
+        brief: "Briefing",
         load: "Charger",
         stats: "Statistiques",
-        controls: "Contrôles",
+        controls: "Commandes",
         audio: "Audio",
         display: "Affichage",
         language: "Langue",
@@ -62,7 +62,7 @@ export const menuStrings = {
     de: {
       menu: {
         map: "Karte",
-        brief: "Kurzinfo",
+        brief: "Missionsinfo",
         load: "Laden",
         stats: "Statistiken",
         controls: "Steuerung",
@@ -82,12 +82,12 @@ export const menuStrings = {
     it: {
       menu: {
         map: "Mappa",
-        brief: "Riepilogo",
+        brief: "Briefing",
         load: "Carica",
         stats: "Statistiche",
-        controls: "Controlli",
+        controls: "Comandi",
         audio: "Audio",
-        display: "Display",
+        display: "Video",
         language: "Lingua",
         credits: "Crediti",
       },
