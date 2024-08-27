@@ -12,6 +12,7 @@ import { navigationSelector, setHoveredOption } from './store/navigationSlice';
 import { buttonGroupMap, buttonGroups } from './constants/buttonGroups';
 import getNextGroupIndex from './utils/getNextGroupIndex';
 import { menuStrings } from './constants/menuStrings';
+import Header from './components/Header/Header';
 
 function App() {
   const menuOptions = useMenuOptions();
@@ -105,6 +106,7 @@ function App() {
         <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} buttonGroup='DEBUG'/>
       </div>
       <img src={imageImports.global.vclogo1024} className="viceLogo" />
+      <Header />
       <div
         className="App"
         onKeyDown={handleKeyDown} // Attach the onKeyDown event here

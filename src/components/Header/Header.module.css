@@ -1,0 +1,19 @@
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+.Header {
+    font-family: Pricedown;
+    position: absolute;
+    top: 6%;
+    right: 7%;
+    font-size: 72px;
+    user-select: none;
+    z-index: 2;
+    color: var(--pink);
+    text-shadow: -10px 10px 0px rgb(27, 27, 27, 0.8);
+    text-transform: lowercase;
+    letter-spacing: -1px;
+    animation: fadeIn 0.4s;
+}
