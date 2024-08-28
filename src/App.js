@@ -46,14 +46,15 @@ function App() {
 
   const renderButtons = (start, end) => {
     const menuRow = menuOptions.slice(start,end);
+    const indexOffset = start + 1; // To minimise dependency on hardcoded buttonNumber's
 
     return (
       <>
         {
-          menuRow.map((option) => (
+          menuRow.map((option, index ) => (
           <Button
             key={option.buttonNumber}
-            buttonNumber={option.buttonNumber}
+            buttonNumber={index + indexOffset}
             buttonText={option.buttonText}
             buttonGroup={option.buttonGroup}
             actions={option.actions}
