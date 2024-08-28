@@ -11,6 +11,18 @@ export const menuStrings = {
         language: "Language",
         credits: "Credits",
       },
+      brief: {
+        intro: [
+          "Go get some sleep.",
+          "What are you gonna do?",
+          "I'll drop by your office tomorrow and we can start sorting this mess out."
+        ],
+        hotel: [
+          "But because it's you, because we got history, I'm gonna let you handle this.",
+          "Look, Sonny, you got my word.",
+          "I'll be in touch."
+        ]
+      },
       language: {
         english: "English",
         french: "French",
