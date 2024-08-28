@@ -22,6 +22,19 @@ export const handleArrowNavigation = (
   const { firstRowStart, firstRowEnd, secondRowStart, secondRowEnd, vertical } =
     getNavigationLimits(optionsPerRow, menuOptions);
 
+    // load menu handling
+  if (activeButtonGroup === buttonGroups.LOAD) {
+    if (direction === "down") {
+      if (hoveredOption + 1 > 2) handleHover(1);
+      else handleHover(hoveredOption + 1);
+    }
+    if (direction === "up") {
+      if (hoveredOption - 1 < 1) handleHover(2);
+      else handleHover(hoveredOption - 1);
+    }
+    return;
+  }
+
   // language menu handling
   if (activeButtonGroup === buttonGroups.LANGUAGE) {
     if (direction === "down") {
