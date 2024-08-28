@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Button.module.css";
 import { useEffect, useState, useRef, act } from "react";
 import { changeLocation } from "../../store/cursorSlice";
-import { navigationSelector, setHoveredOption, setNextGroup } from "../../store/navigationSlice";
+import { navigationSelector, setCurrentActions, setHoveredOption, setNextGroup } from "../../store/navigationSlice";
 import useEventHandler from "../../hooks/useEventHandler";
 import { buttonGroups } from "../../constants/buttonGroups";
 
@@ -44,9 +44,7 @@ const Button = ({
         };
 
         dispatch(changeLocation(rectInPercentages));
-
-        if (buttonGroup === buttonGroups.MAIN)
-        dispatch(setNextGroup(actions.nextMenu));
+        dispatch(setCurrentActions(actions));
       }
     };
 

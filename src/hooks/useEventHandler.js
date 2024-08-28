@@ -10,10 +10,12 @@ import {
 import { buttonGroupMap, buttonGroups } from "../constants/buttonGroups";
 import useMenuOptions from "./useMenuOptions";
 import { languageSelector, setLanguage } from "../store/localizationSlice";
+import { languageMap } from "../constants/menuStrings";
 
 const useEventHandler = () => {
   const menuOptions = useMenuOptions();
   const currentLanguage = useSelector(languageSelector);
+
   const { playHover, playSelect, playBack, playError, playInfo } =
     useSoundManager();
   const dispatch = useDispatch();
@@ -28,8 +30,7 @@ const useEventHandler = () => {
     if (buttonNumber) dispatch(setHoveredOption(buttonNumber));
     if (activeButtonGroup === buttonGroups.MAIN) {
       const buttonActions = menuOptions[buttonNumber - 1].actions;
-      dispatch(setNextGroup(buttonActions.triggerMenu));
-      dispatch(setCurrentActions(buttonActions));
+      dispatch(setNextGroup(buttonActions.nextMenu));
     }
 
     if (activeButtonGroup === buttonGroups.STATS) {
@@ -44,33 +45,10 @@ const useEventHandler = () => {
 
   const selectCase = (actions) => {
     if (activeButtonGroup === buttonGroups.MAIN) {
-      if ( currentActions.trigger() ) playSelect();
+      if ( triggerMenu(currentActions.nextMenu) ) playSelect();
     } else if (activeButtonGroup === buttonGroups.LANGUAGE) {
       playHover();
-      switch (hoveredOption) {
-        case 1:
-          if (currentLanguage === "en") break;
-          dispatch(setLanguage("en"));
-          break;
-        case 2:
-          if (currentLanguage === "fr") break;
-          dispatch(setLanguage("fr"));
-          break;
-        case 3:
-          if (currentLanguage === "de") break;
-          dispatch(setLanguage("de"));
-          break;
-        case 4:
-          if (currentLanguage === "it") break;
-          dispatch(setLanguage("it"));
-          break;
-        case 5:
-          if (currentLanguage === "es") break;
-          dispatch(setLanguage("es"));
-          break;
-        default:
-          break;
-      }
+      changeLanguage(currentActions.nextLanguage);
     } else if (activeButtonGroup === buttonGroups.STATS) {
       handleBack();
     }
@@ -94,18 +72,6 @@ const useEventHandler = () => {
     playError();
   };
 
-  return {
-    handleBack,
-    handleSelect,
-    handleError,
-    handleHover,
-    handleInfo,
-  };
-};
-
-export const useExportedFunctions = () => {
-  const dispatch = useDispatch();
-
   const triggerMenu = (newMenu) => {
     if (newMenu === buttonGroups.BRIEF) return false;
     dispatch(setButtonGroup(newMenu));
@@ -113,8 +79,18 @@ export const useExportedFunctions = () => {
     return true;
   };
 
+  const changeLanguage = (newLanguage) => {
+    if (languageMap[newLanguage] && currentLanguage !== newLanguage) {
+      dispatch(setLanguage(newLanguage));
+    }
+  };
+
   return {
-    triggerMenu,
+    handleBack,
+    handleSelect,
+    handleError,
+    handleHover,
+    handleInfo,
   };
 };
 

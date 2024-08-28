@@ -141,3 +141,10 @@ export const menuStrings = {
     },
   };
   
+export const languageMap = {
+    en: "en",
+    fr: "fr",
+    de: "de",
+    it: "it",
+    es: "es",
+  };
