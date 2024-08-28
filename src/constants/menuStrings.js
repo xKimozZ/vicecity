@@ -50,6 +50,18 @@ export const menuStrings = {
         italian: "Italiano",
         spanish: "Español",
       },
+      brief: {
+        intro: [
+          "Vete a dormir un poco.",
+          "¯Quž es lo que vas a hacer?",
+          "Ma®ana te dejarž en tu oficina y podremos empezar a solucionar toda este desorden."
+        ],
+        hotel: [
+          "But because it's you, because we got history, I'm gonna let you handle this.",
+          "Look, Sonny, you got my word.",
+          "I'll be in touch."
+        ],
+      },
     },
     fr: {
       menu: {
@@ -69,6 +81,18 @@ export const menuStrings = {
         german: "Allemand",
         italian: "Italien",
         spanish: "Espagnol",
+      },
+      brief: {
+        intro: [
+          "Va roupiller.",
+          "Qu'est-ce que tu vas faire?",
+          "Je passerai — ton bureau demain et on essayera de trouver une solution — ce merdier."
+        ],
+        hotel: [
+          "But because it's you, because we got history, I'm gonna let you handle this.",
+          "Look, Sonny, you got my word.",
+          "I'll be in touch."
+        ],
       },
     },
     de: {
@@ -90,6 +114,18 @@ export const menuStrings = {
         italian: "Italienisch",
         spanish: "Spanisch",
       },
+      brief: {
+        intro: [
+          "Leg dich schlafen.",
+          "Was hast du vor?",
+          "Ich komme morgen zu dir ins B¬ro, dann sehen wir weiter."
+        ],
+        hotel: [
+          "But because it's you, because we got history, I'm gonna let you handle this.",
+          "Look, Sonny, you got my word.",
+          "I'll be in touch."
+        ],
+      },
     },
     it: {
       menu: {
@@ -109,6 +145,18 @@ export const menuStrings = {
         german: "Tedesco",
         italian: "Italiano",
         spanish: "Spagnolo",
+      },
+      brief: {
+        intro: [
+          "Vai a riposarti.",
+          "Che cosa intendi fare?",
+          "Passer¥ domani a trovarti in ufficio e troveremo un modo per risolvere questo casino."
+        ],
+        hotel: [
+          "But because it's you, because we got history, I'm gonna let you handle this.",
+          "Look, Sonny, you got my word.",
+          "I'll be in touch."
+        ],
       },
     },
     pt: {
