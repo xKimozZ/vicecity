@@ -29,6 +29,7 @@ const useEventHandler = () => {
   const handleHover = (buttonNumber) => {
     if (buttonNumber) dispatch(setHoveredOption(buttonNumber));
     if (activeButtonGroup === buttonGroups.MAIN) {
+      // Load in the menu for that option
       const buttonActions = menuOptions[buttonNumber - 1].actions;
       dispatch(setNextGroup(buttonActions.nextMenu));
     }
@@ -40,12 +41,9 @@ const useEventHandler = () => {
   };
 
   const handleSelect = () => {
-    selectCase();
-  };
-
-  const selectCase = (actions) => {
     if (activeButtonGroup === buttonGroups.MAIN) {
-      if ( triggerMenu(currentActions.nextMenu) ) playSelect();
+      // If allowed to enter the menu (all except brief), return true and play the sound
+      if (triggerMenu(currentActions.nextMenu)) playSelect();
     } else if (activeButtonGroup === buttonGroups.LANGUAGE) {
       playHover();
       changeLanguage(currentActions.nextLanguage);
@@ -55,10 +53,6 @@ const useEventHandler = () => {
   };
 
   const handleBack = () => {
-    backCase();
-  };
-
-  const backCase = () => {
     if (activeButtonGroup !== buttonGroups.MAIN) {
       const activeButtonGroupIndex = buttonGroupMap[activeButtonGroup] ?? 0;
       dispatch(setHoveredOption(activeButtonGroupIndex));
