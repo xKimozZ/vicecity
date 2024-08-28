@@ -1,0 +1,8 @@
+.saveButton {
+    padding-left: 20px;
+    font-size: 32px;
+    width: 100%;
+    z-index: 1;
+    text-align: left;
+    font-family: 'SF Arborcrest Heavy';
+}

@@ -6,6 +6,7 @@ import { stringSelector } from "../store/localizationSlice";
 import { useSelector } from "react-redux";
 import BriefMenu from "../components/MenuComponents/BriefMenu/BriefMenu";
 import getGroupIndex from "../utils/getNextGroupIndex";
+import LoadMenu from "../components/MenuComponents/LoadMenu/LoadMenu";
 
 const useMenuOptions = () => {
   const strings = useSelector(stringSelector);
@@ -35,7 +36,7 @@ const useMenuOptions = () => {
     {
       //buttonNumber: getGroupIndex(buttonGroups.LOAD),
       buttonText: strings.menu.load,
-      component: SampleMenuComponent,
+      component: LoadMenu,
       frameClip: `polygon(10.41% 15.43%, 88.25% 4.72%, 93.75% 76.37%, 8.49% 78.83%)`,
       buttonGroup: buttonGroups.MAIN,
       actions: {

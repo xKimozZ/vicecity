@@ -1,0 +1,28 @@
+.loadContainer {
+    display: flex;
+    gap: 0.5em;
+    width: 80%;
+    height: 70vh;
+    z-index: 1;
+}
+
+.loadButtonContainer {
+    display: flex;
+    width: 270px;
+    flex-direction: column;
+    margin-left: 4%;
+    margin-top: 7em;
+}
+
+
+
+.loadPanel {
+    background-color: rgb(69, 94, 122, 0.7);
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    padding: 30px;
+    height: 50vh;
+    clip-path: polygon(2.5% 0%, 96% 3%, 100% 100%, 4% 97%);
+}
