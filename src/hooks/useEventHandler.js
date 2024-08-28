@@ -50,6 +50,13 @@ const useEventHandler = () => {
     } else if (activeButtonGroup === buttonGroups.STATS) {
       handleBack();
     }
+    else if (activeButtonGroup === buttonGroups.LOAD) {
+      console.log(currentActions);
+    if (currentActions.fileExists !== undefined && currentActions.fileExists === false)
+    {
+      playError();
+    }
+  }
   };
 
   const handleBack = () => {
