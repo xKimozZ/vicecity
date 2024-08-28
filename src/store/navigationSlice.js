@@ -3,7 +3,7 @@ import { buttonGroups } from "../constants/buttonGroups";
 
 const initialState = {
   hoveredOption: 1,
-  nextButtonGroup: buttonGroups.MAIN,
+  nextButtonGroup: buttonGroups.MAP,
   activeButtonGroup: buttonGroups.MAIN,
   currentActions: {},
 };
