@@ -17,23 +17,22 @@ const useEventHandler = () => {
   const { playHover, playSelect, playBack, playError, playInfo } =
     useSoundManager();
   const dispatch = useDispatch();
-  const { activeButtonGroup, currentActions, hoveredOption } = useSelector(navigationSelector);
+  const { activeButtonGroup, currentActions, hoveredOption } =
+    useSelector(navigationSelector);
 
   const handleInfo = () => {
     playInfo();
   };
 
   const handleHover = (buttonNumber) => {
-    if (buttonNumber)
-    dispatch(setHoveredOption(buttonNumber));
-    if ( activeButtonGroup === buttonGroups.MAIN ) {
-      const buttonActions = menuOptions[buttonNumber-1].actions;
+    if (buttonNumber) dispatch(setHoveredOption(buttonNumber));
+    if (activeButtonGroup === buttonGroups.MAIN) {
+      const buttonActions = menuOptions[buttonNumber - 1].actions;
       dispatch(setNextGroup(buttonActions.triggerMenu));
       dispatch(setCurrentActions(buttonActions));
-    };
+    }
 
-    if ( activeButtonGroup === buttonGroups.STATS )
-    {
+    if (activeButtonGroup === buttonGroups.STATS) {
       // stats scroll logic todo here
     }
     playHover();
@@ -45,11 +44,7 @@ const useEventHandler = () => {
 
   const selectCase = (actions) => {
     if (activeButtonGroup === buttonGroups.MAIN) {
-      if (currentActions.triggerMenu === buttonGroups.BRIEF) return;
-
-      dispatch(setButtonGroup(currentActions.triggerMenu));
-      dispatch(setHoveredOption(1));
-      playSelect();
+      if ( currentActions.trigger() ) playSelect();
     } else if (activeButtonGroup === buttonGroups.LANGUAGE) {
       playHover();
       switch (hoveredOption) {
@@ -90,13 +85,9 @@ const useEventHandler = () => {
       const activeButtonGroupIndex = buttonGroupMap[activeButtonGroup] ?? 0;
       dispatch(setHoveredOption(activeButtonGroupIndex));
       dispatch(setButtonGroup(buttonGroups.MAIN));
-      if (activeButtonGroup === buttonGroups.STATS)
-        playHover();
-      else
-        playBack();
-    }
-    else
-    playBack();
+      if (activeButtonGroup === buttonGroups.STATS) playHover();
+      else playBack();
+    } else playBack();
   };
 
   const handleError = () => {
@@ -109,6 +100,21 @@ const useEventHandler = () => {
     handleError,
     handleHover,
     handleInfo,
+  };
+};
+
+export const useExportedFunctions = () => {
+  const dispatch = useDispatch();
+
+  const triggerMenu = (newMenu) => {
+    if (newMenu === buttonGroups.BRIEF) return false;
+    dispatch(setButtonGroup(newMenu));
+    dispatch(setHoveredOption(1));
+    return true;
+  };
+
+  return {
+    triggerMenu,
   };
 };
 

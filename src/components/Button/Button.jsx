@@ -46,7 +46,7 @@ const Button = ({
         dispatch(changeLocation(rectInPercentages));
 
         if (buttonGroup === buttonGroups.MAIN)
-        dispatch(setNextGroup(actions.triggerMenu));
+        dispatch(setNextGroup(actions.nextMenu));
       }
     };
 
