@@ -61,10 +61,10 @@ export const handleArrowNavigation = (
     // stats menu handling
     if (activeButtonGroup === buttonGroups.STATS) {
       if (direction === "down") {
-        handleHover();
+        handleHover(1);
       }
       if (direction === "up") {
-        handleHover();
+        handleHover(0);
       }
       return;
     }

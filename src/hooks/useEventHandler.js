@@ -11,6 +11,7 @@ import { buttonGroupMap, buttonGroups } from "../constants/buttonGroups";
 import useMenuOptions from "./useMenuOptions";
 import { languageSelector, setLanguage } from "../store/localizationSlice";
 import { languageMap } from "../constants/menuStrings";
+import { decrementStatsTranslate, incrementStatsTranslate } from "../store/miscSlice";
 
 const useEventHandler = () => {
   const menuOptions = useMenuOptions();
@@ -38,6 +39,9 @@ const useEventHandler = () => {
 
     if (activeButtonGroup === buttonGroups.STATS) {
       // stats scroll logic todo here
+      if (buttonNumber === 1)
+        dispatch(incrementStatsTranslate());
+      else dispatch(decrementStatsTranslate());
     }
     playHover();
   };
@@ -46,7 +50,7 @@ const useEventHandler = () => {
     if (triggeredBy)
     {
       if (triggeredBy !== hoveredOption) {
-        if (activeButtonGroup === buttonGroups.LOAD)
+        if (activeButtonGroup === buttonGroups.LOAD && hoveredOption > 2)
         {
           handleBack();
         }
@@ -68,11 +72,9 @@ const useEventHandler = () => {
         dispatch(setHoveredOption(3));
         playHover();
       }
-      if (
-        currentActions.fileExists !== undefined &&
-        currentActions.fileExists === false
-      ) {
-        playError();
+      if (currentActions.fileExists !== undefined) {
+        if (currentActions.fileExists) playSelect();
+        else playError();
       }
     }
   };

@@ -49,3 +49,8 @@
     justify-content: flex-start;
     width: 65%;
 }
+
+@keyframes scrollDown {
+    0% { transform: translateY(0); }
+    99% { transform: translateY(100%); }
+  }
