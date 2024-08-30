@@ -14,7 +14,6 @@
     font-family: Pricedown;
     padding: 0.02em 0.5em;
     font-size: 48px;
-    user-select: none;
     z-index: 2;
     color: var(--pink);
     text-shadow: 3px 3px 0px black;
