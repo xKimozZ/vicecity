@@ -63,7 +63,7 @@ const Button = ({
 
   const handleSelect = () => {
     if (!isActive() ) return;
-    selectFunction?.();
+    selectFunction?.(buttonNumber);
   };
 
   return (

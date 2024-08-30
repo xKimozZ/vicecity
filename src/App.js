@@ -65,7 +65,7 @@ function App() {
   };
 
   const renderHoveredComponent = () => {
-    if (hoveredOption > 0 && hoveredOption <= componentContainer.length) {
+    if (hoveredOption > 0 ) {
       const nextButtonGroupIndex = getNextGroupIndex(nextButtonGroup);
       const ComponentToRender = componentContainer[nextButtonGroupIndex - 1]; // assuming hoveredOption starts from 1
       return ComponentToRender ? <ComponentToRender /> : null; // Render component if it exists
@@ -118,7 +118,7 @@ function App() {
           {renderHoveredComponent()}
       </div>
       <div className='buttonContainer' ref={interfaceRef}
-      onKeyDown={handleKeyDown} tabIndex="0" onClick={()=> {if (activeButtonGroup !== buttonGroups.MAIN) handleBack()}}>
+      onKeyDown={handleKeyDown} tabIndex="0" onClick={()=> {if (activeButtonGroup !== buttonGroups.MAIN) handleBack(1)}}>
       <div className="frame">
           {renderButtons(0, optionsPerRow[0]) }
         </div>

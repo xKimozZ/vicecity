@@ -27,6 +27,8 @@ const useEventHandler = () => {
   };
 
   const handleHover = (buttonNumber) => {
+    if (activeButtonGroup === buttonGroups.LOAD && hoveredOption > 2 && buttonNumber <= 2)
+      return;
     if (buttonNumber) dispatch(setHoveredOption(buttonNumber));
     if (activeButtonGroup === buttonGroups.MAIN) {
       // Load in the menu for that option
@@ -40,7 +42,19 @@ const useEventHandler = () => {
     playHover();
   };
 
-  const handleSelect = () => {
+  const handleSelect = (triggeredBy) => {
+    if (triggeredBy)
+    {
+      if (triggeredBy !== hoveredOption) {
+        if (activeButtonGroup === buttonGroups.LOAD)
+        {
+          handleBack();
+        }
+        handleHover(triggeredBy);
+        return;
+      }
+    }
+    
     if (activeButtonGroup === buttonGroups.MAIN) {
       // If allowed to enter the menu (all except brief), return true and play the sound
       if (triggerMenu(currentActions.nextMenu)) playSelect();
@@ -49,24 +63,49 @@ const useEventHandler = () => {
       changeLanguage(currentActions.nextLanguage);
     } else if (activeButtonGroup === buttonGroups.STATS) {
       handleBack();
+    } else if (activeButtonGroup === buttonGroups.LOAD ) {
+      if (currentActions.trigger === "loadGame") {
+        dispatch(setHoveredOption(3));
+        playHover();
+      }
+      if (
+        currentActions.fileExists !== undefined &&
+        currentActions.fileExists === false
+      ) {
+        playError();
+      }
     }
-    else if (activeButtonGroup === buttonGroups.LOAD) {
-      console.log(currentActions);
-    if (currentActions.fileExists !== undefined && currentActions.fileExists === false)
-    {
-      playError();
-    }
-  }
   };
 
-  const handleBack = () => {
+  const handleBack = (overRide = 0) => {
     if (activeButtonGroup !== buttonGroups.MAIN) {
-      const activeButtonGroupIndex = buttonGroupMap[activeButtonGroup] ?? 0;
-      dispatch(setHoveredOption(activeButtonGroupIndex));
-      dispatch(setButtonGroup(buttonGroups.MAIN));
-      if (activeButtonGroup === buttonGroups.STATS) playHover();
-      else playBack();
-    } else playBack();
+      if (activeButtonGroup === buttonGroups.STATS) {
+        backToNavigation();
+        playHover();
+      }
+      else if (activeButtonGroup === buttonGroups.LOAD)
+      {
+        if (overRide === 1) {
+          playBack();
+          backToNavigation();
+          return;
+        }
+        if (hoveredOption > 2)
+        {
+          dispatch(setHoveredOption(1));
+          playHover();
+        }
+        else {
+          backToNavigation();
+          playBack();
+        }
+      }
+      else {
+        backToNavigation();
+        playBack();
+      }
+    }
+    else playBack();
   };
 
   const handleError = () => {
@@ -86,12 +125,19 @@ const useEventHandler = () => {
     }
   };
 
+  const backToNavigation = () => {
+    const activeButtonGroupIndex = buttonGroupMap[activeButtonGroup] ?? 0;
+    dispatch(setHoveredOption(activeButtonGroupIndex));
+    dispatch(setButtonGroup(buttonGroups.MAIN));
+  }
+
   return {
     handleBack,
     handleSelect,
     handleError,
     handleHover,
     handleInfo,
+    backToNavigation,
   };
 };
 

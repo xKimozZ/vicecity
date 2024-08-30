@@ -25,12 +25,22 @@ export const handleArrowNavigation = (
     // load menu handling
   if (activeButtonGroup === buttonGroups.LOAD) {
     if (direction === "down") {
-      if (hoveredOption + 1 > 2) handleHover(1);
-      else handleHover(hoveredOption + 1);
+      if (hoveredOption > 2)
+        {
+          if (hoveredOption + 1 > 10) handleHover(3);
+          else handleHover(hoveredOption + 1);
+        }
+        else if (hoveredOption + 1 > 2) handleHover(1);
+        else handleHover(hoveredOption + 1);
     }
     if (direction === "up") {
-      if (hoveredOption - 1 < 1) handleHover(2);
-      else handleHover(hoveredOption - 1);
+      if (hoveredOption > 2)
+        {
+          if (hoveredOption - 1 < 3) handleHover(9);
+          else handleHover(hoveredOption - 1);
+        }
+        else if (hoveredOption - 1 < 1) handleHover(2);
+        else handleHover(hoveredOption - 1);
     }
     return;
   }
