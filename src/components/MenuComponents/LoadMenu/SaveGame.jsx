@@ -8,7 +8,8 @@ import { buttonGroups } from "../../../constants/buttonGroups";
 
 const SaveGame = ({
   buttonNumber = 3,
-  buttonText = `Save File ${buttonNumber} Not Present`,
+  slotNumber = 0,
+  buttonText = `Save File ${slotNumber} Not Present`,
   buttonGroup = buttonGroups.LOAD,
   actions = {fileExists: false},
 }) => {
@@ -22,7 +23,7 @@ const SaveGame = ({
   };
 
   const isActive = () => {
-    return activeButtonGroup === buttonGroup;
+    return ( activeButtonGroup === buttonGroup && hoveredOption > 2 );
   }
 
   useEffect(() => {
@@ -37,6 +38,11 @@ const SaveGame = ({
           left: (rect.left / viewportWidth) * 100,
           width: (rect.width / viewportWidth) * 100,
           height: (rect.height / viewportHeight) * 100,
+          clipFactor: 3,
+          topFactor: 0.99,
+          leftFactor: 0.99,
+          widthFactor: 1,
+          heightFactor: 1.1,
         };
 
         dispatch(changeLocation(rectInPercentages));
