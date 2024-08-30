@@ -14,22 +14,38 @@ const initialState = {
   },
 };
 
+const defaultClipFactor = 13;
+const defaultTopFactor = 0.98;
+const defaultLeftFactor = 0.99;
+const defaultWidthFactor = 1.1;
+const defaultHeightFactor = 1.8;
+
 export const cursorSlice = createSlice({
   name: "cursor",
   initialState,
   reducers: {
     changeLocation: (state, { payload }) => {
-      const { top = "0%", left = "0%", width = "0%", height = "0%" } = payload;
+      const {
+        top = "0%",
+        left = "0%",
+        width = "0%",
+        height = "0%",
+        clipFactor = defaultClipFactor,
+        topFactor = defaultTopFactor,
+        leftFactor = defaultLeftFactor,
+        widthFactor = defaultWidthFactor,
+        heightFactor = defaultHeightFactor,
+      } = payload;
 
       const newPositionStyle = {
-        top: `${top * getRandomNumber(0.98, 1)}%`,
-        left: `${left * getRandomNumber(0.99, 1)}%`,
-        width: `${width * getRandomNumber(1, 1.1)}%`,
-        height: `${height * getRandomNumber(1, 1.8)}%`,
+        top: `${top * getRandomNumber(topFactor, 1)}%`,
+        left: `${left * getRandomNumber(leftFactor, 1)}%`,
+        width: `${width * getRandomNumber(1, widthFactor)}%`,
+        height: `${height * getRandomNumber(1, heightFactor)}%`,
       };
 
       const newClipPathStyle = {
-        clipPath: generateRandomClipPath(),
+        clipPath: generateRandomClipPath(clipFactor),
       };
 
       state.positionStyle = newPositionStyle;

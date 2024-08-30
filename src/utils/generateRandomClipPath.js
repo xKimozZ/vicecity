@@ -1,6 +1,6 @@
 import getRandomNumber from './getRandomNumber';
 
-const generateRandomClipPath = (clipPercentage = 13) => {
+const generateRandomClipPath = (clipPercentage = 0) => {
   const x1 = getRandomNumber(0, clipPercentage);
   const y1 = getRandomNumber(0, clipPercentage);
   const x2 = getRandomNumber(100 - clipPercentage, 100);
