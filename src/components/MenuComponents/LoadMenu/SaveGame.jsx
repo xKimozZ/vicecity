@@ -9,14 +9,24 @@ import { buttonGroups } from "../../../constants/buttonGroups";
 const SaveGame = ({
   buttonNumber = 3,
   slotNumber = 0,
-  buttonText = `Save File ${slotNumber} Not Present`,
   buttonGroup = buttonGroups.LOAD,
-  actions = {fileExists: false},
+  saveFile,
 }) => {
   const buttonRef = useRef(null);
   const dispatch = useDispatch();
   const { hoveredOption, activeButtonGroup } = useSelector(navigationSelector);
   const { handleHover: hoverFunction, handleSelect: selectFunction } =  useEventHandler();
+  const [saveText, setSaveText] = useState(`Save File ${slotNumber} Not Present`);
+  const [actions, setActions] = useState({fileExists: false});
+  
+  useEffect(()=>{
+    if (saveFile)
+    {
+      setSaveText(`${slotNumber}: ${saveFile.name}`);
+      setActions({fileExists: true});
+      console.log(saveFile.date);
+    }
+  },[]);
 
   const isHovered = () => {
     return hoveredOption === buttonNumber;
@@ -65,7 +75,7 @@ const SaveGame = ({
 
   const handleSelect = () => {
     if (!isActive() ) return;
-    selectFunction?.();
+    selectFunction?.(buttonNumber);
   };
 
   return (
@@ -75,7 +85,11 @@ const SaveGame = ({
       onMouseEnter={handleHover}
       onClick={handleSelect}
     >
-      <span>{buttonText}</span>
+      <span>{saveText}</span>
+      { saveFile &&
+        <span className={styles.saveDate}>
+        {saveFile.date.slice(4,24).toString()}
+      </span>}
     </div>
   );
 };

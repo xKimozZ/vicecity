@@ -5,4 +5,12 @@
     z-index: 1;
     text-align: left;
     font-family: 'SF Arborcrest Heavy';
+    position: relative;
+}
+
+.saveDate {
+    position: absolute;
+    font-size: 24px;
+    bottom: -36%;
+    /* left: 20%; */
 }

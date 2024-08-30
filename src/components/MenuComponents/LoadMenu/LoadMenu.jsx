@@ -31,7 +31,7 @@ const LoadMenu = () => {
       <div className={styles.loadPanel}>
         <div className={styles.loadFlex}>
           <Cursor />
-          <SaveGame buttonNumber={3} slotNumber={1}/>
+          <SaveGame buttonNumber={3} slotNumber={1} saveFile={{name: "In the beginning...", date: Date()}}/>
           <SaveGame buttonNumber={4} slotNumber={2}/>
           <SaveGame buttonNumber={5} slotNumber={3}/>
           <SaveGame buttonNumber={6} slotNumber={4}/>
