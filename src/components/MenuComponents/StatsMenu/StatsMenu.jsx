@@ -10,7 +10,58 @@ const StatsMenu = () => {
             </span>
             Upstanding Citizen [0]
             <div className={styles.statsPanel}>
-                stats here
+                <div className={styles.statsFlex}>
+                <span className={styles.statsEntry}>
+                Yo yo yo
+                </span>
+                <span className={styles.statsEntry}>
+                Yo yo yo
+                </span>
+                <span className={styles.statsEntry}>
+                Yo yo yo
+                </span>
+                <span className={styles.statsEntry}>
+                Yo yo yo
+                </span>
+                <span className={styles.statsEntry}>
+                Yo yo yo
+                </span>
+                <span className={styles.statsEntry}>
+                Yo yo yo
+                </span>
+                <span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span>
+                <span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span><span className={styles.statsEntry}>
+                Yo yo yo
+                </span>
+                </div>
             </div>
             <div className={styles.statsBottom}>
                 <Button buttonText="back" buttonNumber={1} textColor="var(--pink)" buttonGroup={buttonGroups.STATS} 
