@@ -18,23 +18,26 @@ const LoadMenu = () => {
         buttonGroup={buttonGroups.LOAD}
         textColor="var(--pink)"
         buttonText={"load game"}
-        actions={{}}
+        actions={{trigger: "loadGame"}}
       />
       <Button
         buttonNumber={2}
         buttonGroup={buttonGroups.LOAD}
         textColor="var(--pink)"
         buttonText={"new game"}
-        actions={{}}
+        actions={{trigger: "newGame"}}
       />
       </div>
       <div className={styles.loadPanel}>
         <Cursor />
-        <SaveGame buttonNumber={3} />
-        <SaveGame buttonNumber={4}/>
-        <SaveGame buttonNumber={5}/>
-        <SaveGame buttonNumber={6}/>
-        <SaveGame buttonNumber={7}/>
+        <SaveGame buttonNumber={3} slotNumber={1}/>
+        <SaveGame buttonNumber={4} slotNumber={2}/>
+        <SaveGame buttonNumber={5} slotNumber={3}/>
+        <SaveGame buttonNumber={6} slotNumber={4}/>
+        <SaveGame buttonNumber={7} slotNumber={5}/>
+        <SaveGame buttonNumber={8} slotNumber={6}/>
+        <SaveGame buttonNumber={9} slotNumber={7}/>
+        <SaveGame buttonNumber={10} slotNumber={8}/>
       </div>
     </div>
   );
