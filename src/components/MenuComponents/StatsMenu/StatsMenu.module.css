@@ -35,6 +35,15 @@
     flex-direction: column;
     align-items: flex-start;
     padding-inline: 2.5em;
+    
+}
+
+.statsTransition {
+    transition: all linear 0.5s;
+}
+
+.cancel {
+    transition: none;
 }
 
 .statsEntry {
