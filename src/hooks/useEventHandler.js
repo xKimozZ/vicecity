@@ -11,119 +11,24 @@ import { buttonGroupMap, buttonGroups } from "../constants/buttonGroups";
 import useMenuOptions from "./useMenuOptions";
 import { languageSelector, setLanguage } from "../store/localizationSlice";
 import { languageMap } from "../constants/menuStrings";
-import { decrementStatsTranslate, incrementStatsTranslate, toggleStatsDirection } from "../store/miscSlice";
+import {
+  decrementStatsTranslate,
+  incrementStatsTranslate,
+  toggleStatsDirection,
+} from "../store/miscSlice";
+import handleMenuEvents from "../utils/menuSpecificEventHandling";
 
 const useEventHandler = () => {
   const menuOptions = useMenuOptions();
   const currentLanguage = useSelector(languageSelector);
-  
+
   const { playHover, playSelect, playBack, playError, playInfo } =
-  useSoundManager();
+    useSoundManager();
   const dispatch = useDispatch();
   const { activeButtonGroup, currentActions, hoveredOption, keyPressed } =
-  useSelector(navigationSelector);
-
-  const handleInfo = () => {
-    playInfo();
-  };
-
-  const handleHover = (buttonNumber) => {
-    if (activeButtonGroup === buttonGroups.LOAD && hoveredOption > 2 && buttonNumber <= 2)
-      return;
-    if (buttonNumber) dispatch(setHoveredOption(buttonNumber));
-    if (activeButtonGroup === buttonGroups.MAIN) {
-      // Load in the menu for that option
-      const buttonActions = menuOptions[buttonNumber - 1].actions;
-      dispatch(setNextGroup(buttonActions.nextMenu));
-    }
-
-    if (activeButtonGroup === buttonGroups.STATS) {
-      // stats scroll logic todo here
-      if (buttonNumber === 1)
-      {
-        dispatch(incrementStatsTranslate());
-        dispatch(toggleStatsDirection("up"));
-      }
-      else 
-      {
-        dispatch(decrementStatsTranslate());
-        dispatch(toggleStatsDirection("down"));
-      }
-    }
-
-    // In exempted cases of debouncing (stats scroll for example)
-    // This will prevent the sound from playing over and over again
-    // If down key is held
-    if (!keyPressed) playHover();
-  };
-
-  const handleSelect = (triggeredBy) => {
-    if (triggeredBy)
-    {
-      if (triggeredBy !== hoveredOption) {
-        if (activeButtonGroup === buttonGroups.LOAD && hoveredOption > 2)
-        {
-          handleBack();
-        }
-        handleHover(triggeredBy);
-        return;
-      }
-    }
-    
-    if (activeButtonGroup === buttonGroups.MAIN) {
-      // If allowed to enter the menu (all except brief), return true and play the sound
-      if (triggerMenu(currentActions.nextMenu)) playSelect();
-    } else if (activeButtonGroup === buttonGroups.LANGUAGE) {
-      playHover();
-      changeLanguage(currentActions.nextLanguage);
-    } else if (activeButtonGroup === buttonGroups.STATS) {
-      handleBack();
-    } else if (activeButtonGroup === buttonGroups.LOAD ) {
-      if (currentActions.trigger === "loadGame") {
-        dispatch(setHoveredOption(3));
-        playHover();
-      }
-      if (currentActions.fileExists !== undefined) {
-        if (currentActions.fileExists) playSelect();
-        else playError();
-      }
-    }
-  };
-
-  const handleBack = (overRide = 0) => {
-    if (activeButtonGroup !== buttonGroups.MAIN) {
-      if (activeButtonGroup === buttonGroups.STATS) {
-        backToNavigation();
-        playHover();
-      }
-      else if (activeButtonGroup === buttonGroups.LOAD)
-      {
-        if (overRide === 1) {
-          playBack();
-          backToNavigation();
-          return;
-        }
-        if (hoveredOption > 2)
-        {
-          dispatch(setHoveredOption(1));
-          playHover();
-        }
-        else {
-          backToNavigation();
-          playBack();
-        }
-      }
-      else {
-        backToNavigation();
-        playBack();
-      }
-    }
-    else playBack();
-  };
-
-  const handleError = () => {
-    playError();
-  };
+    useSelector(navigationSelector);
+  const { handleStats, handleMain, handleLanguage, handleLoad } =
+    handleMenuEvents();
 
   const triggerMenu = (newMenu) => {
     if (newMenu === buttonGroups.BRIEF) return false;
@@ -142,7 +47,180 @@ const useEventHandler = () => {
     const activeButtonGroupIndex = buttonGroupMap[activeButtonGroup] ?? 0;
     dispatch(setHoveredOption(activeButtonGroupIndex));
     dispatch(setButtonGroup(buttonGroups.MAIN));
-  }
+  };
+
+  const commonActionList = {
+    statsActions: {
+      leaveStatsMenu: () => {
+        backToNavigation();
+        playHover();
+      },
+      scrolling: {
+        scrollDown: () => {
+          dispatch(incrementStatsTranslate());
+          dispatch(toggleStatsDirection("up"));
+        },
+        scrollUp: () => {
+          dispatch(decrementStatsTranslate());
+          dispatch(toggleStatsDirection("down"));
+        },
+      },
+    },
+
+    mainActions: {
+      selectMenu: {
+        triggerMenu: triggerMenu,
+        nextMenu: currentActions.nextMenu,
+        playSound: playSelect,
+      },
+    },
+
+    languageActions: {
+      selectLanguage: {
+        changeLanguage: changeLanguage,
+        newLanguage: currentActions.nextLanguage,
+        playSound: playHover,
+      },
+    },
+
+    loadActions: {
+      loadSelect: {
+        toggleLoad: () => {
+          hoveredOption < 3
+            ? dispatch(setHoveredOption(3))
+            : dispatch(setHoveredOption(1));
+        },
+      },
+      loadSounds: {
+        playHover: playHover,
+        playSelect: playSelect,
+        playError: playError,
+        playBack: playBack,
+      },
+    },
+  };
+
+  const handleInfo = () => {
+    playInfo();
+  };
+
+  const handleHover = (buttonNumber) => {
+    // special case to prevent hovering over 'load game' and 'new game' when you are navigating across savegames
+    if (
+      activeButtonGroup === buttonGroups.LOAD &&
+      hoveredOption > 2 &&
+      buttonNumber <= 2
+    )
+      return;
+
+    if (buttonNumber) dispatch(setHoveredOption(buttonNumber));
+    switch (activeButtonGroup) {
+      case buttonGroups.MAIN:
+        {
+          const hoverMenu = {
+            newMenu: menuOptions[buttonNumber - 1].actions.nextMenu,
+            setNextMenu: (nextMenu) => dispatch(setNextGroup(nextMenu)),
+          };
+          handleMain("hover", hoverMenu);
+        }
+        break;
+      case buttonGroups.STATS:
+        {
+          const { scrolling } = commonActionList.statsActions;
+          const actionList = {
+            direction: buttonNumber === 1 ? "up" : "down",
+            ...scrolling,
+          };
+          handleStats("hover", actionList);
+        }
+        break;
+      default:
+        break;
+    }
+
+    // In exempted cases of debouncing (stats scroll for example)
+    // This will prevent the sound from playing over and over again
+    // If down key is held
+    if (!keyPressed) playHover();
+  };
+
+  const handleSelect = (triggeredBy) => {
+    // Because if a click happens on any button that belongs to the current group but not hovered on
+    // It will trigger the hovered button's event anyway
+    // This will shift the hover onto the unhovered yet just selected button
+    if (triggeredBy) {
+      if (triggeredBy !== hoveredOption) {
+        if (activeButtonGroup === buttonGroups.LOAD && hoveredOption > 2) {
+          handleBack();
+        }
+        handleHover(triggeredBy);
+        return;
+      }
+    }
+
+    switch (activeButtonGroup) {
+      case buttonGroups.MAIN:
+        {
+          const { selectMenu } = commonActionList.mainActions;
+          handleMain("select", selectMenu);
+        }
+        break;
+      case buttonGroups.LANGUAGE:
+        {
+          const { selectLanguage } = commonActionList.languageActions;
+          handleLanguage("select", selectLanguage);
+        }
+        break;
+      case buttonGroups.LOAD:
+        {
+          const actionList = {
+            ...commonActionList.loadActions.loadSelect,
+            ...commonActionList.loadActions.loadSounds,
+            nextAction: currentActions.trigger,
+            fileExists: currentActions.fileExists,
+          };
+          handleLoad("select", actionList);
+        }
+        break;
+      case buttonGroups.STATS:
+        const { leaveStatsMenu } = commonActionList.statsActions;
+        handleStats("select", { leaveStatsMenu });
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleBack = (overRide = 0) => {
+    if (activeButtonGroup !== buttonGroups.MAIN) {
+      switch (activeButtonGroup) {
+        case buttonGroups.STATS:
+          const { leaveStatsMenu } = commonActionList.statsActions;
+          handleStats("select", { leaveStatsMenu });
+          break;
+        case buttonGroups.LOAD:
+          {
+            const actionList = {
+              ...commonActionList.loadActions.loadSelect,
+              ...commonActionList.loadActions.loadSounds,
+              shouldExitMenu:
+                overRide === 1 || hoveredOption < 3 ? true : false,
+              exitMenu: backToNavigation,
+            };
+            handleLoad("back", actionList);
+          }
+          break;
+        default:
+          backToNavigation();
+          playBack();
+          break;
+      }
+    } else playBack();
+  };
+
+  const handleError = () => {
+    playError();
+  };
 
   return {
     handleBack,
