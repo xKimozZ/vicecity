@@ -12,7 +12,6 @@ import useMenuOptions from "./useMenuOptions";
 import { languageSelector, setLanguage } from "../store/localizationSlice";
 import { languageMap } from "../constants/menuStrings";
 import { decrementStatsTranslate, incrementStatsTranslate, toggleStatsDirection } from "../store/miscSlice";
-import useKeyPress from "./useKeyPress";
 
 const useEventHandler = () => {
   const menuOptions = useMenuOptions();
@@ -20,9 +19,8 @@ const useEventHandler = () => {
   
   const { playHover, playSelect, playBack, playError, playInfo } =
   useSoundManager();
-  const {keyPressed} = useKeyPress();
   const dispatch = useDispatch();
-  const { activeButtonGroup, currentActions, hoveredOption } =
+  const { activeButtonGroup, currentActions, hoveredOption, keyPressed } =
   useSelector(navigationSelector);
 
   const handleInfo = () => {

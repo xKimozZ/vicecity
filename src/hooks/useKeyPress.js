@@ -1,22 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { setKeyPressed } from '../store/navigationSlice';
+import { useDispatch } from 'react-redux';
 
 const useKeyPress = () => {
-  const [keyPressed, setKeyPressed] = useState(false);
+    const dispatch = useDispatch();
 
   useEffect(() => {
-    const handleKeyDown = () => setKeyPressed(true);
-    const handleKeyUp = () => setKeyPressed(false);
+    const handleKeyUp = () => dispatch(setKeyPressed(false));
 
-    window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
   }, []);
 
-  return { keyPressed, setKeyPressed };
 };
 
 export default useKeyPress;

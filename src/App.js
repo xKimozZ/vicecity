@@ -13,6 +13,7 @@ import { buttonGroupMap, buttonGroups } from './constants/buttonGroups';
 import getNextGroupIndex from './utils/getNextGroupIndex';
 import { menuStrings } from './constants/menuStrings';
 import Header from './components/Header/Header';
+import useKeyPress from './hooks/useKeyPress';
 
 function App() {
   const menuOptions = useMenuOptions();
@@ -27,6 +28,7 @@ function App() {
   const [clipPathContainer, setClipPathContainer] = useState([]);
   const [componentContainer, setComponentContainer] = useState([]);
   const interfaceRef = useRef(null);
+  const listener = useKeyPress();
   const { handleKeyDown } = useKeyNavigation(optionsPerRow);
   const { hoveredOption, nextButtonGroup, activeButtonGroup } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandler();
