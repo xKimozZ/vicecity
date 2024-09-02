@@ -11,17 +11,19 @@ import { buttonGroupMap, buttonGroups } from "../constants/buttonGroups";
 import useMenuOptions from "./useMenuOptions";
 import { languageSelector, setLanguage } from "../store/localizationSlice";
 import { languageMap } from "../constants/menuStrings";
-import { decrementStatsTranslate, incrementStatsTranslate } from "../store/miscSlice";
+import { decrementStatsTranslate, incrementStatsTranslate, toggleStatsDirection } from "../store/miscSlice";
+import useKeyPress from "./useKeyPress";
 
 const useEventHandler = () => {
   const menuOptions = useMenuOptions();
   const currentLanguage = useSelector(languageSelector);
-
+  
   const { playHover, playSelect, playBack, playError, playInfo } =
-    useSoundManager();
+  useSoundManager();
+  const {keyPressed} = useKeyPress();
   const dispatch = useDispatch();
   const { activeButtonGroup, currentActions, hoveredOption } =
-    useSelector(navigationSelector);
+  useSelector(navigationSelector);
 
   const handleInfo = () => {
     playInfo();
@@ -41,9 +43,11 @@ const useEventHandler = () => {
       // stats scroll logic todo here
       if (buttonNumber === 1)
         dispatch(incrementStatsTranslate());
-      else dispatch(decrementStatsTranslate());
-    }
-    playHover();
+
+    // In exempted cases of debouncing (stats scroll for example)
+    // This will prevent the sound from playing over and over again
+    // If down key is held
+    if (!keyPressed) playHover();
   };
 
   const handleSelect = (triggeredBy) => {
