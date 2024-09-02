@@ -36,7 +36,7 @@ export const handleArrowNavigation = (
     if (direction === "up") {
       if (hoveredOption > 2)
         {
-          if (hoveredOption - 1 < 3) handleHover(9);
+          if (hoveredOption - 1 < 3) handleHover(10);
           else handleHover(hoveredOption - 1);
         }
         else if (hoveredOption - 1 < 1) handleHover(2);
