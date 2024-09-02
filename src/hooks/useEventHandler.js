@@ -42,7 +42,16 @@ const useEventHandler = () => {
     if (activeButtonGroup === buttonGroups.STATS) {
       // stats scroll logic todo here
       if (buttonNumber === 1)
+      {
         dispatch(incrementStatsTranslate());
+        dispatch(toggleStatsDirection("up"));
+      }
+      else 
+      {
+        dispatch(decrementStatsTranslate());
+        dispatch(toggleStatsDirection("down"));
+      }
+    }
 
     // In exempted cases of debouncing (stats scroll for example)
     // This will prevent the sound from playing over and over again

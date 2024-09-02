@@ -4,6 +4,7 @@ const translateFactor = 10;
 
 const initialState = {
   statsTranslate: 0,
+  statsDirection: "down",
 };
 
 export const miscSlice = createSlice({
@@ -28,11 +29,15 @@ export const miscSlice = createSlice({
       }
       state.statsTranslate = newStatsTranslate;
     },
+    toggleStatsDirection: (state, { payload }) => {
+      const newStatsDirection = payload;
+      state.statsDirection = newStatsDirection;
+    },
   },
 });
 
 const selectSelf = (state) => state.miscReducer;
 export const miscSelector = createSelector(selectSelf, (state) => state);
 
-export const { incrementStatsTranslate, decrementStatsTranslate } = miscSlice.actions;
+export const { incrementStatsTranslate, decrementStatsTranslate, toggleStatsDirection } = miscSlice.actions;
 export default miscSlice.reducer;

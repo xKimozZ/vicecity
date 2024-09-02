@@ -7,21 +7,37 @@ import { useEffect } from "react";
 import { navigationSelector } from "../../../store/navigationSlice";
 
 const StatsMenu = () => {
-    const {statsTranslate: scroll} = useSelector(miscSelector);
+    const {statsTranslate: scroll, statsDirection} = useSelector(miscSelector);
     const {activeButtonGroup} = useSelector(navigationSelector);
     const dispatch = useDispatch();
 
     useEffect(()=>{
+        if (activeButtonGroup === buttonGroups.STATS)
+        {
+            if (statsDirection === "down")
+            dispatch(incrementStatsTranslate());
+            else
+            dispatch(decrementStatsTranslate());
+        }},[activeButtonGroup]);
+
+    useEffect(()=>{
         if (activeButtonGroup === buttonGroups.MAIN)
         {
-            setTimeout(()=>dispatch(decrementStatsTranslate()),500);
-            console.log(scroll);
+            const timeoutId = setTimeout(() => {
+                if (statsDirection === "down")
+                dispatch(decrementStatsTranslate());
+                else
+                dispatch(incrementStatsTranslate());
+
+            }, 500);
+
+            return () => clearTimeout(timeoutId);
         }
     }
 ,[scroll, activeButtonGroup]);
 
     const scrollStyle = {
-        translate: `0px ${scroll}px`
+        transform: `translate(0px, ${scroll}px)`
     };
 
     return(
