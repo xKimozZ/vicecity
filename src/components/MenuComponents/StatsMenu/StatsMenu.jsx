@@ -3,27 +3,33 @@ import { buttonGroups } from "../../../constants/buttonGroups";
 import Button from "../../Button/Button"
 import styles from "./StatsMenu.module.css"
 import { decrementStatsTranslate, incrementStatsTranslate, miscSelector } from "../../../store/miscSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { navigationSelector } from "../../../store/navigationSlice";
 
 const StatsMenu = () => {
+    const [beganScrolling, setBeganScrolling] = useState(false);
     const {statsTranslate: scroll, statsDirection} = useSelector(miscSelector);
     const {activeButtonGroup} = useSelector(navigationSelector);
     const dispatch = useDispatch();
 
+
+    // Provides a smoother stop if the menu wasnt locked in but was idly scrolling
     useEffect(()=>{
-        if (activeButtonGroup === buttonGroups.STATS)
+        if (activeButtonGroup === buttonGroups.STATS && beganScrolling)
         {
             if (statsDirection === "down")
             dispatch(incrementStatsTranslate());
             else
             dispatch(decrementStatsTranslate());
-        }},[activeButtonGroup]);
+        }
+        else setBeganScrolling(false);
+    },[activeButtonGroup]);
 
     useEffect(()=>{
         if (activeButtonGroup === buttonGroups.MAIN)
         {
             const timeoutId = setTimeout(() => {
+                setBeganScrolling(true);
                 if (statsDirection === "down")
                 dispatch(decrementStatsTranslate());
                 else
@@ -47,7 +53,7 @@ const StatsMenu = () => {
             </span>
             Upstanding Citizen [0]
             <div className={styles.statsPanel}>
-                <div className={`${styles.statsFlex} ${activeButtonGroup === buttonGroups.MAIN ? styles.statsTransition : ''}
+                <div className={`${styles.statsFlex} ${activeButtonGroup === buttonGroups.MAIN ? styles.statsTransition : styles.statsTransition1}
                 ${ (scroll === 1000)  ? styles.cancel : ''}`}
                 style={scrollStyle}>
                 <span className={styles.statsEntry}>

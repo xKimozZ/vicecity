@@ -42,6 +42,11 @@
     transition: all linear 0.5s;
 }
 
+.statsTransition1 {
+    transition: all linear 0.1s;
+}
+
+
 .cancel {
     transition: none;
 }
