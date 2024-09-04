@@ -30,6 +30,24 @@ export const menuStrings = {
         italian: "Italian",
         spanish: "Spanish",
       },
+      load: {
+        loadgame: "Load Game",
+        newgame: "New Game",
+        savefile: "Save File",
+        notpresent: "Not Present",
+        jan: "Jan",
+        feb: "Feb",
+        mar: "Mar",
+        apr: "Apr",
+        may: "May",
+        jun: "Jun",
+        jul: "Jul",
+        aug: "Aug",
+        sep: "Sep",
+        oct: "Oct",
+        nov: "Nov",
+        dec: "Dec",
+      }
     },
     es: {
       menu: {
@@ -62,6 +80,24 @@ export const menuStrings = {
           "I'll be in touch."
         ],
       },
+      load: {
+        loadgame: "Cargar partida",
+        newgame: "Nueva partida",
+        savefile: "No hay archivo",
+        notpresent: "guardado",
+        jan: "Ene",
+        feb: "Feb",
+        mar: "Mar",
+        apr: "Abr",
+        may: "May",
+        jun: "Jun",
+        jul: "Jul",
+        aug: "Ago",
+        sep: "Sep",
+        oct: "Oct",
+        nov: "Nov",
+        dec: "Dic",
+      }
     },
     fr: {
       menu: {
@@ -94,6 +130,24 @@ export const menuStrings = {
           "I'll be in touch."
         ],
       },
+      load: {
+        loadgame: "Charger partie",
+        newgame: "Nouvelle partie",
+        savefile: "Pas de sauvegarde",
+        notpresent: "",
+        jan: "Jan",
+        feb: "Fev",
+        mar: "Mar",
+        apr: "Avr",
+        may: "Mai",
+        jun: "Jun",
+        jul: "Jui",
+        aug: "Ao",
+        sep: "Sept",
+        oct: "Oct",
+        nov: "Nov",
+        dec: "Dec",
+      }
     },
     de: {
       menu: {
@@ -126,6 +180,24 @@ export const menuStrings = {
           "I'll be in touch."
         ],
       },
+      load: {
+        loadgame: "Spiel laden",
+        newgame: "Neues Spiel",
+        savefile: "Datei",
+        notpresent: "nicht vorhanden",
+        jan: "Jan",
+        feb: "Feb",
+        mar: "Mar",
+        apr: "Apr",
+        may: "Mai",
+        jun: "Jun",
+        jul: "Jul",
+        aug: "Aug",
+        sep: "Sept",
+        oct: "Okt",
+        nov: "Nov",
+        dec: "Dez",
+      }
     },
     it: {
       menu: {
@@ -158,6 +230,24 @@ export const menuStrings = {
           "I'll be in touch."
         ],
       },
+      load: {
+        loadgame: "Carica partita",
+        newgame: "Nuova partita",
+        savefile: "Salvataggio",
+        notpresent: "non trovato",
+        jan: "Gen",
+        feb: "Feb",
+        mar: "Mar",
+        apr: "Apr",
+        may: "Mag",
+        jun: "Giu",
+        jul: "Lug",
+        aug: "Ago",
+        sep: "Set",
+        oct: "Ott",
+        nov: "Nov",
+        dec: "Dic",
+      }
     },
     pt: {
       menu: {
