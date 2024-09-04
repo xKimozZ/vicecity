@@ -1,13 +1,13 @@
 import styles from "./BriefMenu.module.css";
 import { useSelector } from "react-redux";
-import { stringSelector } from "../../../store/localizationSlice";
+import { stringBriefSelector } from "../../../store/localizationSlice";
 
 const BriefMenu = () => {
-  const strings = useSelector(stringSelector);
-
+  const strings = useSelector(stringBriefSelector);
+  
   return (
     <div className={styles.briefContainer}>
-      {strings.brief.intro.map((line, index) => (
+      {strings.intro.map((line, index) => (
         <span key={index} className={styles.briefLine}>
           {line}
         </span>

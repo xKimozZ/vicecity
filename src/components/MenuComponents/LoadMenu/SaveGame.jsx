@@ -5,6 +5,7 @@ import { changeLocation } from "../../../store/cursorSlice";
 import { navigationSelector, setCurrentActions, setHoveredOption, setNextGroup } from "../../../store/navigationSlice";
 import { buttonGroups } from "../../../constants/buttonGroups";
 import { useEventHandlerContext } from "../../../context/EventHandlerContext";
+import { stringLoadSelector } from "../../../store/localizationSlice";
 
 const SaveGame = ({
   buttonNumber = 3,
@@ -16,7 +17,8 @@ const SaveGame = ({
   const dispatch = useDispatch();
   const { hoveredOption, activeButtonGroup } = useSelector(navigationSelector);
   const { handleHover: hoverFunction, handleSelect: selectFunction } =  useEventHandlerContext();
-  const [saveText, setSaveText] = useState(`Save File ${slotNumber} Not Present`);
+  const strings = useSelector(stringLoadSelector);
+  const [saveText, setSaveText] = useState(`${strings.savefile} ${slotNumber} ${strings.notpresent}`);
   const [actions, setActions] = useState({fileExists: false});
   
   useEffect(()=>{
