@@ -27,8 +27,6 @@ const useEventHandler = () => {
   const dispatch = useDispatch();
   const { activeButtonGroup, currentActions, hoveredOption, keyPressed } =
     useSelector(navigationSelector);
-  const { handleStats, handleMain, handleLanguage, handleLoad } =
-    handleMenuEvents();
 
   const triggerMenu = (newMenu) => {
     if (newMenu === buttonGroups.BRIEF) return false;
@@ -49,56 +47,46 @@ const useEventHandler = () => {
     dispatch(setButtonGroup(buttonGroups.MAIN));
   };
 
-  const commonActionList = {
-    statsActions: {
-      leaveStatsMenu: () => {
-        backToNavigation();
-        playHover();
-      },
-      scrolling: {
-        scrollDown: () => {
-          dispatch(incrementStatsTranslate());
-          dispatch(toggleStatsDirection("up"));
-        },
-        scrollUp: () => {
-          dispatch(decrementStatsTranslate());
-          dispatch(toggleStatsDirection("down"));
-        },
-      },
+  // global actions and functions unlikely to change
+  const staticActions = {
+    sounds: {
+      playHover: playHover,
+      playSelect: playSelect,
+      playBack: playBack,
+      playInfo: playInfo,
+      playError: playError,
     },
-
-    mainActions: {
-      selectMenu: {
-        triggerMenu: triggerMenu,
-        nextMenu: currentActions.nextMenu,
-        playSound: playSelect,
-      },
+    navigation: {
+      exitMenu: backToNavigation,
+      triggerMenu: triggerMenu,
     },
-
-    languageActions: {
-      selectLanguage: {
-        changeLanguage: changeLanguage,
-        newLanguage: currentActions.nextLanguage,
-        playSound: playHover,
+    misc: {
+      scrollDown: () => {
+        dispatch(incrementStatsTranslate());
+        dispatch(toggleStatsDirection("up"));
       },
-    },
-
-    loadActions: {
-      loadSelect: {
-        toggleLoad: () => {
-          hoveredOption < 3
-            ? dispatch(setHoveredOption(3))
-            : dispatch(setHoveredOption(1));
-        },
+      scrollUp: () => {
+        dispatch(decrementStatsTranslate());
+        dispatch(toggleStatsDirection("down"));
       },
-      loadSounds: {
-        playHover: playHover,
-        playSelect: playSelect,
-        playError: playError,
-        playBack: playBack,
+      changeLanguage: changeLanguage,
+      toggleLoad: () => {
+        hoveredOption < 3
+          ? dispatch(setHoveredOption(3))
+          : dispatch(setHoveredOption(1));
       },
     },
   };
+
+  const dynamicVariables = {
+    nextMenu: currentActions.nextMenu,
+    nextLanguage: currentActions.nextLanguage,
+    trigger: currentActions.trigger,
+    fileExists: currentActions.fileExists,
+  };
+
+  const { handleStats, handleMain, handleLanguage, handleLoad } =
+    handleMenuEvents(staticActions);
 
   const handleInfo = () => {
     playInfo();
@@ -126,10 +114,8 @@ const useEventHandler = () => {
         break;
       case buttonGroups.STATS:
         {
-          const { scrolling } = commonActionList.statsActions;
           const actionList = {
             direction: buttonNumber === 1 ? "up" : "down",
-            ...scrolling,
           };
           handleStats("hover", actionList);
         }
@@ -161,30 +147,27 @@ const useEventHandler = () => {
     switch (activeButtonGroup) {
       case buttonGroups.MAIN:
         {
-          const { selectMenu } = commonActionList.mainActions;
-          handleMain("select", selectMenu);
+          const { nextMenu } = dynamicVariables;
+          handleMain("select", { nextMenu });
         }
         break;
       case buttonGroups.LANGUAGE:
         {
-          const { selectLanguage } = commonActionList.languageActions;
-          handleLanguage("select", selectLanguage);
+          const { nextLanguage } = dynamicVariables;
+          handleLanguage("select", { nextLanguage });
         }
         break;
       case buttonGroups.LOAD:
         {
           const actionList = {
-            ...commonActionList.loadActions.loadSelect,
-            ...commonActionList.loadActions.loadSounds,
-            nextAction: currentActions.trigger,
-            fileExists: currentActions.fileExists,
+            nextAction: dynamicVariables.trigger,
+            fileExists: dynamicVariables.fileExists,
           };
           handleLoad("select", actionList);
         }
         break;
       case buttonGroups.STATS:
-        const { leaveStatsMenu } = commonActionList.statsActions;
-        handleStats("select", { leaveStatsMenu });
+        handleStats("select");
         break;
       default:
         break;
@@ -195,17 +178,13 @@ const useEventHandler = () => {
     if (activeButtonGroup !== buttonGroups.MAIN) {
       switch (activeButtonGroup) {
         case buttonGroups.STATS:
-          const { leaveStatsMenu } = commonActionList.statsActions;
-          handleStats("select", { leaveStatsMenu });
+          handleStats("select");
           break;
         case buttonGroups.LOAD:
           {
             const actionList = {
-              ...commonActionList.loadActions.loadSelect,
-              ...commonActionList.loadActions.loadSounds,
               shouldExitMenu:
                 overRide === 1 || hoveredOption < 3 ? true : false,
-              exitMenu: backToNavigation,
             };
             handleLoad("back", actionList);
           }

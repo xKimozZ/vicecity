@@ -1,16 +1,14 @@
-const handleMenuEvents = () => {
+const handleMenuEvents = (globalActions) => {
+
+  const { playHover, playSelect, playError, playBack } = globalActions.sounds;
+  const { exitMenu, triggerMenu } = globalActions.navigation;
+  const { toggleLoad, changeLanguage, scrollDown, scrollUp } = globalActions.misc;
+
   const handleLoad = (eventType, actionList) => {
     switch (eventType) {
       case "select":
         {
-          const {
-            nextAction,
-            playHover,
-            playError,
-            playSelect,
-            toggleLoad,
-            fileExists,
-          } = actionList;
+          const { nextAction, fileExists } = actionList;
           if (nextAction === "loadGame") {
             toggleLoad();
             playHover();
@@ -24,13 +22,12 @@ const handleMenuEvents = () => {
         break;
       case "hover":
         {
-          
         }
         break;
       case "back":
         {
-          const { shouldExitMenu, exitMenu, playBack, playHover, toggleLoad } = actionList;
-          
+          const { shouldExitMenu } = actionList;
+
           // If user clicks at bottom or if already hovering on the first phase
           if (shouldExitMenu) {
             exitMenu();
@@ -51,20 +48,20 @@ const handleMenuEvents = () => {
     switch (eventType) {
       case "select":
         {
-          const { leaveStatsMenu } = actionList;
-          leaveStatsMenu();
+          exitMenu();
+          playHover();
         }
         break;
       case "hover":
         {
-          const { direction, scrollUp, scrollDown } = actionList;
+          const { direction } = actionList;
           direction === "up" ? scrollUp() : scrollDown();
         }
         break;
       case "back":
         {
-          const { leaveStatsMenu } = actionList;
-          leaveStatsMenu();
+          exitMenu();
+          playHover();
         }
         break;
       default:
@@ -77,10 +74,10 @@ const handleMenuEvents = () => {
     switch (eventType) {
       case "select":
         {
-          const { playSound, triggerMenu, nextMenu } = actionList;
+          const { nextMenu } = actionList;
 
           // If true -- allowed to enter the menu (all except brief), return true and play the sound
-          if (triggerMenu(nextMenu)) playSound();
+          if (triggerMenu(nextMenu)) playSelect();
         }
         break;
       case "hover":
@@ -101,9 +98,9 @@ const handleMenuEvents = () => {
     switch (eventType) {
       case "select":
         {
-          const { playSound, changeLanguage, newLanguage } = actionList;
-          changeLanguage(newLanguage);
-          playSound();
+          const { nextLanguage } = actionList;
+          changeLanguage(nextLanguage);
+          playHover();
         }
         break;
       case "hover":
