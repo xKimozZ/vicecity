@@ -2,7 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./SaveGame.module.css";
 import { useEffect, useState, useRef, act } from "react";
 import { changeLocation } from "../../../store/cursorSlice";
-import { navigationSelector, setCurrentActions, setHoveredOption, setNextGroup } from "../../../store/navigationSlice";
+import {
+  navigationSelector,
+  setCurrentActions,
+  setHoveredOption,
+  setNextGroup,
+} from "../../../store/navigationSlice";
 import { buttonGroups } from "../../../constants/buttonGroups";
 import { useEventHandlerContext } from "../../../context/EventHandlerContext";
 import { stringLoadSelector } from "../../../store/localizationSlice";
@@ -16,27 +21,29 @@ const SaveGame = ({
   const buttonRef = useRef(null);
   const dispatch = useDispatch();
   const { hoveredOption, activeButtonGroup } = useSelector(navigationSelector);
-  const { handleHover: hoverFunction, handleSelect: selectFunction } =  useEventHandlerContext();
+  const { handleHover: hoverFunction, handleSelect: selectFunction } =
+    useEventHandlerContext();
   const strings = useSelector(stringLoadSelector);
-  const [saveText, setSaveText] = useState(`${strings.savefile} ${slotNumber} ${strings.notpresent}`);
-  const [actions, setActions] = useState({fileExists: false});
-  
-  useEffect(()=>{
-    if (saveFile)
-    {
+  const [saveText, setSaveText] = useState(
+    `${strings.savefile} ${slotNumber} ${strings.notpresent}`
+  );
+  const [actions, setActions] = useState({ fileExists: false });
+
+  useEffect(() => {
+    if (saveFile) {
       setSaveText(`${slotNumber}: ${saveFile.name}`);
-      setActions({fileExists: true});
+      setActions({ fileExists: true });
       console.log(saveFile.date);
     }
-  },[]);
+  }, []);
 
   const isHovered = () => {
     return hoveredOption === buttonNumber;
   };
 
   const isActive = () => {
-    return ( activeButtonGroup === buttonGroup && hoveredOption > 2 );
-  }
+    return activeButtonGroup === buttonGroup && hoveredOption > 2;
+  };
 
   useEffect(() => {
     const updatePosition = () => {
@@ -71,13 +78,56 @@ const SaveGame = ({
   }, [hoveredOption, activeButtonGroup]);
 
   const handleHover = () => {
-    if (isHovered() || !isActive() ) return;
+    if (isHovered() || !isActive()) return;
     hoverFunction?.(buttonNumber);
   };
 
   const handleSelect = () => {
-    if (!isActive() ) return;
+    if (!isActive()) return;
     selectFunction?.(buttonNumber);
+  };
+
+  const generateDate = (date) => {
+    const dateString =
+      (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) +
+      " " +
+      getMonthString(date.getMonth()) +
+      " " +
+      date.getFullYear() +
+      " " +
+      date.toISOString().slice(11, 19);
+    return dateString;
+  };
+
+  const getMonthString = (month) => {
+    switch (month) {
+      case 0:
+        return strings.jan;
+      case 1:
+        return strings.feb;
+      case 2:
+        return strings.mar;
+      case 3:
+        return strings.apr;
+      case 4:
+        return strings.may;
+      case 5:
+        return strings.jun;
+      case 6:
+        return strings.jul;
+      case 7:
+        return strings.aug;
+      case 8:
+        return strings.sep;
+      case 9:
+        return strings.oct;
+      case 10:
+        return strings.nov;
+      case 11:
+        return strings.dec;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -87,11 +137,10 @@ const SaveGame = ({
       onMouseEnter={handleHover}
       onClick={handleSelect}
     >
-      <span>{saveText}</span>
-      { saveFile &&
-        <span className={styles.saveDate}>
-        {saveFile.date.slice(4,24).toString()}
-      </span>}
+      {saveText}
+      {saveFile && (
+        <span className={styles.saveDate}>{generateDate(saveFile.date)}</span>
+      )}
     </div>
   );
 };

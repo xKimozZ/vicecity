@@ -35,13 +35,13 @@ const LoadMenu = () => {
       <div className={styles.loadPanel}>
         <div className={styles.loadFlex}>
           <Cursor />
-          <SaveGame buttonNumber={3} slotNumber={1} saveFile={{name: "In the beginning...", date: Date()}}/>
+          <SaveGame buttonNumber={3} slotNumber={1} saveFile={{name: "In the beginning...", date: new Date("2002-10-26 18:46:13")}}/>
           <SaveGame buttonNumber={4} slotNumber={2}/>
           <SaveGame buttonNumber={5} slotNumber={3}/>
           <SaveGame buttonNumber={6} slotNumber={4}/>
           <SaveGame buttonNumber={7} slotNumber={5}/>
           <SaveGame buttonNumber={8} slotNumber={6}/>
-          <SaveGame buttonNumber={9} slotNumber={7}/>
+          <SaveGame buttonNumber={9} slotNumber={7} saveFile={{name: "Keep your Friends Close...", date: new Date()}}/>
           <SaveGame buttonNumber={10} slotNumber={8}/>
         </div>
       </div>

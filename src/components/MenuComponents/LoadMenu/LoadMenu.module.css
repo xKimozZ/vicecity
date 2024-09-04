@@ -8,12 +8,14 @@
 
 .loadButtonContainer {
     display: flex;
-    width: 270px;
+    width: 400px;
     flex-direction: column;
-    margin-left: 4%;
+    align-items: flex-end;
     margin-top: 7em;
 }
 
+.loadButton {
+}
 
 
 .loadPanel {
