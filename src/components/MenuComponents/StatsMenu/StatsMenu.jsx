@@ -54,7 +54,7 @@ const StatsMenu = () => {
             Upstanding Citizen [0]
             <div className={styles.statsPanel}>
                 <div className={`${styles.statsFlex} ${activeButtonGroup === buttonGroups.MAIN ? styles.statsTransition : styles.statsTransition1}
-                ${ (scroll === 1000)  ? styles.cancel : ''}`}
+                ${ (scroll === 1000 || scroll === -1000)  ? styles.cancel : ''}`}
                 style={scrollStyle}>
                 <span className={styles.statsEntry}>
                 Yo yo yo
