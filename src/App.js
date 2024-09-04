@@ -33,8 +33,6 @@ function App() {
   const { hoveredOption, nextButtonGroup, activeButtonGroup } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandlerContext();
 
-  const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandler();
-
 
   useEffect(() => {
     const newClipPaths = menuOptions.map((option) => {
