@@ -3,8 +3,8 @@ import styles from "./SaveGame.module.css";
 import { useEffect, useState, useRef, act } from "react";
 import { changeLocation } from "../../../store/cursorSlice";
 import { navigationSelector, setCurrentActions, setHoveredOption, setNextGroup } from "../../../store/navigationSlice";
-import useEventHandler from "../../../hooks/useEventHandler";
 import { buttonGroups } from "../../../constants/buttonGroups";
+import { useEventHandlerContext } from "../../../context/EventHandlerContext";
 
 const SaveGame = ({
   buttonNumber = 3,
@@ -15,7 +15,7 @@ const SaveGame = ({
   const buttonRef = useRef(null);
   const dispatch = useDispatch();
   const { hoveredOption, activeButtonGroup } = useSelector(navigationSelector);
-  const { handleHover: hoverFunction, handleSelect: selectFunction } =  useEventHandler();
+  const { handleHover: hoverFunction, handleSelect: selectFunction } =  useEventHandlerContext();
   const [saveText, setSaveText] = useState(`Save File ${slotNumber} Not Present`);
   const [actions, setActions] = useState({fileExists: false});
   

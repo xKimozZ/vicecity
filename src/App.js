@@ -4,7 +4,6 @@ import { useEffect, useState, useRef } from 'react';
 import useMenuOptions from './hooks/useMenuOptions';
 import { useSelector } from 'react-redux';
 import Cursor from './components/Cursor/Cursor'
-import useEventHandler from './hooks/useEventHandler';
 import useKeyNavigation from './hooks/useKeyNavigation';
 import { imageImports } from './assets/imageImports';
 import LanguageMenu from './components/MenuComponents/LanguageMenu/LanguageMenu';
@@ -14,6 +13,7 @@ import getNextGroupIndex from './utils/getNextGroupIndex';
 import { menuStrings } from './constants/menuStrings';
 import Header from './components/Header/Header';
 import useKeyPress from './hooks/useKeyPress';
+import { useEventHandlerContext } from './context/EventHandlerContext';
 
 function App() {
   const menuOptions = useMenuOptions();
@@ -31,6 +31,8 @@ function App() {
   const listener = useKeyPress();
   const { handleKeyDown } = useKeyNavigation(optionsPerRow);
   const { hoveredOption, nextButtonGroup, activeButtonGroup } = useSelector(navigationSelector);
+  const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandlerContext();
+
   const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandler();
 
 

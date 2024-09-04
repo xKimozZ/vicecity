@@ -6,12 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import './assets/globals.css'
 import { Provider } from 'react-redux';
 import { store } from './store/store'
+import { EventHandlerProvider } from './context/EventHandlerContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <EventHandlerProvider>
+        <App />
+      </EventHandlerProvider>
     </Provider>
   </React.StrictMode>
 );

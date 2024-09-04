@@ -3,8 +3,8 @@ import styles from "./Button.module.css";
 import { useEffect, useState, useRef, act } from "react";
 import { changeLocation } from "../../store/cursorSlice";
 import { navigationSelector, setCurrentActions, setHoveredOption, setNextGroup } from "../../store/navigationSlice";
-import useEventHandler from "../../hooks/useEventHandler";
 import { buttonGroups } from "../../constants/buttonGroups";
+import { useEventHandlerContext } from "../../context/EventHandlerContext";
 
 const Button = ({
   buttonText = "Sample",
@@ -19,7 +19,7 @@ const Button = ({
   const buttonRef = useRef(null);
   const dispatch = useDispatch();
   const { hoveredOption, activeButtonGroup } = useSelector(navigationSelector);
-  const { handleHover: hoverFunction, handleSelect: selectFunction } =  useEventHandler();
+  const { handleHover: hoverFunction, handleSelect: selectFunction } =  useEventHandlerContext();
 
   const isHovered = () => {
     return hoveredOption === buttonNumber;
