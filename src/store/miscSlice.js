@@ -1,4 +1,6 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { getRandomKey } from "../utils/getRandomObject";
+import { menuStrings } from "../constants/menuStrings";
 
 const translateFactor = 10;
 
@@ -7,6 +9,7 @@ const initialState = {
   statsDirection: "down",
   statsLimit: 2800,
   lowerStatsLimit: 400,
+  briefKey: getRandomKey(menuStrings.en.brief),
 };
 
 export const miscSlice = createSlice({
@@ -39,11 +42,21 @@ export const miscSlice = createSlice({
       const newStatsLimit = payload;
       state.statsLimit = newStatsLimit;
     },
+    setBriefKey: (state, { payload }) => {
+      const newBriefKey = payload;
+      state.briefKey = newBriefKey;
+    },
   },
 });
 
 const selectSelf = (state) => state.miscReducer;
 export const miscSelector = createSelector(selectSelf, (state) => state);
 
-export const { incrementStatsTranslate, decrementStatsTranslate, toggleStatsDirection, setStatsLimit } = miscSlice.actions;
+export const {
+  incrementStatsTranslate,
+  decrementStatsTranslate,
+  toggleStatsDirection,
+  setStatsLimit,
+  setBriefKey,
+} = miscSlice.actions;
 export default miscSlice.reducer;
