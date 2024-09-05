@@ -5,6 +5,8 @@ const translateFactor = 10;
 const initialState = {
   statsTranslate: 0,
   statsDirection: "down",
+  statsLimit: 2800,
+  lowerStatsLimit: 400,
 };
 
 export const miscSlice = createSlice({
@@ -13,18 +15,18 @@ export const miscSlice = createSlice({
   reducers: {
     incrementStatsTranslate: (state, { payload }) => {
       const newStatsTranslate = state.statsTranslate + translateFactor;
-      if (newStatsTranslate === 1000)
+      if (newStatsTranslate === state.lowerStatsLimit)
         {
-          state.statsTranslate = -1000;
+          state.statsTranslate = -state.statsLimit;
           return;
         }
       state.statsTranslate = newStatsTranslate;
     },
     decrementStatsTranslate: (state, { payload }) => {
       const newStatsTranslate = state.statsTranslate - translateFactor;
-      if (newStatsTranslate === -1000)
+      if (newStatsTranslate === -state.statsLimit)
       {
-        state.statsTranslate = 1000;
+        state.statsTranslate = state.lowerStatsLimit;
         return;
       }
       state.statsTranslate = newStatsTranslate;
@@ -33,11 +35,15 @@ export const miscSlice = createSlice({
       const newStatsDirection = payload;
       state.statsDirection = newStatsDirection;
     },
+    setStatsLimit: (state, { payload }) => {
+      const newStatsLimit = payload;
+      state.statsLimit = newStatsLimit;
+    },
   },
 });
 
 const selectSelf = (state) => state.miscReducer;
 export const miscSelector = createSelector(selectSelf, (state) => state);
 
-export const { incrementStatsTranslate, decrementStatsTranslate, toggleStatsDirection } = miscSlice.actions;
+export const { incrementStatsTranslate, decrementStatsTranslate, toggleStatsDirection, setStatsLimit } = miscSlice.actions;
 export default miscSlice.reducer;
