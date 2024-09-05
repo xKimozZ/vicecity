@@ -2,6 +2,8 @@
     --white: #d5d5d5;
     --pink: #ff95df;
     --green: #198246;
+
+    --scrollFadeLimit: 30%;
     }
 
 body {}

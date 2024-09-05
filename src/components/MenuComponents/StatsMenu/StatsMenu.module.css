@@ -27,6 +27,8 @@
     height: 40vh;
     clip-path: polygon(2.5% 0%, 97% 9%, 95% 89%, 5% 100%);
     overflow: hidden;
+    position: relative;
+    z-index: 1;
 }
 
 .statsFlex {
@@ -34,8 +36,29 @@
     gap: 4px;
     flex-direction: column;
     align-items: flex-start;
-    padding-inline: 2.5em;
-    
+    padding-inline: 3em;
+}
+
+.statsPanel:after{
+    content:'';
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: var(--scrollFadeLimit);
+    bottom: 0;
+    left: 0;
+    background:linear-gradient(to bottom, rgb(69, 94, 122, 0.1), rgb(69, 94, 122, 1));
+}
+
+ .statsPanel:before{
+    content:'';
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: var(--scrollFadeLimit);
+    top: 0;
+    left: 0;
+    background:linear-gradient(to top, rgb(69, 94, 122, 0.1), rgb(69, 94, 122, 1));
 }
 
 .statsTransition {
