@@ -44,5 +44,10 @@ export const stringLoadSelector = createSelector(
   (state) => state.strings[state.language]?.load || {}
 );
 
+export const stringStatsSelector = createSelector(
+  selectSelf,
+  (state) => state.strings[state.language]?.stats || {}
+);
+
 export const { setLanguage } = localizationSlice.actions;
 export default localizationSlice.reducer;
