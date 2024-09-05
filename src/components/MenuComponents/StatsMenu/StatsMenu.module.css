@@ -22,10 +22,10 @@
 }
 
 .statsPanel {
-    background-color: rgb(69, 94, 122, 0.7);
-    width: 80%;
+    background-color: var(--lightblue);
+    width: 75%;
     height: 40vh;
-    clip-path: polygon(2.5% 0%, 97% 9%, 95% 89%, 5% 100%);
+    clip-path: polygon(2.5% 0%, 96% 7%, 95% 89%, 4.5% 100%);
     overflow: hidden;
     position: relative;
     z-index: 1;
@@ -47,7 +47,7 @@
     height: var(--scrollFadeLimit);
     bottom: 0;
     left: 0;
-    background:linear-gradient(to bottom, rgb(69, 94, 122, 0.1), rgb(69, 94, 122, 1));
+    background:linear-gradient(to bottom, var(--scrollFadeStart), var(--scrollFadeEnd));
 }
 
  .statsPanel:before{
@@ -58,7 +58,7 @@
     height: var(--scrollFadeLimit);
     top: 0;
     left: 0;
-    background:linear-gradient(to top, rgb(69, 94, 122, 0.1), rgb(69, 94, 122, 1));
+    background:linear-gradient(to top, var(--scrollFadeStart), var(--scrollFadeEnd));
 }
 
 .statsTransition {

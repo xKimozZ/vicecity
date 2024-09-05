@@ -19,7 +19,7 @@
 
 
 .loadPanel {
-    background-color: rgb(69, 94, 122, 0.7);
+    background-color: var(--lightblue);
     width: 80%;
     z-index: 1;
     padding: 30px;

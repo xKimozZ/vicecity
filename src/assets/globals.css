@@ -2,8 +2,11 @@
     --white: #d5d5d5;
     --pink: #ff95df;
     --green: #198246;
+    --lightblue: rgb(69, 94, 122, 0.7);
 
     --scrollFadeLimit: 30%;
+    --scrollFadeStart: rgb(69, 94, 122, 0.1);
+    --scrollFadeEnd: rgb(69, 94, 122, 1);
     }
 
 body {}
