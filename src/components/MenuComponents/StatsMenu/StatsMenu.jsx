@@ -60,7 +60,7 @@ const StatsMenu = () => {
               ? styles.statsTransition
               : styles.statsTransition1
           }
-                ${scroll === lowerStatsLimit || scroll === -statsLimit ? styles.cancel : ""}`}
+                ${scroll >= lowerStatsLimit || scroll <= -statsLimit ? styles.cancel : ""}`}
           style={scrollStyle}
           ref={statsRef}
         >

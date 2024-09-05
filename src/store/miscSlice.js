@@ -15,7 +15,7 @@ export const miscSlice = createSlice({
   reducers: {
     incrementStatsTranslate: (state, { payload }) => {
       const newStatsTranslate = state.statsTranslate + translateFactor;
-      if (newStatsTranslate === state.lowerStatsLimit)
+      if (newStatsTranslate >= state.lowerStatsLimit)
         {
           state.statsTranslate = -state.statsLimit;
           return;
@@ -24,7 +24,7 @@ export const miscSlice = createSlice({
     },
     decrementStatsTranslate: (state, { payload }) => {
       const newStatsTranslate = state.statsTranslate - translateFactor;
-      if (newStatsTranslate === -state.statsLimit)
+      if (newStatsTranslate <= -state.statsLimit)
       {
         state.statsTranslate = state.lowerStatsLimit;
         return;
