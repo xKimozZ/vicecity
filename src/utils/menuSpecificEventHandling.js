@@ -28,14 +28,13 @@ const handleMenuEvents = (globalActions) => {
         {
           const { shouldExitMenu } = actionList;
 
+          playBack();
           // If user clicks at bottom or if already hovering on the first phase
           if (shouldExitMenu) {
             exitMenu();
-            playBack();
             return;
           }
           toggleLoad();
-          playHover();
         }
         break;
       default:
@@ -61,7 +60,7 @@ const handleMenuEvents = (globalActions) => {
       case "back":
         {
           exitMenu();
-          playHover();
+          playBack();
         }
         break;
       default:

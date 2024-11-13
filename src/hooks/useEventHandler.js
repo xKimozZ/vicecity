@@ -178,7 +178,7 @@ const useEventHandler = () => {
     if (activeButtonGroup !== buttonGroups.MAIN) {
       switch (activeButtonGroup) {
         case buttonGroups.STATS:
-          handleStats("select");
+          handleStats("back");
           break;
         case buttonGroups.LOAD:
           {
