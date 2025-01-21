@@ -6,6 +6,7 @@ import styles from "./LoadMenu.module.css";
 import { languageMap } from "../../../constants/menuStrings";
 import SaveGame from "./SaveGame";
 import Cursor from "../../Cursor/Cursor";
+import { actionNames } from "../../../constants/actionNames";
 
 const LoadMenu = () => {
   const strings = useSelector(stringLoadSelector);
@@ -19,7 +20,7 @@ const LoadMenu = () => {
         buttonGroup={buttonGroups.LOAD}
         textColor="var(--pink)"
         buttonText={strings.loadgame}
-        actions={{trigger: "loadGame"}}
+        actions={{trigger: actionNames.loadGame }}
       />
       </div>
       <div className={styles.loadButton}>
@@ -28,7 +29,7 @@ const LoadMenu = () => {
         buttonGroup={buttonGroups.LOAD}
         textColor="var(--pink)"
         buttonText={strings.newgame}
-        actions={{trigger: "newGame"}}
+        actions={{trigger: actionNames.newGame }}
       />
       </div>
       </div>

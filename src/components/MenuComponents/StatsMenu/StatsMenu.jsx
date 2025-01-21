@@ -348,7 +348,6 @@ const StatsMenu = () => {
           buttonNumber={1}
           textColor="var(--pink)"
           buttonGroup={buttonGroups.STATS}
-          actions={{ triggerMenu: buttonGroups.MAIN }}
         />
       </div>
     </div>
