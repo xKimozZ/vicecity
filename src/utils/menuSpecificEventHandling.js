@@ -1,8 +1,9 @@
+
 const handleMenuEvents = (globalActions) => {
 
   const { playHover, playSelect, playError, playBack } = globalActions.sounds;
   const { exitMenu, triggerMenu } = globalActions.navigation;
-  const { toggleLoad, changeLanguage, scrollDown, scrollUp } = globalActions.misc;
+  const { toggleLoad, changeLanguage, scrollDown, scrollUp, setNextMenu } = globalActions.misc;
 
   const handleLoad = (eventType, actionList) => {
     switch (eventType) {

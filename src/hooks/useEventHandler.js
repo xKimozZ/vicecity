@@ -7,7 +7,7 @@ import {
   navigationSelector,
   setCurrentActions,
 } from "../store/navigationSlice";
-import { buttonGroupMap, buttonGroups } from "../constants/buttonGroups";
+import { buttonGroups } from "../constants/buttonGroups";
 import useMenuOptions from "./useMenuOptions";
 import { languageSelector, setLanguage } from "../store/localizationSlice";
 import { languageMap } from "../constants/menuStrings";
@@ -59,6 +59,7 @@ const useEventHandler = () => {
     navigation: {
       exitMenu: backToNavigation,
       triggerMenu: triggerMenu,
+      setHover: (buttonNumber) => dispatch(setHoveredOption(buttonNumber)),
     },
     misc: {
       scrollDown: () => {
