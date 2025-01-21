@@ -9,7 +9,6 @@ import { imageImports } from './assets/imageImports';
 import LanguageMenu from './components/MenuComponents/LanguageMenu/LanguageMenu';
 import { navigationSelector, setHoveredOption } from './store/navigationSlice';
 import { buttonGroupMap, buttonGroups } from './constants/buttonGroups';
-import getNextGroupIndex from './utils/getNextGroupIndex';
 import { menuStrings } from './constants/menuStrings';
 import Header from './components/Header/Header';
 import useKeyPress from './hooks/useKeyPress';
@@ -68,8 +67,7 @@ function App() {
 
   const renderHoveredComponent = () => {
     if (hoveredOption > 0 ) {
-      const nextButtonGroupIndex = getNextGroupIndex(nextButtonGroup);
-      const ComponentToRender = componentContainer[nextButtonGroupIndex - 1]; // assuming hoveredOption starts from 1
+      const ComponentToRender = componentContainer[nextButtonGroup - 1]; // assuming hoveredOption starts from 1
       return ComponentToRender ? <ComponentToRender /> : null; // Render component if it exists
     }
     return null;
@@ -79,10 +77,9 @@ function App() {
     if (clipPathContainer.length === 0)
       return;
     
-    const nextButtonGroupIndex = getNextGroupIndex(nextButtonGroup);
     setClipPathStyle({
       transition: '0.1s linear', // Apply transition
-      clipPath: clipPathContainer[nextButtonGroupIndex - 1] ? clipPathContainer[nextButtonGroupIndex - 1] : menuOptions[0].frameClip,
+      clipPath: clipPathContainer[nextButtonGroup - 1] ? clipPathContainer[nextButtonGroup - 1] : menuOptions[0].frameClip,
     });
   },[nextButtonGroup]);
 

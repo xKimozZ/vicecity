@@ -42,8 +42,8 @@ const useEventHandler = () => {
   };
 
   const backToNavigation = () => {
-    const activeButtonGroupIndex = buttonGroupMap[activeButtonGroup] ?? 0;
-    dispatch(setHoveredOption(activeButtonGroupIndex));
+    
+    dispatch(setHoveredOption(activeButtonGroup));
     dispatch(setButtonGroup(buttonGroups.MAIN));
   };
 
