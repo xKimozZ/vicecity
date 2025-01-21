@@ -12,6 +12,13 @@ const Button = ({
   textColor = "var(--white)",
   buttonGroup = buttonGroups.MAIN,
   actions = {},
+  cursorFactors = {
+    clipFactor: undefined,
+    topFactor: undefined,
+    leftFactor: undefined,
+    widthFactor: undefined,
+    heightFactor: undefined,
+  },
 }) => {
   const [textStyle, setTextStyle] = useState({
     color: textColor,
@@ -41,6 +48,7 @@ const Button = ({
           left: (rect.left / viewportWidth) * 100,
           width: (rect.width / viewportWidth) * 100,
           height: (rect.height / viewportHeight) * 100,
+          ...cursorFactors,
         };
 
         dispatch(changeLocation(rectInPercentages));
