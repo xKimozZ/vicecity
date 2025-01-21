@@ -1,3 +1,4 @@
+import { actionNames } from "../constants/actionNames";
 
 const handleMenuEvents = (globalActions) => {
 
@@ -10,7 +11,7 @@ const handleMenuEvents = (globalActions) => {
       case "select":
         {
           const { nextAction, fileExists } = actionList;
-          if (nextAction === "loadGame") {
+          if (nextAction === actionNames.loadGame) {
             toggleLoad();
             playHover();
           }
