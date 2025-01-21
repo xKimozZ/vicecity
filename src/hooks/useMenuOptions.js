@@ -5,7 +5,6 @@ import StatsMenu from "../components/MenuComponents/StatsMenu/StatsMenu";
 import { stringSelector } from "../store/localizationSlice";
 import { useSelector } from "react-redux";
 import BriefMenu from "../components/MenuComponents/BriefMenu/BriefMenu";
-import getGroupIndex from "../utils/getNextGroupIndex";
 import LoadMenu from "../components/MenuComponents/LoadMenu/LoadMenu";
 
 const useMenuOptions = () => {
