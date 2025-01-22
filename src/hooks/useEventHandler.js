@@ -16,7 +16,7 @@ import {
   incrementStatsTranslate,
   toggleStatsDirection,
 } from "../store/miscSlice";
-import handleMenuEvents from "../utils/menuSpecificEventHandling";
+import handleMenuEvents from "../utils/event_handling/menuSpecificEventHandling";
 
 const useEventHandler = () => {
   const menuOptions = useMenuOptions();
@@ -42,7 +42,6 @@ const useEventHandler = () => {
   };
 
   const backToNavigation = () => {
-    
     dispatch(setHoveredOption(activeButtonGroup));
     dispatch(setButtonGroup(buttonGroups.MAIN));
   };

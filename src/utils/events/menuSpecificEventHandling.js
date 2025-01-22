@@ -1,4 +1,4 @@
-import { actionNames } from "../constants/actionNames";
+import { actionNames } from "../../constants/actionNames";
 
 const handleMenuEvents = (globalActions) => {
 
