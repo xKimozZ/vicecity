@@ -12,6 +12,7 @@ const useKeyNavigation = (optionsPerRow) => {
   const { hoveredOption, activeButtonGroup, keyPressed, lastKeyPressedTime } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack } = useEventHandlerContext();
   const { navigationFunctions } = useDispatchAbstractor();
+  const { updateParams, handleInput } = handleArrowNavigation(hoveredOption, activeButtonGroup, buttonGroups, handleHover, optionsPerRow, menuOptions);
 
   useEffect(() => {
     const handleKeyUp = () => {
@@ -25,25 +26,28 @@ const useKeyNavigation = (optionsPerRow) => {
     };
   }, []);
 
-  const keyHandlers = {
-    ArrowRight: () => handleArrowNavigation("right", hoveredOption, optionsPerRow, activeButtonGroup, buttonGroups, handleHover, menuOptions),
-    ArrowLeft: () => handleArrowNavigation("left", hoveredOption, optionsPerRow, activeButtonGroup, buttonGroups, handleHover, menuOptions),
-    ArrowDown: () => handleArrowNavigation("down", hoveredOption, optionsPerRow, activeButtonGroup, buttonGroups, handleHover, menuOptions),
-    ArrowUp: () => handleArrowNavigation("up", hoveredOption, optionsPerRow, activeButtonGroup, buttonGroups, handleHover, menuOptions),
-    Escape: handleBack,
-    Backspace: handleError,
-    Enter: () => handleSelect(),
-  };
+  useEffect(() => {
+    updateParams(hoveredOption, activeButtonGroup);
+  }, [hoveredOption, activeButtonGroup]);
 
   const statsScrollCondition = (event) => {
     return activeButtonGroup === buttonGroups.STATS && (event.key === "ArrowDown" || event.key === "ArrowUp");
   }
 
+  const keyHandlers = {
+    ArrowRight: () => handleInput("right"),
+    ArrowLeft: () => handleInput("left"),
+    ArrowDown: () => handleInput("down"),
+    ArrowUp: () => handleInput("up"),
+    Escape: handleBack,
+    Backspace: handleError,
+    Enter: () => handleSelect(),
+  };
+
   const handleKeyDown = (event) => {
     if (!keyPressed) {
       navigationFunctions.setLastKeyPressedTime(Date.now());
-    } else if (Date.now() - lastKeyPressedTime > 200 && !statsScrollCondition(event))
-      return;
+    } else if ( Date.now() - lastKeyPressedTime > 200 && !statsScrollCondition(event) ) return;
     
       navigationFunctions.setKeyPressed(true); // Set the flag to prevent continuous keydown events
       const handler = keyHandlers[event.key];
