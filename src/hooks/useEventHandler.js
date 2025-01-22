@@ -1,49 +1,42 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import useSoundManager from "./useSoundManager";
 import {
-  setHoveredOption,
-  setButtonGroup,
-  setNextGroup,
   navigationSelector,
-  setCurrentActions,
 } from "../store/navigationSlice";
 import { buttonGroups } from "../constants/buttonGroups";
 import useMenuOptions from "./useMenuOptions";
-import { languageSelector, setLanguage } from "../store/localizationSlice";
+import { languageSelector } from "../store/localizationSlice";
 import { languageMap } from "../constants/menuStrings";
-import {
-  decrementStatsTranslate,
-  incrementStatsTranslate,
-  toggleStatsDirection,
-} from "../store/miscSlice";
-import handleMenuEvents from "../utils/event_handling/menuSpecificEventHandling";
+import handleMenuEvents from "../utils/events/menuSpecificEventHandling";
+import useDispatchAbstractor from "./useDispatchAbstractor";
 
 const useEventHandler = () => {
+  const {navigationFunctions, miscFunctions} = useDispatchAbstractor();
+
   const menuOptions = useMenuOptions();
   const currentLanguage = useSelector(languageSelector);
 
   const { playHover, playSelect, playBack, playError, playInfo } =
     useSoundManager();
-  const dispatch = useDispatch();
   const { activeButtonGroup, currentActions, hoveredOption, keyPressed } =
     useSelector(navigationSelector);
 
   const triggerMenu = (newMenu) => {
     if (newMenu === buttonGroups.BRIEF) return false;
-    dispatch(setButtonGroup(newMenu));
-    dispatch(setHoveredOption(1));
+    navigationFunctions.setButtonGroup(newMenu);
+    navigationFunctions.setHoveredOption(1);
     return true;
   };
 
   const changeLanguage = (newLanguage) => {
     if (languageMap[newLanguage] && currentLanguage !== newLanguage) {
-      dispatch(setLanguage(newLanguage));
+      miscFunctions.setLanguage(newLanguage);
     }
   };
 
   const backToNavigation = () => {
-    dispatch(setHoveredOption(activeButtonGroup));
-    dispatch(setButtonGroup(buttonGroups.MAIN));
+    navigationFunctions.setHoveredOption(activeButtonGroup);
+    navigationFunctions.setButtonGroup(buttonGroups.MAIN);
   };
 
   // global actions and functions unlikely to change
@@ -58,22 +51,22 @@ const useEventHandler = () => {
     navigation: {
       exitMenu: backToNavigation,
       triggerMenu: triggerMenu,
-      setHover: (buttonNumber) => dispatch(setHoveredOption(buttonNumber)),
+      setHover: (buttonNumber) => navigationFunctions.setHoveredOption(buttonNumber),
     },
     misc: {
       scrollDown: () => {
-        dispatch(incrementStatsTranslate());
-        dispatch(toggleStatsDirection("up"));
+        miscFunctions.incrementStatsTranslate();
+        miscFunctions.toggleStatsDirection("up");
       },
       scrollUp: () => {
-        dispatch(decrementStatsTranslate());
-        dispatch(toggleStatsDirection("down"));
+        miscFunctions.decrementStatsTranslate();
+        miscFunctions.toggleStatsDirection("down");
       },
       changeLanguage: changeLanguage,
       toggleLoad: () => {
         hoveredOption < 3
-          ? dispatch(setHoveredOption(3))
-          : dispatch(setHoveredOption(1));
+          ? navigationFunctions.setHoveredOption(3)
+          : navigationFunctions.setHoveredOption(1);
       },
     },
   };
@@ -101,13 +94,13 @@ const useEventHandler = () => {
     )
       return;
 
-    if (buttonNumber) dispatch(setHoveredOption(buttonNumber));
+    if (buttonNumber) navigationFunctions.setHoveredOption(buttonNumber);
     switch (activeButtonGroup) {
       case buttonGroups.MAIN:
         {
           const hoverMenu = {
             newMenu: menuOptions[buttonNumber - 1].actions.nextMenu,
-            setNextMenu: (nextMenu) => dispatch(setNextGroup(nextMenu)),
+            setNextMenu: (nextMenu) => navigationFunctions.setNextGroup(nextMenu),
           };
           handleMain("hover", hoverMenu);
         }

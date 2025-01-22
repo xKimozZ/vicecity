@@ -16,7 +16,7 @@ export const miscSlice = createSlice({
   name: "misc",
   initialState,
   reducers: {
-    incrementStatsTranslate: (state, { payload }) => {
+    misc_incrementStatsTranslate: (state, { payload }) => {
       const newStatsTranslate = state.statsTranslate + translateFactor;
       if (newStatsTranslate >= state.lowerStatsLimit)
         {
@@ -25,7 +25,7 @@ export const miscSlice = createSlice({
         }
       state.statsTranslate = newStatsTranslate;
     },
-    decrementStatsTranslate: (state, { payload }) => {
+    misc_decrementStatsTranslate: (state, { payload }) => {
       const newStatsTranslate = state.statsTranslate - translateFactor;
       if (newStatsTranslate <= -state.statsLimit)
       {
@@ -34,15 +34,15 @@ export const miscSlice = createSlice({
       }
       state.statsTranslate = newStatsTranslate;
     },
-    toggleStatsDirection: (state, { payload }) => {
+    misc_toggleStatsDirection: (state, { payload }) => {
       const newStatsDirection = payload;
       state.statsDirection = newStatsDirection;
     },
-    setStatsLimit: (state, { payload }) => {
+    misc_setStatsLimit: (state, { payload }) => {
       const newStatsLimit = payload;
       state.statsLimit = newStatsLimit;
     },
-    setBriefKey: (state, { payload }) => {
+    misc_setBriefKey: (state, { payload }) => {
       const newBriefKey = payload;
       state.briefKey = newBriefKey;
     },
@@ -53,10 +53,10 @@ const selectSelf = (state) => state.miscReducer;
 export const miscSelector = createSelector(selectSelf, (state) => state);
 
 export const {
-  incrementStatsTranslate,
-  decrementStatsTranslate,
-  toggleStatsDirection,
-  setStatsLimit,
-  setBriefKey,
+  misc_incrementStatsTranslate,
+  misc_decrementStatsTranslate,
+  misc_toggleStatsDirection,
+  misc_setStatsLimit,
+  misc_setBriefKey,
 } = miscSlice.actions;
 export default miscSlice.reducer;

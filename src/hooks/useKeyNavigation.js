@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { navigationSelector } from "../store/navigationSlice";
 import { buttonGroups } from "../constants/buttonGroups";
 import { handleArrowNavigation } from "../utils/buttonGroupKeyNavigation";
 import useMenuOptions from "./useMenuOptions";
-import { setKeyPressed } from "../store/navigationSlice";
+import useDispatchAbstractor from "./useDispatchAbstractor";
 import { useEventHandlerContext } from "../context/EventHandlerContext";
 
 const useKeyNavigation = (optionsPerRow ) => {
   const menuOptions = useMenuOptions();
   const { hoveredOption, activeButtonGroup, keyPressed } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack } = useEventHandlerContext();
-  const dispatch = useDispatch();
+  const { navigationFunctions } = useDispatchAbstractor();
 
   const keyHandlers = {
     ArrowRight: () => handleArrowNavigation("right", hoveredOption, optionsPerRow, activeButtonGroup, buttonGroups, handleHover, menuOptions),
@@ -27,7 +27,7 @@ const useKeyNavigation = (optionsPerRow ) => {
   }
 
   const handleKeyDown = (event) => {
-      dispatch(setKeyPressed(true)); // Set the flag to prevent continuous keydown events
+      navigationFunctions.setKeyPressed(true); // Set the flag to prevent continuous keydown events
       const handler = keyHandlers[event.key];
       if (handler) handler();
   };

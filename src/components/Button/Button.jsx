@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styles from "./Button.module.css";
-import { useEffect, useState, useRef, act } from "react";
-import { changeLocation } from "../../store/cursorSlice";
-import { navigationSelector, setCurrentActions, setHoveredOption, setNextGroup } from "../../store/navigationSlice";
+import { useEffect, useState, useRef } from "react";
+import { navigationSelector } from "../../store/navigationSlice";
 import { buttonGroups } from "../../constants/buttonGroups";
 import { useEventHandlerContext } from "../../context/EventHandlerContext";
+import useDispatchAbstractor from "../../hooks/useDispatchAbstractor";
 
 const Button = ({
   buttonText = "Sample",
@@ -24,7 +24,7 @@ const Button = ({
     color: textColor,
   });
   const buttonRef = useRef(null);
-  const dispatch = useDispatch();
+  const {cursorFunctions, navigationFunctions} = useDispatchAbstractor();
   const { hoveredOption, activeButtonGroup } = useSelector(navigationSelector);
   const { handleHover: hoverFunction, handleSelect: selectFunction } =  useEventHandlerContext();
 
@@ -51,8 +51,8 @@ const Button = ({
           ...cursorFactors,
         };
 
-        dispatch(changeLocation(rectInPercentages));
-        dispatch(setCurrentActions(actions));
+        cursorFunctions.changeLocation(rectInPercentages);
+        navigationFunctions.setCurrentActions(actions);
       }
     };
 

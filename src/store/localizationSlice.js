@@ -10,7 +10,7 @@ export const localizationSlice = createSlice({
   name: "localization",
   initialState,
   reducers: {
-    setLanguage: (state, { payload }) => {
+    local_setLanguage: (state, { payload }) => {
       const newLanguage = payload;
       state.language = newLanguage;
     },
@@ -49,5 +49,5 @@ export const stringStatsSelector = createSelector(
   (state) => state.strings[state.language]?.stats || {}
 );
 
-export const { setLanguage } = localizationSlice.actions;
+export const { local_setLanguage } = localizationSlice.actions;
 export default localizationSlice.reducer;

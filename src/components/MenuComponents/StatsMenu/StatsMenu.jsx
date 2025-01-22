@@ -1,35 +1,33 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { buttonGroups } from "../../../constants/buttonGroups";
 import Button from "../../Button/Button";
 import styles from "./StatsMenu.module.css";
 import {
-  decrementStatsTranslate,
-  incrementStatsTranslate,
   miscSelector,
-  setStatsLimit,
 } from "../../../store/miscSlice";
 import { useEffect, useRef, useState } from "react";
 import { navigationSelector } from "../../../store/navigationSlice";
 import { stringStatsSelector } from "../../../store/localizationSlice";
+import useDispatchAbstractor from "../../../hooks/useDispatchAbstractor";
 
 const StatsMenu = () => {
   const [beganScrolling, setBeganScrolling] = useState(false);
   const { statsTranslate: scroll, statsDirection, statsLimit, lowerStatsLimit } = useSelector(miscSelector);
   const { activeButtonGroup } = useSelector(navigationSelector);
-  const dispatch = useDispatch();
+  const { miscFunctions } = useDispatchAbstractor();
   const strings = useSelector(stringStatsSelector);
   const statsRef = useRef();
 
   useEffect(()=>{
     const {height} = statsRef.current.getBoundingClientRect();
-    dispatch(setStatsLimit(height + 30));
+    miscFunctions.setStatsLimit(height + 30);
   },[]);
 
   // Provides a smoother stop if the menu wasnt locked in but was idly scrolling
   useEffect(() => {
     if (activeButtonGroup === buttonGroups.STATS && beganScrolling) {
-      if (statsDirection === "down") dispatch(incrementStatsTranslate());
-      else dispatch(decrementStatsTranslate());
+      if (statsDirection === "down") miscFunctions.incrementStatsTranslate();
+      else miscFunctions.decrementStatsTranslate();
     } else setBeganScrolling(false);
   }, [activeButtonGroup]);
 
@@ -37,8 +35,8 @@ const StatsMenu = () => {
     if (activeButtonGroup === buttonGroups.MAIN) {
       const timeoutId = setTimeout(() => {
         setBeganScrolling(true);
-        if (statsDirection === "down") dispatch(decrementStatsTranslate());
-        else dispatch(incrementStatsTranslate());
+        if (statsDirection === "down") miscFunctions.decrementStatsTranslate();
+        else miscFunctions.incrementStatsTranslate();
       }, 500);
 
       return () => clearTimeout(timeoutId);

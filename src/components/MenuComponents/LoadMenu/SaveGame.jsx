@@ -1,16 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styles from "./SaveGame.module.css";
 import { useEffect, useState, useRef, act } from "react";
-import { changeLocation } from "../../../store/cursorSlice";
 import {
   navigationSelector,
-  setCurrentActions,
-  setHoveredOption,
-  setNextGroup,
 } from "../../../store/navigationSlice";
 import { buttonGroups } from "../../../constants/buttonGroups";
 import { useEventHandlerContext } from "../../../context/EventHandlerContext";
 import { stringLoadSelector } from "../../../store/localizationSlice";
+import useDispatchAbstractor from "../../../hooks/useDispatchAbstractor";
 
 const SaveGame = ({
   buttonNumber = 3,
@@ -19,7 +16,7 @@ const SaveGame = ({
   saveFile,
 }) => {
   const buttonRef = useRef(null);
-  const dispatch = useDispatch();
+  const {cursorFunctions, navigationFunctions} = useDispatchAbstractor();
   const { hoveredOption, activeButtonGroup } = useSelector(navigationSelector);
   const { handleHover: hoverFunction, handleSelect: selectFunction } =
     useEventHandlerContext();
@@ -64,8 +61,8 @@ const SaveGame = ({
           heightFactor: 1.1,
         };
 
-        dispatch(changeLocation(rectInPercentages));
-        dispatch(setCurrentActions(actions));
+        cursorFunctions.changeLocation(rectInPercentages);
+        navigationFunctions.setCurrentActions(actions);
       }
     };
 

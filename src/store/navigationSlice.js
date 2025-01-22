@@ -13,23 +13,23 @@ export const navigationSlice = createSlice({
   name: "navigation",
   initialState,
   reducers: {
-    setHoveredOption: (state, { payload }) => {
+    nav_setHoveredOption: (state, { payload }) => {
       const newHoveredOption = payload;
       state.hoveredOption = newHoveredOption;
     },
-    setButtonGroup: (state, { payload }) => {
+    nav_setButtonGroup: (state, { payload }) => {
       const newButtonGroup = payload;
       state.activeButtonGroup = newButtonGroup;
     },
-    setNextGroup: (state, { payload }) => {
+    nav_setNextGroup: (state, { payload }) => {
       const newButtonGroup = payload;
       state.nextButtonGroup = newButtonGroup;
     },
-    setCurrentActions: (state, { payload }) => {
+    nav_setCurrentActions: (state, { payload }) => {
       const newActions = payload;
       state.currentActions = newActions;
     },
-    setKeyPressed: (state, { payload }) => {
+    nav_setKeyPressed: (state, { payload }) => {
       const newKeyPressed = payload;
       state.keyPressed = newKeyPressed;
     },
@@ -39,5 +39,5 @@ export const navigationSlice = createSlice({
 const selectSelf = (state) => state.navigationReducer;
 export const navigationSelector = createSelector(selectSelf, (state) => state);
 
-export const { setHoveredOption, setButtonGroup, setNextGroup, setCurrentActions, setKeyPressed } = navigationSlice.actions;
+export const { nav_setHoveredOption, nav_setButtonGroup, nav_setNextGroup, nav_setCurrentActions, nav_setKeyPressed } = navigationSlice.actions;
 export default navigationSlice.reducer;

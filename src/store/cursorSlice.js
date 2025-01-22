@@ -24,7 +24,7 @@ export const cursorSlice = createSlice({
   name: "cursor",
   initialState,
   reducers: {
-    changeLocation: (state, { payload }) => {
+    cursor_changeLocation: (state, { payload }) => {
       const {
         top = "0%",
         left = "0%",
@@ -57,5 +57,5 @@ export const cursorSlice = createSlice({
 const selectSelf = (state) => state.cursorReducer;
 export const cursorSelector = createSelector(selectSelf, (state) => state);
 
-export const { changeLocation } = cursorSlice.actions;
+export const { cursor_changeLocation } = cursorSlice.actions;
 export default cursorSlice.reducer;

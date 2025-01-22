@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
-import { setKeyPressed } from '../store/navigationSlice';
-import { useDispatch } from 'react-redux';
+import useDispatchAbstractor from './useDispatchAbstractor';
 
 const useKeyPress = () => {
-    const dispatch = useDispatch();
+  const { navigationFunctions } = useDispatchAbstractor();
 
   useEffect(() => {
-    const handleKeyUp = () => dispatch(setKeyPressed(false));
+    const handleKeyUp = () => navigationFunctions.setKeyPressed(false);
 
     window.addEventListener('keyup', handleKeyUp);
 
