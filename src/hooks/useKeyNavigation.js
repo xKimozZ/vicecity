@@ -6,9 +6,9 @@ import useMenuOptions from "./useMenuOptions";
 import useDispatchAbstractor from "./useDispatchAbstractor";
 import { useEventHandlerContext } from "../context/EventHandlerContext";
 
-const useKeyNavigation = (optionsPerRow ) => {
+const useKeyNavigation = (optionsPerRow) => {
   const menuOptions = useMenuOptions();
-  const { hoveredOption, activeButtonGroup, keyPressed } = useSelector(navigationSelector);
+  const { hoveredOption, activeButtonGroup, keyPressed, lastKeyPressedTime } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack } = useEventHandlerContext();
   const { navigationFunctions } = useDispatchAbstractor();
 
@@ -27,6 +27,11 @@ const useKeyNavigation = (optionsPerRow ) => {
   }
 
   const handleKeyDown = (event) => {
+    if (!keyPressed) {
+      navigationFunctions.setLastKeyPressedTime(Date.now());
+    } else if (Date.now() - lastKeyPressedTime > 200 && !statsScrollCondition(event))
+      return;
+    
       navigationFunctions.setKeyPressed(true); // Set the flag to prevent continuous keydown events
       const handler = keyHandlers[event.key];
       if (handler) handler();

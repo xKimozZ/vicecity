@@ -7,6 +7,7 @@ const initialState = {
   activeButtonGroup: buttonGroups.MAIN,
   currentActions: {},
   keyPressed: false,
+  lastKeyPressedTime: 0,
 };
 
 export const navigationSlice = createSlice({
@@ -33,11 +34,15 @@ export const navigationSlice = createSlice({
       const newKeyPressed = payload;
       state.keyPressed = newKeyPressed;
     },
+    nav_setLastKeyPressedTime: (state, { payload }) => {
+      const newLastKeyPressedTime = payload;
+      state.lastKeyPressedTime = newLastKeyPressedTime;
+    },
   },
 });
 
 const selectSelf = (state) => state.navigationReducer;
 export const navigationSelector = createSelector(selectSelf, (state) => state);
 
-export const { nav_setHoveredOption, nav_setButtonGroup, nav_setNextGroup, nav_setCurrentActions, nav_setKeyPressed } = navigationSlice.actions;
+export const { nav_setHoveredOption, nav_setButtonGroup, nav_setNextGroup, nav_setCurrentActions, nav_setKeyPressed, nav_setLastKeyPressedTime } = navigationSlice.actions;
 export default navigationSlice.reducer;
