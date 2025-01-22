@@ -17,6 +17,7 @@ const Hoverable = ({
     heightFactor: undefined,
   },
   id = "button-default-id",
+  parentId = "my-parent-id",
   topClassName = "",
   topStyles = {},
   children,
@@ -53,6 +54,9 @@ const Hoverable = ({
 
         cursorFunctions.changeLocation(rectInPercentages);
         navigationFunctions.setCurrentActions(actions);
+
+        const newBigHover = {myId: id, parentId: parentId, active: false};
+        navigationFunctions.setBigHover(newBigHover);
       }
     };
 

@@ -1,0 +1,12 @@
+.soundBarContainer {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+  
+  .bar {
+    width: 9px; /* Adjust the width of individual bars */
+    background-color: #61c2f7; /* Color of the bar */
+    box-shadow: 6px 4px 0px black;
+    transition: height 0.3s ease; /* Smooth transition for height changes */
+  }

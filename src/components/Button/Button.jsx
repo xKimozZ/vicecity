@@ -15,6 +15,8 @@ const Button = ({
     widthFactor: undefined,
     heightFactor: undefined,
   },
+  id = "button-default-id",
+  parentId = "my-parent-id",
   activeCondition = () => {return true;},
 }) => {
   const textStyle = {
@@ -30,6 +32,8 @@ const Button = ({
       topClassName={`${styles.buttonContainer}`}
       topStyles={textStyle}
       activeCondition={activeCondition}
+      id={id}
+      parentId={parentId} 
     >
       <span>{buttonText}</span>
     </Hoverable>

@@ -9,18 +9,21 @@ import useDispatchAbstractor from "./useDispatchAbstractor";
 import { useEffect } from "react";
 
 const useEventHandler = () => {
-  const { navigationFunctions, miscFunctions, localizationFunctions } = useDispatchAbstractor();
+  const { navigationFunctions, miscFunctions, localizationFunctions, cursorFunctions } = useDispatchAbstractor();
   const currentLanguage = useSelector(languageSelector);
   const { playHover, playSelect, playBack, playError, playInfo } = useSoundManager();
-  const { activeButtonGroup, currentActions, hoveredOption, keyPressed } =useSelector(navigationSelector);
+  const { activeButtonGroup, currentActions, hoveredOption, keyPressed, bigHover} =useSelector(navigationSelector);
 
   const backToNavigation = () => {
+    navigationFunctions.setBigHover({
+      active: false,
+    });
     navigationFunctions.setHoveredOption(activeButtonGroup);
     navigationFunctions.setButtonGroup(buttonGroups.MAIN);
   };
 
   // global actions and functions unlikely to change
-  const reducerFunctions = { navigationFunctions, miscFunctions, localizationFunctions };
+  const reducerFunctions = { navigationFunctions, miscFunctions, localizationFunctions, cursorFunctions };
 
   const staticActions = {
     sounds: {
@@ -45,16 +48,23 @@ const useEventHandler = () => {
     nextLanguage: currentActions.nextLanguage,
     trigger: currentActions.trigger,
     fileExists: currentActions.fileExists,
+    bigHover: bigHover,
   };
 
-  const { handleStats, handleMain, handleLoad, handleSelectGeneral,updateParams } = handleMenuEvents(staticActions, reducerFunctions);
+  const { handleStats, handleMain, handleLoad, handleSelectGeneral,updateParams, handleDisplay } = handleMenuEvents(staticActions, reducerFunctions);
   useEffect(() => {
     updateParams(dynamicVariables);
   }, [activeButtonGroup,hoveredOption,keyPressed,currentLanguage,currentActions,]);
 
   const handleHover = (buttonNumber) => {
     // special case to prevent hovering over 'load game' and 'new game' when you are navigating across savegames
-    if ( activeButtonGroup === buttonGroups.LOAD && hoveredOption > 2 && buttonNumber <= 2) return;
+    if (
+      activeButtonGroup === buttonGroups.LOAD &&
+      hoveredOption > 2 &&
+      buttonNumber <= 2
+      || bigHover.active && buttonNumber != hoveredOption
+    )
+      return;
 
     if (buttonNumber) navigationFunctions.setHoveredOption(buttonNumber);
 
@@ -62,7 +72,7 @@ const useEventHandler = () => {
     // If an actionList was sent, this is because there was no other way to convey the absolute latest state
     switch (activeButtonGroup) {
       case buttonGroups.MAIN:
-        const hoverMenu = {newMenu: menuOptions[buttonNumber - 1].actions.nextMenu,};
+        const hoverMenu = {newMenu: menuOptions[buttonNumber - 1].actions.nextMenu};
         handleMain("hover", hoverMenu);
         break;
       case buttonGroups.STATS:
@@ -88,13 +98,23 @@ const useEventHandler = () => {
         // If click on 'load game' or 'new game' while navigating across savegames
         if (activeButtonGroup === buttonGroups.LOAD && hoveredOption > 2) {
           handleBack();
+          handleHover(triggeredBy);
         }
-        handleHover(triggeredBy);
+        if (bigHover.active) {
+          navigationFunctions.setHoveredOption(triggeredBy);
+          playHover();
+          navigationFunctions.setBigHover({...bigHover, active: false});
+        }
         return;
       }
     }
-    // No unique inputs expected here, so the switch statement is handled in the function
-    handleSelectGeneral();
+
+    switch (activeButtonGroup) {
+      default:
+        // No unique inputs expected here, so the switch statement is handled in the function
+        handleSelectGeneral();
+        break;
+    }
   };
 
   const handleBack = (overRide = 0) => {

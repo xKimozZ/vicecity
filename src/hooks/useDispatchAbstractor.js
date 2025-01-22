@@ -6,9 +6,10 @@ import {
   nav_setCurrentActions,
   nav_setKeyPressed,
   nav_setLastKeyPressedTime,
+  nav_setBigHover,
 } from "../store/navigationSlice";
 import { local_setLanguage } from "../store/localizationSlice";
-import { misc_decrementStatsTranslate, misc_incrementStatsTranslate, misc_setBriefKey, misc_setStatsLimit, misc_toggleStatsDirection, } from "../store/miscSlice";
+import { misc_decrementStatsTranslate, misc_incrementStatsTranslate, misc_setBriefKey, misc_setStatsLimit, misc_toggleStatsDirection,} from "../store/miscSlice";
 import { cursor_changeLocation } from "../store/cursorSlice";
 
 const useDispatchAbstractor = () => {
@@ -21,8 +22,10 @@ const useDispatchAbstractor = () => {
     const setHoveredOption = (buttonId) => dispatch(nav_setHoveredOption(buttonId));
     const setNextGroup = (menuId) => dispatch(nav_setNextGroup(menuId));
     const setCurrentActions = (actionId) => dispatch(nav_setCurrentActions(actionId));
+    const setBigHover = (hoverStruct) => dispatch(nav_setBigHover(hoverStruct));
 
-    const navigationFunctions = {setKeyPressed, setLastKeyPressedTime, setButtonGroup, setHoveredOption, setNextGroup, setCurrentActions};
+    const navigationFunctions = {setKeyPressed, setLastKeyPressedTime, setButtonGroup, 
+      setHoveredOption, setNextGroup, setCurrentActions, setBigHover, };
 
     // localizationSlice
     const setLanguage = (languageId) => dispatch(local_setLanguage(languageId));

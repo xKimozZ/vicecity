@@ -4,6 +4,7 @@ import SampleMenuComponent from "../components/MenuComponents/SampleMenuComponen
 import StatsMenu from "../components/MenuComponents/StatsMenu/StatsMenu";
 import BriefMenu from "../components/MenuComponents/BriefMenu/BriefMenu";
 import LoadMenu from "../components/MenuComponents/LoadMenu/LoadMenu";
+import DisplayMenu from "../components/MenuComponents/DisplayMenu/DisplayMenu";
 
 const menuOptions = [
     {
@@ -69,7 +70,7 @@ const menuOptions = [
     {
       //buttonNumber: getGroupIndex(buttonGroups.DISPLAY),
       buttonText: "display",
-      component: SampleMenuComponent,
+      component: DisplayMenu,
       frameClip: `polygon(15.31% 14.36%, 83.75% 4.2%, 94.38% 83.67%, 15.75% 77.38%)`,
       buttonGroup: buttonGroups.MAIN,
       actions: {

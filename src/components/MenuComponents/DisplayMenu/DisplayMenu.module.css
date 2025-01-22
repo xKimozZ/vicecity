@@ -1,0 +1,28 @@
+.displayContainer {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 70vh;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.displayOptionFlex {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.2em;
+    text-align: right;
+}
+
+.statsHeader {
+    font-family: Pricedown;
+    padding: 0.02em 0.5em;
+    font-size: 48px;
+    z-index: 2;
+    color: var(--pink);
+    text-shadow: 3px 3px 0px black;
+    text-transform: lowercase;
+    letter-spacing: -1px;
+}
