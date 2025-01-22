@@ -1,43 +1,44 @@
 import { actionNames } from "../../constants/actionNames";
+import { buttonGroups } from "../../constants/buttonGroups";
+import { auxilaryFunctions } from "./auxilaryFunctions";
 
-const handleMenuEvents = (globalActions) => {
+const handleMenuEvents = (globalActions, reducerFunctions) => {
 
   const { playHover, playSelect, playError, playBack } = globalActions.sounds;
-  const { exitMenu, triggerMenu } = globalActions.navigation;
-  const { toggleLoad, changeLanguage, scrollDown, scrollUp, setNextMenu } = globalActions.misc;
+  const { backToNavigation } = globalActions.navigation;
+  const { toggleLoad, changeLanguage, scrollDown, scrollUp, triggerMenu, setNextMenu } = auxilaryFunctions(reducerFunctions);
+
+  var dynamicVariables;
+  const updateParams = (newDynamicVariables) => {
+    dynamicVariables = newDynamicVariables;
+  };
 
   const handleLoad = (eventType, actionList) => {
     switch (eventType) {
       case "select":
-        {
-          const { nextAction, fileExists } = actionList;
-          if (nextAction === actionNames.loadGame) {
-            toggleLoad();
-            playHover();
-          }
-          if (fileExists !== undefined) {
-            if (fileExists) {
-              playSelect();
-            } else playError();
-          }
+        const { trigger: nextAction, fileExists } = dynamicVariables;
+        console.log(nextAction);
+        if (nextAction === actionNames.loadGame) {
+          toggleLoad(dynamicVariables.hoveredOption);
+          playHover();
+        }
+        if (fileExists !== undefined) {
+          if (fileExists) {
+            playSelect();
+          } else playError();
         }
         break;
       case "hover":
-        {
-        }
         break;
       case "back":
-        {
-          const { shouldExitMenu } = actionList;
-
-          playBack();
-          // If user clicks at bottom or if already hovering on the first phase
-          if (shouldExitMenu) {
-            exitMenu();
-            return;
-          }
-          toggleLoad();
+        const { shouldExitMenu } = actionList;
+        playBack();
+        // If user clicks at bottom or if already hovering on the first phase
+        if (shouldExitMenu) {
+          backToNavigation();
+          return;
         }
+        toggleLoad(dynamicVariables.hoveredOption);
         break;
       default:
         console.log("INVALID EVENT TYPE!");
@@ -48,22 +49,14 @@ const handleMenuEvents = (globalActions) => {
   const handleStats = (eventType, actionList) => {
     switch (eventType) {
       case "select":
-        {
-          exitMenu();
-          playHover();
-        }
+        backToNavigation();
+        playHover();
         break;
       case "hover":
-        {
-          const { direction } = actionList;
-          direction === "up" ? scrollUp() : scrollDown();
-        }
+        const { direction } = actionList;
+        direction === "up" ? scrollUp() : scrollDown();
         break;
       case "back":
-        {
-          exitMenu();
-          playBack();
-        }
         break;
       default:
         console.log("INVALID EVENT TYPE!");
@@ -74,18 +67,14 @@ const handleMenuEvents = (globalActions) => {
   const handleMain = (eventType, actionList) => {
     switch (eventType) {
       case "select":
-        {
-          const { nextMenu } = actionList;
+        const { nextMenu } = dynamicVariables;
 
-          // If true -- allowed to enter the menu (all except brief), return true and play the sound
-          if (triggerMenu(nextMenu)) playSelect();
-        }
+        // If true -- allowed to enter the menu (all except brief), return true and play the sound
+        if (triggerMenu(nextMenu)) playSelect();
         break;
       case "hover":
-        {
-          const { newMenu, setNextMenu } = actionList;
-          setNextMenu(newMenu);
-        }
+        const { newMenu } = actionList;
+        setNextMenu(newMenu);
         break;
       case "back":
         break;
@@ -98,11 +87,9 @@ const handleMenuEvents = (globalActions) => {
   const handleLanguage = (eventType, actionList) => {
     switch (eventType) {
       case "select":
-        {
-          const { nextLanguage } = actionList;
-          changeLanguage(nextLanguage);
-          playHover();
-        }
+        const { nextLanguage, currentLanguage } = dynamicVariables;
+        changeLanguage(nextLanguage, currentLanguage);
+        playHover();
         break;
       case "hover":
         break;
@@ -114,7 +101,26 @@ const handleMenuEvents = (globalActions) => {
     }
   };
 
-  return { handleLoad, handleStats, handleMain, handleLanguage };
+  const handleSelectGeneral = () => {
+    switch (dynamicVariables.activeButtonGroup) {
+      case buttonGroups.MAIN:
+        handleMain("select");
+        break;
+      case buttonGroups.LANGUAGE:
+        handleLanguage("select");
+        break;
+      case buttonGroups.LOAD:
+        handleLoad("select");
+        break;
+      case buttonGroups.STATS:
+        handleStats("select");
+        break;
+      default:
+        break;
+    }
+  };
+
+  return { handleLoad, handleStats, handleMain, handleLanguage, handleSelectGeneral, updateParams };
 };
 
 export default handleMenuEvents;
