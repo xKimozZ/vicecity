@@ -54,7 +54,7 @@ const useEventHandler = () => {
   const { handleStats, handleMain, handleLoad, handleSelectGeneral,updateParams, handleDisplay } = handleMenuEvents(staticActions, reducerFunctions);
   useEffect(() => {
     updateParams(dynamicVariables);
-  }, [activeButtonGroup,hoveredOption,keyPressed,currentLanguage,currentActions,]);
+  }, [activeButtonGroup,hoveredOption,keyPressed,currentLanguage,currentActions,bigHover]);
 
   const handleHover = (buttonNumber) => {
     // special case to prevent hovering over 'load game' and 'new game' when you are navigating across savegames
