@@ -5,12 +5,25 @@ import { handleArrowNavigation } from "../utils/buttonGroupKeyNavigation";
 import useMenuOptions from "./useMenuOptions";
 import useDispatchAbstractor from "./useDispatchAbstractor";
 import { useEventHandlerContext } from "../context/EventHandlerContext";
+import { useEffect } from "react";
 
 const useKeyNavigation = (optionsPerRow) => {
   const menuOptions = useMenuOptions();
   const { hoveredOption, activeButtonGroup, keyPressed, lastKeyPressedTime } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack } = useEventHandlerContext();
   const { navigationFunctions } = useDispatchAbstractor();
+
+  useEffect(() => {
+    const handleKeyUp = () => {
+      navigationFunctions.setKeyPressed(false);
+    }
+    
+    window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
 
   const keyHandlers = {
     ArrowRight: () => handleArrowNavigation("right", hoveredOption, optionsPerRow, activeButtonGroup, buttonGroups, handleHover, menuOptions),

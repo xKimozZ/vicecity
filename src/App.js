@@ -6,12 +6,9 @@ import { useSelector } from 'react-redux';
 import Cursor from './components/Cursor/Cursor'
 import useKeyNavigation from './hooks/useKeyNavigation';
 import { imageImports } from './assets/imageImports';
-import LanguageMenu from './components/MenuComponents/LanguageMenu/LanguageMenu';
 import { navigationSelector, setHoveredOption } from './store/navigationSlice';
-import { buttonGroupMap, buttonGroups } from './constants/buttonGroups';
-import { menuStrings } from './constants/menuStrings';
+import { buttonGroups } from './constants/buttonGroups';
 import Header from './components/Header/Header';
-import useKeyPress from './hooks/useKeyPress';
 import { useEventHandlerContext } from './context/EventHandlerContext';
 
 function App() {
@@ -27,7 +24,6 @@ function App() {
   const [clipPathContainer, setClipPathContainer] = useState([]);
   const [componentContainer, setComponentContainer] = useState([]);
   const interfaceRef = useRef(null);
-  const listener = useKeyPress();
   const { handleKeyDown } = useKeyNavigation(optionsPerRow);
   const { hoveredOption, nextButtonGroup, activeButtonGroup } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandlerContext();
