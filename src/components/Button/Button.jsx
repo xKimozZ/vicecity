@@ -1,10 +1,6 @@
-import { useSelector } from "react-redux";
 import styles from "./Button.module.css";
-import { useEffect, useState, useRef } from "react";
-import { navigationSelector } from "../../store/navigationSlice";
 import { buttonGroups } from "../../constants/buttonGroups";
-import { useEventHandlerContext } from "../../context/EventHandlerContext";
-import useDispatchAbstractor from "../../hooks/useDispatchAbstractor";
+import Hoverable from "../Hoverable/Hoverable";
 
 const Button = ({
   buttonText = "Sample",
@@ -19,71 +15,24 @@ const Button = ({
     widthFactor: undefined,
     heightFactor: undefined,
   },
+  activeCondition = () => {return true;},
 }) => {
-  const [textStyle, setTextStyle] = useState({
+  const textStyle = {
     color: textColor,
-  });
-  const buttonRef = useRef(null);
-  const {cursorFunctions, navigationFunctions} = useDispatchAbstractor();
-  const { hoveredOption, activeButtonGroup } = useSelector(navigationSelector);
-  const { handleHover: hoverFunction, handleSelect: selectFunction } =  useEventHandlerContext();
-
-  const isHovered = () => {
-    return hoveredOption === buttonNumber;
-  };
-
-  const isActive = () => {
-    return activeButtonGroup === buttonGroup;
-  }
-
-  useEffect(() => {
-    const updatePosition = () => {
-      if (isHovered() && isActive() && buttonRef.current) {
-        const rect = buttonRef.current.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-
-        const rectInPercentages = {
-          top: (rect.top / viewportHeight) * 100,
-          left: (rect.left / viewportWidth) * 100,
-          width: (rect.width / viewportWidth) * 100,
-          height: (rect.height / viewportHeight) * 100,
-          ...cursorFactors,
-        };
-
-        cursorFunctions.changeLocation(rectInPercentages);
-        navigationFunctions.setCurrentActions(actions);
-      }
-    };
-
-    updatePosition(); // Initial call
-    window.addEventListener("resize", updatePosition); // Update on resize
-
-    return () => {
-      window.removeEventListener("resize", updatePosition); // Clean up
-    };
-  }, [hoveredOption, activeButtonGroup]);
-
-  const handleHover = () => {
-    if (isHovered() || !isActive() ) return;
-    hoverFunction?.(buttonNumber);
-  };
-
-  const handleSelect = () => {
-    if (!isActive() ) return;
-    selectFunction?.(buttonNumber);
   };
 
   return (
-    <div
-      ref={buttonRef}
-      className={`${styles.buttonContainer}`}
-      onMouseEnter={handleHover}
-      onClick={handleSelect}
-      style={{ ...textStyle }}
+    <Hoverable
+      buttonNumber={buttonNumber}
+      buttonGroup={buttonGroup}
+      actions={actions}
+      cursorFactors={cursorFactors}
+      topClassName={`${styles.buttonContainer}`}
+      topStyles={textStyle}
+      activeCondition={activeCondition}
     >
       <span>{buttonText}</span>
-    </div>
+    </Hoverable>
   );
 };
 

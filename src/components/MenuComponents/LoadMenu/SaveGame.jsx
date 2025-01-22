@@ -1,13 +1,10 @@
 import { useSelector } from "react-redux";
 import styles from "./SaveGame.module.css";
-import { useEffect, useState, useRef, act } from "react";
-import {
-  navigationSelector,
-} from "../../../store/navigationSlice";
+import { useEffect, useState } from "react";
+import Hoverable from "../../Hoverable/Hoverable";
 import { buttonGroups } from "../../../constants/buttonGroups";
-import { useEventHandlerContext } from "../../../context/EventHandlerContext";
 import { stringLoadSelector } from "../../../store/localizationSlice";
-import useDispatchAbstractor from "../../../hooks/useDispatchAbstractor";
+import { navigationSelector } from "../../../store/navigationSlice";
 
 const SaveGame = ({
   buttonNumber = 3,
@@ -15,74 +12,26 @@ const SaveGame = ({
   buttonGroup = buttonGroups.LOAD,
   saveFile,
 }) => {
-  const buttonRef = useRef(null);
-  const {cursorFunctions, navigationFunctions} = useDispatchAbstractor();
-  const { hoveredOption, activeButtonGroup } = useSelector(navigationSelector);
-  const { handleHover: hoverFunction, handleSelect: selectFunction } =
-    useEventHandlerContext();
+  const {hoveredOption} = useSelector(navigationSelector);
   const strings = useSelector(stringLoadSelector);
   const [saveText, setSaveText] = useState(
     `${strings.savefile} ${slotNumber} ${strings.notpresent}`
   );
   const [actions, setActions] = useState({ fileExists: false });
+  const cursorFactors = {
+    clipFactor: 3,
+    topFactor: 0.99,
+    leftFactor: 0.99,
+    widthFactor: 1,
+    heightFactor: 1.1,
+  };
 
   useEffect(() => {
     if (saveFile) {
       setSaveText(`${slotNumber}: ${saveFile.name}`);
       setActions({ fileExists: true });
-      console.log(saveFile.date);
     }
   }, []);
-
-  const isHovered = () => {
-    return hoveredOption === buttonNumber;
-  };
-
-  const isActive = () => {
-    return activeButtonGroup === buttonGroup && hoveredOption > 2;
-  };
-
-  useEffect(() => {
-    const updatePosition = () => {
-      if (isHovered() && isActive() && buttonRef.current) {
-        const rect = buttonRef.current.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-
-        const rectInPercentages = {
-          top: (rect.top / viewportHeight) * 100,
-          left: (rect.left / viewportWidth) * 100,
-          width: (rect.width / viewportWidth) * 100,
-          height: (rect.height / viewportHeight) * 100,
-          clipFactor: 3,
-          topFactor: 0.99,
-          leftFactor: 0.99,
-          widthFactor: 1,
-          heightFactor: 1.1,
-        };
-
-        cursorFunctions.changeLocation(rectInPercentages);
-        navigationFunctions.setCurrentActions(actions);
-      }
-    };
-
-    updatePosition(); // Initial call
-    window.addEventListener("resize", updatePosition); // Update on resize
-
-    return () => {
-      window.removeEventListener("resize", updatePosition); // Clean up
-    };
-  }, [hoveredOption, activeButtonGroup]);
-
-  const handleHover = () => {
-    if (isHovered() || !isActive()) return;
-    hoverFunction?.(buttonNumber);
-  };
-
-  const handleSelect = () => {
-    if (!isActive()) return;
-    selectFunction?.(buttonNumber);
-  };
 
   const generateDate = (date) => {
     const dateString =
@@ -127,18 +76,24 @@ const SaveGame = ({
     }
   };
 
+  const isChoosingSaveGames = () => {
+    return hoveredOption >= 3;
+  };
+
   return (
-    <div
-      ref={buttonRef}
-      className={`${styles.saveButton}`}
-      onMouseEnter={handleHover}
-      onClick={handleSelect}
+    <Hoverable
+      buttonNumber={buttonNumber}
+      buttonGroup={buttonGroup}
+      actions={actions}
+      cursorFactors={cursorFactors}
+      topClassName={`${styles.saveButton}`}
+      activeCondition={isChoosingSaveGames}
     >
       {saveText}
       {saveFile && (
         <span className={styles.saveDate}>{generateDate(saveFile.date)}</span>
       )}
-    </div>
+    </Hoverable>
   );
 };
 
