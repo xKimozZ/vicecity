@@ -49,8 +49,8 @@ const StatsMenu = () => {
 
   return (
     <div className={styles.statsContainer}>
-      <span className={styles.statsHeader}>Criminal Rating:</span>
-      Upstanding Citizen [0]
+      <span className={styles.statsHeader}>{strings.crimra}</span>
+      {strings.rating_1} [0]
       <div className={styles.statsPanel}>
         <div
           className={`${styles.statsFlex} ${
@@ -342,7 +342,7 @@ const StatsMenu = () => {
       </div>
       <div className={styles.statsBottom}>
         <Button
-          buttonText="back"
+          buttonText={strings.back}
           buttonNumber={1}
           textColor="var(--pink)"
           buttonGroup={buttonGroups.STATS}

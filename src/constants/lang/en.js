@@ -48,6 +48,9 @@ export const en = {
       dec: "Dec",
     },
     stats: {
+      crimra: "Criminal Rating:",
+      rating_1: "Upstanding Citizen",
+      back: "Back",
       percentage: "Percentage completed",
       attempts: "Mission attempts",
       playtime: "Playing Time",
