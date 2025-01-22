@@ -1,5 +1,5 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
-import { getRandomKey } from "../utils/getRandomObject";
+import { getRandomKey } from "../utils/math/getRandomObject";
 import { menuStrings } from "../constants/menuStrings";
 
 const translateFactor = 10;

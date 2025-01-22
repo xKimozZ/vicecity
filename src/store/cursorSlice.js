@@ -1,6 +1,6 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
-import generateRandomClipPath from "../utils/generateRandomClipPath";
-import getRandomNumber from "../utils/getRandomNumber";
+import generateRandomClipPath from "../utils/math/generateRandomClipPath";
+import getRandomNumber from "../utils/math/getRandomNumber";
 
 const initialState = {
   positionStyle: {
