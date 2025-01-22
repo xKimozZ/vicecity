@@ -38,7 +38,7 @@ const useKeyNavigation = (optionsPerRow) => {
     ArrowDown: () => handleInput("down"),
     ArrowUp: () => handleInput("up"),
     Escape: handleBack,
-    Backspace: handleError,
+    Backspace: handleBack,
     Enter: () => handleSelect(),
   };
 
