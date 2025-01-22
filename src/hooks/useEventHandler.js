@@ -11,7 +11,7 @@ import handleMenuEvents from "../utils/events/menuSpecificEventHandling";
 import useDispatchAbstractor from "./useDispatchAbstractor";
 
 const useEventHandler = () => {
-  const {navigationFunctions, miscFunctions} = useDispatchAbstractor();
+  const {navigationFunctions, miscFunctions, localizationFunctions} = useDispatchAbstractor();
 
   const menuOptions = useMenuOptions();
   const currentLanguage = useSelector(languageSelector);
@@ -30,7 +30,7 @@ const useEventHandler = () => {
 
   const changeLanguage = (newLanguage) => {
     if (languageMap[newLanguage] && currentLanguage !== newLanguage) {
-      miscFunctions.setLanguage(newLanguage);
+      localizationFunctions.setLanguage(newLanguage);
     }
   };
 
