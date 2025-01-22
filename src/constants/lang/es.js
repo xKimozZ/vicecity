@@ -119,4 +119,12 @@ export const es = {
     ignored: "Ignorado",
     outof: " de ",
   },
+  display:  {
+    brightness: "Brillo",
+    trails: "Suavizado",
+    subtitles: "Subtetulos",
+    widescreen: "Formato 16:9",
+    on: "ON",
+    off: "OFF",
+  }
 };

@@ -119,4 +119,12 @@ export const it = {
     ignored: "Ignorato",
     outof: " su ",
   },
+  display:  {
+    brightness: "Luminosità",
+    trails: "Tracce",
+    subtitles: "Sottotitoli",
+    widescreen: "Panoramico",
+    on: "ON",
+    off: "OFF",
+  }
 };

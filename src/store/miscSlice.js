@@ -10,6 +10,12 @@ const initialState = {
   statsLimit: 2800,
   lowerStatsLimit: 400,
   briefKey: getRandomKey(menuStrings.en.brief),
+
+  displaySettings: {
+    trails: true,
+    subtitles: true,
+    widescreen: true,
+  }
 };
 
 export const miscSlice = createSlice({
@@ -46,6 +52,10 @@ export const miscSlice = createSlice({
       const newBriefKey = payload;
       state.briefKey = newBriefKey;
     },
+    misc_setDisplaySettings: (state, { payload }) => {
+      const newDisplaySettings = payload;
+      state.displaySettings = newDisplaySettings;
+    },
   },
 });
 
@@ -58,5 +68,6 @@ export const {
   misc_toggleStatsDirection,
   misc_setStatsLimit,
   misc_setBriefKey,
+  misc_setDisplaySettings,
 } = miscSlice.actions;
 export default miscSlice.reducer;

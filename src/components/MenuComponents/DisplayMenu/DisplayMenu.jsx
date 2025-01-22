@@ -1,19 +1,24 @@
 import { useSelector } from "react-redux";
 import { buttonGroups } from "../../../constants/buttonGroups";
-import { stringLanguageSelector } from "../../../store/localizationSlice";
 import Button from "../../Button/Button";
 import styles from "./DisplayMenu.module.css";
-import { languageMap } from "../../../constants/menuStrings";
 import Bar from "../../Bar/Bar";
+import { miscSelector } from "../../../store/miscSlice";
+import { stringDisplaySelector } from "../../../store/localizationSlice";
 
 const DisplayMenu = () => {
-  const strings = useSelector(stringLanguageSelector);
+  const strings = useSelector(stringDisplaySelector);
+  const {displaySettings} = useSelector(miscSelector);
+
+  const Status = (key) => {
+    return displaySettings[key] ? strings.on : strings.off;
+  };
 
   return (
     <div className={styles.displayContainer}>
       <div className={styles.displayOptionFlex} id="brightness">
         <Button
-          buttonText={"brightness"}
+          buttonText={strings.brightness}
           buttonNumber={1}
           textColor="var(--pink)"
           buttonGroup={buttonGroups.DISPLAY}
@@ -25,7 +30,7 @@ const DisplayMenu = () => {
       </div>
       <div className={styles.displayOptionFlex} id="test">
         <Button
-          buttonText={"trails : on"}
+          buttonText={`${strings.trails} : ${Status("trails")}`}
           buttonNumber={2}
           textColor="var(--pink)"
           buttonGroup={buttonGroups.DISPLAY}
@@ -33,7 +38,7 @@ const DisplayMenu = () => {
       </div>
       <div className={styles.displayOptionFlex} id="test">
         <Button
-          buttonText={"subtitles : on"}
+          buttonText={`${strings.subtitles} : ${Status("subtitles")}`}
           buttonNumber={3}
           textColor="var(--pink)"
           buttonGroup={buttonGroups.DISPLAY}
@@ -41,7 +46,7 @@ const DisplayMenu = () => {
       </div>
       <div className={styles.displayOptionFlex} id="test">
         <Button
-          buttonText={"wide screen : on"}
+          buttonText={`${strings.widescreen} : ${Status("widescreen")}`}
           buttonNumber={4}
           textColor="var(--pink)"
           buttonGroup={buttonGroups.DISPLAY}

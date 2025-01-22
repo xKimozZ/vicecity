@@ -119,4 +119,12 @@ export const fr = {
     ignored: "Ignoré",
     outof: " sur ",
   },
+  display:  {
+    brightness: "Luminosité",
+    trails: "Remanences",
+    subtitles: "Sous-titres",
+    widescreen: "Ecran large",
+    on: "Activé",
+    off: "Disactivé",
+  }
 };

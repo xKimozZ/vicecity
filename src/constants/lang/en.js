@@ -118,5 +118,13 @@ export const en = {
       media: "Highest media attention",
       ignored: "Ignored",
       outof: " out of "
+    },
+    display:  {
+      brightness: "Brightness",
+      trails: "Trails",
+      subtitles: "Subtitles",
+      widescreen: "Wide Screen",
+      on: "On",
+      off: "Off",
     }
 };
