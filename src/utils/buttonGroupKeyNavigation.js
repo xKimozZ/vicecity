@@ -1,5 +1,8 @@
+import { buttonGroups } from "../constants/buttonGroups";
+import menuOptions from "../constants/menuOptions";
+
 // For main menu when not locked on to a screen
-export const getNavigationLimits = (optionsPerRow, menuOptions) => {
+export const getNavigationLimits = (optionsPerRow) => {
   const firstRowStart = 1;
   const firstRowEnd = optionsPerRow[0];
   const secondRowStart = optionsPerRow[1] + 1;
@@ -8,20 +11,11 @@ export const getNavigationLimits = (optionsPerRow, menuOptions) => {
   return { firstRowStart, firstRowEnd, secondRowStart, secondRowEnd, vertical };
 };
 
-export const handleArrowNavigation = (
-  hoveredOption,
-  activeButtonGroup,
+export const handleArrowNavigation = (initialHover, initialGroup, handleHover, optionsPerRow) => {
+  const { firstRowStart, firstRowEnd, secondRowStart, secondRowEnd, vertical } = getNavigationLimits(optionsPerRow);
 
-  // Stuff that wont change
-  buttonGroups,
-  handleHover,
-  optionsPerRow,
-  menuOptions
-) => {
-  const { firstRowStart, firstRowEnd, secondRowStart, secondRowEnd, vertical } = getNavigationLimits(optionsPerRow, menuOptions);
-  
-  var hoveredOption = hoveredOption;
-  var activeButtonGroup = activeButtonGroup;
+  var hoveredOption = initialHover;
+  var activeButtonGroup = initialGroup;
 
   const updateParams = (newHoveredOption, activeButtonGroup) => {
     hoveredOption = newHoveredOption;
@@ -37,8 +31,7 @@ export const handleArrowNavigation = (
             else handleHover(hoveredOption + 1);
           } else if (hoveredOption + 1 > 2) handleHover(1);
           else handleHover(hoveredOption + 1);
-        }
-        else if (direction === "up") {
+        } else if (direction === "up") {
           if (hoveredOption > 2) {
             if (hoveredOption - 1 < 3) handleHover(10);
             else handleHover(hoveredOption - 1);
@@ -51,8 +44,7 @@ export const handleArrowNavigation = (
         if (direction === "down") {
           if (hoveredOption + 1 > 5) handleHover(1);
           else handleHover(hoveredOption + 1);
-        }
-        else if (direction === "up") {
+        } else if (direction === "up") {
           if (hoveredOption - 1 < 1) handleHover(5);
           else handleHover(hoveredOption - 1);
         }
@@ -61,8 +53,7 @@ export const handleArrowNavigation = (
       case buttonGroups.STATS:
         if (direction === "down") {
           handleHover(1);
-        }
-        else if (direction === "up") {
+        } else if (direction === "up") {
           handleHover(0);
         }
         return;
@@ -73,22 +64,16 @@ export const handleArrowNavigation = (
           else if (hoveredOption + 1 === firstRowEnd + 1)
             handleHover(firstRowStart);
           else handleHover(hoveredOption + 1);
-        }
-
-        else if (direction === "left") {
+        } else if (direction === "left") {
           if (hoveredOption - 1 < firstRowStart) handleHover(firstRowEnd);
           else if (hoveredOption - 1 === secondRowStart - 1)
             handleHover(secondRowEnd);
           else handleHover(hoveredOption - 1);
-        }
-
-        else if (direction === "down") {
+        } else if (direction === "down") {
           if (hoveredOption + vertical > secondRowEnd)
             handleHover(hoveredOption - vertical);
           else handleHover(hoveredOption + vertical);
-        }
-
-        else if (direction === "up") {
+        } else if (direction === "up") {
           if (hoveredOption - vertical < firstRowStart)
             handleHover(hoveredOption + vertical);
           else handleHover(hoveredOption - vertical);
@@ -96,6 +81,6 @@ export const handleArrowNavigation = (
         return;
     }
   };
-  
+
   return { handleInput, updateParams };
 };
