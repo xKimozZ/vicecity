@@ -2,13 +2,12 @@ import { useSelector } from "react-redux";
 import { navigationSelector } from "../store/navigationSlice";
 import { buttonGroups } from "../constants/buttonGroups";
 import { handleArrowNavigation } from "../utils/buttonGroupKeyNavigation";
-import useMenuOptions from "./useMenuOptions";
+import menuOptions from "../constants/menuOptions";
 import useDispatchAbstractor from "./useDispatchAbstractor";
 import { useEventHandlerContext } from "../context/EventHandlerContext";
 import { useEffect } from "react";
 
 const useKeyNavigation = (optionsPerRow) => {
-  const menuOptions = useMenuOptions();
   const { hoveredOption, activeButtonGroup, keyPressed, lastKeyPressedTime } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack } = useEventHandlerContext();
   const { navigationFunctions } = useDispatchAbstractor();

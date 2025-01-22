@@ -4,7 +4,7 @@ import {
   navigationSelector,
 } from "../store/navigationSlice";
 import { buttonGroups } from "../constants/buttonGroups";
-import useMenuOptions from "./useMenuOptions";
+import menuOptions from "../constants/menuOptions";
 import { languageSelector } from "../store/localizationSlice";
 import { languageMap } from "../constants/menuStrings";
 import handleMenuEvents from "../utils/events/menuSpecificEventHandling";
@@ -13,7 +13,6 @@ import useDispatchAbstractor from "./useDispatchAbstractor";
 const useEventHandler = () => {
   const {navigationFunctions, miscFunctions, localizationFunctions} = useDispatchAbstractor();
 
-  const menuOptions = useMenuOptions();
   const currentLanguage = useSelector(languageSelector);
 
   const { playHover, playSelect, playBack, playError, playInfo } =
@@ -29,6 +28,7 @@ const useEventHandler = () => {
   };
 
   const changeLanguage = (newLanguage) => {
+    console.log(hoveredOption);
     if (languageMap[newLanguage] && currentLanguage !== newLanguage) {
       localizationFunctions.setLanguage(newLanguage);
     }

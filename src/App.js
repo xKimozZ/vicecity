@@ -1,7 +1,7 @@
 import './App.css';
 import Button from './components/Button/Button'
 import { useEffect, useState, useRef } from 'react';
-import useMenuOptions from './hooks/useMenuOptions';
+import menuOptions from './constants/menuOptions';
 import { useSelector } from 'react-redux';
 import Cursor from './components/Cursor/Cursor'
 import useKeyNavigation from './hooks/useKeyNavigation';
@@ -10,9 +10,9 @@ import { navigationSelector, setHoveredOption } from './store/navigationSlice';
 import { buttonGroups } from './constants/buttonGroups';
 import Header from './components/Header/Header';
 import { useEventHandlerContext } from './context/EventHandlerContext';
+import { stringMenuSelector } from './store/localizationSlice';
 
 function App() {
-  const menuOptions = useMenuOptions();
   const optionsPerRow = [4,4];
   const [marginState, setMarginState] = useState(false);
   const [clipPathStyle, setClipPathStyle] = useState(
@@ -27,6 +27,7 @@ function App() {
   const { handleKeyDown } = useKeyNavigation(optionsPerRow);
   const { hoveredOption, nextButtonGroup, activeButtonGroup } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandlerContext();
+  const menuButtonStrings = useSelector(stringMenuSelector);
 
 
   useEffect(() => {
@@ -52,7 +53,7 @@ function App() {
           <Button
             key={option.buttonNumber}
             buttonNumber={index + indexOffset}
-            buttonText={option.buttonText}
+            buttonText={menuButtonStrings[option.buttonText]}
             buttonGroup={option.buttonGroup}
             actions={option.actions}
           />
