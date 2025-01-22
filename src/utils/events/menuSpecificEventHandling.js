@@ -19,7 +19,6 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
     switch (eventType) {
       case "select":
         const { trigger: nextAction, fileExists } = dynamicVariables;
-        console.log(nextAction);
         if (nextAction === actionNames.loadGame) {
           toggleLoad(dynamicVariables.hoveredOption);
           playHover();
@@ -123,8 +122,6 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
                 return;
               }
 
-              console.log(dynamicVariables.bigHover.myId);
-              console.log(dynamicVariables.bigHover.parentId);
               const parentObject = getElementById(dynamicVariables.bigHover.parentId);
               const rect = parentObject.getBoundingClientRect();
               const cursorFactors = {
@@ -136,10 +133,9 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
               };
               const rectInPercentages = rectangleBuilder(rect, cursorFactors);
       
-              reducerFunctions.cursorFunctions.changeLocation(rectInPercentages);
-
               const newBigHover = {...dynamicVariables.bigHover, active: true};
               reducerFunctions.navigationFunctions.setBigHover(newBigHover);
+              reducerFunctions.cursorFunctions.changeLocation(rectInPercentages);
               playHover();
           }
         }
@@ -171,6 +167,9 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
         break;
       case buttonGroups.STATS:
         handleStats("select");
+        break;
+      case buttonGroups.DISPLAY:
+        handleDisplay("select");
         break;
       default:
         break;
