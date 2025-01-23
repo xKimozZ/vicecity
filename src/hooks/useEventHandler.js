@@ -105,6 +105,9 @@ const useEventHandler = () => {
           playHover();
           navigationFunctions.setBigHover({...bigHover, active: false});
         }
+        if (activeButtonGroup === buttonGroups.MAIN) {
+          handleHover(triggeredBy);
+        }
         return;
       }
     }
