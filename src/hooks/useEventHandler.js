@@ -124,11 +124,23 @@ const useEventHandler = () => {
         return;
       }
     }
-
+    
     switch (activeButtonGroup) {
       default:
         // No unique inputs expected here, so the switch statement is handled in the function
         handleSelectGeneral();
+        break;
+    }
+  };
+
+  const handleSpecial = (triggeredBy) => {
+    switch (activeButtonGroup) {
+      case buttonGroups.DISPLAY:
+        const actionList = { barSelected: triggeredBy };
+        handleDisplay("special", actionList);
+        break;
+      default:
+        console.log("INVALID SPECIAL EVENT!");
         break;
     }
   };
@@ -156,7 +168,7 @@ const useEventHandler = () => {
     playInfo();
   };
 
-  return {handleBack,handleSelect,handleError,handleHover,handleInfo,backToNavigation};
+  return {handleBack,handleSelect,handleError,handleHover,handleSpecial,handleInfo,backToNavigation};
 };
 
 export default useEventHandler;

@@ -152,7 +152,18 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
         break;
       case "back":
         break;
-      default:
+      case "special":
+        // If clicked directly on the brightness bar
+        if (dynamicVariables.bigHover.active && dynamicVariables.bigHover.myId === actionNames.DISPLAY.BRIGHTNESS_ID)
+        {
+          const {barSelected} = actionList;
+          const newBrightness = Math.round((barSelected / 16) * 100) / 100;
+          const newDisplaySettings = {...dynamicVariables.displaySettings,[actionNames.DISPLAY.BRIGHTNESS_ID]: newBrightness,};
+          reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
+          playSelect();
+        }
+        break;
+        default:
         console.log("INVALID EVENT TYPE!");
         break;
     }
