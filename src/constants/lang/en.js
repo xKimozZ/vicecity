@@ -124,6 +124,9 @@ export const en = {
       trails: "Trails",
       subtitles: "Subtitles",
       widescreen: "Wide Screen",
+      radar: "Radar Mode",
+      hud: "HUD Mode",
+      screenpos: "Screen Position",
       on: "On",
       off: "Off",
     }

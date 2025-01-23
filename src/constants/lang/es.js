@@ -124,6 +124,9 @@ export const es = {
     trails: "Suavizado",
     subtitles: "Subtetulos",
     widescreen: "Formato 16:9",
+    radar: "Radar Mode",
+    hud: "HUD Mode",
+    screenpos: "Screen Position",
     on: "ON",
     off: "OFF",
   }

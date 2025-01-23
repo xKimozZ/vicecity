@@ -124,6 +124,9 @@ export const de = {
     trails: "Unschsrfe-FX",
     subtitles: "Untertitel",
     widescreen: "Breitbild",
+    radar: "Radar Mode",
+    hud: "HUD Mode",
+    screenpos: "Screen Position",
     on: "AN",
     off: "AUS",
   }

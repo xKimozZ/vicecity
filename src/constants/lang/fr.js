@@ -124,6 +124,9 @@ export const fr = {
     trails: "Remanences",
     subtitles: "Sous-titres",
     widescreen: "Ecran large",
+    radar: "Radar Mode",
+    hud: "HUD Mode",
+    screenpos: "Screen Position",
     on: "Activé",
     off: "Disactivé",
   }

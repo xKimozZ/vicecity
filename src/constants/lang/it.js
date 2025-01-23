@@ -124,6 +124,9 @@ export const it = {
     trails: "Tracce",
     subtitles: "Sottotitoli",
     widescreen: "Panoramico",
+    radar: "Radar Mode",
+    hud: "HUD Mode",
+    screenpos: "Screen Position",
     on: "ON",
     off: "OFF",
   }
