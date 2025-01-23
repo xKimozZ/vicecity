@@ -19,7 +19,7 @@ const LoadMenu = () => {
         buttonGroup={buttonGroups.LOAD}
         textColor="var(--pink)"
         buttonText={strings.loadgame}
-        actions={{trigger: actionNames.loadGame }}
+        actions={{trigger: actionNames.LOAD.LOADGAME }}
       />
       </div>
       <div className={styles.loadButton}>
@@ -28,7 +28,7 @@ const LoadMenu = () => {
         buttonGroup={buttonGroups.LOAD}
         textColor="var(--pink)"
         buttonText={strings.newgame}
-        actions={{trigger: actionNames.newGame }}
+        actions={{trigger: actionNames.LOAD.NEWGAME }}
       />
       </div>
       </div>

@@ -1,4 +1,15 @@
 export const actionNames = {
-    loadGame: "loadGame",
-    newGame: "newGame",
+    LOAD: {
+        LOADGAME: "loadGame",
+        NEWGAME: "newGame",
+    },
+    DISPLAY: {
+        BRIGHTNESS_ID: "brightness",
+        TRAILS_ID: "trails",
+        SUBTITLES_ID: "subtitles",
+        WIDESCREEN_ID: "widescreen",
+        RADAR_ID: "radar",
+        HUD_ID: "hud",
+        SCREENNPOS_ID: "screenpos",
+    },
 }

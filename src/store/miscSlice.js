@@ -1,6 +1,9 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 import { getRandomKey } from "../utils/math/getRandomObject";
 import { menuStrings } from "../constants/menuStrings";
+import { actionNames } from "../constants/actionNames";
+
+const { DISPLAY } = actionNames;
 
 const translateFactor = 10;
 
@@ -12,9 +15,9 @@ const initialState = {
   briefKey: getRandomKey(menuStrings.en.brief),
 
   displaySettings: {
-    trails: true,
-    subtitles: true,
-    widescreen: true,
+    [DISPLAY.TRAILS_ID]: true,
+    [DISPLAY.SUBTITLES_ID]: true,
+    [DISPLAY.WIDESCREEN_ID]: true,
   }
 };
 

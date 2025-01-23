@@ -19,7 +19,7 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
     switch (eventType) {
       case "select":
         const { trigger: nextAction, fileExists } = dynamicVariables;
-        if (nextAction === actionNames.loadGame) {
+        if (nextAction === actionNames.LOAD.LOADGAME) {
           toggleLoad(dynamicVariables.hoveredOption);
           playHover();
         }
@@ -106,8 +106,9 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
     switch (eventType) {
       case "select":
         {
-          if (dynamicVariables.trigger === "brightness")
+          switch(dynamicVariables.trigger)
           {
+            case actionNames.DISPLAY.BRIGHTNESS_ID:
               // If I click on it again, disable the bigHover
               const cursorFactors = {
                 clipFactor: 3,
@@ -118,13 +119,17 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
               };
               toggleBigHover(dynamicVariables.bigHover, cursorFactors);
               playHover();
-          }
-          if (dynamicVariables.trigger === "trails")
-          {
+              break;
+            
+            case actionNames.DISPLAY.TRAILS_ID:
+            case actionNames.DISPLAY.SUBTITLES_ID:
+            case actionNames.DISPLAY.WIDESCREEN_ID:
               playSelect();
-              rerenderCursor("trails");
-              const newDisplaySettings = { ...dynamicVariables.displaySettings, trails: !dynamicVariables.displaySettings.trails };
+              const { myId } = dynamicVariables.bigHover;
+              rerenderCursor(myId);
+              const newDisplaySettings = { ...dynamicVariables.displaySettings, [myId]: !dynamicVariables.displaySettings[myId] };
               reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
+              break;
           }
         }
         break;
