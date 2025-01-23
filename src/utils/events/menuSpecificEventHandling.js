@@ -3,11 +3,10 @@ import { buttonGroups } from "../../constants/buttonGroups";
 import { auxilaryFunctions } from "./auxilaryFunctions";
 
 const handleMenuEvents = (globalActions, reducerFunctions) => {
-
-  const { playHover, playSelect, playError, playBack } = globalActions.sounds;
+  const { playHover, playSelect, playError, playBack, playSoundAfterDelay } = globalActions.sounds;
   const { backToNavigation } = globalActions.navigation;
   const { toggleLoad, changeLanguage, scrollDown, scrollUp, triggerMenu, setNextMenu,
-    getElementById, rectangleBuilder, rerenderCursor, toggleBigHover,
+    getElementById, rectangleBuilder, rerenderCursor, toggleBigHover, incrementBar,
    } = auxilaryFunctions(reducerFunctions);
 
   var dynamicVariables;
@@ -136,18 +135,19 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
         break;
       case "hover":
         {
-          const { direction } = actionList;
+          try {
+            const { direction } = actionList;
           if (dynamicVariables.bigHover.active && dynamicVariables.bigHover.myId === actionNames.DISPLAY.BRIGHTNESS_ID) {
-          const currentBrightness = dynamicVariables.displaySettings[actionNames.DISPLAY.BRIGHTNESS_ID];
-          const increment = 1 / 16;
-          const sign = direction === "left" ? -1 : 1;
-          const newBrightness = currentBrightness + sign * increment;
-          if (newBrightness >= 0 && newBrightness <= 1) {
+            
+            const currentBrightness = dynamicVariables.displaySettings[actionNames.DISPLAY.BRIGHTNESS_ID];
+            const newBrightness = incrementBar(currentBrightness, direction, playSoundAfterDelay);
+
             const newDisplaySettings = {...dynamicVariables.displaySettings,[actionNames.DISPLAY.BRIGHTNESS_ID]: newBrightness,};
             reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
+           }
+          } catch {
+            console.log("SLOW DOWN!!!")
           }
-          playHover();
-        }
         }
         break;
       case "back":

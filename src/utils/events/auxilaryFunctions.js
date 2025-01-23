@@ -64,8 +64,21 @@ export const auxilaryFunctions = (reducerFunctions) => {
         reducerFunctions.navigationFunctions.setBigHover(newBigHover);
         rerenderCursor(active ? myId : parentId, cursorFactors);
       };
+
+      const incrementBar = (currentValue, direction, playSoundAfterDelay) => {
+        const increment = 1 / 16;
+        const sign = direction === "left" ? -1 : 1;
+        let newValue = currentValue + sign * increment;
+        if (newValue < 0 || newValue > 1) {
+          newValue = currentValue;
+        }
+        const time = Date.now();
+        reducerFunctions.miscFunctions.setBarLastUpdate(time);
+        playSoundAfterDelay(time);
+        return newValue;
+      };
     
       return {toggleLoad, scrollUp, scrollDown, changeLanguage, setNextMenu, triggerMenu, getElementById, rectangleBuilder,
-        toggleBigHover, rerenderCursor
+        toggleBigHover, rerenderCursor, incrementBar,
       };
 }

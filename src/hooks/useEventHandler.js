@@ -9,13 +9,15 @@ import useDispatchAbstractor from "./useDispatchAbstractor";
 import { useEffect } from "react";
 import { miscSelector } from "../store/miscSlice";
 import { actionNames } from "../constants/actionNames";
+import useDebounce from "./useDebounce";
 
 const useEventHandler = () => {
   const { navigationFunctions, miscFunctions, localizationFunctions, cursorFunctions } = useDispatchAbstractor();
   const currentLanguage = useSelector(languageSelector);
   const { playHover, playSelect, playBack, playError, playInfo } = useSoundManager();
+  const {playSoundAfterDelay} = useDebounce();
   const { activeButtonGroup, currentActions, hoveredOption, keyPressed, bigHover} =useSelector(navigationSelector);
-  const { displaySettings } = useSelector(miscSelector);
+  const { displaySettings, barLastUpdate } = useSelector(miscSelector);
 
   const backToNavigation = () => {
     navigationFunctions.setBigHover({
@@ -24,6 +26,7 @@ const useEventHandler = () => {
     navigationFunctions.setHoveredOption(activeButtonGroup);
     navigationFunctions.setButtonGroup(buttonGroups.MAIN);
   };
+
 
   // global actions and functions unlikely to change
   const reducerFunctions = { navigationFunctions, miscFunctions, localizationFunctions, cursorFunctions };
@@ -35,6 +38,7 @@ const useEventHandler = () => {
       playBack: playBack,
       playInfo: playInfo,
       playError: playError,
+      playSoundAfterDelay: playSoundAfterDelay,
     },
     navigation: {
       backToNavigation: backToNavigation,
