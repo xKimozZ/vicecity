@@ -119,6 +119,13 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
               toggleBigHover(dynamicVariables.bigHover, cursorFactors);
               playHover();
           }
+          if (dynamicVariables.trigger === "trails")
+          {
+              playSelect();
+              rerenderCursor("trails");
+              const newDisplaySettings = { ...dynamicVariables.displaySettings, trails: !dynamicVariables.displaySettings.trails };
+              reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
+          }
         }
         break;
       case "hover":

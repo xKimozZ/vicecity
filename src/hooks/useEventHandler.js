@@ -7,12 +7,14 @@ import { languageSelector } from "../store/localizationSlice";
 import handleMenuEvents from "../utils/events/menuSpecificEventHandling";
 import useDispatchAbstractor from "./useDispatchAbstractor";
 import { useEffect } from "react";
+import { miscSelector } from "../store/miscSlice";
 
 const useEventHandler = () => {
   const { navigationFunctions, miscFunctions, localizationFunctions, cursorFunctions } = useDispatchAbstractor();
   const currentLanguage = useSelector(languageSelector);
   const { playHover, playSelect, playBack, playError, playInfo } = useSoundManager();
   const { activeButtonGroup, currentActions, hoveredOption, keyPressed, bigHover} =useSelector(navigationSelector);
+  const { displaySettings } = useSelector(miscSelector);
 
   const backToNavigation = () => {
     navigationFunctions.setBigHover({
@@ -49,6 +51,7 @@ const useEventHandler = () => {
     trigger: currentActions.trigger,
     fileExists: currentActions.fileExists,
     bigHover: bigHover,
+    displaySettings: displaySettings,
   };
 
   const { handleStats, handleMain, handleLoad, handleSelectGeneral,updateParams, handleDisplay } = handleMenuEvents(staticActions, reducerFunctions);

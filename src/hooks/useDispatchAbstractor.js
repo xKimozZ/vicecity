@@ -9,7 +9,14 @@ import {
   nav_setBigHover,
 } from "../store/navigationSlice";
 import { local_setLanguage } from "../store/localizationSlice";
-import { misc_decrementStatsTranslate, misc_incrementStatsTranslate, misc_setBriefKey, misc_setStatsLimit, misc_toggleStatsDirection,} from "../store/miscSlice";
+import {
+  misc_decrementStatsTranslate,
+  misc_incrementStatsTranslate,
+  misc_setBriefKey,
+  misc_setStatsLimit,
+  misc_toggleStatsDirection,
+  misc_setDisplaySettings,
+} from "../store/miscSlice";
 import { cursor_changeLocation } from "../store/cursorSlice";
 
 const useDispatchAbstractor = () => {
@@ -38,8 +45,10 @@ const useDispatchAbstractor = () => {
     const setBriefKey = (briefKey) => dispatch(misc_setBriefKey(briefKey));
     const setStatsLimit = (limit) => dispatch(misc_setStatsLimit(limit));
     const toggleStatsDirection = (direction) => dispatch(misc_toggleStatsDirection(direction));
+    const setDisplaySettings = (settingsStruct) => dispatch(misc_setDisplaySettings(settingsStruct));
 
-    const miscFunctions = {decrementStatsTranslate, incrementStatsTranslate, setBriefKey, setStatsLimit, toggleStatsDirection};
+    const miscFunctions = {decrementStatsTranslate, incrementStatsTranslate, setDisplaySettings,
+      setBriefKey, setStatsLimit, toggleStatsDirection};
 
     // cursorSlice
     const changeLocation = (rectParams) => dispatch(cursor_changeLocation(rectParams));
