@@ -7,7 +7,7 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
   const { playHover, playSelect, playError, playBack } = globalActions.sounds;
   const { backToNavigation } = globalActions.navigation;
   const { toggleLoad, changeLanguage, scrollDown, scrollUp, triggerMenu, setNextMenu,
-    getElementById, rectangleBuilder,
+    getElementById, rectangleBuilder, rerenderCursor, toggleBigHover,
    } = auxilaryFunctions(reducerFunctions);
 
   var dynamicVariables;
@@ -109,21 +109,6 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
           if (dynamicVariables.trigger === "brightness")
           {
               // If I click on it again, disable the bigHover
-              if (dynamicVariables.bigHover.active)
-              {
-                const myObject = getElementById(dynamicVariables.bigHover.myId);
-                const rect = myObject.getBoundingClientRect();
-                const rectInPercentages = rectangleBuilder(rect);
-                playHover();
-                
-                const newBigHover = {...dynamicVariables.bigHover, active: false};
-                reducerFunctions.navigationFunctions.setBigHover(newBigHover);
-                reducerFunctions.cursorFunctions.changeLocation(rectInPercentages);
-                return;
-              }
-
-              const parentObject = getElementById(dynamicVariables.bigHover.parentId);
-              const rect = parentObject.getBoundingClientRect();
               const cursorFactors = {
                 clipFactor: 3,
                 topFactor: 0.95,
@@ -131,11 +116,7 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
                 widthFactor: 1.11,
                 heightFactor: 1.3,
               };
-              const rectInPercentages = rectangleBuilder(rect, cursorFactors);
-      
-              const newBigHover = {...dynamicVariables.bigHover, active: true};
-              reducerFunctions.navigationFunctions.setBigHover(newBigHover);
-              reducerFunctions.cursorFunctions.changeLocation(rectInPercentages);
+              toggleBigHover(dynamicVariables.bigHover, cursorFactors);
               playHover();
           }
         }

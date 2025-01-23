@@ -2,7 +2,7 @@ import { buttonGroups } from "../../constants/buttonGroups";
 import { languageMap } from "../../constants/menuStrings";
 
 export const auxilaryFunctions = (reducerFunctions) => {
-    const { navigationFunctions, miscFunctions, localizationFunctions } = reducerFunctions;
+    const { navigationFunctions, miscFunctions, localizationFunctions, cursorFunctions } = reducerFunctions;
 
     const triggerMenu = (newMenu) => {
         if (newMenu === buttonGroups.BRIEF) return false;
@@ -48,6 +48,24 @@ export const auxilaryFunctions = (reducerFunctions) => {
       }
 
       const setNextMenu = (nextMenu) => navigationFunctions.setNextGroup(nextMenu);
+
+      const rerenderCursor = (targetId, cursorFactors) => {
+        const myObject = getElementById(targetId);
+        if (!myObject) return;
+        const rect = myObject.getBoundingClientRect();
+        const rectInPercentages = rectangleBuilder(rect, cursorFactors);
+        reducerFunctions.cursorFunctions.changeLocation(rectInPercentages);
+      };
+      
+      const toggleBigHover = (bigHoverStruct, cursorFactors) => {
+        if (!bigHoverStruct) return;
+        const { myId, parentId, active } = bigHoverStruct;
+        const newBigHover = { myId, parentId, active: !active };
+        reducerFunctions.navigationFunctions.setBigHover(newBigHover);
+        rerenderCursor(active ? myId : parentId, cursorFactors);
+      };
     
-      return {toggleLoad, scrollUp, scrollDown, changeLanguage, setNextMenu, triggerMenu, getElementById, rectangleBuilder};
+      return {toggleLoad, scrollUp, scrollDown, changeLanguage, setNextMenu, triggerMenu, getElementById, rectangleBuilder,
+        toggleBigHover, rerenderCursor
+      };
 }
