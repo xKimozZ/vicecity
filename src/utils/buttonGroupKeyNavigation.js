@@ -1,4 +1,4 @@
-import { buttonGroups } from "../constants/buttonGroups";
+import { buttonGroups, buttonIndices } from "../constants/buttonGroups";
 import menuOptions from "../constants/menuOptions";
 
 // For main menu when not locked on to a screen
@@ -55,6 +55,17 @@ export const handleArrowNavigation = (initialHover, initialGroup, handleHover, o
           handleHover(1);
         } else if (direction === "up") {
           handleHover(0);
+        }
+        return;
+
+      case buttonGroups.DISPLAY:
+        const { LIST_START, LIST_END } = buttonIndices.DISPLAY;
+        if (direction === "down") {
+          if (hoveredOption + 1 > LIST_END) handleHover(LIST_START);
+          else handleHover(hoveredOption + 1);
+        } else if (direction === "up") {
+          if (hoveredOption - 1 < LIST_START) handleHover(LIST_END);
+          else handleHover(hoveredOption - 1);
         }
         return;
 
