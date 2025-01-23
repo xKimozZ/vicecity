@@ -14,6 +14,7 @@ const initialState = {
   lowerStatsLimit: 400,
   briefKey: getRandomKey(menuStrings.en.brief),
 
+  barLastUpdate: 0,
   displaySettings: {
     [DISPLAY.BRIGHTNESS_ID]: 0.6875,
     [DISPLAY.TRAILS_ID]: true,
@@ -61,6 +62,10 @@ export const miscSlice = createSlice({
       const newDisplaySettings = payload;
       state.displaySettings = newDisplaySettings;
     },
+    misc_setBarLastUpdate: (state, { payload }) => {
+      const newBarLastUpdate = payload;
+      state.barLastUpdate = newBarLastUpdate;
+    },
   },
 });
 
@@ -74,5 +79,6 @@ export const {
   misc_setStatsLimit,
   misc_setBriefKey,
   misc_setDisplaySettings,
+  misc_setBarLastUpdate,
 } = miscSlice.actions;
 export default miscSlice.reducer;

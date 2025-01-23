@@ -8,6 +8,7 @@ const initialState = {
   currentActions: {},
   keyPressed: false,
   lastKeyPressedTime: 0,
+  lastKeyUnpressedTime: 0,
   bigHover: {
     myId: "button-default-id",
     parentId: "my-parent-id",
@@ -43,6 +44,10 @@ export const navigationSlice = createSlice({
       const newLastKeyPressedTime = payload;
       state.lastKeyPressedTime = newLastKeyPressedTime;
     },
+    nav_setLastKeyUnpressedTime: (state, { payload }) => {
+      const newLastKeyUnpressedTime = payload;
+      state.lastKeyUnpressedTime = newLastKeyUnpressedTime;
+    },
     nav_setBigHover: (state, { payload }) => {
       const newBigHover = payload;
       state.bigHover = newBigHover;
@@ -53,6 +58,6 @@ export const navigationSlice = createSlice({
 const selectSelf = (state) => state.navigationReducer;
 export const navigationSelector = createSelector(selectSelf, (state) => state);
 
-export const { nav_setHoveredOption, nav_setButtonGroup, nav_setNextGroup,
+export const { nav_setHoveredOption, nav_setButtonGroup, nav_setNextGroup, nav_setLastKeyUnpressedTime,
   nav_setCurrentActions, nav_setKeyPressed, nav_setLastKeyPressedTime, nav_setBigHover } = navigationSlice.actions;
 export default navigationSlice.reducer;
