@@ -18,6 +18,7 @@ const Button = ({
   id = "button-default-id",
   parentId = "my-parent-id",
   activeCondition = () => {return true;},
+  alwaysBigHover = false,
 }) => {
   const textStyle = {
     color: textColor,
@@ -33,7 +34,8 @@ const Button = ({
       topStyles={textStyle}
       activeCondition={activeCondition}
       id={id}
-      parentId={parentId} 
+      parentId={parentId}
+      alwaysBigHover={alwaysBigHover}
     >
       <span>{buttonText}</span>
     </Hoverable>

@@ -22,6 +22,7 @@ const Hoverable = ({
   topStyles = {},
   children,
   activeCondition = () => {return true;},
+  alwaysBigHover = false,
 }) => {
   const buttonRef = useRef(null);
   const { cursorFunctions, navigationFunctions } = useDispatchAbstractor();
@@ -37,12 +38,18 @@ const Hoverable = ({
     return activeButtonGroup === buttonGroup && activeCondition();
   };
 
+  const hasParent = () => {
+    return document.getElementById(parentId);
+  };
+
   useEffect(() => {
     const updatePosition = () => {
       if (isHovered() && isActive() && buttonRef.current) {
-        const rect = buttonRef.current.getBoundingClientRect();
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
+        const rect = alwaysBigHover && hasParent()
+          ? hasParent().getBoundingClientRect()
+          : buttonRef.current.getBoundingClientRect();
 
         const rectInPercentages = {
           top: (rect.top / viewportHeight) * 100,
