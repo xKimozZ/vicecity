@@ -1,3 +1,4 @@
+import { actionNames } from "../constants/actionNames";
 import { buttonGroups, buttonIndices } from "../constants/buttonGroups";
 import menuOptions from "../constants/menuOptions";
 
@@ -66,6 +67,10 @@ export const handleArrowNavigation = (initialHover, initialGroup, handleHover, o
         } else if (direction === "up") {
           if (hoveredOption - 1 < LIST_START) handleHover(LIST_END);
           else handleHover(hoveredOption - 1);
+        } else if (direction === "left") {
+          handleHover(actionNames.DISPLAY.DIRECTION_LEFT);
+        } else if (direction === "right") {
+          handleHover(actionNames.DISPLAY.DIRECTION_RIGHT);
         }
         return;
 

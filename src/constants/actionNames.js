@@ -11,5 +11,7 @@ export const actionNames = {
         RADAR_ID: "radar",
         HUD_ID: "hud",
         SCREENNPOS_ID: "screenpos",
+        DIRECTION_RIGHT: -1,
+        DIRECTION_LEFT: -2,
     },
 }

@@ -32,7 +32,7 @@ const DisplayMenu = () => {
           id={BRIGHTNESS_ID}
           parentId={BRIGHTNESS_WRAPPER}
         />
-        <Bar />
+        <Bar filledBars={displaySettings[BRIGHTNESS_ID]}/>
       </div>
       <div className={styles.displayOptionFlex}>
         <Button
@@ -63,7 +63,7 @@ const DisplayMenu = () => {
           actions={{trigger: WIDESCREEN_ID}}
           alwaysBigHover={true}
           id={WIDESCREEN_ID}
-        />
+          />
       </div>
       <div className={styles.displayOptionFlex} id="radar-wrapper">
         <Button
@@ -73,7 +73,7 @@ const DisplayMenu = () => {
           buttonGroup={buttonGroups.DISPLAY}
           alwaysBigHover={true}
           parentId="test1"
-        />
+          />
       </div>
       <div className={styles.displayOptionFlex} id="hud">
         <Button
@@ -81,7 +81,9 @@ const DisplayMenu = () => {
           buttonNumber={HUD}
           textColor="var(--pink)"
           buttonGroup={buttonGroups.DISPLAY}
-        />
+          actions={{trigger: HUD_ID}}
+          id={HUD_ID}
+          />
       </div>
       <div className={styles.displayOptionFlex} id="screenpos">
         <Button

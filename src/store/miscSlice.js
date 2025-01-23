@@ -15,9 +15,11 @@ const initialState = {
   briefKey: getRandomKey(menuStrings.en.brief),
 
   displaySettings: {
+    [DISPLAY.BRIGHTNESS_ID]: 0.6875,
     [DISPLAY.TRAILS_ID]: true,
     [DISPLAY.SUBTITLES_ID]: true,
     [DISPLAY.WIDESCREEN_ID]: true,
+    [DISPLAY.HUD_ID]: true,
   }
 };
 

@@ -124,6 +124,7 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
             case actionNames.DISPLAY.TRAILS_ID:
             case actionNames.DISPLAY.SUBTITLES_ID:
             case actionNames.DISPLAY.WIDESCREEN_ID:
+            case actionNames.DISPLAY.HUD_ID:
               playSelect();
               const { myId } = dynamicVariables.bigHover;
               rerenderCursor(myId);
@@ -135,8 +136,18 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
         break;
       case "hover":
         {
-          const { newMenu } = actionList;
-          setNextMenu(newMenu);
+          const { direction } = actionList;
+          if (dynamicVariables.bigHover.active && dynamicVariables.bigHover.myId === actionNames.DISPLAY.BRIGHTNESS_ID) {
+          const currentBrightness = dynamicVariables.displaySettings[actionNames.DISPLAY.BRIGHTNESS_ID];
+          const increment = 1 / 16;
+          const sign = direction === "left" ? -1 : 1;
+          const newBrightness = currentBrightness + sign * increment;
+          if (newBrightness >= 0 && newBrightness <= 1) {
+            const newDisplaySettings = {...dynamicVariables.displaySettings,[actionNames.DISPLAY.BRIGHTNESS_ID]: newBrightness,};
+            reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
+          }
+          playHover();
+        }
         }
         break;
       case "back":

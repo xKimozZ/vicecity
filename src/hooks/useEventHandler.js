@@ -8,6 +8,7 @@ import handleMenuEvents from "../utils/events/menuSpecificEventHandling";
 import useDispatchAbstractor from "./useDispatchAbstractor";
 import { useEffect } from "react";
 import { miscSelector } from "../store/miscSlice";
+import { actionNames } from "../constants/actionNames";
 
 const useEventHandler = () => {
   const { navigationFunctions, miscFunctions, localizationFunctions, cursorFunctions } = useDispatchAbstractor();
@@ -65,11 +66,11 @@ const useEventHandler = () => {
       activeButtonGroup === buttonGroups.LOAD &&
       hoveredOption > 2 &&
       buttonNumber <= 2
-      || bigHover.active && buttonNumber != hoveredOption
+      || bigHover.active && buttonNumber != hoveredOption && buttonNumber > 0
     )
       return;
 
-    if (buttonNumber) navigationFunctions.setHoveredOption(buttonNumber);
+    if (buttonNumber && buttonNumber > 0) navigationFunctions.setHoveredOption(buttonNumber);
 
     // Note: this switch statement is mostly dedicated for "special" cases which absolutely need the latest input
     // If an actionList was sent, this is because there was no other way to convey the absolute latest state
@@ -82,6 +83,11 @@ const useEventHandler = () => {
         const actionList = { direction: buttonNumber === 1 ? "up" : "down" };
         handleStats("hover", actionList);
         break;
+      case buttonGroups.DISPLAY:
+        if (buttonNumber > 0) break; // Only directions here!
+        const directionList = { direction: buttonNumber === actionNames.DISPLAY.DIRECTION_RIGHT ? "right" : "left" };
+        handleDisplay("hover", directionList);
+        return; // Need to play my own sound here inside
       default:
         break;
     }
