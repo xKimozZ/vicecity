@@ -7,7 +7,7 @@ import { useEventHandlerContext } from "../context/EventHandlerContext";
 import { useEffect } from "react";
 
 const useKeyNavigation = (optionsPerRow) => {
-  const { hoveredOption, activeButtonGroup, keyPressed, lastKeyPressedTime } = useSelector(navigationSelector);
+  const { hoveredOption, activeButtonGroup, keyPressed, lastKeyPressedTime, lastKeyUnpressedTime, bigHover } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack } = useEventHandlerContext();
   const { navigationFunctions } = useDispatchAbstractor();
   const { updateParams, handleInput } = handleArrowNavigation(hoveredOption, activeButtonGroup, handleHover, optionsPerRow);
@@ -32,6 +32,10 @@ const useKeyNavigation = (optionsPerRow) => {
     return activeButtonGroup === buttonGroups.STATS && (event.key === "ArrowDown" || event.key === "ArrowUp");
   }
 
+  const barCondition = (event) => {
+    return activeButtonGroup === buttonGroups.DISPLAY && (event.key === "ArrowLeft" || event.key === "ArrowRight") && bigHover.active;
+  }
+
   const keyHandlers = {
     ArrowRight: () => handleInput("right"),
     ArrowLeft: () => handleInput("left"),
@@ -45,7 +49,9 @@ const useKeyNavigation = (optionsPerRow) => {
   const handleKeyDown = (event) => {
     if (!keyPressed) {
       navigationFunctions.setLastKeyPressedTime(Date.now());
-    } else if ( Date.now() - lastKeyPressedTime > 200 && !statsScrollCondition(event) ) return;
+    } else if ( Date.now() - lastKeyPressedTime > 200 && !statsScrollCondition(event) && !barCondition(event)) return;
+
+     // if (Date.now() - lastKeyUnpressedTime < 150) return;
     
       navigationFunctions.setKeyPressed(true); // Set the flag to prevent continuous keydown events
       const handler = keyHandlers[event.key];
