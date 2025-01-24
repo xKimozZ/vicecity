@@ -129,5 +129,7 @@ export const en = {
       screenpos: "Screen Position",
       on: "On",
       off: "Off",
+      mapblips: "MAP & BLIPS",
+      blipsonly: "BLIPS ONLY",
     }
 };

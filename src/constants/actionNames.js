@@ -13,5 +13,8 @@ export const actionNames = {
         SCREENNPOS_ID: "screenpos",
         DIRECTION_RIGHT: -1,
         DIRECTION_LEFT: -2,
+        RADAR_MAPBLIPS: 0,
+        RADAR_BLIPSONLY: 1,
+        RADAR_OFF: 2,
     },
 }

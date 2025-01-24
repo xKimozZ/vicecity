@@ -129,5 +129,7 @@ export const it = {
     screenpos: "Screen Position",
     on: "ON",
     off: "OFF",
+    mapblips: "MAPPA E INDICATORI",
+    blipsonly: "SOLO SEGNALI",
   }
 };

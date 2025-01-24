@@ -12,7 +12,8 @@ import { useEffect, useState } from "react";
 import { displayHelperFunctions } from "./displayHelper";
 
 const { BRIGHTNESS, TRAILS, SUBTITLES, WIDESCREEN, RADAR, HUD, SCREENPOS, NUM_OPTIONS } = buttonIndices.DISPLAY;
-const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID, SCREENPOS_ID } = actionNames.DISPLAY;
+const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID, SCREENPOS_ID,
+    RADAR_MAPBLIPS, RADAR_BLIPSONLY, RADAR_OFF} = actionNames.DISPLAY;
 
 const BRIGHTNESS_WRAPPER = "brightness-wrapper";
 
@@ -55,6 +56,16 @@ const DisplayMenu = () => {
   }, [activeButtonGroup]);
 
   const Status = (key) => {
+    if (key === RADAR_ID) {
+      switch (displaySettings[RADAR_ID]) {
+        case RADAR_MAPBLIPS:
+          return strings.mapblips;
+        case RADAR_BLIPSONLY:
+          return strings.blipsonly;
+        case RADAR_OFF:
+          return strings.off; 
+      }
+    }
     return displaySettings[key] ? strings.on : strings.off;
   };
   
@@ -76,7 +87,7 @@ const DisplayMenu = () => {
 
   const optionText = () => <div className={`${styles.displayOptionButton}`}><span id={id+"-start"} className={`${styles.displayPadleft} `}>{`${strings[key]}`}</span></div>
   const columnText = () => <div id={id+"-column"} className={`${styles.displayDots} ${styles.displayOptionColumn}`}>:</div>
-  const statusText = () => <div id={id+"-status"} className={`${styles.displayPadright} ${styles.displayOptionStatus}`}>{Status(id)}</div>
+  const statusText = () => <div className={`${styles.displayOptionStatus}`}><span id={id+"-status"} className={`${styles.displayPadright}  `}>{Status(id)}</span></div>
   
   const ind = tempReturnIndex(buttonNumber);
   return (

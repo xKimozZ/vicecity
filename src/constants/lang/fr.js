@@ -129,5 +129,7 @@ export const fr = {
     screenpos: "Screen Position",
     on: "Activé",
     off: "Disactivé",
+    mapblips: "CARTE ET POINTS",
+    blipsonly: "BIPS UNIQUEMENT",
   }
 };

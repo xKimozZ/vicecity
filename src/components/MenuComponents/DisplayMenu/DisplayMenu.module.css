@@ -42,6 +42,7 @@
 .displayOptionStatus {
     grid-column: 3;
     text-align: left;
+    white-space: nowrap;
 }
 
 .displayText {

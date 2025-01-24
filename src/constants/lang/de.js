@@ -129,5 +129,7 @@ export const de = {
     screenpos: "Screen Position",
     on: "AN",
     off: "AUS",
+    mapblips: "KARTE & SYMBOLE",
+    blipsonly: "NUR SYMBOLE",
   }
 };
