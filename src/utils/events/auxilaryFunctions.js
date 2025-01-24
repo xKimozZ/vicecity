@@ -59,10 +59,12 @@ export const auxilaryFunctions = (reducerFunctions) => {
       
       const toggleBigHover = (bigHoverStruct, cursorFactors) => {
         if (!bigHoverStruct) return;
-        const { myId, parentId, active, always } = bigHoverStruct;
-        const newBigHover = { myId, parentId, active: !active, always: always };
+        const { myId, parentId, active, always, twoStaged } = bigHoverStruct;
+        const newBigHover = { ...bigHoverStruct, active: !active, always: always };
         reducerFunctions.navigationFunctions.setBigHover(newBigHover);
-        rerenderCursor(active && !always ? myId : parentId, cursorFactors);
+        let targetParentId = parentId;
+        if (twoStaged && active) targetParentId = parentId + "2"; // This has `always` true since the highlight is not on myId itself
+        rerenderCursor(active && !always ? myId : targetParentId, cursorFactors);
       };
 
       const incrementBar = (currentValue, direction, playSoundAfterDelay) => {

@@ -7,13 +7,16 @@ export const displayHelperFunctions = () => {
         const ret = elementRects.map((rect, index) => {
             const hoverableElement = document.getElementById(rect.id + "-start");
             const statusElement = document.getElementById(rect.id + "-status");
+            const columnElement = document.getElementById(rect.id + "-column");
             if (hoverableElement && statusElement) {
               const hoverableRect = hoverableElement.getBoundingClientRect();
               const statusRect = statusElement.getBoundingClientRect();
+              const columnRect = columnElement.getBoundingClientRect();
               return {
                 ...rect,
                 hoverableElement: hoverableRect,
                 statusElement: statusRect,
+                columnElement: columnRect,
               };
             }
             return rect;
@@ -25,14 +28,20 @@ export const displayHelperFunctions = () => {
         const ret = fakeElements.map((element, index) => {
             const rect = updatedRects[index];
             if (rect && rect.hoverableElement && rect.statusElement) {
-              const { hoverableElement, statusElement } = rect;
+              const { hoverableElement, statusElement, columnElement } = rect;
               const newStyle = {
                 top: hoverableElement.top,
                 left: hoverableElement.left,
                 height: hoverableElement.height,
                 width: statusElement.right - hoverableElement.left,
               };
-              return { ...element, style: newStyle };
+              const newStyle2 = {
+                top: hoverableElement.top,
+                left: hoverableElement.left,
+                height: hoverableElement.height,
+                width: columnElement.right * 1.02 - hoverableElement.left,
+              };
+              return { ...element, style: newStyle, style2: newStyle2 };
             }
             return element;
           });

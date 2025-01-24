@@ -23,10 +23,11 @@ const Hoverable = ({
   children,
   activeCondition = () => {return true;},
   alwaysBigHover = false,
+  columnParams = {twoStaged: false},
 }) => {
   const buttonRef = useRef(null);
   const { cursorFunctions, navigationFunctions } = useDispatchAbstractor();
-  const { hoveredOption, activeButtonGroup } = useSelector(navigationSelector);
+  const { hoveredOption, activeButtonGroup, bigHover } = useSelector(navigationSelector);
   const { handleHover: hoverFunction, handleSelect: selectFunction } =
     useEventHandlerContext();
 
@@ -39,7 +40,8 @@ const Hoverable = ({
   };
 
   const hasParent = () => {
-    return document.getElementById(parentId);
+    const parent2suffix = columnParams.twoStaged && !bigHover.active ? "2" : ""; 
+    return document.getElementById(parentId + parent2suffix);
   };
 
   useEffect(() => {
@@ -62,7 +64,7 @@ const Hoverable = ({
         cursorFunctions.changeLocation(rectInPercentages);
         navigationFunctions.setCurrentActions(actions);
 
-        const newBigHover = {myId: id, parentId: parentId, active: false, always: alwaysBigHover};
+        const newBigHover = {myId: id, parentId: parentId, active: false, always: alwaysBigHover, twoStaged: columnParams.twoStaged};
         navigationFunctions.setBigHover(newBigHover);
       }
     };

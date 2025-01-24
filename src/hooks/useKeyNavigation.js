@@ -5,6 +5,9 @@ import { handleArrowNavigation } from "../utils/buttonGroupKeyNavigation";
 import useDispatchAbstractor from "./useDispatchAbstractor";
 import { useEventHandlerContext } from "../context/EventHandlerContext";
 import { useEffect } from "react";
+import { actionNames } from "../constants/actionNames";
+
+const {BRIGHTNESS_ID} = actionNames.DISPLAY;
 
 const useKeyNavigation = (optionsPerRow) => {
   const { hoveredOption, activeButtonGroup, keyPressed, lastKeyPressedTime, lastKeyUnpressedTime, bigHover } = useSelector(navigationSelector);
@@ -33,7 +36,7 @@ const useKeyNavigation = (optionsPerRow) => {
   }
 
   const barCondition = (event) => {
-    return activeButtonGroup === buttonGroups.DISPLAY && (event.key === "ArrowLeft" || event.key === "ArrowRight") && bigHover.active;
+    return activeButtonGroup === buttonGroups.DISPLAY && (event.key === "ArrowLeft" || event.key === "ArrowRight") && bigHover.active && bigHover.myId === BRIGHTNESS_ID;
   }
 
   const keyHandlers = {

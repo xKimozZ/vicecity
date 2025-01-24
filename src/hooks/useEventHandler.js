@@ -21,6 +21,7 @@ const useEventHandler = () => {
 
   const backToNavigation = () => {
     navigationFunctions.setBigHover({
+      ...bigHover,
       active: false,
     });
     navigationFunctions.setHoveredOption(activeButtonGroup);

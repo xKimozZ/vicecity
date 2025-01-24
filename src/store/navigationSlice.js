@@ -14,6 +14,7 @@ const initialState = {
     parentId: "my-parent-id",
     active: false,
     always: false,
+    twoStaged: false,
   },
 };
 
