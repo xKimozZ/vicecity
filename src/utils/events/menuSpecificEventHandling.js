@@ -144,42 +144,36 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
         break;
       case "hover":
         {
-          switch(dynamicVariables.trigger)
-          {
-            case actionNames.DISPLAY.BRIGHTNESS_ID:
               try {
                 const { direction } = actionList;
-              if (dynamicVariables.bigHover.active && dynamicVariables.bigHover.myId === actionNames.DISPLAY.BRIGHTNESS_ID) {
+                switch (dynamicVariables.trigger) {
+                  case actionNames.DISPLAY.BRIGHTNESS_ID:
+                    if (dynamicVariables.bigHover.active && dynamicVariables.bigHover.myId === actionNames.DISPLAY.BRIGHTNESS_ID) {
                 
-                const currentBrightness = dynamicVariables.displaySettings[actionNames.DISPLAY.BRIGHTNESS_ID];
-                const newBrightness = incrementBar(currentBrightness, direction, playSoundAfterDelay);
-    
-                const newDisplaySettings = {...dynamicVariables.displaySettings,[actionNames.DISPLAY.BRIGHTNESS_ID]: newBrightness,};
-                reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
-               }
+                      const currentBrightness = dynamicVariables.displaySettings[actionNames.DISPLAY.BRIGHTNESS_ID];
+                      const newBrightness = incrementBar(currentBrightness, direction, playSoundAfterDelay);
+          
+                      const newDisplaySettings = {...dynamicVariables.displaySettings,[actionNames.DISPLAY.BRIGHTNESS_ID]: newBrightness,};
+                      reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
+                     }
+                     break;
+                  case actionNames.DISPLAY.RADAR_ID:
+                    if (dynamicVariables.bigHover.active && dynamicVariables.bigHover.myId === actionNames.DISPLAY.RADAR_ID) {
+                      const sign = direction === "left" ? -1 : 1;
+                      const currentOption = dynamicVariables.displaySettings[actionNames.DISPLAY.RADAR_ID];
+                      const { RADAR_MAPBLIPS, RADAR_OFF } = actionNames.DISPLAY;
+                      let newOption = currentOption + sign;
+                      if (newOption < RADAR_MAPBLIPS) newOption = RADAR_OFF;
+                      if (newOption > RADAR_OFF) newOption = RADAR_MAPBLIPS;
+                      const newDisplaySettings = {...dynamicVariables.displaySettings,[actionNames.DISPLAY.RADAR_ID]: newOption};
+                      reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
+                      playSelect();
+                      }
+                      break;
+                }
               } catch {
                 console.log("SLOW DOWN!!!")
               }
-              break;
-              case actionNames.DISPLAY.RADAR_ID:
-                try {
-                  const { direction } = actionList;
-                if (dynamicVariables.bigHover.active && dynamicVariables.bigHover.myId === actionNames.DISPLAY.RADAR_ID) {
-                  const sign = direction === "left" ? -1 : 1;
-                  const currentOption = dynamicVariables.displaySettings[actionNames.DISPLAY.RADAR_ID];
-                  const { RADAR_MAPBLIPS, RADAR_OFF } = actionNames.DISPLAY;
-                  let newOption = currentOption + sign;
-                  if (newOption < RADAR_MAPBLIPS) newOption = RADAR_OFF;
-                  if (newOption > RADAR_OFF) newOption = RADAR_MAPBLIPS;
-                  const newDisplaySettings = {...dynamicVariables.displaySettings,[actionNames.DISPLAY.RADAR_ID]: newOption};
-                  reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
-                  playSelect();
-                 }
-                } catch {
-                  console.log("SLOW DOWN!!!")
-                }
-                break;
-          }
         }
         break;
       case "back":
