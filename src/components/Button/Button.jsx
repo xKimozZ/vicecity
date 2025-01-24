@@ -19,6 +19,7 @@ const Button = ({
   parentId = "my-parent-id",
   activeCondition = () => {return true;},
   alwaysBigHover = false,
+  overrideClassname,
 }) => {
   const textStyle = {
     color: textColor,
@@ -30,7 +31,7 @@ const Button = ({
       buttonGroup={buttonGroup}
       actions={actions}
       cursorFactors={cursorFactors}
-      topClassName={`${styles.buttonContainer}`}
+      topClassName={`${ overrideClassname ? overrideClassname : styles.buttonContainer}`}
       topStyles={textStyle}
       activeCondition={activeCondition}
       id={id}
