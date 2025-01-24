@@ -59,10 +59,10 @@ export const auxilaryFunctions = (reducerFunctions) => {
       
       const toggleBigHover = (bigHoverStruct, cursorFactors) => {
         if (!bigHoverStruct) return;
-        const { myId, parentId, active } = bigHoverStruct;
-        const newBigHover = { myId, parentId, active: !active };
+        const { myId, parentId, active, always } = bigHoverStruct;
+        const newBigHover = { myId, parentId, active: !active, always: always };
         reducerFunctions.navigationFunctions.setBigHover(newBigHover);
-        rerenderCursor(active ? myId : parentId, cursorFactors);
+        rerenderCursor(active && !always ? myId : parentId, cursorFactors);
       };
 
       const incrementBar = (currentValue, direction, playSoundAfterDelay) => {

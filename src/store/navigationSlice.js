@@ -13,6 +13,7 @@ const initialState = {
     myId: "button-default-id",
     parentId: "my-parent-id",
     active: false,
+    always: false,
   },
 };
 

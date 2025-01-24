@@ -125,8 +125,9 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
             case actionNames.DISPLAY.WIDESCREEN_ID:
             case actionNames.DISPLAY.HUD_ID:
               playSelect();
-              const { myId } = dynamicVariables.bigHover;
-              rerenderCursor(myId);
+              const { myId, parentId, always } = dynamicVariables.bigHover;
+              const targetId = always ? parentId : myId;
+              rerenderCursor(targetId);
               const newDisplaySettings = { ...dynamicVariables.displaySettings, [myId]: !dynamicVariables.displaySettings[myId] };
               reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
               break;

@@ -62,7 +62,7 @@ const Hoverable = ({
         cursorFunctions.changeLocation(rectInPercentages);
         navigationFunctions.setCurrentActions(actions);
 
-        const newBigHover = {myId: id, parentId: parentId, active: false};
+        const newBigHover = {myId: id, parentId: parentId, active: false, always: alwaysBigHover};
         navigationFunctions.setBigHover(newBigHover);
       }
     };
