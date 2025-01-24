@@ -26,30 +26,42 @@ export const handleArrowNavigation = (initialHover, initialGroup, handleHover, o
   const handleInput = (direction) => {
     switch (activeButtonGroup) {
       case buttonGroups.LOAD:
-        if (direction === "down") {
-          if (hoveredOption > 2) {
-            if (hoveredOption + 1 > 10) handleHover(3);
+        const { PHASE1_LIST_START, PHASE1_LIST_END, PHASE2_LIST_START, PHASE2_LIST_END } = buttonIndices.LOAD;
+        const insidePhase2 = hoveredOption >= PHASE2_LIST_START;
+        switch (direction) {
+          case "down":
+            if (insidePhase2) {
+              if (hoveredOption + 1 > PHASE2_LIST_END)
+                handleHover(PHASE2_LIST_START);
+              else handleHover(hoveredOption + 1);
+            } else if (hoveredOption + 1 > PHASE1_LIST_END)
+              handleHover(PHASE1_LIST_START);
             else handleHover(hoveredOption + 1);
-          } else if (hoveredOption + 1 > 2) handleHover(1);
-          else handleHover(hoveredOption + 1);
-        } else if (direction === "up") {
-          if (hoveredOption > 2) {
-            if (hoveredOption - 1 < 3) handleHover(10);
+            break;
+          case "up":
+            if (insidePhase2) {
+              if (hoveredOption - 1 < PHASE2_LIST_START)
+                handleHover(PHASE2_LIST_END);
+              else handleHover(hoveredOption - 1);
+            } else if (hoveredOption - 1 < PHASE1_LIST_START)
+              handleHover(PHASE1_LIST_END);
             else handleHover(hoveredOption - 1);
-          } else if (hoveredOption - 1 < 1) handleHover(2);
-          else handleHover(hoveredOption - 1);
+            break;
         }
         return;
 
       case buttonGroups.LANGUAGE:
-        if (direction === "down") {
-          if (hoveredOption + 1 > 5) handleHover(1);
-          else handleHover(hoveredOption + 1);
-        } else if (direction === "up") {
-          if (hoveredOption - 1 < 1) handleHover(5);
-          else handleHover(hoveredOption - 1);
+        {
+          const {LIST_START, LIST_END} = buttonIndices.LANGUAGE;
+          if (direction === "down") {
+            if (hoveredOption + 1 > LIST_END) handleHover(LIST_START);
+            else handleHover(hoveredOption + 1);
+          } else if (direction === "up") {
+            if (hoveredOption - 1 < LIST_START) handleHover(LIST_END);
+            else handleHover(hoveredOption - 1);
+          }
+          return;
         }
-        return;
 
       case buttonGroups.STATS:
         if (direction === "down") {
@@ -60,7 +72,8 @@ export const handleArrowNavigation = (initialHover, initialGroup, handleHover, o
         return;
 
       case buttonGroups.DISPLAY:
-        const { LIST_START, LIST_END } = buttonIndices.DISPLAY;
+        {
+          const { LIST_START, LIST_END } = buttonIndices.DISPLAY;
         if (direction === "down") {
           if (hoveredOption + 1 > LIST_END) handleHover(LIST_START);
           else handleHover(hoveredOption + 1);
@@ -71,6 +84,7 @@ export const handleArrowNavigation = (initialHover, initialGroup, handleHover, o
           handleHover(actionNames.DISPLAY.DIRECTION_LEFT);
         } else if (direction === "right") {
           handleHover(actionNames.DISPLAY.DIRECTION_RIGHT);
+        }
         }
         return;
 

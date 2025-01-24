@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux";
-import { buttonGroups } from "../../../constants/buttonGroups";
+import { buttonGroups, buttonIndices } from "../../../constants/buttonGroups";
 import { stringLanguageSelector } from "../../../store/localizationSlice";
 import Button from "../../Button/Button";
 import styles from "./LanguageMenu.module.css";
 import { languageMap } from "../../../constants/menuStrings";
+
+const { ENGLISH, FRENCH, GERMAN, ITALIAN, SPANISH } = buttonIndices.LANGUAGE;
 
 const LanguageMenu = () => {
   const strings = useSelector(stringLanguageSelector);
@@ -11,35 +13,35 @@ const LanguageMenu = () => {
   return (
     <div className={styles.languageContainer}>
       <Button
-        buttonNumber={1}
+        buttonNumber={ENGLISH}
         buttonGroup={buttonGroups.LANGUAGE}
         textColor="var(--pink)"
         buttonText={strings.english}
         actions={{nextLanguage: languageMap.en}}
       />
       <Button
-        buttonNumber={2}
+        buttonNumber={FRENCH}
         buttonGroup={buttonGroups.LANGUAGE}
         textColor="var(--pink)"
         buttonText={strings.french}
         actions={{nextLanguage: languageMap.fr}}
       />
       <Button
-        buttonNumber={3}
+        buttonNumber={GERMAN}
         buttonGroup={buttonGroups.LANGUAGE}
         textColor="var(--pink)"
         buttonText={strings.german}
         actions={{nextLanguage: languageMap.de}}
       />
       <Button
-        buttonNumber={4}
+        buttonNumber={ITALIAN}
         buttonGroup={buttonGroups.LANGUAGE}
         textColor="var(--pink)"
         buttonText={strings.italian}
         actions={{nextLanguage: languageMap.it}}
       />
       <Button
-        buttonNumber={5}
+        buttonNumber={SPANISH}
         buttonGroup={buttonGroups.LANGUAGE}
         textColor="var(--pink)"
         buttonText={strings.spanish}
