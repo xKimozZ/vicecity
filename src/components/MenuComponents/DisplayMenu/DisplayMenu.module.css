@@ -4,8 +4,9 @@
     width: 80%;
     height: 70vh;
     z-index: 1;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center;
+    justify-content: center; */
+    padding-left: 20%;
 }
 
 .displayOptionFlex {
@@ -14,15 +15,56 @@
     align-items: baseline;
     gap: 0.2em;
     text-align: right;
+    width: max-content;
+    padding-right: 0.45em;
+    padding-block: 0.1em;
 }
 
-.statsHeader {
+.displayOptionGrid {
+    display: grid;
+    grid-template-columns: 1fr 0.05fr 0.05fr;
+    align-items: baseline;
+    text-align: center;
+    width: max-content;
+}
+
+.displayOptionButton {
+    grid-column: 1;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.displayOptionColon {
+    grid-column: 2;
+    text-align: center;
+}
+
+.displayOptionStatus {
+    grid-column: 3;
+    text-align: left;
+}
+
+.displayText {
     font-family: Pricedown;
-    padding: 0.02em 0.5em;
+    /*max-width: 180px;*/
+    /* max-height: 56px; */
+    padding: 0.02em 0em;
+    color: var(--pink);
     font-size: 48px;
     z-index: 2;
-    color: var(--pink);
     text-shadow: 3px 3px 0px black;
     text-transform: lowercase;
     letter-spacing: -1px;
+}
+
+.displayPadleft {
+    padding-left: 1em;
+}
+
+.displayPadright {
+    padding-right: 0.5em;
+}
+
+.displayDots {
+    margin-inline: 0.5em;
 }
