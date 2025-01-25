@@ -1,4 +1,5 @@
 import vclogo1024 from './images/vclogo1024.png'
+import scsize from './images/scsize.png'
 
 export const imageImports = {
   global: {
@@ -11,6 +12,6 @@ export const imageImports = {
 
   },
   miscImages: {
-
+    scsize,
   },
 };
