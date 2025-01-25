@@ -24,6 +24,7 @@ const Hoverable = ({
   activeCondition = () => {return true;},
   alwaysBigHover = false,
   columnParams = {twoStaged: false},
+  additionalClassnames = [],
 }) => {
   const buttonRef = useRef(null);
   const { cursorFunctions, navigationFunctions } = useDispatchAbstractor();
@@ -87,13 +88,14 @@ const Hoverable = ({
     selectFunction?.(buttonNumber);
   };
 
+  const classNames = [topClassName, ...additionalClassnames].join(" ");
   return (
     <div
       id={id}
       onMouseEnter={handleHover}
       onClick={handleSelect}
       ref={buttonRef}
-      className={topClassName}
+      className={classNames}
       style={{ ...topStyles }}
     >
       {children}
