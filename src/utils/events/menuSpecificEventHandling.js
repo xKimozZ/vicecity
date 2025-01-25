@@ -164,6 +164,7 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
                     if (dynamicVariables.bigHover.active && dynamicVariables.bigHover.myId === actionNames.DISPLAY.BRIGHTNESS_ID) {
                 
                       const currentBrightness = dynamicVariables.displaySettings[actionNames.DISPLAY.BRIGHTNESS_ID];
+                      if (direction === "up" || direction === "down" ) return;
                       const newBrightness = incrementBar(currentBrightness, direction, playSoundAfterDelay);
           
                       const newDisplaySettings = {...dynamicVariables.displaySettings,[actionNames.DISPLAY.BRIGHTNESS_ID]: newBrightness,};
@@ -172,7 +173,8 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
                      break;
                   case actionNames.DISPLAY.RADAR_ID:
                     if (dynamicVariables.bigHover.active && dynamicVariables.bigHover.myId === actionNames.DISPLAY.RADAR_ID) {
-                      const sign = direction === "left" ? -1 : 1;
+                      let sign;
+                      if (direction === "left") sign = -1; else if (direction === "right") sign = 1; else return;
                       const currentOption = dynamicVariables.displaySettings[actionNames.DISPLAY.RADAR_ID];
                       const { RADAR_MAPBLIPS, RADAR_OFF } = actionNames.DISPLAY;
                       let newOption = currentOption + sign;
