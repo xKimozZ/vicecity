@@ -18,12 +18,12 @@ export const auxilaryFunctions = (reducerFunctions) => {
       };
 
       const scrollDown = () => {
-        miscFunctions.incrementStatsTranslate();
+        miscFunctions.incrementStatsTranslate(1);
         miscFunctions.toggleStatsDirection("up");
       };
 
       const scrollUp = () => {
-        miscFunctions.decrementStatsTranslate();
+        miscFunctions.decrementStatsTranslate(1);
         miscFunctions.toggleStatsDirection("down");
       };
 

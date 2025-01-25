@@ -18,10 +18,10 @@ const StatsMenu = () => {
   const strings = useSelector(stringStatsSelector);
   const statsRef = useRef();
 
-  useEffect(()=>{
-    const {height} = statsRef.current.getBoundingClientRect();
-    miscFunctions.setStatsLimit(height + 30);
-  },[]);
+  // useEffect(()=>{
+  //   const {height} = statsRef.current.getBoundingClientRect();
+  //   miscFunctions.setStatsLimit(height + 30);
+  // },[]);
 
   // Provides a smoother stop if the menu wasnt locked in but was idly scrolling
   useEffect(() => {
@@ -37,7 +37,7 @@ const StatsMenu = () => {
         setBeganScrolling(true);
         if (statsDirection === "down") miscFunctions.decrementStatsTranslate();
         else miscFunctions.incrementStatsTranslate();
-      }, 500);
+      }, 15);
 
       return () => clearTimeout(timeoutId);
     }

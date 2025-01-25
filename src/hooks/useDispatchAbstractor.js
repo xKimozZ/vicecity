@@ -43,8 +43,8 @@ const useDispatchAbstractor = () => {
       const localizationFunctions = {setLanguage};
       
       // miscSlice
-      const decrementStatsTranslate = () => dispatch(misc_decrementStatsTranslate());
-      const incrementStatsTranslate = () => dispatch(misc_incrementStatsTranslate());
+      const decrementStatsTranslate = (multiplier) => dispatch(misc_decrementStatsTranslate(multiplier));
+      const incrementStatsTranslate = (multiplier) => dispatch(misc_incrementStatsTranslate(multiplier));
       const setBriefKey = (briefKey) => dispatch(misc_setBriefKey(briefKey));
       const setStatsLimit = (limit) => dispatch(misc_setStatsLimit(limit));
       const toggleStatsDirection = (direction) => dispatch(misc_toggleStatsDirection(direction));

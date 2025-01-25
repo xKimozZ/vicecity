@@ -5,13 +5,14 @@ import { actionNames } from "../constants/actionNames";
 
 const { DISPLAY } = actionNames;
 
-const translateFactor = 10;
+//const translateFactor = 10;
+const translateFactor = 1;
 
 const initialState = {
   statsTranslate: 0,
   statsDirection: "down",
-  statsLimit: 2800,
-  lowerStatsLimit: 400,
+  statsLimit: 2500,
+  lowerStatsLimit: 250,
   briefKey: getRandomKey(menuStrings.en.brief),
 
   barLastUpdate: 0,
@@ -31,7 +32,9 @@ export const miscSlice = createSlice({
   initialState,
   reducers: {
     misc_incrementStatsTranslate: (state, { payload }) => {
-      const newStatsTranslate = state.statsTranslate + translateFactor;
+      let multiplier = 1;
+      if (payload === 1) multiplier*=10;
+      const newStatsTranslate = state.statsTranslate + translateFactor * multiplier;
       if (newStatsTranslate >= state.lowerStatsLimit)
         {
           state.statsTranslate = -state.statsLimit;
@@ -40,7 +43,9 @@ export const miscSlice = createSlice({
       state.statsTranslate = newStatsTranslate;
     },
     misc_decrementStatsTranslate: (state, { payload }) => {
-      const newStatsTranslate = state.statsTranslate - translateFactor;
+      let multiplier = 1;
+      if (payload === 1) multiplier*=10;
+      const newStatsTranslate = state.statsTranslate - translateFactor * multiplier;
       if (newStatsTranslate <= -state.statsLimit)
       {
         state.statsTranslate = state.lowerStatsLimit;
