@@ -20,6 +20,7 @@ const Button = ({
   activeCondition = () => {return true;},
   alwaysBigHover = false,
   overrideClassname,
+  additionalClassnames = [],
 }) => {
   const textStyle = {
     color: textColor,
@@ -37,6 +38,7 @@ const Button = ({
       id={id}
       parentId={parentId}
       alwaysBigHover={alwaysBigHover}
+      additionalClassnames={additionalClassnames}
     >
       <span>{buttonText}</span>
     </Hoverable>
