@@ -6,11 +6,13 @@ import { useSelector } from 'react-redux';
 import Cursor from './components/Cursor/Cursor'
 import useKeyNavigation from './hooks/useKeyNavigation';
 import { imageImports } from './assets/imageImports';
-import { navigationSelector, setHoveredOption } from './store/navigationSlice';
+import { navigationSelector } from './store/navigationSlice';
+import { actionNames } from './constants/actionNames';
 import { buttonGroups } from './constants/buttonGroups';
 import Header from './components/Header/Header';
 import { useEventHandlerContext } from './context/EventHandlerContext';
 import { stringMenuSelector } from './store/localizationSlice';
+import { miscSelector } from './store/miscSlice';
 
 function App() {
   const optionsPerRow = [4,4];
@@ -25,7 +27,8 @@ function App() {
   const [componentContainer, setComponentContainer] = useState([]);
   const interfaceRef = useRef(null);
   const { handleKeyDown } = useKeyNavigation(optionsPerRow);
-  const { hoveredOption, nextButtonGroup, activeButtonGroup } = useSelector(navigationSelector);
+  const { hoveredOption, nextButtonGroup, activeButtonGroup, bigHover } = useSelector(navigationSelector);
+  const { displaySettings } = useSelector(miscSelector);
   const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandlerContext();
   const menuButtonStrings = useSelector(stringMenuSelector);
 
@@ -95,10 +98,26 @@ function App() {
       setMarginState(!marginState)
     };
 
+    const {SCREENPOS_ID} = actionNames.DISPLAY;
+
+    const fakeScreenPosStyle = {
+      position: "fixed",
+      top: "6px",
+      left: "6px",
+      height: "calc(99.3vh - 12px)",
+      width: "calc(99.3vw - 12px)",
+      border: "6px solid yellow"
+    };
+
+    const screenPosStyle = {
+      //transform: `translate(${displaySettings[SCREENPOS_ID].x}px, ${displaySettings[SCREENPOS_ID].y}px)`,
+    };
+
   return (
     <>
       <Cursor />
-    <div className={`${marginState ? 'margin' : ''} AppContainer`}>
+      {bigHover.active && bigHover.myId === SCREENPOS_ID && <div style={fakeScreenPosStyle}/>}
+    <div className={`${marginState ? 'margin' : ''} AppContainer`} style={{...screenPosStyle}}>
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}} onClick={handleMargin}>
         <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} buttonGroup='DEBUG'/>
       </div>

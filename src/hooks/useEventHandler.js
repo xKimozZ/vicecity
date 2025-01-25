@@ -90,7 +90,22 @@ const useEventHandler = () => {
         break;
       case buttonGroups.DISPLAY:
         if (buttonNumber > 0) break; // Only directions here!
-        const directionList = { direction: buttonNumber === actionNames.DISPLAY.DIRECTION_RIGHT ? "right" : "left" };
+        let direction;
+        switch (buttonNumber) {
+          case actionNames.DISPLAY.DIRECTION_RIGHT:
+            direction = "right";
+            break;
+          case actionNames.DISPLAY.DIRECTION_LEFT:
+            direction = "left";
+            break;
+          case actionNames.DISPLAY.DIRECTION_UP:
+            direction = "up";
+            break;
+          case actionNames.DISPLAY.DIRECTION_DOWN:
+            direction = "down";
+            break;
+        }
+        const directionList = { direction: direction };
         handleDisplay("hover", directionList);
         return; // Need to play my own sound here inside
       default:

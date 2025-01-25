@@ -7,13 +7,13 @@ import { useEventHandlerContext } from "../context/EventHandlerContext";
 import { useEffect } from "react";
 import { actionNames } from "../constants/actionNames";
 
-const {BRIGHTNESS_ID} = actionNames.DISPLAY;
+const {BRIGHTNESS_ID, SCREENPOS_ID} = actionNames.DISPLAY;
 
 const useKeyNavigation = (optionsPerRow) => {
   const { hoveredOption, activeButtonGroup, keyPressed, lastKeyPressedTime, lastKeyUnpressedTime, bigHover } = useSelector(navigationSelector);
   const { handleHover, handleSelect, handleError, handleBack } = useEventHandlerContext();
   const { navigationFunctions } = useDispatchAbstractor();
-  const { updateParams, handleInput } = handleArrowNavigation(hoveredOption, activeButtonGroup, handleHover, optionsPerRow);
+  const { updateParams, handleInput } = handleArrowNavigation(hoveredOption, activeButtonGroup, bigHover, handleHover, optionsPerRow);
 
   useEffect(() => {
     const handleKeyUp = () => {
@@ -28,8 +28,8 @@ const useKeyNavigation = (optionsPerRow) => {
   }, []);
 
   useEffect(() => {
-    updateParams(hoveredOption, activeButtonGroup);
-  }, [hoveredOption, activeButtonGroup]);
+    updateParams(hoveredOption, activeButtonGroup, bigHover);
+  }, [hoveredOption, activeButtonGroup, bigHover]);
 
   const statsScrollCondition = (event) => {
     return activeButtonGroup === buttonGroups.STATS && (event.key === "ArrowDown" || event.key === "ArrowUp");
@@ -37,6 +37,10 @@ const useKeyNavigation = (optionsPerRow) => {
 
   const barCondition = (event) => {
     return activeButtonGroup === buttonGroups.DISPLAY && (event.key === "ArrowLeft" || event.key === "ArrowRight") && bigHover.active && bigHover.myId === BRIGHTNESS_ID;
+  }
+
+  const screenPosCondition = (event) => {
+    return activeButtonGroup === buttonGroups.DISPLAY && (event.key === "ArrowLeft" || event.key === "ArrowRight" || event.key === "ArrowUp" || event.key === "ArrowDown") && bigHover.active && bigHover.myId === SCREENPOS_ID;
   }
 
   const keyHandlers = {
@@ -49,10 +53,14 @@ const useKeyNavigation = (optionsPerRow) => {
     Enter: () => handleSelect(),
   };
 
+  const willNotAccept = (event) => {
+    return Date.now() - lastKeyPressedTime > 200 && !statsScrollCondition(event) && !barCondition(event) && !screenPosCondition(event);
+  }
+
   const handleKeyDown = (event) => {
     if (!keyPressed) {
       navigationFunctions.setLastKeyPressedTime(Date.now());
-    } else if ( Date.now() - lastKeyPressedTime > 200 && !statsScrollCondition(event) && !barCondition(event)) return;
+    } else if ( willNotAccept(event) ) return;
 
      // if (Date.now() - lastKeyUnpressedTime < 150) return;
     

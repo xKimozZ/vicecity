@@ -12,15 +12,17 @@ export const getNavigationLimits = (optionsPerRow) => {
   return { firstRowStart, firstRowEnd, secondRowStart, secondRowEnd, vertical };
 };
 
-export const handleArrowNavigation = (initialHover, initialGroup, handleHover, optionsPerRow) => {
+export const handleArrowNavigation = (initialHover, initialGroup, initialBigHover, handleHover, optionsPerRow) => {
   const { firstRowStart, firstRowEnd, secondRowStart, secondRowEnd, vertical } = getNavigationLimits(optionsPerRow);
 
   var hoveredOption = initialHover;
   var activeButtonGroup = initialGroup;
+  var bigHover = initialBigHover;
 
-  const updateParams = (newHoveredOption, activeButtonGroup) => {
+  const updateParams = (newHoveredOption, activeButtonGroup, bigHover) => {
     hoveredOption = newHoveredOption;
     activeButtonGroup = activeButtonGroup;
+    bigHover = bigHover;
   };
 
   const handleInput = (direction) => {
@@ -73,18 +75,20 @@ export const handleArrowNavigation = (initialHover, initialGroup, handleHover, o
 
       case buttonGroups.DISPLAY:
         {
-          const { LIST_START, LIST_END } = buttonIndices.DISPLAY;
-        if (direction === "down") {
-          if (hoveredOption + 1 > LIST_END) handleHover(LIST_START);
-          else handleHover(hoveredOption + 1);
-        } else if (direction === "up") {
-          if (hoveredOption - 1 < LIST_START) handleHover(LIST_END);
-          else handleHover(hoveredOption - 1);
-        } else if (direction === "left") {
-          handleHover(actionNames.DISPLAY.DIRECTION_LEFT);
-        } else if (direction === "right") {
-          handleHover(actionNames.DISPLAY.DIRECTION_RIGHT);
-        }
+            const { LIST_START, LIST_END } = buttonIndices.DISPLAY;
+            if (direction === "down") {
+              if (bigHover && bigHover.active) {handleHover(actionNames.DISPLAY.DIRECTION_DOWN); return;}
+              if (hoveredOption + 1 > LIST_END) handleHover(LIST_START);
+              else handleHover(hoveredOption + 1);
+            } else if (direction === "up") {
+              if (bigHover && bigHover.active) {handleHover(actionNames.DISPLAY.DIRECTION_UP); return;}
+              if (hoveredOption - 1 < LIST_START) handleHover(LIST_END);
+              else handleHover(hoveredOption - 1);
+            } else if (direction === "left") {
+              handleHover(actionNames.DISPLAY.DIRECTION_LEFT);
+            } else if (direction === "right") {
+              handleHover(actionNames.DISPLAY.DIRECTION_RIGHT);
+            }
         }
         return;
 

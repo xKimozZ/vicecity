@@ -107,6 +107,19 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
         {
           switch(dynamicVariables.trigger)
           {
+            case actionNames.DISPLAY.SCREENPOS_ID:
+              {
+                  const cursorFactors = dynamicVariables.bigHover.active ? null : {
+                    clipFactor: 3,
+                    topFactor: 0.95,
+                    leftFactor: 1,
+                    widthFactor: 1.11,
+                    heightFactor: 1.3,
+                  };
+                  toggleBigHover(dynamicVariables.bigHover, cursorFactors);
+                  playSelect();
+              }
+              break;
             case actionNames.DISPLAY.BRIGHTNESS_ID:
               // If I click on it again, disable the bigHover
               const cursorFactors = {
@@ -168,6 +181,19 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
                       const newDisplaySettings = {...dynamicVariables.displaySettings,[actionNames.DISPLAY.RADAR_ID]: newOption};
                       reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
                       playSelect();
+                      }
+                      break;
+                  case actionNames.DISPLAY.SCREENPOS_ID:
+                    if (dynamicVariables.bigHover.active && dynamicVariables.bigHover.myId === actionNames.DISPLAY.SCREENPOS_ID) {
+                      const sign = direction === "left" || direction === "up" ? -1 : 1;
+                      const {x:oldX, y:oldY} = dynamicVariables.displaySettings[actionNames.DISPLAY.SCREENPOS_ID];
+                      let newX = oldX;
+                      let newY = oldY;
+                      if (direction === "left" || direction === "right") newX = oldX + sign;
+                      if (direction === "up" || direction === "down") newY = oldY + sign;
+                      const newOption = {x:newX, y:newY};
+                      const newDisplaySettings = {...dynamicVariables.displaySettings,[actionNames.DISPLAY.SCREENPOS_ID]: newOption};
+                      reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
                       }
                       break;
                 }

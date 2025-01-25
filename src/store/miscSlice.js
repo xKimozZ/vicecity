@@ -22,6 +22,7 @@ const initialState = {
     [DISPLAY.WIDESCREEN_ID]: true,
     [DISPLAY.HUD_ID]: true,
     [DISPLAY.RADAR_ID]: DISPLAY.RADAR_MAPBLIPS,
+    [DISPLAY.SCREENPOS_ID]: {x:0, y:0},
   }
 };
 
