@@ -191,6 +191,9 @@ const handleMenuEvents = (globalActions, reducerFunctions) => {
                       let newY = oldY;
                       if (direction === "left" || direction === "right") newX = oldX + sign;
                       if (direction === "up" || direction === "down") newY = oldY + sign;
+                      const viewportWidth = window.innerWidth;
+                      const viewportHeight = window.innerHeight;
+                      if (Math.abs(newX) > viewportWidth / 2 || Math.abs(newY) > viewportHeight / 2) return;
                       const newOption = {x:newX, y:newY};
                       const newDisplaySettings = {...dynamicVariables.displaySettings,[actionNames.DISPLAY.SCREENPOS_ID]: newOption};
                       reducerFunctions.miscFunctions.setDisplaySettings(newDisplaySettings);
