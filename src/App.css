@@ -2,6 +2,7 @@
   background-color: black;
   cursor: url('./assets/images/mouse64.png'),auto;
   position: relative;
+  overflow: hidden;
 }
 
 .viceLogo {
@@ -47,6 +48,7 @@
   min-width: 640px;
   display: flex;
   flex-direction: column;
+  z-index: 2;
 }
 
 .margin {
