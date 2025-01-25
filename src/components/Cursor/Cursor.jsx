@@ -6,15 +6,23 @@ import { navigationSelector } from "../../store/navigationSlice";
 import { actionNames } from "../../constants/actionNames";
 import { useState, useEffect } from "react";
 
+const { SCREENPOS_ID } = actionNames.DISPLAY;
+
 const Cursor = () => {
   const { positionStyle, clipPathStyle } = useSelector(cursorSelector);
   const { displaySettings } = useSelector(miscSelector);
+
+  const { top, left } = positionStyle;
   const { bigHover } = useSelector(navigationSelector);
-  const { SCREENPOS_ID } = actionNames.DISPLAY;
+
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [lastXY, setLastXY] = useState({x:0,y:0});
-  const { top, left } = positionStyle;
+  const [finalPosition, setFinalPosition] = useState({});
+  
+  const isChangingScreenPos = () => {
+    return bigHover.active && bigHover.myId === SCREENPOS_ID;
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,12 +33,6 @@ const Cursor = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const isChangingScreenPos = () => {
-    return bigHover.active && bigHover.myId === SCREENPOS_ID;
-  };
-
-  const [finalPosition, setFinalPosition] = useState({});
 
   useEffect(() => {
     if (isChangingScreenPos()) {
@@ -44,6 +46,7 @@ const Cursor = () => {
   }, [bigHover, viewportWidth, viewportHeight, top, left, displaySettings]);
 
   const finalStyle={...positionStyle, ...clipPathStyle, ...finalPosition};
+
   return <div className={styles.cursorBackground} style={{...finalStyle}} />;
 };
 
