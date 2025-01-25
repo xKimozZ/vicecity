@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { displayHelperFunctions } from "./displayHelper";
 import {auxilaryFunctions} from "../../../utils/events/auxilaryFunctions"
 import useDispatchAbstractor from "../../../hooks/useDispatchAbstractor";
+import { imageImports } from "../../../assets/imageImports";
 
 const { BRIGHTNESS, TRAILS, SUBTITLES, WIDESCREEN, RADAR, HUD, SCREENPOS, NUM_OPTIONS } = buttonIndices.DISPLAY;
 const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID, SCREENPOS_ID,
@@ -149,15 +150,22 @@ const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID,
           {renderOption("widescreen", WIDESCREEN, WIDESCREEN_ID)}
           {renderOption("radar", RADAR, RADAR_ID)}
           {renderOption("hud", HUD, HUD_ID)}
-          <div  id="screenpos">
-        <Button
-          buttonText={`${strings.screenpos}`}
-          buttonNumber={SCREENPOS}
-          textColor="var(--pink)"
-          buttonGroup={buttonGroups.DISPLAY}
-        />
       </div>
-      </div>
+      <div className={`${styles.displayScreenPosCenterFlex}`}>
+        <div className={`${styles.displayScreenPosColFlex}`} id={SCREENPOS_ID+"-parent"}>
+          <Button
+            buttonText={`${strings.screenpos}`}
+            buttonNumber={SCREENPOS}
+            textColor="var(--pink)"
+            id={SCREENPOS_ID}
+            parentId={SCREENPOS_ID+"-parent"}
+            actions={{trigger: SCREENPOS_ID}}
+            buttonGroup={buttonGroups.DISPLAY}
+            additionalClassnames={[styles.displayPadleft , styles.displayPadright]}
+          />
+          <img src={imageImports.miscImages.scsize} className={styles.displayScreenPosImage}/>
+        </div>
+      </div>    
     </div>
   );
 };
