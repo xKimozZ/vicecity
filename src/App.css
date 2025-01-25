@@ -38,7 +38,7 @@
 }
 
 .backgroundElement {
-  position: fixed;
+  position: absolute;
   z-index: 0;
   width: 100vw;
   height: 100vh;

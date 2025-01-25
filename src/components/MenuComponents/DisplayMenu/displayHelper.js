@@ -24,20 +24,21 @@ export const displayHelperFunctions = () => {
         return ret;
     };
 
-    const updateFakeElements = (fakeElements, updatedRects) => {
+    const updateFakeElements = (fakeElements, updatedRects, screenPosStruct) => {
+        const {x, y} = screenPosStruct; // Necessary in order to synchronize and not "overdo" the calculation
         const ret = fakeElements.map((element, index) => {
             const rect = updatedRects[index];
             if (rect && rect.hoverableElement && rect.statusElement) {
               const { hoverableElement, statusElement, columnElement } = rect;
               const newStyle = {
-                top: hoverableElement.top,
-                left: hoverableElement.left,
+                top: hoverableElement.top - y,
+                left: hoverableElement.left - x,
                 height: hoverableElement.height,
                 width: statusElement.right - hoverableElement.left,
               };
               const newStyle2 = {
-                top: hoverableElement.top,
-                left: hoverableElement.left,
+                top: hoverableElement.top -y,
+                left: hoverableElement.left -x,
                 height: hoverableElement.height,
                 width: columnElement.right * 1.02 - hoverableElement.left,
               };

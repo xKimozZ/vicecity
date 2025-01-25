@@ -110,14 +110,14 @@ function App() {
     };
 
     const screenPosStyle = {
-      //transform: `translate(${displaySettings[SCREENPOS_ID].x}px, ${displaySettings[SCREENPOS_ID].y}px)`,
+      transform: `translate(${displaySettings[SCREENPOS_ID].x}px, ${displaySettings[SCREENPOS_ID].y}px)`,
     };
 
   return (
     <>
       <Cursor />
-      {bigHover.active && bigHover.myId === SCREENPOS_ID && <div style={fakeScreenPosStyle}/>}
-      <div className="backgroundElement" style={clipPathStyle}/>
+      {bigHover.active && bigHover.myId === SCREENPOS_ID && <div style={{...fakeScreenPosStyle, ...screenPosStyle}}/>}
+      <div className="backgroundElement" style={{...clipPathStyle, ...screenPosStyle}}/>
       <div className={`${marginState ? 'margin' : ''} AppContainer`} style={{...screenPosStyle}}>
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}} onClick={handleMargin}>
         <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} buttonGroup='DEBUG'/>

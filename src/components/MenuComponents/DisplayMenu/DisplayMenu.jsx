@@ -49,7 +49,7 @@ const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID,
     const updatePosition = () => {
       const updatedRects = updateElementsRects(elementRects);
       setElementRects(updatedRects);
-      const updatedFakeElements = updateFakeElements(fakeElements, updatedRects);
+      const updatedFakeElements = updateFakeElements(fakeElements, updatedRects, displaySettings[SCREENPOS_ID]);
       setFakeElements(updatedFakeElements);
     };
 
