@@ -69,6 +69,10 @@ const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID,
       const updatedFakeElements = updateFakeElements(fakeElements, updatedRects);
       setFakeElements(updatedFakeElements);
     }
+    if (bigHover.active && bigHover.myId === BRIGHTNESS_ID) {
+      const rootElement = document.getElementById("root");
+      rootElement.style.filter = `brightness(${displaySettings[BRIGHTNESS_ID]+0.08})`;
+    }
   }, [displaySettings]);
 
   useEffect(() => {
