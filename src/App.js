@@ -117,7 +117,8 @@ function App() {
     <>
       <Cursor />
       {bigHover.active && bigHover.myId === SCREENPOS_ID && <div style={fakeScreenPosStyle}/>}
-    <div className={`${marginState ? 'margin' : ''} AppContainer`} style={{...screenPosStyle}}>
+      <div className="backgroundElement" style={clipPathStyle}/>
+      <div className={`${marginState ? 'margin' : ''} AppContainer`} style={{...screenPosStyle}}>
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}} onClick={handleMargin}>
         <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} buttonGroup='DEBUG'/>
       </div>
@@ -127,9 +128,7 @@ function App() {
         className="App"
         onKeyDown={handleKeyDown} // Attach the onKeyDown event here
         tabIndex="0"
-        style={clipPathStyle}
         >
-          <Cursor />
           {renderHoveredComponent()}
       </div>
       <div className='buttonContainer' ref={interfaceRef}
