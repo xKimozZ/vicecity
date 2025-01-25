@@ -24,7 +24,7 @@ export const displayHelperFunctions = () => {
         return ret;
     };
 
-    const updateFakeElements = (fakeElements, updatedRects, screenPosStruct) => {
+    const updateFakeElements = (fakeElements, updatedRects, screenPosStruct = {x:0,y:0}) => {
         const {x, y} = screenPosStruct; // Necessary in order to synchronize and not "overdo" the calculation
         const ret = fakeElements.map((element, index) => {
             const rect = updatedRects[index];
