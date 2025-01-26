@@ -17,7 +17,7 @@ const initialState = {
 
   barLastUpdate: 0,
   displaySettings: {
-    [DISPLAY.BRIGHTNESS_ID]: 0.6875,
+    [DISPLAY.BRIGHTNESS_ID]: 15/16,
     [DISPLAY.TRAILS_ID]: true,
     [DISPLAY.SUBTITLES_ID]: true,
     [DISPLAY.WIDESCREEN_ID]: true,
