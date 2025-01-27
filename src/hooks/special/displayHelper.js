@@ -1,14 +1,11 @@
-import { buttonIndices } from "../../../constants/buttonGroups";
-
-const { TRAILS, SUBTITLES, WIDESCREEN, RADAR, HUD } = buttonIndices.DISPLAY;
 
 export const displayHelperFunctions = () => {
     const updateElementsRects = (elementRects) => {
-        const ret = elementRects.map((rect, index) => {
+        const ret = elementRects.map(( rect ) => {
             const hoverableElement = document.getElementById(rect.id + "-start");
             const statusElement = document.getElementById(rect.id + "-status");
             const columnElement = document.getElementById(rect.id + "-column");
-            if (hoverableElement && statusElement) {
+            if (hoverableElement && statusElement && columnElement) {
               const hoverableRect = hoverableElement.getBoundingClientRect();
               const statusRect = statusElement.getBoundingClientRect();
               const columnRect = columnElement.getBoundingClientRect();
@@ -48,23 +45,6 @@ export const displayHelperFunctions = () => {
           });
         return ret;
     };
-
-    const tempReturnIndex = (num) => {
-        switch (num) {
-          case TRAILS:
-            return 0;
-          case SUBTITLES:
-            return 1;
-          case WIDESCREEN:
-            return 2;
-          case RADAR:
-            return 3;
-          case HUD:
-            return 4;
-          default:
-            return -1;
-        }
-      };
     
-  return {updateElementsRects, updateFakeElements, tempReturnIndex};
+  return { updateElementsRects, updateFakeElements };
 };

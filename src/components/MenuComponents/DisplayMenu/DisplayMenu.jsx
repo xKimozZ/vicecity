@@ -1,91 +1,42 @@
 import { useSelector } from "react-redux";
-import { buttonGroups, buttonIndices } from "../../../constants/buttonGroups";
-import Button from "../../Button/Button";
-import styles from "./DisplayMenu.module.css";
-import Bar from "../../Bar/Bar";
 import { miscSelector } from "../../../store/miscSlice";
 import { stringDisplaySelector } from "../../../store/localizationSlice";
+import { useEventHandlerContext } from "../../../context/EventHandlerContext";
+import useDisplayDOMEvents from "../../../hooks/special/useDisplayDOMEvents";
 import { actionNames } from "../../../constants/actionNames";
-import Hoverable from "../../Hoverable/Hoverable";
-import { navigationSelector } from "../../../store/navigationSlice";
-import { useEffect, useState } from "react";
-import { displayHelperFunctions } from "./displayHelper";
+import { buttonGroups, buttonIndices } from "../../../constants/buttonGroups";
 import { imageImports } from "../../../assets/imageImports";
-import useGlobalEvents from "../../../hooks/events/useGlobalEvents";
+import styles from "./DisplayMenu.module.css";
+import Button from "../../Button/Button";
+import Hoverable from "../../Hoverable/Hoverable";
+import Bar from "../../Bar/Bar";
 
-const { BRIGHTNESS, TRAILS, SUBTITLES, WIDESCREEN, RADAR, HUD, SCREENPOS, NUM_OPTIONS } = buttonIndices.DISPLAY;
-const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID, SCREENPOS_ID,
-  RADAR_MAPBLIPS, RADAR_BLIPSONLY, RADAR_OFF} = actionNames.DISPLAY;
-  
-  const BRIGHTNESS_WRAPPER = "brightness-wrapper";
-  
-  const {updateElementsRects, updateFakeElements, tempReturnIndex } = displayHelperFunctions();
-  
-  const DisplayMenu = () => {
-    const strings = useSelector(stringDisplaySelector);
-    const {displaySettings} = useSelector(miscSelector);
-    const {activeButtonGroup, bigHover} = useSelector(navigationSelector)
-    const { rerenderCursor } = useGlobalEvents();
-  
-  const [fakeElements, setFakeElements] = useState([
-    { id: TRAILS_ID, style: {top:0,left:0,height:0,width:0} , style2: {top:0,left:0,height:0,width:0} },
-    { id: SUBTITLES_ID, style: {top:0,left:0,height:0,width:0} , style2: {top:0,left:0,height:0,width:0}},
-    { id: WIDESCREEN_ID, style: {top:0,left:0,height:0,width:0} , style2: {top:0,left:0,height:0,width:0}},
-    { id: RADAR_ID, style: {top:0,left:0,height:0,width:0} , style2: {top:0,left:0,height:0,width:0}},
-    { id: HUD_ID, style: {top:0,left:0,height:0,width:0} , style2: {top:0,left:0,height:0,width:0}},
-  ]);
-  const [elementRects, setElementRects] = useState([
-    { id: TRAILS_ID, hoverableElement: null, statusElement: null,  columnElement: null  },
-    { id: SUBTITLES_ID, hoverableElement: null, statusElement: null,  columnElement: null   },
-    { id: WIDESCREEN_ID, hoverableElement: null, statusElement: null,  columnElement: null   },
-    { id: RADAR_ID, hoverableElement: null, statusElement: null,  columnElement: null   },
-    { id: HUD_ID, hoverableElement: null, statusElement: null,  columnElement: null   },
-  ]);
-  const [lastRadar, setLastRadar] = useState(displaySettings[RADAR_ID]);
-  
-  useEffect(() => {
-    const updatePosition = () => {
-      const updatedRects = updateElementsRects(elementRects);
-      setElementRects(updatedRects);
-      const updatedFakeElements = updateFakeElements(fakeElements, updatedRects, displaySettings[SCREENPOS_ID]);
-      setFakeElements(updatedFakeElements);
-    };
+const { BRIGHTNESS, TRAILS, SUBTITLES, WIDESCREEN, RADAR, HUD, SCREENPOS } = buttonIndices.DISPLAY;
+const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID, SCREENPOS_ID, RADAR_MAPBLIPS, RADAR_BLIPSONLY, RADAR_OFF } = actionNames.DISPLAY;
+const BRIGHTNESS_WRAPPER = "brightness-wrapper";
 
-    updatePosition(); // Initial call
-    window.addEventListener("resize", updatePosition); // Update on resize
+const DisplayMenu = () => {
+  const strings = useSelector(stringDisplaySelector);
+  const { displaySettings } = useSelector(miscSelector);
+  const { globalHookFunctions } = useEventHandlerContext();
+  const { fakeElements } = useDisplayDOMEvents(globalHookFunctions);
 
-    return () => {
-      window.removeEventListener("resize", updatePosition); // Clean up
-    };
-  }, [activeButtonGroup, displaySettings]);
-
-  useEffect(() => {
-    if (lastRadar !== displaySettings[RADAR_ID]) {
-      setLastRadar(displaySettings[RADAR_ID]);
-      const updatedRects = updateElementsRects(elementRects);
-      setElementRects(updatedRects);
-      const updatedFakeElements = updateFakeElements(fakeElements, updatedRects);
-      setFakeElements(updatedFakeElements);
+  const tempReturnIndex = (num) => {
+    switch (num) {
+      case TRAILS:
+        return 0;
+      case SUBTITLES:
+        return 1;
+      case WIDESCREEN:
+        return 2;
+      case RADAR:
+        return 3;
+      case HUD:
+        return 4;
+      default:
+        return -1;
     }
-    if (bigHover.active && bigHover.myId === BRIGHTNESS_ID) {
-      const rootElement = document.getElementById("root");
-      rootElement.style.filter = `brightness(${displaySettings[BRIGHTNESS_ID]+0.08})`;
-    }
-  }, [displaySettings]);
-
-  useEffect(() => {
-    if (bigHover.active && bigHover.myId === RADAR_ID)
-    {
-      const cursorFactors = {
-        clipFactor: 4,
-        topFactor: 1,
-        leftFactor: 1.1,
-        widthFactor: 1.01,
-        heightFactor: 1.18,
-      };
-      rerenderCursor(RADAR_ID+"-parent", cursorFactors);
-    }
-  }, [lastRadar]);
+  };
 
   const Status = (key) => {
     if (key === RADAR_ID) {
@@ -95,13 +46,13 @@ const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID,
         case RADAR_BLIPSONLY:
           return strings.blipsonly;
         case RADAR_OFF:
-          return strings.off; 
+          return strings.off;
       }
     }
     return displaySettings[key] ? strings.on : strings.off;
   };
-  
-  const renderOption = (key, buttonNumber, id, ) => {
+
+  const renderOption = (key, buttonNumber, id) => {
     const wrapper = (content) => (
       <Hoverable
         buttonNumber={buttonNumber}
@@ -117,19 +68,40 @@ const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID,
       </Hoverable>
     );
 
-  const optionText = () => <div className={`${styles.displayOptionButton}`}><span id={id+"-start"} className={`${styles.displayPadleft} `}>{`${strings[key]}`}</span></div>
-  const columnText = () => <div id={id+"-column"} className={`${styles.displayDots} ${styles.displayOptionColumn}`}>:</div>
-  const statusText = () => <div className={`${styles.displayOptionStatus}`}><span id={id+"-status"} className={`${styles.displayPadright}  `}>{Status(id)}</span></div>
-  
-  const ind = tempReturnIndex(buttonNumber);
-  return (
-    <>
-    <div id={id+"-parent"} style={{position:"fixed", ...fakeElements[ind].style}}/>
-    <div id={id+"-parent2"} style={{position:"fixed", ...fakeElements[ind].style2}}/>
-      {wrapper(optionText())}
-      {wrapper(columnText())}
-      {wrapper(statusText())}
-  </>)
+    const optionText = () => (
+      <div className={`${styles.displayOptionButton}`}>
+        <span
+          id={id + "-start"}
+          className={`${styles.displayPadleft} `}
+        >{`${strings[key]}`}</span>
+      </div>
+    );
+    const columnText = () => (
+      <div
+        id={id + "-column"}
+        className={`${styles.displayDots} ${styles.displayOptionColumn}`}
+      >
+        :
+      </div>
+    );
+    const statusText = () => (
+      <div className={`${styles.displayOptionStatus}`}>
+        <span id={id + "-status"} className={`${styles.displayPadright}  `}>
+          {Status(id)}
+        </span>
+      </div>
+    );
+
+    const ind = tempReturnIndex(buttonNumber);
+    return (
+      <>
+        <div id={id + "-parent"} style={{ position: "fixed", ...fakeElements[ind].style }} />
+        <div id={id + "-parent2"} style={{ position: "fixed", ...fakeElements[ind].style2 }} />
+        {wrapper(optionText())}
+        {wrapper(columnText())}
+        {wrapper(statusText())}
+      </>
+    );
   };
 
   return (
@@ -140,34 +112,37 @@ const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID,
           buttonNumber={BRIGHTNESS}
           textColor="var(--pink)"
           buttonGroup={buttonGroups.DISPLAY}
-          actions={{trigger: BRIGHTNESS_ID}}
+          actions={{ trigger: BRIGHTNESS_ID }}
           id={BRIGHTNESS_ID}
           parentId={BRIGHTNESS_WRAPPER}
         />
-        <Bar filledBars={displaySettings[BRIGHTNESS_ID]}/>
+        <Bar filledBars={displaySettings[BRIGHTNESS_ID]} />
       </div>
       <div className={` ${styles.displayOptionGrid}`}>
-          {renderOption("trails", TRAILS, TRAILS_ID)}
-          {renderOption("subtitles", SUBTITLES, SUBTITLES_ID)}
-          {renderOption("widescreen", WIDESCREEN, WIDESCREEN_ID)}
-          {renderOption("radar", RADAR, RADAR_ID)}
-          {renderOption("hud", HUD, HUD_ID)}
+        {renderOption("trails", TRAILS, TRAILS_ID)}
+        {renderOption("subtitles", SUBTITLES, SUBTITLES_ID)}
+        {renderOption("widescreen", WIDESCREEN, WIDESCREEN_ID)}
+        {renderOption("radar", RADAR, RADAR_ID)}
+        {renderOption("hud", HUD, HUD_ID)}
       </div>
       <div className={`${styles.displayScreenPosCenterFlex}`}>
-        <div className={`${styles.displayScreenPosColFlex}`} id={SCREENPOS_ID+"-parent"}>
+        <div
+          className={`${styles.displayScreenPosColFlex}`}
+          id={SCREENPOS_ID + "-parent"}
+        >
           <Button
             buttonText={`${strings.screenpos}`}
             buttonNumber={SCREENPOS}
             textColor="var(--pink)"
             id={SCREENPOS_ID}
-            parentId={SCREENPOS_ID+"-parent"}
-            actions={{trigger: SCREENPOS_ID}}
+            parentId={SCREENPOS_ID + "-parent"}
+            actions={{ trigger: SCREENPOS_ID }}
             buttonGroup={buttonGroups.DISPLAY}
-            additionalClassnames={[styles.displayPadleft , styles.displayPadright]}
+            additionalClassnames={[ styles.displayPadleft, styles.displayPadright, ]}
           />
-          <img src={imageImports.miscImages.scsize} className={styles.displayScreenPosImage}/>
+          <img src={imageImports.miscImages.scsize} className={styles.displayScreenPosImage} />
         </div>
-      </div>    
+      </div>
     </div>
   );
 };
