@@ -83,6 +83,11 @@
   bottom: 3%;
 }
 
+.loadPanelBackground {
+  background-color: var(--lightblue);
+  clip-path: polygon(2.5% 0%, 96% 3%, 100% 100%, 4% 97%);
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

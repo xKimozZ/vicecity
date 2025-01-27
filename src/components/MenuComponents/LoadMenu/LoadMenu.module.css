@@ -14,17 +14,10 @@
     margin-top: 7em;
 }
 
-.loadButton {
-}
-
-
 .loadPanel {
-    background-color: var(--lightblue);
     width: 80%;
-    z-index: 1;
-    padding: 30px;
     height: 48vh;
-    clip-path: polygon(2.5% 0%, 96% 3%, 100% 100%, 4% 97%);
+    padding: 30px;
 }
 
 .loadFlex {
