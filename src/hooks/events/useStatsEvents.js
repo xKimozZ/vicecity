@@ -1,15 +1,14 @@
 import useSoundManager from "../useSoundManager";
 import useDispatchAbstractor from "../useDispatchAbstractor";
-import useGlobalEvents from "./useGlobalEvents";
 import { actionNames } from "../../constants/actionNames";
 
 const { HOVER, SELECT, BACK } = actionNames.GENERAL;
 const { DIRECTION_UP, DIRECTION_DOWN } = actionNames.ARROWS;
 
-const useStatsEvents = () => {
+const useStatsEvents = (globalHookFunctions) => {
   const { playHover } = useSoundManager();
   const { miscFunctions } = useDispatchAbstractor();
-  const { backToNavigation } = useGlobalEvents();
+  const { backToNavigation } = globalHookFunctions;
 
   const scrollUp = () => {
     miscFunctions.incrementStatsTranslate(1);

@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { navigationSelector } from "../../store/navigationSlice";
 import useSoundManager from "../useSoundManager";
 import useDispatchAbstractor from "../useDispatchAbstractor";
-import useGlobalEvents from "./useGlobalEvents";
 import { actionNames } from "../../constants/actionNames";
 import { buttonIndices } from "../../constants/buttonGroups";
 
@@ -11,8 +10,8 @@ const { HOVER, SELECT, BACK } = actionNames.GENERAL;
 const { LOADGAME } = actionNames.LOAD;
 const { PHASE1_LIST_START, PHASE2_LIST_START } = buttonIndices.LOAD;
 
-const useLoadEvents = () => {
-  const { backToNavigation } = useGlobalEvents();
+const useLoadEvents = (globalHookFunctions) => {
+  const { backToNavigation } = globalHookFunctions;
   const { playHover, playSelect, playBack, playError } = useSoundManager();
   const { navigationFunctions } = useDispatchAbstractor();
   const { hoveredOption, currentActions } = useSelector(navigationSelector);

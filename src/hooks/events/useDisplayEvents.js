@@ -44,11 +44,9 @@ const useDisplayEvents = () => {
     switch(optionId)
           {
             case SCREENPOS_ID:
-              {
                   const cursorFactors = bigHover.active ? null : DEFAULT_FACTORS;
                   toggleBigHover(cursorFactors);
                   playSelect();
-              }
               break;
             case BRIGHTNESS_ID:
               toggleBigHover(DEFAULT_FACTORS);

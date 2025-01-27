@@ -1,15 +1,14 @@
 import { useSelector } from "react-redux";
 import { navigationSelector } from "../../store/navigationSlice";
 import useSoundManager from "../useSoundManager";
-import useGlobalEvents from "./useGlobalEvents";
 import { actionNames } from "../../constants/actionNames";
 import menuOptions from "../../constants/menuOptions";
 
 const { HOVER, SELECT, BACK } = actionNames.GENERAL;
 
-const useMainEvents = () => {
+const useMainEvents = (globalHookFunctions) => {
   const { playSelect } = useSoundManager();
-  const { triggerMenu, setNextMenu } = useGlobalEvents();
+  const { triggerMenu, setNextMenu } = globalHookFunctions;
   const { currentActions } = useSelector(navigationSelector);
 
   const handleMain = (eventType, buttonNumber) => {

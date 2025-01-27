@@ -18,12 +18,13 @@ const useEventHandler = () => {
   const { playHover, playBack, playError, playInfo } = useSoundManager();
   const { activeButtonGroup, hoveredOption, keyPressed, bigHover} =useSelector(navigationSelector);
 
-  const { backToNavigation } = useGlobalEvents();
-  const { handleMain } = useMainEvents();
-  const { handleStats } = useStatsEvents();
-  const { handleLanguage } = useLanguageEvents();
-  const { handleLoad } = useLoadEvents();
-  const { handleDisplay } = useDisplayEvents();
+  const globalHookFunctions = useGlobalEvents();
+
+  const { handleMain } = useMainEvents(globalHookFunctions);
+  const { handleStats } = useStatsEvents(globalHookFunctions);
+  const { handleLanguage } = useLanguageEvents(globalHookFunctions);
+  const { handleLoad } = useLoadEvents(globalHookFunctions);
+  const { handleDisplay } = useDisplayEvents(globalHookFunctions);
 
   const handleHover = (buttonNumber) => {
     // special case to prevent hovering over 'load game' and 'new game' when you are navigating across savegames
@@ -123,7 +124,7 @@ const useEventHandler = () => {
           handleLoad(BACK, overRide);
           break;
         default:
-          backToNavigation();
+          globalHookFunctions.backToNavigation();
           playBack();
           break;
       }
@@ -138,7 +139,7 @@ const useEventHandler = () => {
     playInfo();
   };
 
-  return {handleBack,handleSelect,handleError,handleHover,handleSpecial,handleInfo,backToNavigation};
+  return { handleBack,handleSelect,handleError,handleHover,handleSpecial,handleInfo };
 };
 
 export default useEventHandler;
