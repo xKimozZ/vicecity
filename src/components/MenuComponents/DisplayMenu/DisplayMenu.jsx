@@ -14,6 +14,13 @@ import Bar from "../../Bar/Bar";
 const { BRIGHTNESS, TRAILS, SUBTITLES, WIDESCREEN, RADAR, HUD, SCREENPOS } = buttonIndices.DISPLAY;
 const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID, SCREENPOS_ID, RADAR_MAPBLIPS, RADAR_BLIPSONLY, RADAR_OFF } = actionNames.DISPLAY;
 const BRIGHTNESS_WRAPPER = "brightness-wrapper";
+const RADAR_CURSOR_FACTORS = {
+  clipFactor: 4,
+  topFactor: 1,
+  leftFactor: 1.1,
+  widthFactor: 1.01,
+  heightFactor: 1.18,
+};
 
 const DisplayMenu = () => {
   const strings = useSelector(stringDisplaySelector);
@@ -63,6 +70,7 @@ const DisplayMenu = () => {
         alwaysBigHover={true}
         topClassName={`${styles.displayText}`}
         columnParams={{ twoStaged: id === RADAR_ID ? true : false }}
+        cursorFactors={ id === RADAR_ID ? RADAR_CURSOR_FACTORS : {} }
       >
         {content}
       </Hoverable>

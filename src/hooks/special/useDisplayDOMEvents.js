@@ -64,16 +64,7 @@ const useDisplayDOMEvents = (globalHookFunctions) => {
   }, [displaySettings]);
 
   useEffect(() => {
-    if (bigHover.active && bigHover.myId === RADAR_ID) {
-      const cursorFactors = {
-        clipFactor: 4,
-        topFactor: 1,
-        leftFactor: 1.1,
-        widthFactor: 1.01,
-        heightFactor: 1.18,
-      };
-      rerenderCursor(RADAR_ID + "-parent", cursorFactors);
-    }
+    if (bigHover.active && bigHover.myId === RADAR_ID) rerenderCursor(RADAR_ID + "-parent");
   }, [lastRadar]);
 
   return { fakeElements };
