@@ -34,46 +34,9 @@
 }
 
 .displayScreenPosImage {
-    width:128px;
-    height: 128px;
-}
-
-.displayOptionGrid {
-    display: grid;
-    grid-template-columns: 1fr 0.05fr 0.05fr;
-    align-items: baseline;
-    text-align: center;
-    width: max-content;
-}
-
-.displayOptionButton {
-    grid-column: 1;
-    text-align: right;
-    white-space: nowrap;
-}
-
-.displayOptionColon {
-    grid-column: 2;
-    text-align: center;
-}
-
-.displayOptionStatus {
-    grid-column: 3;
-    text-align: left;
-    white-space: nowrap;
-}
-
-.displayText {
-    font-family: Pricedown;
-    /*max-width: 180px;*/
-    /* max-height: 56px; */
-    padding: 0.02em 0em;
-    color: var(--pink);
-    font-size: 48px;
-    z-index: 2;
-    text-shadow: 3px 3px 0px black;
-    text-transform: lowercase;
-    letter-spacing: -1px;
+    margin-top: -4px;
+    width:120px;
+    height: 120px;
 }
 
 .displayPadleft {
@@ -82,8 +45,4 @@
 
 .displayPadright {
     padding-right: 0.5em;
-}
-
-.displayDots {
-    margin-inline: 0.5em;
 }

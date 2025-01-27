@@ -28,7 +28,7 @@ const DEFAULT_FACTORS = {
   };
 
 const useDisplayEvents = (globalHookFunctions) => {
-  const { toggleBigHover, rerenderCursor, incrementBar } = globalHookFunctions;
+  const { toggleBigHover, incrementBar, updateBrightness } = globalHookFunctions;
   const { playSoundAfterDelay } = useDebounce();
   const { playHover, playSelect } = useSoundManager();
 
@@ -59,7 +59,6 @@ const useDisplayEvents = (globalHookFunctions) => {
                 playSelect();
                 const { myId, parentId, always } = bigHover;
                 const targetId = always ? parentId : myId;
-                rerenderCursor(targetId);
                 const newDisplaySettings = { ...displaySettings, [myId]: !displaySettings[myId] };
                 miscFunctions.setDisplaySettings(newDisplaySettings);
                 break;
@@ -82,8 +81,10 @@ const useDisplayEvents = (globalHookFunctions) => {
               const currentBrightness = displaySettings[BRIGHTNESS_ID];
               if (direction === DIRECTION_UP || direction === DIRECTION_DOWN ) return;
               let sign = direction === DIRECTION_LEFT ? -1 : 1;
+              
               const newBrightness = incrementBar(currentBrightness, sign, playSoundAfterDelay);
-  
+              updateBrightness(newBrightness);
+
               const newDisplaySettings = {...displaySettings,[BRIGHTNESS_ID]: newBrightness,};
               miscFunctions.setDisplaySettings(newDisplaySettings);
              }

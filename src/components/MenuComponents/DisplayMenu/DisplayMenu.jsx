@@ -1,13 +1,11 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
-import { useEventHandlerContext } from "../../../context/EventHandlerContext";
-import useDisplayDOMEvents from "../../../hooks/special/useDisplayDOMEvents";
-import { actionNames } from "../../../constants/actionNames";
-import { buttonGroups, buttonIndices } from "../../../constants/buttonGroups";
-import { imageImports } from "../../../assets/imageImports";
 import styles from "./DisplayMenu.module.css";
 import Button from "../../Button/Button";
-import Hoverable from "../../Hoverable/Hoverable";
 import Bar from "../../Bar/Bar";
+import ColumnedList from "../../ColumnedList/ColumnedList";
+import { imageImports } from "../../../assets/imageImports";
+import { buttonGroups, buttonIndices } from "../../../constants/buttonGroups";
+import { actionNames } from "../../../constants/actionNames";
 
 const { BRIGHTNESS, TRAILS, SUBTITLES, WIDESCREEN, RADAR, HUD, SCREENPOS } = buttonIndices.DISPLAY;
 const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID, SCREENPOS_ID, RADAR_MAPBLIPS, RADAR_BLIPSONLY, RADAR_OFF } = actionNames.DISPLAY;
@@ -25,26 +23,6 @@ const DisplayMenu = () => {
   const { displaySettings } = selectorAbstractor.miscState;
   const strings = selectorAbstractor.localizationState.stringDisplayState;
 
-  const { globalHookFunctions } = useEventHandlerContext();
-  const { fakeElements } = useDisplayDOMEvents(globalHookFunctions);
-
-  const tempReturnIndex = (num) => {
-    switch (num) {
-      case TRAILS:
-        return 0;
-      case SUBTITLES:
-        return 1;
-      case WIDESCREEN:
-        return 2;
-      case RADAR:
-        return 3;
-      case HUD:
-        return 4;
-      default:
-        return -1;
-    }
-  };
-
   const Status = (key) => {
     if (key === RADAR_ID) {
       switch (displaySettings[RADAR_ID]) {
@@ -59,58 +37,13 @@ const DisplayMenu = () => {
     return displaySettings[key] ? strings.on : strings.off;
   };
 
-  const renderOption = (key, buttonNumber, id) => {
-    const wrapper = (content) => (
-      <Hoverable
-        buttonNumber={buttonNumber}
-        actions={{ trigger: id }}
-        buttonGroup={buttonGroups.DISPLAY}
-        id={id}
-        parentId={id + "-parent"}
-        alwaysBigHover={true}
-        topClassName={`${styles.displayText}`}
-        columnParams={{ twoStaged: id === RADAR_ID ? true : false }}
-        cursorFactors={ id === RADAR_ID ? RADAR_CURSOR_FACTORS : {} }
-      >
-        {content}
-      </Hoverable>
-    );
-
-    const optionText = () => (
-      <div className={`${styles.displayOptionButton}`}>
-        <span
-          id={id + "-start"}
-          className={`${styles.displayPadleft} `}
-        >{`${strings[key]}`}</span>
-      </div>
-    );
-    const columnText = () => (
-      <div
-        id={id + "-column"}
-        className={`${styles.displayDots} ${styles.displayOptionColumn}`}
-      >
-        :
-      </div>
-    );
-    const statusText = () => (
-      <div className={`${styles.displayOptionStatus}`}>
-        <span id={id + "-status"} className={`${styles.displayPadright}  `}>
-          {Status(id)}
-        </span>
-      </div>
-    );
-
-    const ind = tempReturnIndex(buttonNumber);
-    return (
-      <>
-        <div id={id + "-parent"} style={{ position: "fixed", ...fakeElements[ind].style }} />
-        <div id={id + "-parent2"} style={{ position: "fixed", ...fakeElements[ind].style2 }} />
-        {wrapper(optionText())}
-        {wrapper(columnText())}
-        {wrapper(statusText())}
-      </>
-    );
-  };
+  const colonOptions = [
+    { stringKey: "trails", buttonNumber: TRAILS, buttonGroup: buttonGroups.DISPLAY, id: TRAILS_ID, isTwoStaged: false, dependencies: displaySettings[TRAILS_ID], getStatusString: Status, getOptionTextString: (key) => strings[key] },
+    { stringKey: "subtitles", buttonNumber: SUBTITLES, buttonGroup: buttonGroups.DISPLAY, id: SUBTITLES_ID, isTwoStaged: false, dependencies: displaySettings[SUBTITLES_ID], getStatusString: Status, getOptionTextString: (key) => strings[key] },
+    { stringKey: "widescreen", buttonNumber: WIDESCREEN, buttonGroup: buttonGroups.DISPLAY, id: WIDESCREEN_ID, isTwoStaged: false, dependencies: displaySettings[WIDESCREEN_ID], getStatusString: Status, getOptionTextString: (key) => strings[key] },
+    { stringKey: "radar", buttonNumber: RADAR, buttonGroup: buttonGroups.DISPLAY, id: RADAR_ID, isTwoStaged: true, dependencies: displaySettings[RADAR_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
+    { stringKey: "hud", buttonNumber: HUD, buttonGroup: buttonGroups.DISPLAY, id: HUD_ID, isTwoStaged: false, dependencies: displaySettings[HUD_ID], getStatusString: Status, getOptionTextString: (key) => strings[key] },
+  ];
 
   return (
     <div className={styles.displayContainer}>
@@ -126,13 +59,7 @@ const DisplayMenu = () => {
         />
         <Bar filledBars={displaySettings[BRIGHTNESS_ID]} />
       </div>
-      <div className={` ${styles.displayOptionGrid}`}>
-        {renderOption("trails", TRAILS, TRAILS_ID)}
-        {renderOption("subtitles", SUBTITLES, SUBTITLES_ID)}
-        {renderOption("widescreen", WIDESCREEN, WIDESCREEN_ID)}
-        {renderOption("radar", RADAR, RADAR_ID)}
-        {renderOption("hud", HUD, HUD_ID)}
-      </div>
+        <ColumnedList items={colonOptions} />
       <div className={`${styles.displayScreenPosCenterFlex}`}>
         <div
           className={`${styles.displayScreenPosColFlex}`}
