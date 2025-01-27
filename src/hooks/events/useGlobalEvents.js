@@ -41,9 +41,17 @@ const useGlobalEvents = () => {
     };
   }
 
-  const rerenderCursor = (targetId, cursorFactors) => {
-    const targetElement = document.getElementById(targetId);
-    if (!targetElement) return;
+  const rerenderCursor = (target, cursorFactors) => {
+    let targetElement;
+    if (typeof target === 'string') {
+      targetElement = document.getElementById(target);
+    } else if (target instanceof Element) {
+      targetElement = target;
+    } else {
+      console.error('Invalid target provided to rerenderCursor');
+      return;
+    }
+    
     const rect = targetElement.getBoundingClientRect();
     const rectInPercentages = rectangleBuilder(rect, cursorFactors);
     cursorFunctions.changeLocation(rectInPercentages);
