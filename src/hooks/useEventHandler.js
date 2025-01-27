@@ -1,69 +1,29 @@
 import { useSelector } from "react-redux";
-import useSoundManager from "./useSoundManager";
 import { navigationSelector } from "../store/navigationSlice";
-import { buttonGroups } from "../constants/buttonGroups";
-import menuOptions from "../constants/menuOptions";
-import { languageSelector } from "../store/localizationSlice";
-import handleMenuEvents from "../utils/events/menuSpecificEventHandling";
+import useSoundManager from "./useSoundManager";
 import useDispatchAbstractor from "./useDispatchAbstractor";
-import { useEffect } from "react";
-import { miscSelector } from "../store/miscSlice";
+import useGlobalEvents from "./events/useGlobalEvents";
+import useStatsEvents from "./events/useStatsEvents";
+import useMainEvents from "./events/useMainEvents";
+import useLanguageEvents from "./events/useLanguageEvents";
+import useLoadEvents from "./events/useLoadEvents";
+import useDisplayEvents from "./events/useDisplayEvents";
 import { actionNames } from "../constants/actionNames";
-import useDebounce from "./useDebounce";
+import { buttonGroups } from "../constants/buttonGroups";
+
+const { SELECT , HOVER, BACK, SPECIAL } = actionNames.GENERAL;
 
 const useEventHandler = () => {
-  const { navigationFunctions, miscFunctions, localizationFunctions, cursorFunctions } = useDispatchAbstractor();
-  const currentLanguage = useSelector(languageSelector);
-  const { playHover, playSelect, playBack, playError, playInfo } = useSoundManager();
-  const {playSoundAfterDelay} = useDebounce();
-  const { activeButtonGroup, currentActions, hoveredOption, keyPressed, bigHover} =useSelector(navigationSelector);
-  const { displaySettings, barLastUpdate } = useSelector(miscSelector);
+  const { navigationFunctions } = useDispatchAbstractor();
+  const { playHover, playBack, playError, playInfo } = useSoundManager();
+  const { activeButtonGroup, hoveredOption, keyPressed, bigHover} =useSelector(navigationSelector);
 
-  const backToNavigation = () => {
-    navigationFunctions.setBigHover({
-      ...bigHover,
-      active: false,
-    });
-    navigationFunctions.setHoveredOption(activeButtonGroup);
-    navigationFunctions.setButtonGroup(buttonGroups.MAIN);
-  };
-
-
-  // global actions and functions unlikely to change
-  const reducerFunctions = { navigationFunctions, miscFunctions, localizationFunctions, cursorFunctions };
-
-  const staticActions = {
-    sounds: {
-      playHover: playHover,
-      playSelect: playSelect,
-      playBack: playBack,
-      playInfo: playInfo,
-      playError: playError,
-      playSoundAfterDelay: playSoundAfterDelay,
-    },
-    navigation: {
-      backToNavigation: backToNavigation,
-    },
-  };
-
-  const dynamicVariables = {
-    activeButtonGroup: activeButtonGroup,
-    hoveredOption: hoveredOption,
-    keyPressed: keyPressed,
-    currentLanguage: currentLanguage,
-
-    nextMenu: currentActions.nextMenu,
-    nextLanguage: currentActions.nextLanguage,
-    trigger: currentActions.trigger,
-    fileExists: currentActions.fileExists,
-    bigHover: bigHover,
-    displaySettings: displaySettings,
-  };
-
-  const { handleStats, handleMain, handleLoad, handleSelectGeneral,updateParams, handleDisplay } = handleMenuEvents(staticActions, reducerFunctions);
-  useEffect(() => {
-    updateParams(dynamicVariables);
-  }, [dynamicVariables]);
+  const { backToNavigation } = useGlobalEvents();
+  const { handleMain } = useMainEvents();
+  const { handleStats } = useStatsEvents();
+  const { handleLanguage } = useLanguageEvents();
+  const { handleLoad } = useLoadEvents();
+  const { handleDisplay } = useDisplayEvents();
 
   const handleHover = (buttonNumber) => {
     // special case to prevent hovering over 'load game' and 'new game' when you are navigating across savegames
@@ -81,32 +41,14 @@ const useEventHandler = () => {
     // If an actionList was sent, this is because there was no other way to convey the absolute latest state
     switch (activeButtonGroup) {
       case buttonGroups.MAIN:
-        const hoverMenu = {newMenu: menuOptions[buttonNumber - 1].actions.nextMenu};
-        handleMain("hover", hoverMenu);
+        handleMain(HOVER, buttonNumber);
         break;
       case buttonGroups.STATS:
-        const actionList = { direction: buttonNumber === 1 ? "up" : "down" };
-        handleStats("hover", actionList);
+        handleStats(HOVER, buttonNumber);
         break;
       case buttonGroups.DISPLAY:
         if (buttonNumber > 0) break; // Only directions here!
-        let direction;
-        switch (buttonNumber) {
-          case actionNames.DISPLAY.DIRECTION_RIGHT:
-            direction = "right";
-            break;
-          case actionNames.DISPLAY.DIRECTION_LEFT:
-            direction = "left";
-            break;
-          case actionNames.DISPLAY.DIRECTION_UP:
-            direction = "up";
-            break;
-          case actionNames.DISPLAY.DIRECTION_DOWN:
-            direction = "down";
-            break;
-        }
-        const directionList = { direction: direction };
-        handleDisplay("hover", directionList);
+        handleDisplay(HOVER, buttonNumber);
         return; // Need to play my own sound here inside
       default:
         break;
@@ -142,9 +84,22 @@ const useEventHandler = () => {
     }
     
     switch (activeButtonGroup) {
+      case buttonGroups.MAIN:
+        handleMain(SELECT);
+        break;
+      case buttonGroups.STATS:
+        handleStats(SELECT);
+        break;
+      case buttonGroups.LANGUAGE:
+        handleLanguage(SELECT);
+        break;
+      case buttonGroups.LOAD:
+        handleLoad(SELECT);
+        break;
+      case buttonGroups.DISPLAY:
+        handleDisplay(SELECT);
+        break;
       default:
-        // No unique inputs expected here, so the switch statement is handled in the function
-        handleSelectGeneral();
         break;
     }
   };
@@ -153,7 +108,7 @@ const useEventHandler = () => {
     switch (activeButtonGroup) {
       case buttonGroups.DISPLAY:
         const actionList = { barSelected: triggeredBy };
-        handleDisplay("special", actionList);
+        handleDisplay(SPECIAL, actionList);
         break;
       default:
         console.log("INVALID SPECIAL EVENT!");
@@ -165,8 +120,7 @@ const useEventHandler = () => {
     if (activeButtonGroup !== buttonGroups.MAIN) {
       switch (activeButtonGroup) {
         case buttonGroups.LOAD:
-          const actionList = {shouldExitMenu: overRide === 1 || hoveredOption < 3 ? true : false,};
-          handleLoad("back", actionList);
+          handleLoad(BACK, overRide);
           break;
         default:
           backToNavigation();

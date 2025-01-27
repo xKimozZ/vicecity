@@ -67,9 +67,9 @@ export const handleArrowNavigation = (initialHover, initialGroup, initialBigHove
 
       case buttonGroups.STATS:
         if (direction === "down") {
-          handleHover(1);
+          handleHover(actionNames.ARROWS.DIRECTION_DOWN);
         } else if (direction === "up") {
-          handleHover(0);
+          handleHover(actionNames.ARROWS.DIRECTION_UP);
         }
         return;
 
@@ -77,17 +77,17 @@ export const handleArrowNavigation = (initialHover, initialGroup, initialBigHove
         {
             const { LIST_START, LIST_END } = buttonIndices.DISPLAY;
             if (direction === "down") {
-              if (bigHover && bigHover.active) {handleHover(actionNames.DISPLAY.DIRECTION_DOWN); return;}
+              if (bigHover && bigHover.active) {handleHover(actionNames.ARROWS.DIRECTION_DOWN); return;}
               if (hoveredOption + 1 > LIST_END) handleHover(LIST_START);
               else handleHover(hoveredOption + 1);
             } else if (direction === "up") {
-              if (bigHover && bigHover.active) {handleHover(actionNames.DISPLAY.DIRECTION_UP); return;}
+              if (bigHover && bigHover.active) {handleHover(actionNames.ARROWS.DIRECTION_UP); return;}
               if (hoveredOption - 1 < LIST_START) handleHover(LIST_END);
               else handleHover(hoveredOption - 1);
             } else if (direction === "left") {
-              handleHover(actionNames.DISPLAY.DIRECTION_LEFT);
+              handleHover(actionNames.ARROWS.DIRECTION_LEFT);
             } else if (direction === "right") {
-              handleHover(actionNames.DISPLAY.DIRECTION_RIGHT);
+              handleHover(actionNames.ARROWS.DIRECTION_RIGHT);
             }
         }
         return;

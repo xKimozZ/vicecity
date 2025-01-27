@@ -10,9 +10,8 @@ import Hoverable from "../../Hoverable/Hoverable";
 import { navigationSelector } from "../../../store/navigationSlice";
 import { useEffect, useState } from "react";
 import { displayHelperFunctions } from "./displayHelper";
-import {auxilaryFunctions} from "../../../utils/events/auxilaryFunctions"
-import useDispatchAbstractor from "../../../hooks/useDispatchAbstractor";
 import { imageImports } from "../../../assets/imageImports";
+import useGlobalEvents from "../../../hooks/events/useGlobalEvents";
 
 const { BRIGHTNESS, TRAILS, SUBTITLES, WIDESCREEN, RADAR, HUD, SCREENPOS, NUM_OPTIONS } = buttonIndices.DISPLAY;
 const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID, SCREENPOS_ID,
@@ -26,8 +25,7 @@ const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID,
     const strings = useSelector(stringDisplaySelector);
     const {displaySettings} = useSelector(miscSelector);
     const {activeButtonGroup, bigHover} = useSelector(navigationSelector)
-    const {cursorFunctions} = useDispatchAbstractor();
-    const {rerenderCursor} = auxilaryFunctions({cursorFunctions: cursorFunctions});
+    const { rerenderCursor } = useGlobalEvents();
   
   const [fakeElements, setFakeElements] = useState([
     { id: TRAILS_ID, style: {top:0,left:0,height:0,width:0} , style2: {top:0,left:0,height:0,width:0} },
