@@ -4,7 +4,7 @@ import { navigationSelector } from "../../store/navigationSlice";
 import { buttonGroups } from "../../constants/buttonGroups";
 
 const useGlobalEvents = () => {
-  const { bigHover, activeButtonGroup } = useSelector(navigationSelector);
+  const { bigHover, activeButtonGroup, hoveredOption } = useSelector(navigationSelector);
   const { navigationFunctions, cursorFunctions, miscFunctions } = useDispatchAbstractor();
 
   const backToNavigation = () => {
@@ -54,7 +54,8 @@ const useGlobalEvents = () => {
     
     const rect = targetElement.getBoundingClientRect();
     const rectInPercentages = rectangleBuilder(rect, cursorFactors);
-    cursorFunctions.changeLocation(rectInPercentages);
+    const identityStruct = {buttonNumber: hoveredOption, buttonGroup: activeButtonGroup};
+    cursorFunctions.changeLocation({...rectInPercentages, identityStruct});
   };
 
   const toggleBigHover = ( cursorFactors ) => {
@@ -63,7 +64,7 @@ const useGlobalEvents = () => {
     navigationFunctions.setBigHover(newBigHover);
     let targetParentId = parentId;
     if (twoStaged && active) targetParentId = parentId + "2"; // This has `always` true since the highlight is not on myId itself
-    rerenderCursor(active && !always ? myId : targetParentId, cursorFactors);
+    rerenderCursor(active && !always ? myId : targetParentId, cursorFactors );
   };
 
   const incrementBar = (currentValue, sign = 1 , playSoundAfterDelay) => {

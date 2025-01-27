@@ -25,7 +25,7 @@ const initialState = {
     storedWidthFactor : DEFAULT_WIDTH_FACTOR,
     storedHeightFactor : DEFAULT_HEIGHT_FACTOR,
   },
-  resetToggle: true,
+  lastTriggeredBy: {buttonNumber: 1, buttonGroup: 0},
 };
 
 export const cursorSlice = createSlice({
@@ -38,11 +38,20 @@ export const cursorSlice = createSlice({
         left = "0%",
         width = "0%",
         height = "0%",
-        clipFactor = state.resetToggle ? DEFAULT_CLIP_FACTOR :state.storedFactors.storedClipFactor,
-        topFactor = state.resetToggle ? DEFAULT_TOP_FACTOR :state.storedFactors.storedTopFactor,
-        leftFactor = state.resetToggle ? DEFAULT_LEFT_FACTOR :state.storedFactors.storedLeftFactor,
-        widthFactor = state.resetToggle ? DEFAULT_WIDTH_FACTOR :state.storedFactors.storedWidthFactor,
-        heightFactor = state.resetToggle ? DEFAULT_HEIGHT_FACTOR :state.storedFactors.storedHeightFactor,
+        identityStruct = {},
+      } = payload;
+      const { buttonNumber, buttonGroup, shouldUseLastFactors = false } = identityStruct;
+
+      const shouldUseDefaults = state.lastTriggeredBy.buttonNumber !== buttonNumber || state.lastTriggeredBy.buttonGroup !== buttonGroup;
+      const willUseDefaults = shouldUseDefaults && !shouldUseLastFactors;
+
+      // All of this logic is skipped if cursorFactors was provided
+      const {
+        clipFactor = willUseDefaults ? DEFAULT_CLIP_FACTOR : state.storedFactors.storedClipFactor,
+        topFactor = willUseDefaults ? DEFAULT_TOP_FACTOR : state.storedFactors.storedTopFactor,
+        leftFactor = willUseDefaults ? DEFAULT_LEFT_FACTOR : state.storedFactors.storedLeftFactor,
+        widthFactor = willUseDefaults ? DEFAULT_WIDTH_FACTOR : state.storedFactors.storedWidthFactor,
+        heightFactor = willUseDefaults ? DEFAULT_HEIGHT_FACTOR : state.storedFactors.storedHeightFactor,
       } = payload;
 
       const newPositionStyle = {
@@ -66,7 +75,7 @@ export const cursorSlice = createSlice({
         storedHeightFactor : heightFactor,
       };
 
-      // state.resetToggle = !state.resetToggle;
+      state.lastTriggeredBy = { buttonNumber: buttonNumber, buttonGroup: buttonGroup };
     },
   },
 });
