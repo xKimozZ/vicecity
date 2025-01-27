@@ -1,4 +1,5 @@
 import { useReduxAbstractorContext } from "../context/ReduxAbstractorContext";
+import { useEffect } from "react";
 import useSoundManager from "./useSoundManager";
 import useGlobalEvents from "./events/useGlobalEvents";
 import useStatsEvents from "./events/useStatsEvents";
@@ -24,6 +25,11 @@ const useEventHandler = () => {
   const { handleLanguage } = useLanguageEvents(globalHookFunctions);
   const { handleLoad } = useLoadEvents(globalHookFunctions);
   const { handleDisplay } = useDisplayEvents(globalHookFunctions);
+
+  // Initialize stuff
+  useEffect(() => {
+    globalHookFunctions.updateBrightness();
+  }, []);
 
   const handleHover = (buttonNumber) => {
     // special case to prevent hovering over 'load game' and 'new game' when you are navigating across savegames

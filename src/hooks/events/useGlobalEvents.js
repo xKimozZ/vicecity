@@ -1,9 +1,13 @@
 import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
 import { buttonGroups } from "../../constants/buttonGroups";
+import { actionNames } from "../../constants/actionNames";
+
+const { BRIGHTNESS_ID } = actionNames.DISPLAY;
 
 const useGlobalEvents = () => {
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
   const { bigHover, activeButtonGroup, hoveredOption } = selectorAbstractor.navigationState;
+  const { displaySettings } = selectorAbstractor.miscState;
   const { navigationFunctions, cursorFunctions, miscFunctions } = dispatchAbstractor;
 
   const backToNavigation = () => {
@@ -78,7 +82,13 @@ const useGlobalEvents = () => {
     return newValue;
   };
 
-  return {backToNavigation, triggerMenu, setNextMenu, rectangleBuilder, rerenderCursor, toggleBigHover, incrementBar};
+  const updateBrightness = (newValue) => {
+    let brightnessValue = newValue ? newValue : displaySettings[BRIGHTNESS_ID];
+    const rootElement = document.getElementById("root");
+    rootElement.style.filter = `brightness(${ brightnessValue + 0.08})`;
+  }
+
+  return {backToNavigation, triggerMenu, setNextMenu, rectangleBuilder, rerenderCursor, toggleBigHover, incrementBar, updateBrightness};
 };
 
 export default useGlobalEvents;
