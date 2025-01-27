@@ -139,7 +139,7 @@ const useEventHandler = () => {
     playInfo();
   };
 
-  return { handleBack,handleSelect,handleError,handleHover,handleSpecial,handleInfo };
+  return { handleBack,handleSelect,handleError,handleHover,handleSpecial,handleInfo, globalHookFunctions };
 };
 
 export default useEventHandler;

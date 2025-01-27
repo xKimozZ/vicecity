@@ -9,13 +9,7 @@ const Hoverable = ({
   buttonNumber = 0,
   buttonGroup = buttonGroups.MAIN,
   actions = {},
-  cursorFactors = {
-    clipFactor: undefined,
-    topFactor: undefined,
-    leftFactor: undefined,
-    widthFactor: undefined,
-    heightFactor: undefined,
-  },
+  cursorFactors = {},
   id = "button-default-id",
   parentId = "my-parent-id",
   topClassName = "",
@@ -27,19 +21,12 @@ const Hoverable = ({
   additionalClassnames = [],
 }) => {
   const buttonRef = useRef(null);
-  const { cursorFunctions, navigationFunctions } = useDispatchAbstractor();
+  const { navigationFunctions } = useDispatchAbstractor();
   const { hoveredOption, activeButtonGroup, bigHover } = useSelector(navigationSelector);
-  const { handleHover: hoverFunction, handleSelect: selectFunction } =
-    useEventHandlerContext();
+  const { handleHover: hoverFunction, handleSelect: selectFunction, globalHookFunctions } = useEventHandlerContext();
 
-  const isHovered = () => {
-    return hoveredOption === buttonNumber;
-  };
-
-  const isActive = () => {
-    return activeButtonGroup === buttonGroup && activeCondition();
-  };
-
+  const isHovered = () => hoveredOption === buttonNumber;
+  const isActive = () => activeButtonGroup === buttonGroup && activeCondition();
   const hasParent = () => {
     const parent2suffix = columnParams.twoStaged && !bigHover.active ? "2" : ""; 
     return document.getElementById(parentId + parent2suffix);
@@ -47,22 +34,11 @@ const Hoverable = ({
 
   useEffect(() => {
     const updatePosition = () => {
+      // This is entered only if the global hovered option successfully picks me
       if (isHovered() && isActive() && buttonRef.current) {
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-        const rect = alwaysBigHover && hasParent()
-          ? hasParent().getBoundingClientRect()
-          : buttonRef.current.getBoundingClientRect();
+        const elementToHighlight = alwaysBigHover && hasParent() ? hasParent() : buttonRef.current;
 
-        const rectInPercentages = {
-          top: (rect.top / viewportHeight) * 100,
-          left: (rect.left / viewportWidth) * 100,
-          width: (rect.width / viewportWidth) * 100,
-          height: (rect.height / viewportHeight) * 100,
-          ...cursorFactors,
-        };
-
-        cursorFunctions.changeLocation(rectInPercentages);
+        globalHookFunctions.rerenderCursor(elementToHighlight, cursorFactors);
         navigationFunctions.setCurrentActions(actions);
 
         const newBigHover = {myId: id, parentId: parentId, active: false, always: alwaysBigHover, twoStaged: columnParams.twoStaged};
