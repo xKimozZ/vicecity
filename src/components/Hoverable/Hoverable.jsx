@@ -25,8 +25,8 @@ const Hoverable = ({
   const { hoveredOption, activeButtonGroup, bigHover } = useSelector(navigationSelector);
   const { handleHover: hoverFunction, handleSelect: selectFunction, globalHookFunctions } = useEventHandlerContext();
 
-  const isHovered = () => hoveredOption === buttonNumber;
-  const isActive = () => activeButtonGroup === buttonGroup && activeCondition();
+  const isHovered = hoveredOption === buttonNumber;
+  const isActive = activeButtonGroup === buttonGroup && activeCondition();
   const hasParent = () => {
     const parent2suffix = columnParams.twoStaged && !bigHover.active ? "2" : ""; 
     return document.getElementById(parentId + parent2suffix);
@@ -35,7 +35,7 @@ const Hoverable = ({
   useEffect(() => {
     const updatePosition = () => {
       // This is entered only if the global hovered option successfully picks me
-      if (isHovered() && isActive() && buttonRef.current) {
+      if (isHovered && isActive && buttonRef.current) {
         const elementToHighlight = alwaysBigHover && hasParent() ? hasParent() : buttonRef.current;
 
         globalHookFunctions.rerenderCursor(elementToHighlight, cursorFactors);
@@ -55,12 +55,12 @@ const Hoverable = ({
   }, [hoveredOption, activeButtonGroup]);
 
   const handleHover = () => {
-    if (isHovered() || !isActive()) return;
+    if (isHovered || !isActive) return;
     hoverFunction?.(buttonNumber);
   };
 
   const handleSelect = () => {
-    if (!isActive()) return;
+    if (!isActive) return;
     selectFunction?.(buttonNumber);
   };
 
