@@ -1,13 +1,12 @@
-import { useSelector } from "react-redux";
+import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
 import styles from "./Header.module.css";
-import { stringMenuSelector } from "../../store/localizationSlice";
-import { navigationSelector } from "../../store/navigationSlice";
 import getMenuName from "../../utils/getMenuName";
 
-
 const Header = () => {
-  const strings = useSelector(stringMenuSelector);
-  const { nextButtonGroup } = useSelector(navigationSelector);
+  const { selectorAbstractor } = useReduxAbstractorContext();
+  const { nextButtonGroup } = selectorAbstractor.navigationState;
+  const strings = selectorAbstractor.localizationState.stringMenuState;
+
   const currentMenuName = getMenuName( nextButtonGroup, strings);
 
   return <span className={styles.Header}>{currentMenuName}</span>;

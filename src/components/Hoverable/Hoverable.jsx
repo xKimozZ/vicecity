@@ -1,9 +1,7 @@
-import { useSelector } from "react-redux";
+import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
 import { useEffect, useRef } from "react";
-import { navigationSelector } from "../../store/navigationSlice";
 import { buttonGroups } from "../../constants/buttonGroups";
 import { useEventHandlerContext } from "../../context/EventHandlerContext";
-import useDispatchAbstractor from "../../hooks/useDispatchAbstractor";
 
 const Hoverable = ({
   buttonNumber = 0,
@@ -20,9 +18,11 @@ const Hoverable = ({
   columnParams = {twoStaged: false},
   additionalClassnames = [],
 }) => {
+  const { selectorAbstractor, dispatchAbstractor } = useReduxAbstractorContext();
+  const { navigationFunctions } = dispatchAbstractor;
+  const { hoveredOption, activeButtonGroup, bigHover } = selectorAbstractor.navigationState;
+  
   const buttonRef = useRef(null);
-  const { navigationFunctions } = useDispatchAbstractor();
-  const { hoveredOption, activeButtonGroup, bigHover } = useSelector(navigationSelector);
   const { handleHover: hoverFunction, handleSelect: selectFunction, globalHookFunctions } = useEventHandlerContext();
 
   const isHovered = hoveredOption === buttonNumber;

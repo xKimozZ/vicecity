@@ -7,14 +7,17 @@ import './assets/globals.css'
 import { Provider } from 'react-redux';
 import { store } from './store/store'
 import { EventHandlerProvider } from './context/EventHandlerContext';
+import { ReduxAbstractorProvider } from './context/ReduxAbstractorContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <EventHandlerProvider>
-        <App />
-      </EventHandlerProvider>
+      <ReduxAbstractorProvider>
+        <EventHandlerProvider>
+          <App />
+        </EventHandlerProvider>
+      </ReduxAbstractorProvider>
     </Provider>
   </React.StrictMode>
 );

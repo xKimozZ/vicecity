@@ -1,11 +1,10 @@
 import styles from "./BriefMenu.module.css";
-import { useSelector } from "react-redux";
-import { stringBriefSelector } from "../../../store/localizationSlice";
-import { miscSelector } from "../../../store/miscSlice";
+import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
 
 const BriefMenu = () => {
-  const {briefKey} = useSelector(miscSelector);
-  const strings = useSelector(stringBriefSelector);
+  const { selectorAbstractor } = useReduxAbstractorContext();
+  const {briefKey} = selectorAbstractor.miscState;
+  const strings = selectorAbstractor.localizationState.stringBriefState;
 
   return (
     <div className={styles.briefContainer}>

@@ -1,21 +1,18 @@
-import { useSelector } from "react-redux";
+import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
 import { buttonGroups } from "../../../constants/buttonGroups";
 import Button from "../../Button/Button";
 import styles from "./StatsMenu.module.css";
-import {
-  miscSelector,
-} from "../../../store/miscSlice";
 import { useEffect, useRef, useState } from "react";
-import { navigationSelector } from "../../../store/navigationSlice";
-import { stringStatsSelector } from "../../../store/localizationSlice";
-import useDispatchAbstractor from "../../../hooks/useDispatchAbstractor";
+
 
 const StatsMenu = () => {
+  const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
+  const { miscFunctions } = dispatchAbstractor;
+  const strings = selectorAbstractor.localizationState.stringStatsState;
+  const { activeButtonGroup } = selectorAbstractor.navigationState;
+  const { statsTranslate: scroll, statsDirection, statsLimit, lowerStatsLimit } = selectorAbstractor.miscState;
+  
   const [beganScrolling, setBeganScrolling] = useState(false);
-  const { statsTranslate: scroll, statsDirection, statsLimit, lowerStatsLimit } = useSelector(miscSelector);
-  const { activeButtonGroup } = useSelector(navigationSelector);
-  const { miscFunctions } = useDispatchAbstractor();
-  const strings = useSelector(stringStatsSelector);
   const statsRef = useRef();
 
   // useEffect(()=>{

@@ -1,11 +1,10 @@
-import { useSelector } from "react-redux";
-import useDispatchAbstractor from "../useDispatchAbstractor";
-import { navigationSelector } from "../../store/navigationSlice";
+import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
 import { buttonGroups } from "../../constants/buttonGroups";
 
 const useGlobalEvents = () => {
-  const { bigHover, activeButtonGroup, hoveredOption } = useSelector(navigationSelector);
-  const { navigationFunctions, cursorFunctions, miscFunctions } = useDispatchAbstractor();
+  const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
+  const { bigHover, activeButtonGroup, hoveredOption } = selectorAbstractor.navigationState;
+  const { navigationFunctions, cursorFunctions, miscFunctions } = dispatchAbstractor;
 
   const backToNavigation = () => {
     navigationFunctions.setBigHover({

@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
+import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
 import { buttonGroups, buttonIndices } from "../../../constants/buttonGroups";
-import { stringLanguageSelector } from "../../../store/localizationSlice";
 import Button from "../../Button/Button";
 import styles from "./LanguageMenu.module.css";
 import { languageMap } from "../../../constants/menuStrings";
@@ -8,7 +7,8 @@ import { languageMap } from "../../../constants/menuStrings";
 const { ENGLISH, FRENCH, GERMAN, ITALIAN, SPANISH } = buttonIndices.LANGUAGE;
 
 const LanguageMenu = () => {
-  const strings = useSelector(stringLanguageSelector);
+  const { selectorAbstractor } = useReduxAbstractorContext();
+  const strings = selectorAbstractor.localizationState.stringLanguageState;
 
   return (
     <div className={styles.languageContainer}>

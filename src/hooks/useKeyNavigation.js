@@ -1,18 +1,18 @@
-import { useSelector } from "react-redux";
-import { navigationSelector } from "../store/navigationSlice";
-import { buttonGroups } from "../constants/buttonGroups";
-import { handleArrowNavigation } from "../utils/buttonGroupKeyNavigation";
-import useDispatchAbstractor from "./useDispatchAbstractor";
+import { useReduxAbstractorContext } from "../context/ReduxAbstractorContext";
 import { useEventHandlerContext } from "../context/EventHandlerContext";
 import { useEffect } from "react";
+import { handleArrowNavigation } from "../utils/buttonGroupKeyNavigation";
+import { buttonGroups } from "../constants/buttonGroups";
 import { actionNames } from "../constants/actionNames";
 
 const {BRIGHTNESS_ID, SCREENPOS_ID} = actionNames.DISPLAY;
 
 const useKeyNavigation = (optionsPerRow) => {
-  const { hoveredOption, activeButtonGroup, keyPressed, lastKeyPressedTime, lastKeyUnpressedTime, bigHover } = useSelector(navigationSelector);
+  const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
+  const { navigationFunctions } = dispatchAbstractor;
+  const { hoveredOption, activeButtonGroup, keyPressed, lastKeyPressedTime, lastKeyUnpressedTime, bigHover } = selectorAbstractor.navigationState;
+
   const { handleHover, handleSelect, handleError, handleBack } = useEventHandlerContext();
-  const { navigationFunctions } = useDispatchAbstractor();
   const { updateParams, handleInput } = handleArrowNavigation(hoveredOption, activeButtonGroup, bigHover, handleHover, optionsPerRow);
 
   useEffect(() => {

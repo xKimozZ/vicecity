@@ -1,19 +1,17 @@
-import styles from "./Cursor.module.css";
-import { cursorSelector } from "../../store/cursorSlice";
-import { useSelector } from "react-redux";
-import { miscSelector } from "../../store/miscSlice";
-import { navigationSelector } from "../../store/navigationSlice";
-import { actionNames } from "../../constants/actionNames";
+import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
 import { useState, useEffect } from "react";
+import styles from "./Cursor.module.css";
+import { actionNames } from "../../constants/actionNames";
 
 const { SCREENPOS_ID } = actionNames.DISPLAY;
 
 const Cursor = () => {
-  const { positionStyle, clipPathStyle } = useSelector(cursorSelector);
-  const { displaySettings } = useSelector(miscSelector);
+  const { selectorAbstractor } = useReduxAbstractorContext();
+  const { displaySettings } = selectorAbstractor.miscState;
+  const { bigHover } = selectorAbstractor.navigationState;
+  const { positionStyle, clipPathStyle } = selectorAbstractor.cursorState;
 
   const { top, left } = positionStyle;
-  const { bigHover } = useSelector(navigationSelector);
 
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);

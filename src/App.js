@@ -1,20 +1,23 @@
-import './App.css';
-import Button from './components/Button/Button'
-import { useEffect, useState, useRef } from 'react';
-import menuOptions from './constants/menuOptions';
-import { useSelector } from 'react-redux';
-import Cursor from './components/Cursor/Cursor'
+import { useReduxAbstractorContext } from './context/ReduxAbstractorContext';
+import { useEventHandlerContext } from './context/EventHandlerContext';
 import useKeyNavigation from './hooks/useKeyNavigation';
+import { useEffect, useState, useRef } from 'react';
+import './App.css';
+import Header from './components/Header/Header';
+import Button from './components/Button/Button'
+import menuOptions from './constants/menuOptions';
+import Cursor from './components/Cursor/Cursor'
 import { imageImports } from './assets/imageImports';
-import { navigationSelector } from './store/navigationSlice';
 import { actionNames } from './constants/actionNames';
 import { buttonGroups } from './constants/buttonGroups';
-import Header from './components/Header/Header';
-import { useEventHandlerContext } from './context/EventHandlerContext';
-import { stringMenuSelector } from './store/localizationSlice';
-import { miscSelector } from './store/miscSlice';
 
 function App() {
+  const { selectorAbstractor } = useReduxAbstractorContext();
+  const { hoveredOption, nextButtonGroup, activeButtonGroup, bigHover } = selectorAbstractor.navigationState;
+  const { displaySettings } = selectorAbstractor.miscState;
+  const menuButtonStrings = selectorAbstractor.localizationState.stringMenuState;
+  
+  const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandlerContext();
   const optionsPerRow = [4,4];
   const [marginState, setMarginState] = useState(false);
   const [clipPathStyle, setClipPathStyle] = useState(
@@ -27,10 +30,6 @@ function App() {
   const [componentContainer, setComponentContainer] = useState([]);
   const interfaceRef = useRef(null);
   const { handleKeyDown } = useKeyNavigation(optionsPerRow);
-  const { hoveredOption, nextButtonGroup, activeButtonGroup, bigHover } = useSelector(navigationSelector);
-  const { displaySettings } = useSelector(miscSelector);
-  const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandlerContext();
-  const menuButtonStrings = useSelector(stringMenuSelector);
 
 
   useEffect(() => {

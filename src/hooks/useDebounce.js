@@ -1,16 +1,14 @@
-import { useSelector } from "react-redux";
+import { useReduxAbstractorContext } from "../context/ReduxAbstractorContext";
 import useSoundManager from "./useSoundManager";
-import { navigationSelector } from "../store/navigationSlice";
-import useDispatchAbstractor from "./useDispatchAbstractor";
 import { useEffect, useState, useRef } from "react";
-import { miscSelector } from "../store/miscSlice";
 
 const useDebounce = () => {
-  const { miscFunctions } = useDispatchAbstractor();
-  const { playHover, playSelect, playBack, playError, playInfo } =
-    useSoundManager();
-  const { keyPressed } = useSelector(navigationSelector);
-  const { barLastUpdate } = useSelector(miscSelector);
+  const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
+  const { miscFunctions } = dispatchAbstractor;
+  const { keyPressed } = selectorAbstractor.navigationState;
+  const { barLastUpdate } = selectorAbstractor.miscState;
+
+  const { playHover, playSelect, playBack, playError, playInfo } = useSoundManager();
   const [barSinglePressTime, setBarSinglePressTime] = useState(0);
   const timeoutRef = useRef(null);
 

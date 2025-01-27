@@ -1,8 +1,5 @@
-import { useSelector } from "react-redux";
-import { navigationSelector } from "../../store/navigationSlice";
-import { miscSelector } from "../../store/miscSlice";
+import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
 import useSoundManager from "../useSoundManager";
-import useDispatchAbstractor from "../useDispatchAbstractor";
 import useDebounce from "../useDebounce";
 import { actionNames } from "../../constants/actionNames";
 
@@ -34,9 +31,11 @@ const useDisplayEvents = (globalHookFunctions) => {
   const { toggleBigHover, rerenderCursor, incrementBar } = globalHookFunctions;
   const { playSoundAfterDelay } = useDebounce();
   const { playHover, playSelect } = useSoundManager();
-  const { miscFunctions } = useDispatchAbstractor();
-  const { bigHover, currentActions } = useSelector(navigationSelector);
-  const { displaySettings } = useSelector(miscSelector);
+
+  const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
+  const { miscFunctions } = dispatchAbstractor;
+  const { bigHover, currentActions } = selectorAbstractor.navigationState;
+  const { displaySettings } = selectorAbstractor.miscState;
   const { trigger: optionId } = currentActions;
 
   const selectCase = () => {

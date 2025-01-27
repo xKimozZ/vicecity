@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { miscSelector } from "../../store/miscSlice";
-import { navigationSelector } from "../../store/navigationSlice";
+import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
 import { actionNames } from "../../constants/actionNames";
 import { displayHelperFunctions } from "./displayHelper";
 
@@ -21,11 +19,12 @@ const initialElementRects = [TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, H
     columnElement: null
 }));
 
-const { updateElementsRects, updateFakeElements } = displayHelperFunctions();
-
 const useDisplayDOMEvents = (globalHookFunctions) => {
-  const { displaySettings } = useSelector(miscSelector);
-  const { activeButtonGroup, bigHover } = useSelector(navigationSelector);
+  const { selectorAbstractor } = useReduxAbstractorContext();
+  const { displaySettings } = selectorAbstractor.miscState;
+  const { activeButtonGroup, bigHover } = selectorAbstractor.navigationState;
+
+  const { updateElementsRects, updateFakeElements } = displayHelperFunctions();
   const { rerenderCursor } = globalHookFunctions;
   const [fakeElements, setFakeElements] = useState(initialFakeElements);
   const [elementRects, setElementRects] = useState(initialElementRects);

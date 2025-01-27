@@ -1,7 +1,5 @@
-import { useSelector } from "react-redux";
-import { navigationSelector } from "../store/navigationSlice";
+import { useReduxAbstractorContext } from "../context/ReduxAbstractorContext";
 import useSoundManager from "./useSoundManager";
-import useDispatchAbstractor from "./useDispatchAbstractor";
 import useGlobalEvents from "./events/useGlobalEvents";
 import useStatsEvents from "./events/useStatsEvents";
 import useMainEvents from "./events/useMainEvents";
@@ -14,10 +12,11 @@ import { buttonGroups } from "../constants/buttonGroups";
 const { SELECT , HOVER, BACK, SPECIAL } = actionNames.GENERAL;
 
 const useEventHandler = () => {
-  const { navigationFunctions } = useDispatchAbstractor();
+  const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
+  const { navigationFunctions } = dispatchAbstractor;
+  const { activeButtonGroup, hoveredOption, keyPressed, bigHover} =selectorAbstractor.navigationState;
+  
   const { playHover, playBack, playError, playInfo } = useSoundManager();
-  const { activeButtonGroup, hoveredOption, keyPressed, bigHover} =useSelector(navigationSelector);
-
   const globalHookFunctions = useGlobalEvents();
 
   const { handleMain } = useMainEvents(globalHookFunctions);

@@ -1,6 +1,4 @@
-import { useSelector } from "react-redux";
-import { miscSelector } from "../../../store/miscSlice";
-import { stringDisplaySelector } from "../../../store/localizationSlice";
+import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
 import { useEventHandlerContext } from "../../../context/EventHandlerContext";
 import useDisplayDOMEvents from "../../../hooks/special/useDisplayDOMEvents";
 import { actionNames } from "../../../constants/actionNames";
@@ -23,8 +21,10 @@ const RADAR_CURSOR_FACTORS = {
 };
 
 const DisplayMenu = () => {
-  const strings = useSelector(stringDisplaySelector);
-  const { displaySettings } = useSelector(miscSelector);
+  const { selectorAbstractor } = useReduxAbstractorContext();
+  const { displaySettings } = selectorAbstractor.miscState;
+  const strings = selectorAbstractor.localizationState.stringDisplayState;
+
   const { globalHookFunctions } = useEventHandlerContext();
   const { fakeElements } = useDisplayDOMEvents(globalHookFunctions);
 

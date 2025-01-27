@@ -1,6 +1,5 @@
+import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { stringLoadSelector } from "../../../store/localizationSlice";
 import Button from "../../Button/Button";
 import styles from "./LoadMenu.module.css";
 import SaveGame from "./SaveGame";
@@ -24,7 +23,8 @@ const PANEL_ID = "load-panel";
 const PANEL_BG_ID = "load-panel-background"
 
 const LoadMenu = () => {
-  const strings = useSelector(stringLoadSelector);
+  const { selectorAbstractor } = useReduxAbstractorContext();
+  const strings = selectorAbstractor.localizationState.stringLoadState;
 
   useEffect(() => {
     const updatePosition = () => {

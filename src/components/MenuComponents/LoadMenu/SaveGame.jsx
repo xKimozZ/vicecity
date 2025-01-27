@@ -1,3 +1,4 @@
+import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
 import { useSelector } from "react-redux";
 import styles from "./SaveGame.module.css";
 import { useEffect, useState } from "react";
@@ -6,25 +7,29 @@ import { buttonGroups } from "../../../constants/buttonGroups";
 import { stringLoadSelector } from "../../../store/localizationSlice";
 import { navigationSelector } from "../../../store/navigationSlice";
 
+const SAVEGAME_FACTORS = {
+  clipFactor: 3,
+  topFactor: 0.99,
+  leftFactor: 0.99,
+  widthFactor: 1,
+  heightFactor: 1.1,
+};
+
 const SaveGame = ({
   buttonNumber = 3,
   slotNumber = 0,
   buttonGroup = buttonGroups.LOAD,
   saveFile,
 }) => {
-  const {hoveredOption} = useSelector(navigationSelector);
-  const strings = useSelector(stringLoadSelector);
+  const { selectorAbstractor } = useReduxAbstractorContext();
+  const {hoveredOption} = selectorAbstractor.navigationState;
+  const strings = selectorAbstractor.localizationState.stringLoadState;
+  
   const [saveText, setSaveText] = useState(
     `${strings.savefile} ${slotNumber} ${strings.notpresent}`
   );
+
   const [actions, setActions] = useState({ fileExists: false });
-  const cursorFactors = {
-    clipFactor: 3,
-    topFactor: 0.99,
-    leftFactor: 0.99,
-    widthFactor: 1,
-    heightFactor: 1.1,
-  };
 
   useEffect(() => {
     if (saveFile) {
@@ -85,7 +90,7 @@ const SaveGame = ({
       buttonNumber={buttonNumber}
       buttonGroup={buttonGroup}
       actions={actions}
-      cursorFactors={cursorFactors}
+      cursorFactors={SAVEGAME_FACTORS}
       topClassName={`${styles.saveButton}`}
       activeCondition={isChoosingSaveGames}
     >
