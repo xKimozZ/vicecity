@@ -1,0 +1,40 @@
+
+.theText {
+    font-family: Pricedown;
+    padding: 0.02em 0em;
+    color: var(--pink);
+    font-size: 48px;
+    z-index: 2;
+    text-shadow: 3px 3px 0px black;
+    text-transform: lowercase;
+    letter-spacing: -1px;
+}
+
+.optionText {
+    grid-column: 1;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.padLeft {
+    padding-left: 1em;
+}
+
+.padRight {
+    padding-right: 0.7em;
+}
+
+.columnMargin {
+    margin-inline: 0.5em;
+}
+
+.columnText {
+    grid-column: 2;
+    text-align: center;
+}
+
+.statusText {
+    grid-column: 3;
+    text-align: left;
+    white-space: nowrap;
+}
