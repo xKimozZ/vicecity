@@ -1,11 +1,8 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
-import { useSelector } from "react-redux";
 import styles from "./SaveGame.module.css";
 import { useEffect, useState } from "react";
 import Hoverable from "../../Hoverable/Hoverable";
 import { buttonGroups } from "../../../constants/buttonGroups";
-import { stringLoadSelector } from "../../../store/localizationSlice";
-import { navigationSelector } from "../../../store/navigationSlice";
 
 const SAVEGAME_FACTORS = {
   clipFactor: 3,
