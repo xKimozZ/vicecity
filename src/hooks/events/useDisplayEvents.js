@@ -3,7 +3,6 @@ import { navigationSelector } from "../../store/navigationSlice";
 import { miscSelector } from "../../store/miscSlice";
 import useSoundManager from "../useSoundManager";
 import useDispatchAbstractor from "../useDispatchAbstractor";
-import useGlobalEvents from "./useGlobalEvents";
 import useDebounce from "../useDebounce";
 import { actionNames } from "../../constants/actionNames";
 
@@ -31,8 +30,8 @@ const DEFAULT_FACTORS = {
     heightFactor: 1.3,
   };
 
-const useDisplayEvents = () => {
-  const { toggleBigHover, rerenderCursor, incrementBar } = useGlobalEvents();
+const useDisplayEvents = (globalHookFunctions) => {
+  const { toggleBigHover, rerenderCursor, incrementBar } = globalHookFunctions;
   const { playSoundAfterDelay } = useDebounce();
   const { playHover, playSelect } = useSoundManager();
   const { miscFunctions } = useDispatchAbstractor();
