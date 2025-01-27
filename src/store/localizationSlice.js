@@ -20,7 +20,6 @@ export const localizationSlice = createSlice({
 const selectSelf = (state) => state.localizationReducer;
 
 export const languageSelector = createSelector(selectSelf,(state) => state.language);
-export const stringSelector = createSelector(selectSelf,(state) => state.strings[state.language] || {});
 
 // Specific section selectors
 export const stringMenuSelector = createSelector(
