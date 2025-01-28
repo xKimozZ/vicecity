@@ -134,6 +134,7 @@ const useDisplayEvents = (globalHookFunctions) => {
     if (bigHover.active && bigHover.myId === BRIGHTNESS_ID)
         {
           const newBrightness = (barSelected / 16);
+          updateBrightness(newBrightness);
           const newDisplaySettings = {...displaySettings,[BRIGHTNESS_ID]: newBrightness,};
           miscFunctions.setDisplaySettings(newDisplaySettings);
           playSelect();

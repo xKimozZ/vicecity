@@ -113,8 +113,7 @@ const useEventHandler = () => {
   const handleSpecial = (triggeredBy) => {
     switch (activeButtonGroup) {
       case buttonGroups.DISPLAY:
-        const actionList = { barSelected: triggeredBy };
-        handleDisplay(SPECIAL, actionList);
+        handleDisplay(SPECIAL, triggeredBy);
         break;
       default:
         console.log("INVALID SPECIAL EVENT!");
