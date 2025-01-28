@@ -11,8 +11,6 @@ const StatsMenu = () => {
   const strings = selectorAbstractor.localizationState.stringStatsState;
   const { activeButtonGroup } = selectorAbstractor.navigationState;
   const { statsTranslate: scroll, statsDirection, statsLimit, lowerStatsLimit } = selectorAbstractor.miscState;
-  
-  const [beganScrolling, setBeganScrolling] = useState(false);
   const statsRef = useRef();
 
   // useEffect(()=>{
@@ -20,18 +18,9 @@ const StatsMenu = () => {
   //   miscFunctions.setStatsLimit(height + 30);
   // },[]);
 
-  // Provides a smoother stop if the menu wasnt locked in but was idly scrolling
-  useEffect(() => {
-    if (activeButtonGroup === buttonGroups.STATS && beganScrolling) {
-      if (statsDirection === "down") miscFunctions.incrementStatsTranslate();
-      else miscFunctions.decrementStatsTranslate();
-    } else setBeganScrolling(false);
-  }, [activeButtonGroup]);
-
   useEffect(() => {
     if (activeButtonGroup === buttonGroups.MAIN) {
       const timeoutId = setTimeout(() => {
-        setBeganScrolling(true);
         if (statsDirection === "down") miscFunctions.decrementStatsTranslate();
         else miscFunctions.incrementStatsTranslate();
       }, 15);
