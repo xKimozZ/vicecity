@@ -32,8 +32,10 @@ export const miscSlice = createSlice({
   initialState,
   reducers: {
     misc_incrementStatsTranslate: (state, { payload }) => {
-      let multiplier = 1;
-      if (payload === 1) multiplier*=10;
+      let multiplier = 10;
+      const speedMultiplier = payload ? payload : 1/10;
+      multiplier *= speedMultiplier;
+
       const newStatsTranslate = state.statsTranslate + translateFactor * multiplier;
       if (newStatsTranslate >= state.lowerStatsLimit)
         {
@@ -43,8 +45,10 @@ export const miscSlice = createSlice({
       state.statsTranslate = newStatsTranslate;
     },
     misc_decrementStatsTranslate: (state, { payload }) => {
-      let multiplier = 1;
-      if (payload === 1) multiplier*=10;
+      let multiplier = 10;
+      const speedMultiplier = payload ? payload : 1/10;
+      multiplier *= speedMultiplier;
+      
       const newStatsTranslate = state.statsTranslate - translateFactor * multiplier;
       if (newStatsTranslate <= -state.statsLimit)
       {

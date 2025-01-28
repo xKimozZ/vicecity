@@ -2,7 +2,7 @@ import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorConte
 import { buttonGroups } from "../../../constants/buttonGroups";
 import Button from "../../Button/Button";
 import styles from "./StatsMenu.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 
 const StatsMenu = () => {
@@ -33,18 +33,20 @@ const StatsMenu = () => {
     transform: `translate(0px, ${scroll}px)`,
   };
 
+  const handleWheel = (event) => {
+    if (activeButtonGroup === buttonGroups.STATS) { 
+      event.deltaY > 0 ? miscFunctions.incrementStatsTranslate(2) : miscFunctions.decrementStatsTranslate(2);
+    }
+    event.stopPropagation();
+  };
+
   return (
     <div className={styles.statsContainer}>
       <span className={styles.statsHeader}>{strings.crimra}</span>
       {strings.rating_1} [0]
-      <div className={styles.statsPanel}>
+      <div onWheel={handleWheel} onTouchMove={handleWheel} className={styles.statsPanel}>
         <div
-          className={`${styles.statsFlex} ${
-            activeButtonGroup === buttonGroups.MAIN
-              ? styles.statsTransition
-              : styles.statsTransition1
-          }
-                ${scroll >= lowerStatsLimit || scroll <= -statsLimit ? styles.cancel : ""}`}
+          className={`${styles.statsFlex}`}
           style={scrollStyle}
           ref={statsRef}
         >
