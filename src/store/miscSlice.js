@@ -7,6 +7,7 @@ const { DISPLAY } = actionNames;
 
 //const translateFactor = 10;
 const translateFactor = 1;
+const TRANSLATE_SAFE_ZONE = 30; //px
 
 const initialState = {
   statsTranslate: 0,
@@ -37,7 +38,7 @@ export const miscSlice = createSlice({
       multiplier *= speedMultiplier;
 
       const newStatsTranslate = state.statsTranslate + translateFactor * multiplier;
-      if (newStatsTranslate >= state.lowerStatsLimit)
+      if (newStatsTranslate >= state.lowerStatsLimit + TRANSLATE_SAFE_ZONE)
         {
           state.statsTranslate = -state.statsLimit;
           return;
@@ -50,7 +51,7 @@ export const miscSlice = createSlice({
       multiplier *= speedMultiplier;
       
       const newStatsTranslate = state.statsTranslate - translateFactor * multiplier;
-      if (newStatsTranslate <= -state.statsLimit)
+      if (newStatsTranslate <= -state.statsLimit - TRANSLATE_SAFE_ZONE)
       {
         state.statsTranslate = state.lowerStatsLimit;
         return;

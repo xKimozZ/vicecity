@@ -2,7 +2,7 @@ import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorConte
 import { buttonGroups } from "../../../constants/buttonGroups";
 import Button from "../../Button/Button";
 import styles from "./StatsMenu.module.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 
 const StatsMenu = () => {
@@ -12,6 +12,14 @@ const StatsMenu = () => {
   const { activeButtonGroup } = selectorAbstractor.navigationState;
   const { statsTranslate: scroll, statsDirection, statsLimit, lowerStatsLimit } = selectorAbstractor.miscState;
   const statsRef = useRef();
+
+  const [cancelAnimation, setCancelAnimation] = useState(false);
+
+  useEffect(() => {
+    if (lowerStatsLimit <= scroll || scroll <= -statsLimit )
+      setCancelAnimation(true);
+    else setCancelAnimation(false);
+  }, [cancelAnimation, scroll]);
 
   // useEffect(()=>{
   //   const {height} = statsRef.current.getBoundingClientRect();
@@ -35,7 +43,7 @@ const StatsMenu = () => {
 
   const handleWheel = (event) => {
     if (activeButtonGroup === buttonGroups.STATS) { 
-      event.deltaY > 0 ? miscFunctions.incrementStatsTranslate(2) : miscFunctions.decrementStatsTranslate(2);
+      event.deltaY < 0 ? miscFunctions.incrementStatsTranslate(2) : miscFunctions.decrementStatsTranslate(2);
     }
     event.stopPropagation();
   };
@@ -45,8 +53,9 @@ const StatsMenu = () => {
       <span className={styles.statsHeader}>{strings.crimra}</span>
       {strings.rating_1} [0]
       <div onWheel={handleWheel} onTouchMove={handleWheel} className={styles.statsPanel}>
-        <div
-          className={`${styles.statsFlex}`}
+        <div className={`${styles.statsFlex}
+        ${activeButtonGroup === buttonGroups.MAIN ? styles.statsTransition : styles.statsTransition1}
+        ${ cancelAnimation ? styles.cancel : ""}`}
           style={scrollStyle}
           ref={statsRef}
         >
