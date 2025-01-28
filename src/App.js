@@ -44,6 +44,14 @@ function App() {
     const menuRow = menuOptions.slice(start,end);
     const indexOffset = start + 1; // To minimise dependency on hardcoded buttonNumber's
 
+    const BOTTOM_CURSOR_FACTORS = {
+      clipFactor: 13,
+      topFactor: 0.99,
+      leftFactor: 0.99,
+      widthFactor: 1.15,
+      heightFactor: 2,
+      minHeightFactor: 1.4,
+    };
     return (
       <>
         {
@@ -54,6 +62,8 @@ function App() {
             buttonText={menuButtonStrings[option.buttonText]}
             buttonGroup={option.buttonGroup}
             actions={option.actions}
+            additionalClassnames={['bottomButtons']}
+            cursorFactors={BOTTOM_CURSOR_FACTORS}
           />
         ))}
       </>
