@@ -8,13 +8,11 @@ import Button from './components/Button/Button'
 import menuOptions from './constants/menuOptions';
 import Cursor from './components/Cursor/Cursor'
 import { imageImports } from './assets/imageImports';
-import { actionNames } from './constants/actionNames';
 import { buttonGroups } from './constants/buttonGroups';
 
 function App() {
   const { selectorAbstractor } = useReduxAbstractorContext();
-  const { hoveredOption, nextButtonGroup, activeButtonGroup, bigHover } = selectorAbstractor.navigationState;
-  const { displaySettings } = selectorAbstractor.miscState;
+  const { hoveredOption, nextButtonGroup, activeButtonGroup } = selectorAbstractor.navigationState;
   const menuButtonStrings = selectorAbstractor.localizationState.stringMenuState;
   
   const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandlerContext();
@@ -97,27 +95,11 @@ function App() {
       setMarginState(!marginState)
     };
 
-    const {SCREENPOS_ID} = actionNames.DISPLAY;
-
-    const fakeScreenPosStyle = {
-      position: "fixed",
-      top: "6px",
-      left: "6px",
-      height: "calc(99.3vh - 12px)",
-      width: "calc(99.3vw - 12px)",
-      border: "6px solid yellow"
-    };
-
-    const screenPosStyle = {
-      transform: `translate(${displaySettings[SCREENPOS_ID].x}px, ${displaySettings[SCREENPOS_ID].y}px)`,
-    };
-
   return (
     <>
       <Cursor />
-      {bigHover.active && bigHover.myId === SCREENPOS_ID && <div style={{...fakeScreenPosStyle, ...screenPosStyle}}/>}
-      <div className="backgroundElement" style={{...clipPathStyle, ...screenPosStyle}}/>
-      <div className={`${marginState ? 'margin' : ''} AppContainer`} style={{...screenPosStyle}}>
+      <div id="background" className="backgroundElement" style={{...clipPathStyle }}/>
+      <div id="app-container" className={`${marginState ? 'margin' : ''} AppContainer`}>
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}} onClick={handleMargin}>
         <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} buttonGroup='DEBUG'/>
       </div>

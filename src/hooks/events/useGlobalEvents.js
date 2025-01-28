@@ -2,7 +2,7 @@ import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext"
 import { buttonGroups } from "../../constants/buttonGroups";
 import { actionNames } from "../../constants/actionNames";
 
-const { BRIGHTNESS_ID } = actionNames.DISPLAY;
+const { BRIGHTNESS_ID, SCREENPOS_ID } = actionNames.DISPLAY;
 
 const useGlobalEvents = () => {
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
@@ -88,7 +88,22 @@ const useGlobalEvents = () => {
     rootElement.style.filter = `brightness(${ brightnessValue + 0.08})`;
   }
 
-  return {backToNavigation, triggerMenu, setNextMenu, rectangleBuilder, rerenderCursor, toggleBigHover, incrementBar, updateBrightness};
+  const updateScreenPos = (newValue) => {
+    let screenPosValue = newValue && newValue.x && newValue.y ? newValue : displaySettings[SCREENPOS_ID];
+
+    const borderElement = document.getElementById("fake-border");
+    const appContainerElement = document.getElementById("app-container");
+    const backgroundElement = document.getElementById("background");
+
+    if (!borderElement || !appContainerElement || !backgroundElement) return;
+
+    borderElement.style.transform = `translate(${screenPosValue.x}px, ${screenPosValue.y}px)`;
+    appContainerElement.style.transform = `translate(${screenPosValue.x}px, ${screenPosValue.y}px)`;
+    backgroundElement.style.transform = `translate(${screenPosValue.x}px, ${screenPosValue.y}px)`;
+  }
+
+  return {backToNavigation, triggerMenu, setNextMenu, rectangleBuilder, rerenderCursor, toggleBigHover,
+     incrementBar, updateBrightness, updateScreenPos};
 };
 
 export default useGlobalEvents;

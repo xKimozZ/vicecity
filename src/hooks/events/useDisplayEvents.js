@@ -1,7 +1,9 @@
 import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
 import useSoundManager from "../useSoundManager";
 import useDebounce from "../useDebounce";
+import { useEffect } from "react";
 import { actionNames } from "../../constants/actionNames";
+import { buttonGroups } from "../../constants/buttonGroups";
 
 const { HOVER, SELECT, BACK, SPECIAL } = actionNames.GENERAL;
 const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = actionNames.ARROWS;
@@ -34,15 +36,52 @@ const useDisplayEvents = (globalHookFunctions) => {
 
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
   const { miscFunctions } = dispatchAbstractor;
-  const { bigHover, currentActions } = selectorAbstractor.navigationState;
+  const { bigHover, currentActions, activeButtonGroup } = selectorAbstractor.navigationState;
   const { displaySettings } = selectorAbstractor.miscState;
   const { trigger: optionId } = currentActions;
+
+  const fakeScreenPosStyle = {
+    position: "fixed",
+    top: "6px",
+    left: "6px",
+    height: "calc(99.3vh - 12px)",
+    width: "calc(99.3vw - 12px)",
+    border: "6px solid yellow",
+    transform: `translate(${displaySettings[SCREENPOS_ID].x}px, ${displaySettings[SCREENPOS_ID].y}px)`,
+  };
+
+  const FAKE_BORDER_ID = "fake-border"
+
+  const createFakeBorder = () => {
+    const newElement = document.createElement("div");
+    newElement.id = FAKE_BORDER_ID;
+    Object.assign(newElement.style, fakeScreenPosStyle);
+    const rootElement = document.getElementById("root");
+    rootElement.appendChild(newElement);
+  };
+
+  const destroyFakeBorder = () => {
+    const existingElement = document.getElementById(FAKE_BORDER_ID);
+    existingElement && existingElement.remove();
+  }
+
+  useEffect(() => {
+    if (activeButtonGroup !== buttonGroups.DISPLAY) destroyFakeBorder();
+    return () => {
+      destroyFakeBorder();
+    };
+  }, [activeButtonGroup]);
+
+  useEffect(() => {
+    globalHookFunctions.updateScreenPos();
+  }, [displaySettings[SCREENPOS_ID]]);
 
   const selectCase = () => {
     switch(optionId)
           {
             case SCREENPOS_ID:
                   const cursorFactors = bigHover.active ? null : DEFAULT_FACTORS;
+                  bigHover.active ? destroyFakeBorder() : createFakeBorder();
                   toggleBigHover(cursorFactors);
                   playSelect();
               break;
@@ -119,7 +158,9 @@ const useDisplayEvents = (globalHookFunctions) => {
               const viewportHeight = window.innerHeight;
               
               if (Math.abs(newX) > viewportWidth / 2 || Math.abs(newY) > viewportHeight / 2) return;
+              
               const newOption = {x: newX, y: newY};
+              
               const newDisplaySettings = {...displaySettings,[SCREENPOS_ID]: newOption};
               miscFunctions.setDisplaySettings(newDisplaySettings);
               }
