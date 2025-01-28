@@ -27,7 +27,7 @@ function App() {
   const [clipPathContainer, setClipPathContainer] = useState([]);
   const [componentContainer, setComponentContainer] = useState([]);
   const interfaceRef = useRef(null);
-  const { handleKeyDown } = useKeyNavigation(optionsPerRow);
+  useKeyNavigation(optionsPerRow);
 
 
   useEffect(() => {
@@ -101,19 +101,14 @@ function App() {
       <div id="background" className="backgroundElement" style={{...clipPathStyle }}/>
       <div id="app-container" className={`${marginState ? 'margin' : ''} AppContainer`}>
       <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}} onClick={handleMargin}>
-        <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} buttonGroup='DEBUG'/>
+      <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} buttonGroup='DEBUG'/>
       </div>
       <img src={imageImports.global.vclogo1024} className="viceLogo" />
       <Header />
-      <div
-        className="App"
-        onKeyDown={handleKeyDown} // Attach the onKeyDown event here
-        tabIndex="0"
-        >
+      <div className="App">
           {renderHoveredComponent()}
       </div>
-      <div className='buttonContainer' ref={interfaceRef}
-      onKeyDown={handleKeyDown} tabIndex="0" onClick={()=> {if (activeButtonGroup !== buttonGroups.MAIN) handleBack(1)}}>
+      <div className='buttonContainer' onClick={()=> {if (activeButtonGroup !== buttonGroups.MAIN) handleBack(1)}}>
       <div className="frame">
           {renderButtons(0, optionsPerRow[0]) }
         </div>

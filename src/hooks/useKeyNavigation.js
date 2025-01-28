@@ -16,18 +16,6 @@ const useKeyNavigation = (optionsPerRow) => {
   const { updateParams, handleInput } = handleArrowNavigation(hoveredOption, activeButtonGroup, bigHover, handleHover, optionsPerRow);
 
   useEffect(() => {
-    const handleKeyUp = () => {
-      navigationFunctions.setKeyPressed(false);
-    }
-    
-    window.addEventListener('keyup', handleKeyUp);
-
-    return () => {
-      window.removeEventListener('keyup', handleKeyUp);
-    };
-  }, []);
-
-  useEffect(() => {
     updateParams(hoveredOption, activeButtonGroup, bigHover);
   }, [hoveredOption, activeButtonGroup, bigHover]);
 
@@ -69,7 +57,22 @@ const useKeyNavigation = (optionsPerRow) => {
       if (handler) handler();
   };
 
+  const handleKeyUp = () => {
+    navigationFunctions.setKeyPressed(false);
+  }
+
+  useEffect(() => {
+    window.addEventListener('keyup', handleKeyUp);
+    window.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [dispatchAbstractor, selectorAbstractor, handleKeyUp, handleKeyDown]);
+
   return { handleKeyDown };
 };
+
 
 export default useKeyNavigation;
