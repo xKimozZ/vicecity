@@ -1,7 +1,7 @@
 import { useReduxAbstractorContext } from './context/ReduxAbstractorContext';
 import { useEventHandlerContext } from './context/EventHandlerContext';
 import useKeyNavigation from './hooks/useKeyNavigation';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Button from './components/Button/Button'
@@ -17,7 +17,8 @@ function App() {
   
   const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandlerContext();
   const optionsPerRow = [4,4];
-  const [marginState, setMarginState] = useState(false);
+  useKeyNavigation(optionsPerRow);
+
   const [clipPathStyle, setClipPathStyle] = useState(
     {
       transition: '0.1s linear',
@@ -26,9 +27,6 @@ function App() {
   );
   const [clipPathContainer, setClipPathContainer] = useState([]);
   const [componentContainer, setComponentContainer] = useState([]);
-  const interfaceRef = useRef(null);
-  useKeyNavigation(optionsPerRow);
-
 
   useEffect(() => {
     const newClipPaths = menuOptions.map((option) => {
@@ -85,24 +83,11 @@ function App() {
     handleInfo(); 
   },[]);
 
-    useEffect(() => {
-      interfaceRef.current.focus();
-    }, []);
-
-    const handleMargin = () => {
-      handleSelect();
-      interfaceRef.current.focus();
-      setMarginState(!marginState)
-    };
-
   return (
     <>
       <Cursor />
       <div id="background" className="backgroundElement" style={{...clipPathStyle }}/>
-      <div id="app-container" className={`${marginState ? 'margin' : ''} AppContainer`}>
-      <div style={{position:'fixed',left:'40%', top:'10px', zIndex:9999}} onClick={handleMargin}>
-      <Button textColor='var(--pink)' buttonText='margin' buttonNumber={69} buttonGroup='DEBUG'/>
-      </div>
+      <div id="app-container" className={` AppContainer `}>
       <img src={imageImports.global.vclogo1024} className="viceLogo" />
       <Header />
       <div className="App">
