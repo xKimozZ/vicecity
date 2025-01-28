@@ -1,4 +1,5 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
+import { useEffect } from "react";
 import styles from "./DisplayMenu.module.css";
 import Button from "../../Button/Button";
 import Bar from "../../Bar/Bar";
@@ -44,7 +45,7 @@ const DisplayMenu = () => {
     { stringKey: "radar", buttonNumber: RADAR, buttonGroup: buttonGroups.DISPLAY, id: RADAR_ID, isTwoStaged: true, dependencies: displaySettings[RADAR_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
     { stringKey: "hud", buttonNumber: HUD, buttonGroup: buttonGroups.DISPLAY, id: HUD_ID, isTwoStaged: false, dependencies: displaySettings[HUD_ID], getStatusString: Status, getOptionTextString: (key) => strings[key] },
   ];
-
+  
   return (
     <div className={styles.displayContainer}>
       <div className={styles.displayOptionFlex} id={BRIGHTNESS_WRAPPER}>
@@ -57,9 +58,16 @@ const DisplayMenu = () => {
           id={BRIGHTNESS_ID}
           parentId={BRIGHTNESS_WRAPPER}
         />
-        <Bar filledBars={displaySettings[BRIGHTNESS_ID]} />
+        <Bar
+          buttonNumber={BRIGHTNESS}
+          buttonGroup={buttonGroups.DISPLAY}
+          actions={{ trigger: BRIGHTNESS_ID }}
+          id={BRIGHTNESS_ID}
+          parentId={BRIGHTNESS_WRAPPER}
+          value={displaySettings[BRIGHTNESS_ID]}
+        />
       </div>
-        <ColumnedList items={colonOptions} />
+      <ColumnedList items={colonOptions} />
       <div className={`${styles.displayScreenPosCenterFlex}`}>
         <div
           className={`${styles.displayScreenPosColFlex}`}
@@ -73,9 +81,15 @@ const DisplayMenu = () => {
             parentId={SCREENPOS_ID + "-parent"}
             actions={{ trigger: SCREENPOS_ID }}
             buttonGroup={buttonGroups.DISPLAY}
-            additionalClassnames={[ styles.displayPadleft, styles.displayPadright, ]}
+            additionalClassnames={[
+              styles.displayPadleft,
+              styles.displayPadright,
+            ]}
           />
-          <img src={imageImports.miscImages.scsize} className={styles.displayScreenPosImage} />
+          <img
+            src={imageImports.miscImages.scsize}
+            className={styles.displayScreenPosImage}
+          />
         </div>
       </div>
     </div>
