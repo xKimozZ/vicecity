@@ -15,6 +15,7 @@ const Hoverable = ({
   children,
   activeCondition = () => {return true;},
   alwaysBigHover = false,
+  renderById = false,
   columnParams = {twoStaged: false},
   additionalClassnames = [],
 }) => {
@@ -38,8 +39,9 @@ const Hoverable = ({
       if (isHovered && isActive && buttonRef.current) {
         const alwaysParent = alwaysBigHover && hasParent();
         const wasInBigHover = bigHover.active && bigHover.myId === id;
+        const selfElement = renderById ? document.getElementById(id) : buttonRef.current;
 
-        const elementToHighlight = alwaysParent || wasInBigHover ? hasParent() : buttonRef.current;
+        const elementToHighlight = alwaysParent || wasInBigHover ? hasParent() : selfElement;
 
         globalHookFunctions.rerenderCursor(elementToHighlight, cursorFactors);
         navigationFunctions.setCurrentActions(actions);
