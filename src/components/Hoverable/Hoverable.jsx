@@ -36,12 +36,15 @@ const Hoverable = ({
     const updatePosition = () => {
       // This is entered only if the global hovered option successfully picks me
       if (isHovered && isActive && buttonRef.current) {
-        const elementToHighlight = alwaysBigHover && hasParent() ? hasParent() : buttonRef.current;
+        const alwaysParent = alwaysBigHover && hasParent();
+        const wasInBigHover = bigHover.active && bigHover.myId === id;
+
+        const elementToHighlight = alwaysParent || wasInBigHover ? hasParent() : buttonRef.current;
 
         globalHookFunctions.rerenderCursor(elementToHighlight, cursorFactors);
         navigationFunctions.setCurrentActions(actions);
 
-        const newBigHover = {myId: id, parentId: parentId, active: false, always: alwaysBigHover, twoStaged: columnParams.twoStaged};
+        const newBigHover = {myId: id, parentId: parentId, active: wasInBigHover, always: alwaysBigHover, twoStaged: columnParams.twoStaged};
         navigationFunctions.setBigHover(newBigHover);
       }
     };
@@ -52,7 +55,7 @@ const Hoverable = ({
     return () => {
       window.removeEventListener("resize", updatePosition); // Clean up
     };
-  }, [hoveredOption, activeButtonGroup]);
+  }, [hoveredOption, activeButtonGroup, bigHover.active]);
 
   const handleHover = () => {
     if (isHovered || !isActive) return;
