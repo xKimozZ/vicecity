@@ -1,5 +1,8 @@
-#root {
+body {
   background-color: black;
+}
+
+#root {
   cursor: url('./assets/images/mouse64.png'),auto;
   position: relative;
   overflow: hidden;
