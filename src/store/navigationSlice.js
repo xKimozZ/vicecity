@@ -10,8 +10,8 @@ const initialState = {
   lastKeyPressedTime: 0,
   lastKeyUnpressedTime: 0,
   bigHover: {
-    myId: "button-default-id",
-    parentId: "my-parent-id",
+    myId: "",
+    parentId: "",
     active: false,
     always: false,
     twoStaged: false,
