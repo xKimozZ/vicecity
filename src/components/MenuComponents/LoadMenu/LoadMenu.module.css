@@ -32,3 +32,9 @@
     gap: 0.2em;
     padding-inline: 1em;
 }
+
+.loadPanelBackground {
+    background-color: var(--lightblue);
+    clip-path: polygon(2.5% 0%, 96% 3%, 100% 100%, 4% 97%);
+  }
+  
