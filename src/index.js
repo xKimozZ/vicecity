@@ -1,24 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import './assets/globals.css'
-import { Provider } from 'react-redux';
-import { store } from './store/store'
-import { EventHandlerProvider } from './context/EventHandlerContext';
-import { ReduxAbstractorProvider } from './context/ReduxAbstractorContext';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import "./assets/globals.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ReduxAbstractorProvider>
-        <EventHandlerProvider>
-          <App />
-        </EventHandlerProvider>
-      </ReduxAbstractorProvider>
-    </Provider>
+    <App />
   </React.StrictMode>
 );
 

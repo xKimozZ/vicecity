@@ -13,6 +13,28 @@
   src: url('assets/fonts/SF Arborcrest Heavy.ttf'); /* Locate the .ttf file within your directory*/
 }
 
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 980px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 979px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 500px) {
+    html {
+        font-size: 10px;
+    }
+}
+
 body {
   user-select: none;
   margin: 0;

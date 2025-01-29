@@ -1,0 +1,59 @@
+
+.header {
+  position: fixed;
+  z-index: 9999;
+  cursor: url("./../../assets/images/ee.jpg"), auto;
+
+  color: var(--white);
+  font-size: 1.1rem;
+  font-family: "SF Arborcrest Heavy";
+  text-transform: uppercase;
+
+  text-align: center;
+  width: 100%;
+}
+
+.headerBg {
+  position: absolute;
+  z-index: 9999;
+
+  background-color: var(--green);
+  width: 100%;
+  line-height: 1.8rem;
+}
+
+.header:hover .disclaimer {
+  display: flex;
+  animation: scrollIn .7s;
+}
+
+.disclaimer {
+  display: none;
+  width: 100%;
+  padding: 1em;
+  z-index: 1;
+  
+  text-transform: none;
+  text-align: left;
+  font-size: 1.4rem;
+  cursor: auto;
+}
+
+.disclaimer a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.disclaimerContent {
+  margin-inline: 10%;
+  padding: 12px;
+  padding-top: 3rem;
+  border-radius: 0px 0px 4px 4px;
+  background-color: rgb(40, 44, 52, 0.93);
+}
+
+@keyframes scrollIn {
+  0% { translate: 0px -250px; }
+  100% { translate: 0px 0px; }
+}

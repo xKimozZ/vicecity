@@ -4,7 +4,7 @@ import navigationReducer from "./navigationSlice";
 import localizationReducer from "./localizationSlice";
 import miscReducer from "./miscSlice";
 
-export const store = configureStore({
+export const TheStore = configureStore({
     reducer:{
         cursorReducer,
         navigationReducer,
