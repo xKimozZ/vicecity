@@ -92,23 +92,22 @@ function App() {
   useEffect(() =>
   {
     const disclaimerObject = document.getElementById("disclaimer");
-    const test = () => {
-      const timeoutId = setTimeout(() => {handleInfo()}, 100);
-      
+    const toggleDisclaimer = () => {
+
       if (disclaimerObject && disclaimerObject.style.opacity !== '0')
       { 
-        disclaimerObject.style.opacity = '0'; 
+        disclaimerObject.style.opacity = '0';
         window.alert("Hiding disclaimer! Click on bottom again to unhide.");
       } else {
         disclaimerObject.style.removeProperty('opacity');
         window.alert("Disclaimer unhidden!");
       }
-      return () => {
-        clearTimeout(timeoutId);
-      };
+      handleInfo();
     }
 
-    if (disclaimerObject) disclaimerObject.addEventListener("click", test);
+    if (disclaimerObject) {
+      disclaimerObject.addEventListener("click", toggleDisclaimer);
+    }
     const anchorElements = disclaimerObject.getElementsByTagName("a");
     for (let i = 0; i < anchorElements.length; i++)
       anchorElements[i].addEventListener("click", (event) => {
@@ -116,7 +115,7 @@ function App() {
     });
 
     return () => {
-      if (disclaimerObject) disclaimerObject.removeEventListener("click", test)
+      if (disclaimerObject) disclaimerObject.removeEventListener("click", toggleDisclaimer)
         for (let i = 0; i < anchorElements.length; i++)
           anchorElements[i].removeEventListener("click", (event) => {
             event.stopPropagation();
@@ -126,6 +125,7 @@ function App() {
 
   return (
     <>
+      <header className="header">Development build. Preferred to navigate with arrow keys / ESC / Enter.</header>
       <Cursor />
       <div id="background" className="backgroundElement" style={{...clipPathStyle }}/>
       <div id="app-container" className={` AppContainer `}>
@@ -142,15 +142,17 @@ function App() {
           {renderButtons(optionsPerRow[1], menuOptions.length) }
         </div>
         <footer id="disclaimer" className="disclaimer">
+          <div className="disclaimerContent">
           <span style={{color:'var(--pink)'}}>GTA Vice City PS2 Frontend: </span> 
           <span style={{color:'#61dafb'}}>React Recreation. </span> 
           <span style={{color:'var(--green)'}}> 
             <a href="https://github.com/xKimozZ" target="_blank" rel="noopener noreferrer" >Built by xKimozZ </a>
             <a href="https://www.linkedin.com/in/karim-ayman-h/" target="_blank" rel="noopener noreferrer" >(Karim Ayman). </a>
-          </span> 
+          </span><br/>
           The original assets and design belong to <a href="https://www.rockstargames.com" target="_blank" rel="noopener noreferrer" >Rockstar Games</a> and Take-Two Interactive, and this is a non-profit hobby project that does not intend to infringe on any trademarks.
-          Please note the app is still under development primarily for desktop, so some features might not be optimized or available yet. More info will be available soon.
-          <span style={{color:'var(--pink)'}}> Feel free to check the code! :)</span>
+          <br/>Please note the app is still under development primarily for desktop, so some features might not be optimized or available yet. More info will be available soon. Click on the bottom of the page to toggle this message on or off.
+          <br/><span style={{color:'var(--pink)'}}> Feel free to check the code! :)</span>
+          </div>
         </footer>
       </div>
     </div>
