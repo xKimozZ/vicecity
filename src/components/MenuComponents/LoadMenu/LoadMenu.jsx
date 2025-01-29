@@ -5,6 +5,7 @@ import styles from "./LoadMenu.module.css";
 import SaveGame from "./SaveGame";
 import { buttonGroups, buttonIndices } from "../../../constants/buttonGroups";
 import { actionNames } from "../../../constants/actionNames";
+import { elementIds } from "../../../constants/elementIds";
 
 const {
   LOAD_GAME,
@@ -19,6 +20,8 @@ const {
   SAVE_SLOT_8,
 } = buttonIndices.LOAD;
 
+
+const { FRONTEND_ROOT_ID } = elementIds.FRONTEND;
 const PANEL_ID = "load-panel";
 const PANEL_BG_ID = "load-panel-background"
 
@@ -58,7 +61,7 @@ const LoadMenu = () => {
         height: `${panelRect.height}px`,
       });
 
-      const rootElement = document.getElementById("root");
+      const rootElement = document.getElementById(FRONTEND_ROOT_ID);
       rootElement.appendChild(newElement);
     };
     updatePosition();

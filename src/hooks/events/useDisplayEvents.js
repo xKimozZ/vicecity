@@ -4,6 +4,7 @@ import useDebounce from "./useDebounce";
 import { useEffect } from "react";
 import { actionNames } from "../../constants/actionNames";
 import { buttonGroups } from "../../constants/buttonGroups";
+import { elementIds } from "../../constants/elementIds";
 
 const { HOVER, SELECT, BACK, SPECIAL } = actionNames.GENERAL;
 const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = actionNames.ARROWS;
@@ -19,6 +20,7 @@ const {
     RADAR_MAPBLIPS,
     RADAR_OFF,
 } = actionNames.DISPLAY;
+const { FRONTEND_ROOT_ID } = elementIds.FRONTEND;
 
 // Note this is used mostly for the big hover stuff
 const DEFAULT_FACTORS = {
@@ -56,7 +58,8 @@ const useDisplayEvents = (globalHookFunctions) => {
     const newElement = document.createElement("div");
     newElement.id = FAKE_BORDER_ID;
     Object.assign(newElement.style, fakeScreenPosStyle);
-    const rootElement = document.getElementById("root");
+
+    const rootElement = document.getElementById(FRONTEND_ROOT_ID);
     rootElement.appendChild(newElement);
   };
 
