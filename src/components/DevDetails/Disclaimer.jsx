@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import styles from "./DevDetails.module.css";
+import styles from "./Disclaimer.module.css";
 
-const Disclaimer = ({ handleInfo }) => {
+const Disclaimer = () => {
+
   // Just playing the old fashioned way
   useEffect(() => {
     const disclaimerObject = document.getElementById("disclaimer");
@@ -15,7 +16,6 @@ const Disclaimer = ({ handleInfo }) => {
         disclaimerObject.style.removeProperty("opacity");
         //window.alert("Disclaimer unhidden!");
       }
-      handleInfo();
     };
 
     const deleteDisclaimer = () => {
@@ -94,12 +94,4 @@ const Disclaimer = ({ handleInfo }) => {
   );
 };
 
-const BuildInfo = () => {
-  return (
-    <header className={styles.header}>
-      Development build. Preferred to navigate with arrow keys / ESC / Enter.
-    </header>
-  );
-};
-
-export { Disclaimer, BuildInfo };
+export default Disclaimer;

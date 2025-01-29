@@ -9,7 +9,8 @@ import menuOptions from './constants/menuOptions';
 import Cursor from './components/Cursor/Cursor'
 import { imageImports } from './assets/imageImports';
 import { buttonGroups } from './constants/buttonGroups';
-import { BuildInfo, Disclaimer } from './components/DevDetails/DevDetails';
+import Disclaimer from './components/DevDetails/Disclaimer';
+import BuildInfo from './components/DevDetails/BuildInfo';
 
 function App() {
   const { selectorAbstractor } = useReduxAbstractorContext();

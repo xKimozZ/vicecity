@@ -1,0 +1,10 @@
+  .header {
+    font-size: 1em;
+    font-family: SF;
+    position: absolute;
+    color: var(--white);
+    font-family: 'SF Arborcrest Heavy';
+    text-transform: uppercase;
+    margin-inline: 3%;
+    z-index: 9999;
+  }
