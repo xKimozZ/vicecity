@@ -25,13 +25,13 @@ const Bar = ({
   const [filled, setFilled] = useState();
 
   // Dragging stuff
-  const [dragStart, setDragStart] = useState(null);
-  const [dragging, setDragging] = useState(false);
-  const [dragCurrent, setDragCurrent] = useState(null);
-  const [lastDragTime, setLastDragTime] = useState(0);
+  // const [dragStart, setDragStart] = useState(null);
+  // const [dragging, setDragging] = useState(false);
+  // const [dragCurrent, setDragCurrent] = useState(null);
+  // const [lastDragTime, setLastDragTime] = useState(0);
 
   const barNotHovered = (buttonGroup !== activeButtonGroup || hoveredOption !== buttonNumber || !bigHover.active);
-  const hoverableBehaviorActive = () => !bigHover.active || hoveredOption !== buttonNumber;
+  const hoverableBehaviorActive = () => barNotHovered;
 
   useEffect(() => {
     const filledBars = Math.round(value * 16);
@@ -47,59 +47,59 @@ const Bar = ({
   }, [barCount]);
 
   const handleWheel = (event) => {
-    if (!hoverableBehaviorActive()) { 
+    if (!barNotHovered) { 
       if (event.deltaY !== 0) event.deltaY > 0 ? handleHover(DIRECTION_LEFT) : handleHover(DIRECTION_RIGHT);
       if (event.deltaX !== 0) event.deltaX > 0 ? handleHover(DIRECTION_LEFT) : handleHover(DIRECTION_RIGHT);
     }
     event.stopPropagation();
   };
 
-  const handleMousedown = (event) => {
-    setDragStart(event.clientX);
-    setDragging(true);
-    event.stopPropagation();
-  };
+  // const handleMousedown = (event) => {
+  //   setDragStart(event.clientX);
+  //   setDragging(true);
+  //   event.stopPropagation();
+  // };
 
-  const handleMousemove = (event) => {
-    if (Date.now() - lastDragTime > 60)
-    setDragCurrent(event.clientX);
-  event.stopPropagation();
-  }
+  // const handleMousemove = (event) => {
+  //   if (Date.now() - lastDragTime > 60)
+  //   setDragCurrent(event.clientX);
+  // event.stopPropagation();
+  // }
 
-  const handleMouseup = (event) => {
-    setDragging(false);
-    setLastDragTime(0);
-    event.stopPropagation();
-  }
+  // const handleMouseup = (event) => {
+  //   setDragging(false);
+  //   setLastDragTime(0);
+  //   event.stopPropagation();
+  // }
 
-  useEffect(() => {
-    if (barNotHovered) return;
+  // useEffect(() => {
+  //   if (barNotHovered) return;
 
-    if (dragging &&  Date.now() - lastDragTime > 40) {
-      const diffX = dragCurrent - dragStart;
-      const absDiffX = Math.abs(diffX);
-      if (absDiffX > 15) {
-        if (diffX > 0) handleHover(DIRECTION_RIGHT);
-        else handleHover(DIRECTION_LEFT);
-      }
-      setLastDragTime(Date.now());
-    }
-  }, [dragging, dragStart, dragCurrent, lastDragTime, barNotHovered]);
+  //   if (dragging &&  Date.now() - lastDragTime > 40) {
+  //     const diffX = dragCurrent - dragStart;
+  //     const absDiffX = Math.abs(diffX);
+  //     if (absDiffX > 15) {
+  //       if (diffX > 0) handleHover(DIRECTION_RIGHT);
+  //       else handleHover(DIRECTION_LEFT);
+  //     }
+  //     setLastDragTime(Date.now());
+  //   }
+  // }, [dragging, dragStart, dragCurrent, lastDragTime, barNotHovered]);
 
   useEffect(() => {
 
     if (!barNotHovered) {
       window.addEventListener("wheel", handleWheel);
-      window.addEventListener("mousedown", handleMousedown);
-      window.addEventListener("mousemove", handleMousemove);
-      window.addEventListener("mouseup", handleMouseup); 
+      // window.addEventListener("mousedown", handleMousedown);
+      // window.addEventListener("mousemove", handleMousemove);
+      // window.addEventListener("mouseup", handleMouseup); 
     }
     
     return () => {
       window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("mousedown", handleMousedown);
-      window.removeEventListener("mousemove", handleMousemove);
-      window.removeEventListener("mouseup", handleMouseup); 
+      // window.removeEventListener("mousedown", handleMousedown);
+      // window.removeEventListener("mousemove", handleMousemove);
+      // window.removeEventListener("mouseup", handleMouseup); 
     }
   }, [barNotHovered, handleWheel]);
 
