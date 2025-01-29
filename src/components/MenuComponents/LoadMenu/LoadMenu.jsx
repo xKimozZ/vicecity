@@ -49,7 +49,7 @@ const LoadMenu = () => {
 
       const newElement = document.createElement("div");
       newElement.id = PANEL_BG_ID;
-      newElement.className = "loadPanelBackground";
+      newElement.className = styles.loadPanelBackground;
       Object.assign(newElement.style, {
         position: "absolute",
         top: `${panelRect.top}px`,
