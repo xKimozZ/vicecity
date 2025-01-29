@@ -12,10 +12,12 @@ const { BRIGHTNESS, TRAILS, SUBTITLES, WIDESCREEN, RADAR, HUD, SCREENPOS } = but
 const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID, SCREENPOS_ID, RADAR_MAPBLIPS, RADAR_BLIPSONLY, RADAR_OFF } = actionNames.DISPLAY;
 const BRIGHTNESS_WRAPPER = "brightness-wrapper";
 const RADAR_CURSOR_FACTORS = {
-  clipFactor: 4,
+  clipFactor: 7,
   topFactor: 1,
-  leftFactor: 1.1,
+  leftFactor: 1,
+  maxLeftFactor: 1.03,
   widthFactor: 1.01,
+  minHeightFactor: 1.12,
   heightFactor: 1.18,
 };
 
@@ -39,11 +41,11 @@ const DisplayMenu = () => {
   };
 
   const colonOptions = [
-    { stringKey: "trails", buttonNumber: TRAILS, buttonGroup: buttonGroups.DISPLAY, id: TRAILS_ID, isTwoStaged: false, dependencies: displaySettings[TRAILS_ID], getStatusString: Status, getOptionTextString: (key) => strings[key] },
-    { stringKey: "subtitles", buttonNumber: SUBTITLES, buttonGroup: buttonGroups.DISPLAY, id: SUBTITLES_ID, isTwoStaged: false, dependencies: displaySettings[SUBTITLES_ID], getStatusString: Status, getOptionTextString: (key) => strings[key] },
-    { stringKey: "widescreen", buttonNumber: WIDESCREEN, buttonGroup: buttonGroups.DISPLAY, id: WIDESCREEN_ID, isTwoStaged: false, dependencies: displaySettings[WIDESCREEN_ID], getStatusString: Status, getOptionTextString: (key) => strings[key] },
+    { stringKey: "trails", buttonNumber: TRAILS, buttonGroup: buttonGroups.DISPLAY, id: TRAILS_ID, isTwoStaged: false, dependencies: displaySettings[TRAILS_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
+    { stringKey: "subtitles", buttonNumber: SUBTITLES, buttonGroup: buttonGroups.DISPLAY, id: SUBTITLES_ID, isTwoStaged: false, dependencies: displaySettings[SUBTITLES_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
+    { stringKey: "widescreen", buttonNumber: WIDESCREEN, buttonGroup: buttonGroups.DISPLAY, id: WIDESCREEN_ID, isTwoStaged: false, dependencies: displaySettings[WIDESCREEN_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
     { stringKey: "radar", buttonNumber: RADAR, buttonGroup: buttonGroups.DISPLAY, id: RADAR_ID, isTwoStaged: true, dependencies: displaySettings[RADAR_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
-    { stringKey: "hud", buttonNumber: HUD, buttonGroup: buttonGroups.DISPLAY, id: HUD_ID, isTwoStaged: false, dependencies: displaySettings[HUD_ID], getStatusString: Status, getOptionTextString: (key) => strings[key] },
+    { stringKey: "hud", buttonNumber: HUD, buttonGroup: buttonGroups.DISPLAY, id: HUD_ID, isTwoStaged: false, dependencies: displaySettings[HUD_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
   ];
   
   return (
@@ -82,6 +84,7 @@ const DisplayMenu = () => {
             parentId={SCREENPOS_ID + "-parent"}
             actions={{ trigger: SCREENPOS_ID }}
             buttonGroup={buttonGroups.DISPLAY}
+            cursorFactors={RADAR_CURSOR_FACTORS}
             additionalClassnames={[
               styles.displayPadleft,
               styles.displayPadright,
