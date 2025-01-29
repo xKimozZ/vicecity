@@ -87,16 +87,21 @@ const Bar = ({
   }, [dragging, dragStart, dragCurrent, lastDragTime, barNotHovered]);
 
   useEffect(() => {
-    window.addEventListener("mousedown", handleMousedown);
-    window.addEventListener("mousemove", handleMousemove);
-    window.addEventListener("mouseup", handleMouseup); 
+
+    if (!barNotHovered) {
+      window.addEventListener("wheel", handleWheel);
+      window.addEventListener("mousedown", handleMousedown);
+      window.addEventListener("mousemove", handleMousemove);
+      window.addEventListener("mouseup", handleMouseup); 
+    }
     
     return () => {
+      window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("mousedown", handleMousedown);
       window.removeEventListener("mousemove", handleMousemove);
       window.removeEventListener("mouseup", handleMouseup); 
     }
-  }, []);
+  }, [barNotHovered, handleWheel]);
 
   return (
     <Hoverable
@@ -109,7 +114,6 @@ const Bar = ({
       activeCondition={hoverableBehaviorActive}
     >
       <div
-        onWheel={handleWheel}
         className={styles.soundBarContainer}
       >
         {levels.map((level, index) => (

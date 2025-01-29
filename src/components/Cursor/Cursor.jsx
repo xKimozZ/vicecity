@@ -28,9 +28,9 @@ const Cursor = () => {
       setViewportHeight(window.innerHeight);
     };
 
-    window.addEventListener("resize", handleResize);
+    if ( isChangingScreenPos() ) window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isChangingScreenPos]);
 
   useEffect(() => {
     if (isChangingScreenPos()) {
