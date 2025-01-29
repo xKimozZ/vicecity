@@ -54,6 +54,9 @@ const Landscape = () => {
       widthFactor: 1.15,
       heightFactor: 2,
       minHeightFactor: 1.4,
+      minWidthFactor: 1.02,
+      maxLeftFactor: 0.995,
+      maxTopFactor: 0.995,
     };
     return (
       <>
