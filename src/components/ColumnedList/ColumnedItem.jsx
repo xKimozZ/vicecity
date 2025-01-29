@@ -5,7 +5,7 @@ import Hoverable from "../Hoverable/Hoverable";
 import { actionNames } from "../../constants/actionNames";
 import styles from "./ColumnedItem.module.css";
 
-const {  SCREENPOS_ID } = actionNames.DISPLAY;
+const {  SCREENPOS_ACTION } = actionNames.DISPLAY;
 
 const DEFAULT_STYLE = { top: 0, left: 0, height: 0, width: 0 };
 const initialFakeStyles = {
@@ -44,7 +44,7 @@ const ColumnedItem = ({ stringKey, buttonNumber, buttonGroup, id, isTwoStaged, c
     };
 
     const getUpdatedFakeElements = ( updatedRects ) => {
-        const {x, y} = displaySettings[SCREENPOS_ID]; // Necessary in order to synchronize and not "overdo" the calculation
+        const {x, y} = displaySettings[SCREENPOS_ACTION]; // Necessary in order to synchronize and not "overdo" the calculation
             if (updatedRects && updatedRects.hoverableElement && updatedRects.columnElement && updatedRects.statusElement) {
               const { hoverableElement, statusElement, columnElement } = updatedRects;
               const newStyle = {
@@ -78,7 +78,7 @@ const ColumnedItem = ({ stringKey, buttonNumber, buttonGroup, id, isTwoStaged, c
         return () => {
           window.removeEventListener("resize", updatePosition); // Clean up
         };
-      }, [activeButtonGroup, displaySettings[SCREENPOS_ID], dependencies]);
+      }, [activeButtonGroup, displaySettings[SCREENPOS_ACTION], dependencies]);
 
     useEffect(() => {
         setShouldRerenderCursor(true);

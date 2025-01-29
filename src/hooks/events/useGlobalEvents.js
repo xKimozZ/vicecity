@@ -2,7 +2,7 @@ import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext"
 import { buttonGroups } from "../../constants/buttonGroups";
 import { actionNames } from "../../constants/actionNames";
 
-const { BRIGHTNESS_ID, SCREENPOS_ID } = actionNames.DISPLAY;
+const { BRIGHTNESS_ACTION, SCREENPOS_ACTION } = actionNames.DISPLAY;
 
 const useGlobalEvents = () => {
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
@@ -83,13 +83,13 @@ const useGlobalEvents = () => {
   };
 
   const updateBrightness = (newValue) => {
-    let brightnessValue = newValue ? newValue : displaySettings[BRIGHTNESS_ID];
+    let brightnessValue = newValue ? newValue : displaySettings[BRIGHTNESS_ACTION];
     const rootElement = document.getElementById("root");
     rootElement.style.filter = `brightness(${ brightnessValue + 0.08})`;
   }
 
   const updateScreenPos = (newValue) => {
-    let screenPosValue = newValue && newValue.x && newValue.y ? newValue : displaySettings[SCREENPOS_ID];
+    let screenPosValue = newValue && newValue.x && newValue.y ? newValue : displaySettings[SCREENPOS_ACTION];
 
     const borderElement = document.getElementById("fake-border");
     const appContainerElement = document.getElementById("app-container");
