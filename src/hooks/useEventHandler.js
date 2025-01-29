@@ -8,7 +8,7 @@ import useLanguageEvents from "./events/useLanguageEvents";
 import useLoadEvents from "./events/useLoadEvents";
 import useDisplayEvents from "./events/useDisplayEvents";
 import { actionNames } from "../constants/actionNames";
-import { buttonGroups } from "../constants/buttonGroups";
+import { buttonGroups, buttonIndices } from "../constants/buttonGroups";
 
 const { SELECT , HOVER, BACK, SPECIAL } = actionNames.GENERAL;
 
@@ -35,12 +35,11 @@ const useEventHandler = () => {
     // special case to prevent hovering over 'load game' and 'new game' when you are navigating across savegames
     if (
       activeButtonGroup === buttonGroups.LOAD &&
-      hoveredOption > 2 &&
-      buttonNumber <= 2
-      || bigHover.active && buttonNumber != hoveredOption && buttonNumber > 0
-    )
-      return;
+      hoveredOption > buttonIndices.LOAD.PHASE1_LIST_END &&
+      buttonNumber <= buttonIndices.LOAD.PHASE1_LIST_END
+    ) return;
 
+    // Negative numbers are dedicated for special inputs like arrows in certain options
     if (buttonNumber && buttonNumber > 0) navigationFunctions.setHoveredOption(buttonNumber);
 
     // Note: this switch statement is mostly dedicated for "special" cases which absolutely need the latest input

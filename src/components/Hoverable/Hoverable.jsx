@@ -51,8 +51,10 @@ const Hoverable = ({
       }
     };
 
-    updatePosition(); // Initial call
-    window.addEventListener("resize", updatePosition); // Update on resize
+    if (isHovered) {
+      updatePosition(); // Initial call
+      window.addEventListener("resize", updatePosition); // Update on resize
+    }
 
     return () => {
       window.removeEventListener("resize", updatePosition); // Clean up
@@ -60,21 +62,21 @@ const Hoverable = ({
   }, [hoveredOption, activeButtonGroup, bigHover.active]);
 
   const handleHover = () => {
-    if (isHovered || !isActive) return;
-    hoverFunction?.(buttonNumber);
+    hoverFunction(buttonNumber);
   };
 
   const handleSelect = () => {
-    if (!isActive) return;
-    selectFunction?.(buttonNumber);
+    selectFunction(buttonNumber);
   };
+
+  const hoverListenerEnabled = isActive && !bigHover.active && !isHovered;
 
   const classNames = [topClassName, ...additionalClassnames].join(" ");
   return (
     <div
       id={id}
-      onMouseEnter={handleHover}
-      onClick={handleSelect}
+      onMouseEnter={ hoverListenerEnabled ? handleHover : undefined }
+      onClick={ isActive ? handleSelect : undefined }
       ref={buttonRef}
       className={classNames}
       style={{ ...topStyles }}
