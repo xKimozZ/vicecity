@@ -8,6 +8,7 @@
     text-shadow: 3px 3px 0px black;
     text-transform: lowercase;
     letter-spacing: -1px;
+    /* max-height: 48px; */
 }
 
 .optionText {

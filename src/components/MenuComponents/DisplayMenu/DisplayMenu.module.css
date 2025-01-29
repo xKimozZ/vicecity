@@ -1,15 +1,17 @@
 .displayContainer {
     display: flex;
     flex-direction: column;
-    width: 80%;
-    height: 80vh;
+    width: 68%;
+    height: 80%;
+    margin-top: 3%;
+    margin-left: 6%;
     z-index: 1;
-    /* align-items: center;
-    justify-content: center; */
-    padding-left: 20%;
+
+    align-items: center;
+    justify-content: center;
 }
 
-.displayOptionFlex {
+.displayBrightnessFlex {
     display: flex;
     flex-direction: row;
     align-items: baseline;
@@ -34,7 +36,6 @@
 }
 
 .displayScreenPosImage {
-    margin-top: -4px;
     width:120px;
     height: 120px;
 }
@@ -45,4 +46,8 @@
 
 .displayPadright {
     padding-right: 0.5em;
+}
+
+.displayButtonHeight {
+    max-height: 46px;
 }

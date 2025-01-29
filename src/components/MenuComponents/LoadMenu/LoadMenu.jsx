@@ -22,6 +22,17 @@ const {
 const PANEL_ID = "load-panel";
 const PANEL_BG_ID = "load-panel-background"
 
+const LOAD_CURSOR_FACTORS = {
+  clipFactor: 9,
+  topFactor: 0.96,
+  maxTopFactor: 0.98,
+  leftFactor: 0.99,
+  widthFactor: 1.08,
+  minWidthFactor: 1.03,
+  heightFactor: 1.8,
+  minHeightFactor: 1.4,
+};
+
 const LoadMenu = () => {
   const { selectorAbstractor } = useReduxAbstractorContext();
   const strings = selectorAbstractor.localizationState.stringLoadState;
@@ -72,7 +83,8 @@ const LoadMenu = () => {
         textColor="var(--pink)"
         buttonText={strings.loadgame}
         actions={{trigger: actionNames.LOAD.LOADGAME }}
-      />
+        cursorFactors={LOAD_CURSOR_FACTORS}
+        />
       </div>
       <div className={styles.loadButton}>
       <Button
@@ -81,6 +93,7 @@ const LoadMenu = () => {
         textColor="var(--pink)"
         buttonText={strings.newgame}
         actions={{trigger: actionNames.LOAD.NEWGAME }}
+        cursorFactors={LOAD_CURSOR_FACTORS}
       />
       </div>
       </div>

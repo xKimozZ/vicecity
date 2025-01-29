@@ -48,7 +48,7 @@ const DisplayMenu = () => {
   
   return (
     <div className={styles.displayContainer}>
-      <div className={styles.displayOptionFlex} id={BRIGHTNESS_WRAPPER}>
+      <div className={styles.displayBrightnessFlex} id={BRIGHTNESS_WRAPPER}>
         <Button
           buttonText={strings.brightness}
           buttonNumber={BRIGHTNESS}
@@ -57,6 +57,7 @@ const DisplayMenu = () => {
           actions={{ trigger: BRIGHTNESS_ID }}
           id={BRIGHTNESS_ID}
           parentId={BRIGHTNESS_WRAPPER}
+          additionalClassnames={[styles.displayButtonHeight]}
         />
         <Bar
           buttonNumber={BRIGHTNESS}
@@ -84,6 +85,7 @@ const DisplayMenu = () => {
             additionalClassnames={[
               styles.displayPadleft,
               styles.displayPadright,
+              styles.displayButtonHeight,
             ]}
           />
           <img

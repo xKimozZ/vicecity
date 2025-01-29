@@ -3,18 +3,15 @@
     flex-direction: column;
     align-items: center;
     font-size: 24px;
-    gap: 0.25em;
-    width: 70%;
-    flex: 1 1;
+    flex: 0.8 1;
+    height: 80%;
+    margin-top: 2em;
     font-family: 'SF Arborcrest Heavy';
-    height: 70vh;
 }
 
 .statsHeader {
     font-family: Pricedown;
-    padding: 0.02em 0.5em;
     font-size: 48px;
-    z-index: 2;
     color: var(--pink);
     text-shadow: 3px 3px 0px black;
     text-transform: lowercase;
@@ -23,20 +20,18 @@
 
 .statsPanel {
     background-color: var(--lightblue);
-    width: 75%;
-    height: 40vh;
-    clip-path: polygon(2.5% 0%, 96% 7%, 95% 89%, 4.5% 100%);
+    width: 95%;
+    height: 70%;
+    clip-path: polygon(1.5% 0%, 96.5% 7%, 95.8% 92%, 4% 100%);
     overflow: hidden;
     position: relative;
-    z-index: 1;
 }
 
 .statsFlex {
     display: flex;
     gap: 4px;
     flex-direction: column;
-    align-items: flex-start;
-    padding-inline: 3em;
+    margin-inline: 6%;
 }
 
 .statsPanel:after{
@@ -62,13 +57,12 @@
 }
 
 .statsTransition {
-    /* transition: all linear 0.5s; */
+    transition: none;
 }
 
 .statsTransition1 {
     transition: all linear 0.1s;
 }
-
 
 .cancel {
     transition: none;
@@ -80,20 +74,15 @@
     justify-content: space-between;
 }
 
-.statsEntryTitle {
-}
-
-.statsEntryValue {
-}
-
 .statsEntry:first-child {
-    padding-top: 2em;
+    padding-top: 2.5em;
 }
 
 .statsBottom {
+    margin-top: auto;
     display: flex;
     justify-content: flex-start;
-    width: 65%;
+    width: 85%;
 }
 
 @keyframes scrollDown {
