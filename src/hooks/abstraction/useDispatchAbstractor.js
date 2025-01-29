@@ -8,8 +8,8 @@ import {
   nav_setLastKeyPressedTime,
   nav_setLastKeyUnpressedTime,
   nav_setBigHover,
-} from "../store/navigationSlice";
-import { local_setLanguage } from "../store/localizationSlice";
+} from "../../store/navigationSlice";
+import { local_setLanguage } from "../../store/localizationSlice";
 import {
   misc_decrementStatsTranslate,
   misc_incrementStatsTranslate,
@@ -18,8 +18,8 @@ import {
   misc_toggleStatsDirection,
   misc_setDisplaySettings,
   misc_setBarLastUpdate,
-} from "../store/miscSlice";
-import { cursor_changeLocation } from "../store/cursorSlice";
+} from "../../store/miscSlice";
+import { cursor_changeLocation } from "../../store/cursorSlice";
 
 const useDispatchAbstractor = () => {
   const dispatch = useDispatch();

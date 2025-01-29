@@ -1,5 +1,5 @@
 import useSoundManager from "../useSoundManager";
-import useDispatchAbstractor from "../useDispatchAbstractor";
+import useDispatchAbstractor from "../abstraction/useDispatchAbstractor";
 import { actionNames } from "../../constants/actionNames";
 
 const { HOVER, SELECT, BACK } = actionNames.GENERAL;

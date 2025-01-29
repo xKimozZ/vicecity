@@ -1,5 +1,5 @@
-import { useReduxAbstractorContext } from "../context/ReduxAbstractorContext";
-import useSoundManager from "./useSoundManager";
+import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
+import useSoundManager from "../useSoundManager";
 import { useEffect, useState, useRef } from "react";
 
 const useDebounce = () => {

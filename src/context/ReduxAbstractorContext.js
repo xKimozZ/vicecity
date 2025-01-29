@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useMemo } from 'react';
-import useSelectorAbstractor from '../hooks/useSelectorAbstractor';
-import useDispatchAbstractor from '../hooks/useDispatchAbstractor';
+import useSelectorAbstractor from '../hooks/abstraction/useSelectorAbstractor';
+import useDispatchAbstractor from '../hooks/abstraction/useDispatchAbstractor';
 
 const ReduxAbstractorContext = createContext();
 

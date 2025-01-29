@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import { navigationSelector } from "../store/navigationSlice";
-import { miscSelector } from "../store/miscSlice";
-import { cursorSelector } from "../store/cursorSlice";
+import { navigationSelector } from "../../store/navigationSlice";
+import { miscSelector } from "../../store/miscSlice";
+import { cursorSelector } from "../../store/cursorSlice";
 import { 
     languageSelector, 
     stringMenuSelector, 
@@ -10,7 +10,7 @@ import {
     stringStatsSelector, 
     stringLanguageSelector, 
     stringDisplaySelector 
-} from "../store/localizationSlice";
+} from "../../store/localizationSlice";
 
 const useSelectorAbstractor = () => {
     // Strings

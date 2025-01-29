@@ -1,6 +1,6 @@
 import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
 import useSoundManager from "../useSoundManager";
-import useDebounce from "../useDebounce";
+import useDebounce from "./useDebounce";
 import { useEffect } from "react";
 import { actionNames } from "../../constants/actionNames";
 import { buttonGroups } from "../../constants/buttonGroups";
