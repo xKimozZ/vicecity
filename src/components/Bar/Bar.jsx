@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./Bar.module.css";
 import { useEventHandlerContext } from "../../context/EventHandlerContext";
 import { actionNames } from "../../constants/actionNames";
@@ -23,6 +23,7 @@ const Bar = ({
 
   const [levels, setLevels] = useState([]);
   const [filled, setFilled] = useState();
+  const barRef = useRef(null);
 
   // Dragging stuff
   // const [dragStart, setDragStart] = useState(null);
@@ -85,11 +86,23 @@ const Bar = ({
   //     setLastDragTime(Date.now());
   //   }
   // }, [dragging, dragStart, dragCurrent, lastDragTime, barNotHovered]);
+  
+  const handleClick = (event) => {
+    const parentElement = barRef.current;
+    const clickPositionX = ( event.clientX ) - parentElement.getBoundingClientRect().left;
+    if (clickPositionX < -30 || clickPositionX > 30 + parentElement.offsetWidth) return;
+
+    let barNumber = Math.ceil(clickPositionX / (parentElement.offsetWidth) * barCount);
+    if (barNumber < 0 ) barNumber = 0;
+    if (barNumber > barCount) barNumber = barCount;
+    handleSpecial(barNumber);
+  };
 
   useEffect(() => {
 
     if (!barNotHovered) {
       window.addEventListener("wheel", handleWheel);
+      window.addEventListener("click", handleClick);
       // window.addEventListener("mousedown", handleMousedown);
       // window.addEventListener("mousemove", handleMousemove);
       // window.addEventListener("mouseup", handleMouseup); 
@@ -97,11 +110,12 @@ const Bar = ({
     
     return () => {
       window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("click", handleClick);
       // window.removeEventListener("mousedown", handleMousedown);
       // window.removeEventListener("mousemove", handleMousemove);
       // window.removeEventListener("mouseup", handleMouseup); 
     }
-  }, [barNotHovered, handleWheel]);
+  }, [barNotHovered, handleWheel, handleClick, handleSpecial, value]);
 
   return (
     <Hoverable
@@ -113,14 +127,11 @@ const Bar = ({
       renderById={true}
       activeCondition={hoverableBehaviorActive}
     >
-      <div
-        className={styles.soundBarContainer}
-      >
+      <div className={styles.soundBarContainer} ref={barRef}>
         {levels.map((level, index) => (
           <div
             key={index}
             className={styles.bar}
-            onClick={() => handleSpecial(index + 1)}
             style={{
               height: `${level}px`, // Set height based on the generated levels
               backgroundColor: index < filled ? "#61c2f7" : "#1b5982",
