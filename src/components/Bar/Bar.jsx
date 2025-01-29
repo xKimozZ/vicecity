@@ -48,7 +48,8 @@ const Bar = ({
 
   const handleWheel = (event) => {
     if (!hoverableBehaviorActive()) { 
-      event.deltaY > 0 ? handleHover(DIRECTION_LEFT) : handleHover(DIRECTION_RIGHT);
+      if (event.deltaY !== 0) event.deltaY > 0 ? handleHover(DIRECTION_LEFT) : handleHover(DIRECTION_RIGHT);
+      if (event.deltaX !== 0) event.deltaX > 0 ? handleHover(DIRECTION_LEFT) : handleHover(DIRECTION_RIGHT);
     }
     event.stopPropagation();
   };
