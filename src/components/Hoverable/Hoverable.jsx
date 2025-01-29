@@ -1,5 +1,5 @@
 import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { buttonGroups } from "../../constants/buttonGroups";
 import { useEventHandlerContext } from "../../context/EventHandlerContext";
 
@@ -28,28 +28,34 @@ const Hoverable = ({
 
   const isHovered = hoveredOption === buttonNumber;
   const isActive = activeButtonGroup === buttonGroup && activeCondition();
-  const hasParent = () => {
-    const parent2suffix = columnParams.twoStaged && !bigHover.active ? "2" : ""; 
+  
+  const getParent = useCallback(() => {
+    const parent2suffix = columnParams.twoStaged && !bigHover.active ? "2" : "";
     return document.getElementById(parentId + parent2suffix);
-  };
+  }, [parentId, columnParams.twoStaged, bigHover.active]);
+
+  const updatePosition = useCallback(() => {
+    if (isHovered && isActive && buttonRef.current) {
+      const alwaysParent = alwaysBigHover && getParent();
+      const wasInBigHover = bigHover.active && bigHover.myId === id;
+      const selfElement = renderById ? document.getElementById(id) : buttonRef.current;
+
+      const elementToHighlight = alwaysParent || wasInBigHover ? getParent() : selfElement;
+
+      globalHookFunctions.rerenderCursor(elementToHighlight, cursorFactors);
+      navigationFunctions.setCurrentActions(actions);
+
+      navigationFunctions.setBigHover({
+        myId: id,
+        parentId: parentId,
+        active: bigHover.active,
+        always: alwaysBigHover,
+        twoStaged: columnParams.twoStaged,
+      });
+    }
+  }, [isHovered, isActive, bigHover, cursorFactors, actions, parentId, columnParams.twoStaged, alwaysBigHover, renderById, id]); // Add all dependencies
 
   useEffect(() => {
-    const updatePosition = () => {
-      // This is entered only if the global hovered option successfully picks me
-      if (isHovered && isActive && buttonRef.current) {
-        const alwaysParent = alwaysBigHover && hasParent();
-        const wasInBigHover = bigHover.active && bigHover.myId === id;
-        const selfElement = renderById ? document.getElementById(id) : buttonRef.current;
-
-        const elementToHighlight = alwaysParent || wasInBigHover ? hasParent() : selfElement;
-
-        globalHookFunctions.rerenderCursor(elementToHighlight, cursorFactors);
-        navigationFunctions.setCurrentActions(actions);
-
-        const newBigHover = {myId: id, parentId: parentId, active: wasInBigHover, always: alwaysBigHover, twoStaged: columnParams.twoStaged};
-        navigationFunctions.setBigHover(newBigHover);
-      }
-    };
 
     if (isHovered) {
       updatePosition(); // Initial call
