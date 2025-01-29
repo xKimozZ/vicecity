@@ -45,6 +45,7 @@ const StatsMenu = () => {
     if (activeButtonGroup === buttonGroups.STATS) { 
       event.deltaY < 0 ? miscFunctions.incrementStatsTranslate(2) : miscFunctions.decrementStatsTranslate(2);
     }
+    event.preventDefault();
     event.stopPropagation();
   };
 
