@@ -88,9 +88,40 @@ function App() {
     });
   },[nextButtonGroup]);
 
+  // Just playing the old fashioned way
   useEffect(() =>
   {
-    handleInfo(); 
+    const disclaimerObject = document.getElementById("disclaimer");
+    const test = () => {
+      const timeoutId = setTimeout(() => {handleInfo()}, 100);
+      
+      if (disclaimerObject && disclaimerObject.style.opacity !== '0')
+      { 
+        disclaimerObject.style.opacity = '0'; 
+        window.alert("Hiding disclaimer! Click on bottom again to unhide.");
+      } else {
+        disclaimerObject.style.removeProperty('opacity');
+        window.alert("Disclaimer unhidden!");
+      }
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+
+    if (disclaimerObject) disclaimerObject.addEventListener("click", test);
+    const anchorElements = disclaimerObject.getElementsByTagName("a");
+    for (let i = 0; i < anchorElements.length; i++)
+      anchorElements[i].addEventListener("click", (event) => {
+        event.stopPropagation();
+    });
+
+    return () => {
+      if (disclaimerObject) disclaimerObject.removeEventListener("click", test)
+        for (let i = 0; i < anchorElements.length; i++)
+          anchorElements[i].removeEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+      };
   },[]);
 
   return (
@@ -110,7 +141,17 @@ function App() {
         <div className="bottomButtonRow">
           {renderButtons(optionsPerRow[1], menuOptions.length) }
         </div>
-
+        <footer id="disclaimer" className="disclaimer">
+          <span style={{color:'var(--pink)'}}>GTA Vice City PS2 Frontend: </span> 
+          <span style={{color:'#61dafb'}}>React Recreation. </span> 
+          <span style={{color:'var(--green)'}}> 
+            <a href="https://github.com/xKimozZ" target="_blank" rel="noopener noreferrer" >Built by xKimozZ </a>
+            <a href="https://www.linkedin.com/in/karim-ayman-h/" target="_blank" rel="noopener noreferrer" >(Karim Ayman). </a>
+          </span> 
+          The original assets and design belong to <a href="https://www.rockstargames.com" target="_blank" rel="noopener noreferrer" >Rockstar Games</a> and Take-Two Interactive, and this is a non-profit hobby project that does not intend to infringe on any trademarks.
+          Please note the app is still under development primarily for desktop, so some features might not be optimized or available yet. More info will be available soon.
+          <span style={{color:'var(--pink)'}}> Feel free to check the code! :)</span>
+        </footer>
       </div>
     </div>
     </>
