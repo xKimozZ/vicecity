@@ -1,4 +1,5 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
+import { useEventHandlerContext } from "../../../context/EventHandlerContext";
 import { useEffect } from "react";
 import styles from "./DisplayMenu.module.css";
 import Button from "../../Button/Button";
@@ -10,6 +11,8 @@ import { actionNames } from "../../../constants/actionNames";
 
 const { BRIGHTNESS, TRAILS, SUBTITLES, WIDESCREEN, RADAR, HUD, SCREENPOS } = buttonIndices.DISPLAY;
 const { BRIGHTNESS_ID, TRAILS_ID, SUBTITLES_ID, WIDESCREEN_ID, RADAR_ID, HUD_ID, SCREENPOS_ID, RADAR_MAPBLIPS, RADAR_BLIPSONLY, RADAR_OFF } = actionNames.DISPLAY;
+const { DIRECTION_UP, DIRECTION_DOWN, DIRECTION_LEFT, DIRECTION_RIGHT } = actionNames.ARROWS;
+
 const BRIGHTNESS_WRAPPER = "brightness-wrapper";
 const RADAR_CURSOR_FACTORS = {
   clipFactor: 7,
@@ -24,7 +27,10 @@ const RADAR_CURSOR_FACTORS = {
 const DisplayMenu = () => {
   const { selectorAbstractor } = useReduxAbstractorContext();
   const { displaySettings } = selectorAbstractor.miscState;
+  const { bigHover } = selectorAbstractor.navigationState;
   const strings = selectorAbstractor.localizationState.stringDisplayState;
+
+  const { handleHover } = useEventHandlerContext();
 
   const Status = (key) => {
     if (key === RADAR_ID) {
@@ -47,6 +53,30 @@ const DisplayMenu = () => {
     { stringKey: "radar", buttonNumber: RADAR, buttonGroup: buttonGroups.DISPLAY, id: RADAR_ID, isTwoStaged: true, dependencies: displaySettings[RADAR_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
     { stringKey: "hud", buttonNumber: HUD, buttonGroup: buttonGroups.DISPLAY, id: HUD_ID, isTwoStaged: false, dependencies: displaySettings[HUD_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
   ];
+
+  const isChangingScreenPos = bigHover.active && bigHover.myId === SCREENPOS_ID;
+
+  const changePosWithWheel = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    if (isChangingScreenPos) { 
+      if (event.deltaY !== 0) event.deltaY > 0 ? handleHover(DIRECTION_DOWN) : handleHover(DIRECTION_UP);
+      if (event.deltaX !== 0) event.deltaX > 0 ? handleHover(DIRECTION_LEFT) : handleHover(DIRECTION_RIGHT);
+    }
+  };
+
+  useEffect(() => {
+    if (isChangingScreenPos) 
+    {
+      window.addEventListener("wheel", changePosWithWheel);
+      window.addEventListener("touchmove", changePosWithWheel);
+    }
+    
+    return () => {
+      window.removeEventListener("wheel", changePosWithWheel);
+      window.removeEventListener("touchmove", changePosWithWheel);
+    };
+  }, [isChangingScreenPos, changePosWithWheel]);
   
   return (
     <div className={styles.displayContainer}>
