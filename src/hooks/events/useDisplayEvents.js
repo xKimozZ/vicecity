@@ -66,11 +66,8 @@ const useDisplayEvents = (globalHookFunctions) => {
   }
 
   useEffect(() => {
-    if (activeButtonGroup !== buttonGroups.DISPLAY) destroyFakeBorder();
-    return () => {
-      destroyFakeBorder();
-    };
-  }, [activeButtonGroup]);
+    if (activeButtonGroup !== buttonGroups.DISPLAY || !bigHover.active) destroyFakeBorder();
+  }, [activeButtonGroup, bigHover]);
 
   useEffect(() => {
     globalHookFunctions.updateScreenPos();
