@@ -1,8 +1,7 @@
 
 .optionGrid {
     display: grid;
-    grid-template-columns: 0.8fr 0.05fr 0.15fr;
+    width: 100%;
+    grid-template-columns: 0.5fr 0fr 0.5fr;
     align-items: baseline;
-    text-align: center;
-    width: max-content;
 }
