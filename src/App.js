@@ -103,11 +103,11 @@ function App() {
       <div className="App">
           {renderHoveredComponent()}
       </div>
-      <div className='buttonContainer' onClick={()=> {if (activeButtonGroup !== buttonGroups.MAIN) handleBack(1)}}>
-      <div className="frame">
+      <div className='bottomButtonContainer' onClick={()=> {if (activeButtonGroup !== buttonGroups.MAIN) handleBack(1)}}>
+      <div className="bottomButtonRow">
           {renderButtons(0, optionsPerRow[0]) }
         </div>
-        <div className="frame">
+        <div className="bottomButtonRow">
           {renderButtons(optionsPerRow[1], menuOptions.length) }
         </div>
 
