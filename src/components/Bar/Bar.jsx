@@ -133,7 +133,6 @@ const Bar = ({
             key={index}
             className={styles.bar}
             style={{
-              height: `${level}px`, // Set height based on the generated levels
               backgroundColor: index < filled ? "#61c2f7" : "#1b5982",
             }}
           />

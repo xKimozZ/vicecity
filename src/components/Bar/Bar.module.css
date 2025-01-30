@@ -1,13 +1,89 @@
 .soundBarContainer {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    padding-left: 1em;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 1em;
+  width: 100%;
+  height: 100%;
 }
-  
-  .bar {
-    width: 9px; /* Adjust the width of individual bars */
-    background-color: #61c2f7; /* Color of the bar */
-    box-shadow: 6px 4px 0px black;
-    transition: height 0.3s ease; /* Smooth transition for height changes */
+
+.bar {
+  width: 9px; /* Fixed width */
+  background-color: #61c2f7;
+  box-shadow: 6px 4px 0px black;
+  transition: height 0.3s ease;
+  flex-grow: 1;
+}
+
+:root {
+  --bar-height-base: 24px;
+  --bar-height-increment: 5.5px;
+  --bar-height-scale: 1; /* Default scale */
+}
+
+@media (max-height: 768px) {
+  :root {
+    --bar-height-scale: 1;
   }
+}
+@media (max-height: 640px) {
+  :root {
+    --bar-height-scale: 0.85;
+  }
+  .bar {
+    width: 6.5px;
+  }
+}
+@media (max-height: 570px) {
+  :root {
+    --bar-height-scale: 0.7;
+  }
+  .bar {
+    width: 6px;
+  }
+}
+@media (max-height: 500px) {
+  :root {
+    --bar-height-scale: 0.6;
+  }
+  .bar {
+    width: 5.5px;
+    box-shadow: 3.5px 3px 0px black;
+  }
+  .soundBarContainer {
+    gap: 5px;
+  }
+}
+
+@media (min-height: 1080px) {
+  :root {
+    --bar-height-scale: 1.2;
+  }
+}
+
+/* The crucial fix is here: scale BOTH base and increment! */
+.bar {
+  height: calc(var(--bar-height-base) * var(--bar-height-scale) + var(--bar-height-increment) * var(--bar-height-scale) * var(--level-index)); /* Dynamic height */
+}
+
+/* Important: Add a CSS variable for the level index */
+.bar:nth-child(1) { --level-index: 0; }
+.bar:nth-child(2) { --level-index: 1; }
+.bar:nth-child(3) { --level-index: 2; }
+.bar:nth-child(4) { --level-index: 3; }
+.bar:nth-child(5) { --level-index: 4; }
+.bar:nth-child(6) { --level-index: 5; }
+.bar:nth-child(7) { --level-index: 6; }
+.bar:nth-child(8) { --level-index: 7; }
+.bar:nth-child(9) { --level-index: 8; }
+.bar:nth-child(10) { --level-index: 9; }
+.bar:nth-child(11) { --level-index: 10; }
+.bar:nth-child(12) { --level-index: 11; }
+.bar:nth-child(13) { --level-index: 12; }
+.bar:nth-child(14) { --level-index: 13; }
+.bar:nth-child(15) { --level-index: 14; }
+.bar:nth-child(16) { --level-index: 15; }
+
+.bar {
+  height: calc(var(--bar-height-base) * var(--bar-height-scale) + var(--bar-height-increment) * var(--bar-height-scale) * var(--level-index)); /* Dynamic height */
+}
