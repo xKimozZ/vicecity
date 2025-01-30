@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./BuildInfo.module.css";
 
 const BuildInfo = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
