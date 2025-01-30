@@ -32,13 +32,37 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.2em;
+    justify-content: space-between;
 }
 
+
+:root {
+    --pos-scale-base: 1;
+  }
+  
+  @media (max-height: 768px) {
+    :root {
+      --pos-scale-base: 1.01;
+    }
+  }
+  
+  @media (min-height: 1080px) {
+    :root {
+      --pos-scale-base: 1.2;
+    }
+  }
+
 .displayScreenPosImage {
-    width:120px;
-    height: 120px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("./../../../assets/images/scsize.png");
+    transform: scale(var(--pos-scale-base));
 }
+  
+  /* The crucial fix is here: scale BOTH base and increment! */
+  .bar {
+    height: calc(var(--bar-height-base) * var(--bar-height-scale) + var(--bar-height-increment) * var(--bar-height-scale) * var(--level-index)); /* Dynamic height */
+  }
 
 .displayPadleft {
     padding-left: 1em;
