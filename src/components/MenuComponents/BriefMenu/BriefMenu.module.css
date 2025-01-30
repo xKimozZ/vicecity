@@ -3,14 +3,12 @@
     height: 70%;
     width: 80%;
 
-    font-size: 32px;
     display: flex;
     flex-direction: column;
     gap: 0.6em;
     justify-content: center;
 
     text-align: left;
-    font-family: 'SF Arborcrest Heavy';
 }
 
 .briefLine {

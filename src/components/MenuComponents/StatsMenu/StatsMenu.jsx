@@ -50,8 +50,8 @@ const StatsMenu = () => {
   };
 
   return (
-    <div className={styles.statsContainer}>
-      <span className={styles.statsHeader}>{strings.crimra}</span>
+    <div className={`${styles.statsContainer} arborcrest arborcrestS`}>
+      <span className="pricedown pricedownM">{strings.crimra}</span>
       {strings.rating_1} [0]
       <div onWheel={handleWheel} onTouchMove={handleWheel} className={styles.statsPanel}>
         <div className={`${styles.statsFlex}

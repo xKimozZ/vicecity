@@ -1,16 +1,13 @@
 .saveButton {
     padding-left: 20px;
-    font-size: 32px;
     width: 95%;
     z-index: 1;
     text-align: left;
-    font-family: 'SF Arborcrest Heavy';
     position: relative;
 }
 
 .saveDate {
     position: absolute;
-    font-size: 24px;
     bottom: -36%;
     right: 30%;
 }

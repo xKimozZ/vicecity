@@ -88,12 +88,12 @@ const SaveGame = ({
       buttonGroup={buttonGroup}
       actions={actions}
       cursorFactors={SAVEGAME_FACTORS}
-      topClassName={`${styles.saveButton}`}
+      topClassName={`${styles.saveButton} arborcrest arborcrestM`}
       activeCondition={isChoosingSaveGames}
     >
       {saveText}
       {saveFile && (
-        <span className={styles.saveDate}>{generateDate(saveFile.date)}</span>
+        <span className={`${styles.saveDate} arborcrestS`}>{generateDate(saveFile.date)}</span>
       )}
     </Hoverable>
   );

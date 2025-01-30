@@ -9,7 +9,7 @@ const Header = () => {
 
   const currentMenuName = getMenuName( nextButtonGroup, strings);
 
-  return <span className={styles.Header}>{currentMenuName}</span>;
+  return <span className={`${styles.Header} pricedownL`}>{currentMenuName}</span>;
 };
 
 export default Header;

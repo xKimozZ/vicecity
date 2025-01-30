@@ -101,7 +101,7 @@ const ColumnedItem = ({ stringKey, buttonNumber, buttonGroup, id, isTwoStaged, c
             id={id}
             parentId={id + "-parent"}
             alwaysBigHover={true}
-            topClassName={`${styles.theText}`}
+            topClassName={`${styles.theText} pricedown pricedownM`}
             columnParams={{ twoStaged: isTwoStaged }}
             cursorFactors={cursorFactors}
         >

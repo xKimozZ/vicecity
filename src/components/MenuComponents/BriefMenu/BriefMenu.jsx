@@ -7,7 +7,7 @@ const BriefMenu = () => {
   const strings = selectorAbstractor.localizationState.stringBriefState;
 
   return (
-    <div className={styles.briefContainer}>
+    <div className={`${styles.briefContainer} arborcrest arborcrestM`}>
       {strings[briefKey].map((line, index) => (
         <span key={index} className={styles.briefLine}>
           {line}
