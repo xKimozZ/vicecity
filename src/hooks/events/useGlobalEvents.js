@@ -3,7 +3,7 @@ import { buttonGroups } from "../../constants/buttonGroups";
 import { actionNames } from "../../constants/actionNames";
 import { elementIds } from "../../constants/elementIds";
 
-const { BRIGHTNESS_ACTION, SCREENPOS_ACTION } = actionNames.DISPLAY;
+const { BRIGHTNESS_ID, SCREENPOS_ID } = actionNames.DISPLAY;
 const { FRONTEND_ROOT_ID, FRONTEND_BACKGROUND_ID, FRONTEND_CONTAINER_ID } = elementIds.FRONTEND;
 
 const FAKE_BORDER_ID = "fake-border"
@@ -87,13 +87,13 @@ const useGlobalEvents = () => {
   };
 
   const updateBrightness = (newValue) => {
-    let brightnessValue = newValue ? newValue : displaySettings[BRIGHTNESS_ACTION];
+    let brightnessValue = newValue ? newValue : displaySettings[BRIGHTNESS_ID];
     const rootElement = document.getElementById(FRONTEND_ROOT_ID);
     rootElement.style.filter = `brightness(${ brightnessValue + 0.08})`;
   }
 
   const updateScreenPos = (newValue) => {
-    let screenPosValue = newValue && newValue.x && newValue.y ? newValue : displaySettings[SCREENPOS_ACTION];
+    let screenPosValue = newValue && newValue.x && newValue.y ? newValue : displaySettings[SCREENPOS_ID];
 
     const borderElement = document.getElementById(FAKE_BORDER_ID);
     const appContainerElement = document.getElementById(FRONTEND_CONTAINER_ID);

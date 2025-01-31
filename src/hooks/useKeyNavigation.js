@@ -5,7 +5,7 @@ import { handleArrowNavigation } from "../utils/buttonGroupKeyNavigation";
 import { buttonGroups } from "../constants/buttonGroups";
 import { actionNames } from "../constants/actionNames";
 
-const {BRIGHTNESS_ACTION, SCREENPOS_ACTION} = actionNames.DISPLAY;
+const {BRIGHTNESS_ID, SCREENPOS_ID} = actionNames.DISPLAY;
 
 const useKeyNavigation = (optionsPerRow) => {
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
@@ -24,11 +24,11 @@ const useKeyNavigation = (optionsPerRow) => {
   }
 
   const barCondition = (event) => {
-    return activeButtonGroup === buttonGroups.DISPLAY && (event.key === "ArrowLeft" || event.key === "ArrowRight") && bigHover.active && bigHover.myId === BRIGHTNESS_ACTION;
+    return activeButtonGroup === buttonGroups.DISPLAY && (event.key === "ArrowLeft" || event.key === "ArrowRight") && bigHover.active && bigHover.myId === BRIGHTNESS_ID;
   }
 
   const screenPosCondition = (event) => {
-    return activeButtonGroup === buttonGroups.DISPLAY && (event.key === "ArrowLeft" || event.key === "ArrowRight" || event.key === "ArrowUp" || event.key === "ArrowDown") && bigHover.active && bigHover.myId === SCREENPOS_ACTION;
+    return activeButtonGroup === buttonGroups.DISPLAY && (event.key === "ArrowLeft" || event.key === "ArrowRight" || event.key === "ArrowUp" || event.key === "ArrowDown") && bigHover.active && bigHover.myId === SCREENPOS_ID;
   }
 
   const keyHandlers = {

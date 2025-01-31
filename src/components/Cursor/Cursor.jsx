@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import styles from "./Cursor.module.css";
 import { actionNames } from "../../constants/actionNames";
 
-const { SCREENPOS_ACTION } = actionNames.DISPLAY;
+const { SCREENPOS_ID } = actionNames.DISPLAY;
 
 const Cursor = () => {
   const { selectorAbstractor } = useReduxAbstractorContext();
@@ -19,7 +19,7 @@ const Cursor = () => {
   const [finalPosition, setFinalPosition] = useState({});
   
   const isChangingScreenPos = () => {
-    return bigHover.active && bigHover.myId === SCREENPOS_ACTION;
+    return bigHover.active && bigHover.myId === SCREENPOS_ID;
   };
 
   useEffect(() => {
@@ -35,10 +35,10 @@ const Cursor = () => {
   useEffect(() => {
     if (isChangingScreenPos()) {
       setFinalPosition({position:"absolute", 
-      transform: `translate(${displaySettings[SCREENPOS_ACTION].x - lastXY.x}px, ${displaySettings[SCREENPOS_ACTION].y - lastXY.y}px)`});
+      transform: `translate(${displaySettings[SCREENPOS_ID].x - lastXY.x}px, ${displaySettings[SCREENPOS_ID].y - lastXY.y}px)`});
       return;
     } else {
-      setLastXY({x: displaySettings[SCREENPOS_ACTION].x, y: displaySettings[SCREENPOS_ACTION].y});
+      setLastXY({x: displaySettings[SCREENPOS_ID].x, y: displaySettings[SCREENPOS_ID].y});
       setFinalPosition({});
     }
   }, [bigHover, viewportWidth, viewportHeight, top, left, displaySettings]);

@@ -10,13 +10,13 @@ const { HOVER, SELECT, BACK, SPECIAL } = actionNames.GENERAL;
 const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = actionNames.ARROWS;
 
 const {
-    BRIGHTNESS_ACTION,
-    TRAILS_ACTION,
-    SUBTITLES_ACTION,
-    WIDESCREEN_ACTION,
-    RADAR_ACTION,
-    HUD_ACTION,
-    SCREENPOS_ACTION,
+    BRIGHTNESS_ID,
+    TRAILS_ID,
+    SUBTITLES_ID,
+    WIDESCREEN_ID,
+    RADAR_ID,
+    HUD_ID,
+    SCREENPOS_ID,
     RADAR_MAPBLIPS,
     RADAR_OFF,
 } = actionNames.DISPLAY;
@@ -49,7 +49,7 @@ const useDisplayEvents = (globalHookFunctions) => {
     height: "calc(99.3vh - 12px)",
     width: "calc(99.3vw - 12px)",
     border: "6px solid yellow",
-    transform: `translate(${displaySettings[SCREENPOS_ACTION].x}px, ${displaySettings[SCREENPOS_ACTION].y}px)`,
+    transform: `translate(${displaySettings[SCREENPOS_ID].x}px, ${displaySettings[SCREENPOS_ID].y}px)`,
   };
 
   const FAKE_BORDER_ID = "fake-border"
@@ -74,26 +74,26 @@ const useDisplayEvents = (globalHookFunctions) => {
 
   useEffect(() => {
     globalHookFunctions.updateScreenPos();
-  }, [displaySettings[SCREENPOS_ACTION]]);
+  }, [displaySettings[SCREENPOS_ID]]);
 
   const selectCase = () => {
     switch(optionId)
           {
-            case SCREENPOS_ACTION:
+            case SCREENPOS_ID:
                   const cursorFactors = bigHover.active ? null : DEFAULT_FACTORS;
                   bigHover.active ? destroyFakeBorder() : createFakeBorder();
                   toggleBigHover(cursorFactors);
                   playSelect();
               break;
-            case BRIGHTNESS_ACTION:
+            case BRIGHTNESS_ID:
               toggleBigHover(DEFAULT_FACTORS);
               playHover();
               break;
             
-            case TRAILS_ACTION:
-            case SUBTITLES_ACTION:
-            case WIDESCREEN_ACTION:
-            case HUD_ACTION:
+            case TRAILS_ID:
+            case SUBTITLES_ID:
+            case WIDESCREEN_ID:
+            case HUD_ID:
               {  
                 playSelect();
                 const { myId, parentId, always } = bigHover;
@@ -102,7 +102,7 @@ const useDisplayEvents = (globalHookFunctions) => {
                 miscFunctions.setDisplaySettings(newDisplaySettings);
                 break;
               } 
-            case RADAR_ACTION:
+            case RADAR_ID:
               {
                 playHover();
                 toggleBigHover();
@@ -114,40 +114,40 @@ const useDisplayEvents = (globalHookFunctions) => {
   const hoverCase = (direction) => {
     try {
         switch (optionId) {
-          case BRIGHTNESS_ACTION:
-            if (bigHover.active && bigHover.myId === BRIGHTNESS_ACTION) {
+          case BRIGHTNESS_ID:
+            if (bigHover.active && bigHover.myId === BRIGHTNESS_ID) {
         
-              const currentBrightness = displaySettings[BRIGHTNESS_ACTION];
+              const currentBrightness = displaySettings[BRIGHTNESS_ID];
               if (direction === DIRECTION_UP || direction === DIRECTION_DOWN ) return;
               let sign = direction === DIRECTION_LEFT ? -1 : 1;
               
               const newBrightness = incrementBar(currentBrightness, sign, playSoundAfterDelay);
               updateBrightness(newBrightness);
 
-              const newDisplaySettings = {...displaySettings,[BRIGHTNESS_ACTION]: newBrightness,};
+              const newDisplaySettings = {...displaySettings,[BRIGHTNESS_ID]: newBrightness,};
               miscFunctions.setDisplaySettings(newDisplaySettings);
              }
              break;
-          case RADAR_ACTION:
-            if (bigHover.active && bigHover.myId === RADAR_ACTION) {
+          case RADAR_ID:
+            if (bigHover.active && bigHover.myId === RADAR_ID) {
               let sign;
               if (direction === DIRECTION_LEFT) sign = -1; else if (direction === DIRECTION_RIGHT) sign = 1; else return;
-              const currentOption = displaySettings[RADAR_ACTION];
+              const currentOption = displaySettings[RADAR_ID];
               let newOption = currentOption + sign;
               if (newOption < RADAR_MAPBLIPS) newOption = RADAR_OFF;
               if (newOption > RADAR_OFF) newOption = RADAR_MAPBLIPS;
-              const newDisplaySettings = {...displaySettings,[RADAR_ACTION]: newOption};
+              const newDisplaySettings = {...displaySettings,[RADAR_ID]: newOption};
               miscFunctions.setDisplaySettings(newDisplaySettings);
               playSelect();
               }
               break;
-          case SCREENPOS_ACTION:
-            if (bigHover.active && bigHover.myId === SCREENPOS_ACTION) {
+          case SCREENPOS_ID:
+            if (bigHover.active && bigHover.myId === SCREENPOS_ID) {
               const isInX = direction === DIRECTION_LEFT || direction === DIRECTION_RIGHT;
               const isInY = direction === DIRECTION_UP || direction === DIRECTION_DOWN;
               const sign = direction === DIRECTION_LEFT || direction === DIRECTION_UP ? -1 : 1;
               
-              const {x:oldX, y:oldY} = displaySettings[SCREENPOS_ACTION];
+              const {x:oldX, y:oldY} = displaySettings[SCREENPOS_ID];
               let newX = oldX;
               let newY = oldY;
 
@@ -161,7 +161,7 @@ const useDisplayEvents = (globalHookFunctions) => {
               
               const newOption = {x: newX, y: newY};
               
-              const newDisplaySettings = {...displaySettings,[SCREENPOS_ACTION]: newOption};
+              const newDisplaySettings = {...displaySettings,[SCREENPOS_ID]: newOption};
               miscFunctions.setDisplaySettings(newDisplaySettings);
               }
               break;
@@ -172,11 +172,11 @@ const useDisplayEvents = (globalHookFunctions) => {
   }
 
   const specialCase = (barSelected) => {
-    if (bigHover.active && bigHover.myId === BRIGHTNESS_ACTION)
+    if (bigHover.active && bigHover.myId === BRIGHTNESS_ID)
         {
           const newBrightness = (barSelected / 16);
           updateBrightness(newBrightness);
-          const newDisplaySettings = {...displaySettings,[BRIGHTNESS_ACTION]: newBrightness,};
+          const newDisplaySettings = {...displaySettings,[BRIGHTNESS_ID]: newBrightness,};
           miscFunctions.setDisplaySettings(newDisplaySettings);
           playSelect();
         }
