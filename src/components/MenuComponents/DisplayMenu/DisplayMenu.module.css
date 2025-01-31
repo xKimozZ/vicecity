@@ -1,77 +1,137 @@
 .displayContainer {
-    display: flex;
-    flex-direction: column;
-    width: 68%;
-    height: 80%;
-    margin-top: 3%;
-    margin-left: 6%;
-    z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 68%;
+  height: 80%;
+  margin-top: 3%;
+  margin-left: 6%;
+  z-index: 1;
 
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .displayBrightnessFlex {
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    gap: 0.2em;
-    text-align: right;
-    width: max-content;
-    padding-right: 0.45em;
-    padding-block: 0.1em;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.2em;
+  text-align: right;
+  width: max-content;
+  padding-right: 0.45em;
+  padding-block: 0.1em;
+  margin-left: 6.5em;
 }
-
-.displayScreenPosCenterFlex {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.displayScreenPosColFlex {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-
-
-:root {
-    --pos-scale-base: 1;
-  }
-  
-  @media (max-height: 768px) {
-    :root {
-      --pos-scale-base: 1.01;
-    }
-  }
-  
-  @media (min-height: 1080px) {
-    :root {
-      --pos-scale-base: 1.2;
-    }
-  }
-
-.displayScreenPosImage {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("./../../../assets/images/scsize.png");
-    transform: scale(var(--pos-scale-base));
-}
-  
-  /* The crucial fix is here: scale BOTH base and increment! */
-  .bar {
-    height: calc(var(--bar-height-base) * var(--bar-height-scale) + var(--bar-height-increment) * var(--bar-height-scale) * var(--level-index)); /* Dynamic height */
-  }
 
 .displayPadleft {
-    padding-left: 1em;
+  padding-left: 1em;
 }
 
 .displayPadright {
-    padding-right: 0.5em;
+  padding-right: 0.5em;
 }
 
 .displayButtonHeight {
-    max-height: 46px;
+  max-height: 46px;
+}
+
+.displayScreenPosCenterFlex {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.displayScreenPosColFlex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-between;
+}
+
+:root {
+  --pos-dims-base: 120px;
+  --pos-scale-base: 1;
+}
+
+
+@media (max-height: 768px) {
+  :root {
+    --pos-scale-base: 1.01;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  :root {
+    --pos-scale-base: 0.9;
+  }
+  
+}
+
+@media screen and (max-height: 640px) {
+  :root {
+    --pos-scale-base: 0.8;
+  }
+  
+}
+
+@media screen and (max-height: 540px) {
+  :root {
+    --pos-scale-base: 0.7;
+  }
+  
+}
+
+@media screen and (max-height: 480px) {
+  :root {
+    --pos-scale-base: 0.6;
+  }
+  
+}
+
+@media screen and (max-height: 360px) {
+  :root {
+    --pos-scale-base: 0.5;
+  }
+  
+}
+
+
+
+@media (min-height: 900px) {
+  :root {
+    --pos-scale-base: 1.2;
+  }
+  .displayScreenPosImage {
+    margin-top: 1em;
+  }
+}
+
+@media (min-height: 1000px) {
+  :root {
+    --pos-scale-base: 1.4;
+  }
+  .displayScreenPosImage {
+    margin-top: 4em;
+  }
+}
+
+@media (min-height: 1400px) {
+  :root {
+    --pos-scale-base: 1.8;
+  }
+}
+
+@media (min-height: 1800px) {
+  :root {
+    --pos-scale-base: 2.5;
+  }
+  .displayScreenPosImage {
+    margin-top: 6em;
+  }
+}
+
+.displayScreenPosImage {
+  pointer-events: none;
+  width: calc(var(--pos-dims-base) * var(--pos-scale-base));
+  height: calc(var(--pos-dims-base) * var(--pos-scale-base));
 }

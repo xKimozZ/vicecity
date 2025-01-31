@@ -121,7 +121,7 @@ const DisplayMenu = () => {
               styles.displayButtonHeight,
             ]}
           />
-          <div
+          <img src={imageImports.miscImages.scsize}
             className={`${styles.displayScreenPosImage} posImage`}
           />
         </div>
