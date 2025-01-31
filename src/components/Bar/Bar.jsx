@@ -25,12 +25,6 @@ const Bar = ({
   const [filled, setFilled] = useState();
   const barRef = useRef(null);
 
-  // Dragging stuff
-  // const [dragStart, setDragStart] = useState(null);
-  // const [dragging, setDragging] = useState(false);
-  // const [dragCurrent, setDragCurrent] = useState(null);
-  // const [lastDragTime, setLastDragTime] = useState(0);
-
   const barNotHovered = (buttonGroup !== activeButtonGroup || hoveredOption !== buttonNumber || !bigHover.active);
   const hoverableBehaviorActive = () => barNotHovered;
 
@@ -41,81 +35,43 @@ const Bar = ({
 
   useEffect(() => {
     const generatedLevels = Array.from({ length: barCount }, (_, index) => {
-      return 24 + index * 6; // Trend-like increasing heights
+      return 0;
     });
 
     setLevels(generatedLevels);
   }, [barCount]);
 
-  const handleWheel = (event) => {
-    if (!barNotHovered) { 
-      if (event.deltaY !== 0) event.deltaY > 0 ? handleHover(DIRECTION_LEFT) : handleHover(DIRECTION_RIGHT);
-      if (event.deltaX !== 0) event.deltaX > 0 ? handleHover(DIRECTION_LEFT) : handleHover(DIRECTION_RIGHT);
-    }
-    event.stopPropagation();
-  };
-
-  // const handleMousedown = (event) => {
-  //   setDragStart(event.clientX);
-  //   setDragging(true);
-  //   event.stopPropagation();
-  // };
-
-  // const handleMousemove = (event) => {
-  //   if (Date.now() - lastDragTime > 60)
-  //   setDragCurrent(event.clientX);
-  // event.stopPropagation();
-  // }
-
-  // const handleMouseup = (event) => {
-  //   setDragging(false);
-  //   setLastDragTime(0);
-  //   event.stopPropagation();
-  // }
-
-  // useEffect(() => {
-  //   if (barNotHovered) return;
-
-  //   if (dragging &&  Date.now() - lastDragTime > 40) {
-  //     const diffX = dragCurrent - dragStart;
-  //     const absDiffX = Math.abs(diffX);
-  //     if (absDiffX > 15) {
-  //       if (diffX > 0) handleHover(DIRECTION_RIGHT);
-  //       else handleHover(DIRECTION_LEFT);
-  //     }
-  //     setLastDragTime(Date.now());
-  //   }
-  // }, [dragging, dragStart, dragCurrent, lastDragTime, barNotHovered]);
-  
-  const handleClick = (event) => {
-    const parentElement = barRef.current;
-    const clickPositionX = ( event.clientX ) - parentElement.getBoundingClientRect().left;
-    if (clickPositionX < -30 || clickPositionX > 30 + parentElement.offsetWidth) return;
-
-    let barNumber = Math.ceil(clickPositionX / (parentElement.offsetWidth) * barCount);
-    if (barNumber < 0 ) barNumber = 0;
-    if (barNumber > barCount) barNumber = barCount;
-    handleSpecial(barNumber);
-  };
-
   useEffect(() => {
+
+    const handleClick = (event) => {
+      const parentElement = barRef.current;
+      const clickPositionX = ( event.clientX ) - parentElement.getBoundingClientRect().left;
+      if (clickPositionX < -30 || clickPositionX > 30 + parentElement.offsetWidth) return;
+  
+      let barNumber = Math.ceil(clickPositionX / (parentElement.offsetWidth) * barCount);
+      if (barNumber < 0 || barNumber === -0) barNumber = 0;
+      if (barNumber > barCount) barNumber = barCount;
+      handleSpecial(barNumber);
+    };
+
+    const handleWheel = (event) => {
+      if (!barNotHovered) { 
+        if (event.deltaY !== 0) event.deltaY > 0 ? handleHover(DIRECTION_LEFT) : handleHover(DIRECTION_RIGHT);
+        if (event.deltaX !== 0) event.deltaX > 0 ? handleHover(DIRECTION_LEFT) : handleHover(DIRECTION_RIGHT);
+      }
+      event.stopPropagation();
+    };
 
     if (!barNotHovered) {
       window.addEventListener("wheel", handleWheel);
       window.addEventListener("click", handleClick);
-      // window.addEventListener("mousedown", handleMousedown);
-      // window.addEventListener("mousemove", handleMousemove);
-      // window.addEventListener("mouseup", handleMouseup); 
     }
     
     return () => {
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("click", handleClick);
-      // window.removeEventListener("mousedown", handleMousedown);
-      // window.removeEventListener("mousemove", handleMousemove);
-      // window.removeEventListener("mouseup", handleMouseup); 
     }
-  }, [barNotHovered, handleWheel, handleClick, handleSpecial, value]);
+  }, [barNotHovered, handleSpecial, value, barRef]);
 
   return (
     <Hoverable
@@ -128,7 +84,7 @@ const Bar = ({
       activeCondition={hoverableBehaviorActive}
     >
       <div className={styles.soundBarContainer} ref={barRef}>
-        {levels.map((level, index) => (
+        {levels.map((index) => (
           <div
             key={index}
             className={styles.bar}
