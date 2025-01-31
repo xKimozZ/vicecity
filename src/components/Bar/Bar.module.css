@@ -15,16 +15,23 @@
 }
 
 :root {
-  --bar-width-base: 8.5px;
+  --bar-width-base: 7px;
   --bar-height-base: 18px;
   --bar-height-increment: 4.5px;
   --bar-height-scale: 1;
   --bar-width-scale: 1;
 }
 
-@media (max-height: 768px) {
+@media (max-height: 678px) {
   :root {
     --bar-height-scale: 1;
+    --bar-width-scale: 0.9;
+  }
+  .bar {
+    box-shadow: 3.5px 3px 0px rgb(0, 0, 0, 0.75);
+  }
+  .soundBarContainer {
+    gap: 6px;
   }
 }
 @media (max-height: 640px) {
@@ -81,13 +88,13 @@
 @media (max-height: 400px) {
   :root {
     --bar-height-scale: 0.5;
-    --bar-width-scale: 0.55;
+    --bar-width-scale: 0.45;
   }
   .bar {
     box-shadow: 2.6px 1.5px 0px rgb(0, 0, 0, 0.75);
   }
   .soundBarContainer {
-    gap: 4.5px;
+    gap: 3.5px;
     padding: 0.5em;
   }
 }
@@ -95,6 +102,36 @@
 @media (min-height: 1080px) {
   :root {
     --bar-height-scale: 1.2;
+    --bar-width-scale: 1.2;
+  }
+  .bar {
+    box-shadow: 6px 5px 0px rgb(0, 0, 0, 0.75);
+  }
+  .soundBarContainer {
+    gap: 9px;
+  }
+}
+
+@media (min-height: 1440px) {
+  :root {
+    --bar-height-scale: 1.6;
+    --bar-width-scale: 1.6;
+  }
+  .bar {
+    box-shadow: 7px 5px 0px rgb(0, 0, 0, 0.75);
+  }
+  .soundBarContainer {
+    gap: 12px;
+  }
+}
+
+@media (min-height: 2000px) {
+  :root {
+    --bar-height-scale: 2;
+    --bar-width-scale: 2;
+  }
+  .bar {
+    box-shadow: 8px 8px 0px rgb(0, 0, 0, 0.75);
   }
 }
 

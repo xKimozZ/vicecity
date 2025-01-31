@@ -16,7 +16,6 @@
   animation: fadeIn 0.4s;
 }
 
-
 @media (max-width: 1200px) {
   .Header {
     letter-spacing: -0.8px;
@@ -42,5 +41,26 @@
   .Header {
     letter-spacing: -0.2px;
     text-shadow: -2px 2px 0px rgb(27, 27, 27, 0.8);
+  }
+}
+
+@media (min-width: 1400px) {
+  .Header {
+    letter-spacing: -1.2px;
+    text-shadow: -12px 12px 0px rgb(27, 27, 27, 0.8);
+  }
+}
+
+@media (min-width: 1600px) {
+  .Header {
+    letter-spacing: -1.4px;
+    text-shadow: -14px 14px 0px rgb(27, 27, 27, 0.8);
+  }
+}
+
+@media (min-width: 1800px) {
+  .Header {
+    letter-spacing: -1.6px;
+    text-shadow: -16px 16px 0px rgb(27, 27, 27, 0.8);
   }
 }

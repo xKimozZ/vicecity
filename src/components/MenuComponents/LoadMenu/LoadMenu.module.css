@@ -18,7 +18,7 @@
 
 .loadPanel {
     height: 80%;
-    padding: 1.2em;
+    padding: 1em;
     display: flex;
     justify-content: center;
 }
@@ -36,5 +36,5 @@
 .loadPanelBackground {
     background-color: var(--lightblue);
     clip-path: polygon(2.5% 0%, 96% 3%, 100% 100%, 4% 97%);
-  }
+}
   
