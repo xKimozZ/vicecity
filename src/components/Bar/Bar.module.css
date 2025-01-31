@@ -1,24 +1,25 @@
 .soundBarContainer {
   display: flex;
   align-items: flex-end;
-  gap: 8px;
+  gap: 7px;
   padding: 1em;
-  width: 100%;
-  height: 100%;
+  margin-top: 0.5em;
+  width: max-content;
+  height: max-content;
 }
 
 .bar {
-  width: 9px; /* Fixed width */
   background-color: #61c2f7;
-  box-shadow: 6px 4px 0px black;
-  transition: height 0.3s ease;
+  box-shadow: 4px 3px 0px rgb(0, 0, 0, 0.75);
   flex-grow: 1;
 }
 
 :root {
-  --bar-height-base: 24px;
-  --bar-height-increment: 5.5px;
-  --bar-height-scale: 1; /* Default scale */
+  --bar-width-base: 8.5px;
+  --bar-height-base: 18px;
+  --bar-height-increment: 4.5px;
+  --bar-height-scale: 1;
+  --bar-width-scale: 1;
 }
 
 @media (max-height: 768px) {
@@ -29,29 +30,65 @@
 @media (max-height: 640px) {
   :root {
     --bar-height-scale: 0.85;
+    --bar-width-scale: 0.9;
   }
   .bar {
-    width: 6.5px;
+    box-shadow: 3.5px 3px 0px rgb(0, 0, 0, 0.75);
+  }
+  .soundBarContainer {
+    gap: 6.5px;
   }
 }
 @media (max-height: 570px) {
   :root {
     --bar-height-scale: 0.7;
+    --bar-width-scale: 0.8;
   }
   .bar {
-    width: 6px;
+    box-shadow: 3.5px 3px 0px rgb(0, 0, 0, 0.75);
+  }
+  .soundBarContainer {
+    gap: 6px;
   }
 }
-@media (max-height: 500px) {
+
+@media (max-height: 530px) {
   :root {
-    --bar-height-scale: 0.6;
+    --bar-height-scale: 0.65;
+    --bar-width-scale: 0.7;
   }
   .bar {
-    width: 5.5px;
-    box-shadow: 3.5px 3px 0px black;
+    box-shadow: 3.2px 3px 0px rgb(0, 0, 0, 0.75);
+  }
+  .soundBarContainer {
+    gap: 5.5px;
+  }
+}
+
+@media (max-height: 480px) {
+  :root {
+    --bar-height-scale: 0.6;
+    --bar-width-scale: 0.6;
+  }
+  .bar {
+    box-shadow: 3px 2px 0px rgb(0, 0, 0, 0.75);
   }
   .soundBarContainer {
     gap: 5px;
+  }
+}
+
+@media (max-height: 400px) {
+  :root {
+    --bar-height-scale: 0.5;
+    --bar-width-scale: 0.55;
+  }
+  .bar {
+    box-shadow: 2.6px 1.5px 0px rgb(0, 0, 0, 0.75);
+  }
+  .soundBarContainer {
+    gap: 4.5px;
+    padding: 0.5em;
   }
 }
 
@@ -59,11 +96,6 @@
   :root {
     --bar-height-scale: 1.2;
   }
-}
-
-/* The crucial fix is here: scale BOTH base and increment! */
-.bar {
-  height: calc(var(--bar-height-base) * var(--bar-height-scale) + var(--bar-height-increment) * var(--bar-height-scale) * var(--level-index)); /* Dynamic height */
 }
 
 /* Important: Add a CSS variable for the level index */
@@ -86,4 +118,5 @@
 
 .bar {
   height: calc(var(--bar-height-base) * var(--bar-height-scale) + var(--bar-height-increment) * var(--bar-height-scale) * var(--level-index)); /* Dynamic height */
+  width: calc(var(--bar-width-base) * var(--bar-width-scale))
 }

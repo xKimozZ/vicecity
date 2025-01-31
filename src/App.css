@@ -49,7 +49,6 @@ body {
 .AppContainer {
   min-height: 100vh;
   position: relative;
-  min-width: 640px;
   display: grid;
   grid-template-rows: 81vh 19vh;
   z-index: 2;

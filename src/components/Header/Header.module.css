@@ -1,17 +1,46 @@
 @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
 
 .Header {
-    font-family: Pricedown;
-    position: absolute;
-    top: 6%;
-    right: 7%;
-    z-index: 2;
-    color: var(--pink);
-    text-shadow: -10px 10px 0px rgb(27, 27, 27, 0.8);
-    text-transform: lowercase;
-    letter-spacing: -1px;
-    animation: fadeIn 0.4s;
+  font-family: Pricedown;
+  position: absolute;
+  top: 6%;
+  right: 7%;
+  z-index: 2;
+  color: var(--pink);
+  text-shadow: -10px 10px 0px rgb(27, 27, 27, 0.8);
+  text-transform: lowercase;
+  letter-spacing: -1px;
+  animation: fadeIn 0.4s;
+}
+
+
+@media (max-width: 1200px) {
+  .Header {
+    letter-spacing: -0.8px;
+    text-shadow: -8px 8px 0px rgb(27, 27, 27, 0.8);
+  }
+}
+
+@media (max-width: 992px) {
+  .Header {
+    letter-spacing: -0.6px;
+    text-shadow: -6px 6px 0px rgb(27, 27, 27, 0.8);
+  }
+}
+
+@media (max-width: 768px) {
+  .Header {
+    letter-spacing: -0.4px;
+    text-shadow: -4px 4px 0px rgb(27, 27, 27, 0.8);
+  }
+}
+
+@media (max-width: 576px) {
+  .Header {
+    letter-spacing: -0.2px;
+    text-shadow: -2px 2px 0px rgb(27, 27, 27, 0.8);
+  }
 }
