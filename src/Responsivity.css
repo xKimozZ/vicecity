@@ -3,6 +3,7 @@
   --base-font-size-pricedownM: 48px;
   --base-font-size-arborcrestM: 32px;
   --base-font-size-arborcrestS: 24px;
+  --base-font-size-arborcrestXS: 16px;
   --base-background-size: 256px;
   --base-pos-size: 128px;
   --scale-factor: 1; /* Default scale factor */
@@ -174,20 +175,16 @@
   font-size: calc(var(--base-font-size-arborcrestS) * var(--scale-factor));
 }
 
-.backgroundElement {
-  background-size: calc(var(--base-background-size) * var(--scale-factor));
+
+.arborcrestXS {
+  font-size: calc(var(--base-font-size-arborcrestXS) * var(--scale-factor));
 }
 
-.posImage {
-  width: calc(var(--base-pos-size) * var(--scale-factor));
-  height: calc(var(--base-pos-size) * var(--scale-factor));
+.backgroundElement {
+  background-size: calc(var(--base-background-size) * var(--scale-factor));
 }
 
 .viceLogo {
   width: calc(var(--base-background-size) * var(--scale-factor));
   height: calc(var(--base-background-size) * var(--scale-factor));
-}
-
-.barScale {
-  height: var(--scale-factor);
 }
