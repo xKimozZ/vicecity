@@ -35,7 +35,7 @@ const Bar = ({
 
   useEffect(() => {
     const generatedLevels = Array.from({ length: barCount }, (_, index) => {
-      return 0;
+      return 0; // Trend-like increasing heights
     });
 
     setLevels(generatedLevels);
@@ -84,7 +84,7 @@ const Bar = ({
       activeCondition={hoverableBehaviorActive}
     >
       <div className={styles.soundBarContainer} ref={barRef}>
-        {levels.map((index) => (
+        {levels.map((level, index) => (
           <div
             key={index}
             className={styles.bar}
