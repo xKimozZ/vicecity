@@ -10,7 +10,7 @@
 }
 
 /* Media queries to adjust scale factor based on height */
-@media screen and ((max-height: 700px)) {
+@media screen and (max-height: 700px) {
   :root {
     --scale-factor: 0.9; /* Adjust as needed */
   }
@@ -95,7 +95,7 @@
   }
 }
 
-@media screen and ( (min-height: 800px) or (min-width: 1200px) ) { /* Example: 1080p and above */
+@media screen and (min-height: 800px) { /* Example: 1080p and above */
   :root {
     --scale-factor: 1.05; /* Increase scale factor for larger screens */
   }
@@ -103,7 +103,7 @@
     text-shadow: 3.5px 3.5px 0px black;
   }
 }
-@media screen and ( (min-height: 900px) or (min-width: 1400px) ) { /* Example: 1080p and above */
+@media screen and (min-height: 900px) { /* Example: 1080p and above */
   :root {
     --scale-factor: 1.1; /* Increase scale factor for larger screens */
   }
@@ -124,7 +124,7 @@
 
 }
 
-@media screen and ( (min-height: 1000px) or (min-width: 1600px) ) { /* Example: 1080p and above */
+@media screen and (min-height: 1200px) { /* Example: 1080p and above */
   :root {
     --scale-factor: 1.55; /* Increase scale factor for larger screens */
   }
@@ -135,7 +135,7 @@
 
 }
 
-@media screen and ( (min-height: 1440px) or (min-width: 2000px) ) { /* Example: 1440p and above */
+@media screen and (min-height: 1440px) { /* Example: 1440p and above */
   :root {
     --scale-factor: 1.9; /* Further increase for even larger screens */
   }
