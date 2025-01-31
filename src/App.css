@@ -49,7 +49,7 @@ body {
 .AppContainer {
   position: relative;
   display: grid;
-  grid-template-rows: 81vh 19vh;
+  grid-template-rows: 81dvh 19dvh;
   z-index: 2;
 }
 
