@@ -9,6 +9,57 @@
   --scale-factor: 1; /* Default scale factor */
 }
 
+@media screen and (max-width: 900px) {
+  :root {
+    --scale-factor: 0.85;
+  }
+  .pricedown {
+    text-shadow: 2.5px 2px 0px black;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --scale-factor: 0.7;
+  }
+  .pricedown {
+    text-shadow: 2px 2px 0px black;
+  }
+  .AppContainer {
+    grid-template-rows: 60dvh 40dvh;
+  }
+  .backgroundElement {
+    height: 75dvh;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .AppContainer {
+    display: none;
+  }
+  .backgroundElement {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    --scale-factor: 0.75;
+  }
+  .pricedown {
+    text-shadow: 1.5px 1.5px 0px black;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  :root {
+    --scale-factor: 0.65;
+  }
+  .pricedown {
+    text-shadow: 1px 1px 0px black;
+  }
+}
+
 /* Media queries to adjust scale factor based on height */
 @media screen and (max-height: 700px) {
   :root {
