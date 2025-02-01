@@ -95,3 +95,63 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
+
+.phone {
+  display: none;
+  color: aliceblue;
+  width: 100vw;
+  height: 100vh;
+}
+
+.phone-bg {
+  width: 100vw;
+  height: 100vh;
+  clip-path: polygon(4% 9%, 100% 12%, 100% 100%, 7% 100%);
+  position: absolute;
+  background-image: url('./assets/images/background_portrait.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+
+
+@keyframes portraitBackgroundGoIn {
+  0% { background-position-x: 250px; }
+  100% { background-position-x: 0; }
+}
+
+@media screen and (max-width: 640px) and (orientation: portrait) {
+  .AppContainer {
+    display: none;
+  }
+  .backgroundElement {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 640px) and (orientation: portrait) {
+  .phone {
+    display: flex;
+    width: 100dvw;
+    height: 100dvh;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    
+    background-image: url('./assets/images/background_portrait.jpg');
+    background-position: -9em 0px;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .phoneContent {
+    padding: 2em;
+    font: 0.6em;
+    background-color: var(--pink);
+    opacity: 0.9;
+  }
+  .phone-bg {
+    animation: portraitBackgroundGoIn 3s;
+  }
+}
