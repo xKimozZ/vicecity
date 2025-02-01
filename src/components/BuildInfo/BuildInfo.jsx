@@ -63,7 +63,7 @@ const BuildInfo = () => {
             this header by clicking on the top of the page. <br />
             <div style={{ color: "var(--pink)", textAlign: "center" }}>
               {" "}
-              Feel free to check the code! :)
+              Feel free to check the code using browser developer tools until the repo goes public! :)
             </div>
           </div>
         </div>
