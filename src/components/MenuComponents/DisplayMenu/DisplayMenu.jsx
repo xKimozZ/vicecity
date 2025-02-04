@@ -27,7 +27,7 @@ const RADAR_CURSOR_FACTORS = {
 const DisplayMenu = () => {
   const { selectorAbstractor } = useReduxAbstractorContext();
   const { displaySettings } = selectorAbstractor.miscState;
-  const { bigHover } = selectorAbstractor.navigationState;
+  const { bigHover, currentActions } = selectorAbstractor.navigationState;
   const strings = selectorAbstractor.localizationState.stringDisplayState;
 
   const { handleHover } = useEventHandlerContext();
@@ -54,7 +54,7 @@ const DisplayMenu = () => {
     { stringKey: "hud", buttonNumber: HUD, buttonGroup: buttonGroups.DISPLAY, id: HUD_ID, isTwoStaged: false, dependencies: displaySettings[HUD_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
   ];
 
-  const isChangingScreenPos = bigHover.active && bigHover.myId === SCREENPOS_ID;
+  const isChangingScreenPos = bigHover.active && currentActions.trigger === SCREENPOS_ID;
 
   const changePosWithWheel = (event) => {
     event.preventDefault();
