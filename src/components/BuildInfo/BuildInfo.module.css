@@ -29,7 +29,6 @@
 .disclaimer {
   display: none;
   width: 100%;
-  padding: 1em;
   z-index: 1;
   
   text-transform: none;
@@ -46,7 +45,8 @@
 .disclaimerContent {
   margin-inline: 10%;
   padding: 1em;
-  font-size: 1.4em;
+  padding-top: 3em;
+  font-size: 1.2em;
   border-radius: 0px 0px 4px 4px;
   background-color: rgb(40, 44, 52, 0.93);
 }
