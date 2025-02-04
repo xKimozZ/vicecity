@@ -89,7 +89,7 @@ const Bar = ({
             key={index}
             className={styles.bar}
             style={{
-              backgroundColor: index < filled ? "#61c2f7" : "#1b5982",
+              backgroundColor: index < filled ? "var(--cyan)" : "var(--navy)",
             }}
           />
         ))}
