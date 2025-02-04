@@ -9,30 +9,31 @@
   --scale-factor: 1; /* Default scale factor */
 }
 
-@media screen and (max-width: 900px) {
+/* @media screen and (max-width: 900px) {
   :root {
     --scale-factor: 0.85;
   }
   .pricedown {
     text-shadow: 2.5px 2px 0px black;
-  }
-}
+    }
+    } */
+    
 /*
 @media screen and (max-width: 768px) {
   :root {
-    --scale-factor: 0.7;
+    --scale-factor: 1.2;
   }
   .pricedown {
     text-shadow: 2px 2px 0px black;
   }
   .AppContainer {
-    grid-template-rows: 60dvh 40dvh;
+    grid-template-rows: 71dvh 29dvh;
   }
   .backgroundElement {
-    height: 75dvh;
+    height: 90dvh;
   }
 }
-
+        
 @media screen and (max-width: 540px) {
   .AppContainer {
     display: none;
@@ -89,7 +90,6 @@
   }
   .pricedown {
     text-shadow: 2px 2px 0px black;
-
   }
 }
 
@@ -146,7 +146,8 @@
   }
 }
 
-@media screen and (min-height: 800px) { /* Example: 1080p and above */
+@media screen and (min-height: 800px) {
+  /* Example: 1080p and above */
   :root {
     --scale-factor: 1.05; /* Increase scale factor for larger screens */
   }
@@ -154,7 +155,8 @@
     text-shadow: 3.5px 3.5px 0px black;
   }
 }
-@media screen and (min-height: 900px) { /* Example: 1080p and above */
+@media screen and (min-height: 900px) {
+  /* Example: 1080p and above */
   :root {
     --scale-factor: 1.1; /* Increase scale factor for larger screens */
   }
@@ -163,30 +165,30 @@
   }
 }
 
-@media screen and (min-height: 1000px) { /* Example: 1080p and above */
+@media screen and (min-height: 1000px) {
+  /* Example: 1080p and above */
   :root {
-    --scale-factor: 1.35; /* Increase scale factor for larger screens */
+    --scale-factor: 1.575; /* Increase scale factor for larger screens */
   }
 
   .pricedown {
     text-shadow: 4.5px 4.5px 0px black;
   }
-
-
 }
 
-@media screen and (min-height: 1200px) { /* Example: 1080p and above */
+@media screen and (min-height: 1200px) {
+  /* Example: 1080p and above */
   :root {
-    --scale-factor: 1.55; /* Increase scale factor for larger screens */
+    --scale-factor: 1.7; /* Increase scale factor for larger screens */
   }
 
   .pricedown {
     text-shadow: 5px 5px 0px black;
   }
-
 }
 
-@media screen and (min-height: 1440px) { /* Example: 1440p and above */
+@media screen and (min-height: 1440px) {
+  /* Example: 1440p and above */
   :root {
     --scale-factor: 1.9; /* Further increase for even larger screens */
   }
@@ -196,7 +198,8 @@
   }
 }
 
-@media screen and (min-height: 1600px) { /* Example: 1440p and above */
+@media screen and (min-height: 1600px) {
+  /* Example: 1440p and above */
   :root {
     --scale-factor: 2.5; /* Further increase for even larger screens */
   }
@@ -206,7 +209,6 @@
     letter-spacing: -0.3px;
   }
 }
-
 
 .pricedownM {
   font-size: calc(var(--base-font-size-pricedownM) * var(--scale-factor));
@@ -225,7 +227,6 @@
 .arborcrestS {
   font-size: calc(var(--base-font-size-arborcrestS) * var(--scale-factor));
 }
-
 
 .arborcrestXS {
   font-size: calc(var(--base-font-size-arborcrestXS) * var(--scale-factor));
