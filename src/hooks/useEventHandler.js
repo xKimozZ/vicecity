@@ -6,7 +6,7 @@ import useStatsEvents from "./events/useStatsEvents";
 import useMainEvents from "./events/useMainEvents";
 import useLanguageEvents from "./events/useLanguageEvents";
 import useLoadEvents from "./events/useLoadEvents";
-import useDisplayEvents from "./events/useDisplayEvents";
+import useDisplayEvents from "./events/display/useDisplayEvents";
 import { actionNames } from "../constants/actionNames";
 import { buttonGroups, buttonIndices } from "../constants/buttonGroups";
 
