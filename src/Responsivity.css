@@ -70,7 +70,7 @@
 
 @media screen and (max-height: 650px) {
   :root {
-    --scale-factor: 0.8; /* Adjust as needed */
+    --scale-factor: 0.85; /* Adjust as needed */
   }
   .pricedown {
     letter-spacing: -0.3px;
@@ -80,13 +80,13 @@
 
 @media screen and (max-height: 600px) {
   :root {
-    --scale-factor: 0.75; /* Adjust as needed */
+    --scale-factor: 0.8; /* Adjust as needed */
   }
 }
 
 @media screen and (max-height: 560px) {
   :root {
-    --scale-factor: 0.7; /* Adjust as needed */
+    --scale-factor: 0.75; /* Adjust as needed */
   }
   .pricedown {
     text-shadow: 2px 2px 0px black;
@@ -95,13 +95,13 @@
 
 @media screen and (max-height: 500px) {
   :root {
-    --scale-factor: 0.65; /* Adjust as needed */
+    --scale-factor: 0.7; /* Adjust as needed */
   }
 }
 
 @media screen and (max-height: 450px) {
   :root {
-    --scale-factor: 0.6; /* Adjust as needed */
+    --scale-factor: 0.65; /* Adjust as needed */
   }
   .pricedown {
     text-shadow: 2px 2px 0px black;
@@ -110,13 +110,13 @@
 
 @media screen and (max-height: 420px) {
   :root {
-    --scale-factor: 0.55; /* Adjust as needed */
+    --scale-factor: 0.6; /* Adjust as needed */
   }
 }
 
 @media screen and (max-height: 380px) {
   :root {
-    --scale-factor: 0.47; /* Adjust as needed */
+    --scale-factor: 0.55; /* Adjust as needed */
   }
   .pricedown {
     text-shadow: 1.5px 1.5px 0px black;
@@ -127,19 +127,19 @@
 
 @media screen and (max-height: 330px) {
   :root {
-    --scale-factor: 0.4; /* Adjust as needed */
+    --scale-factor: 0.5; /* Adjust as needed */
   }
 }
 
 @media screen and (max-height: 300px) {
   :root {
-    --scale-factor: 0.35; /* Adjust as needed */
+    --scale-factor: 0.45; /* Adjust as needed */
   }
 }
 
 @media screen and (max-height: 270px) {
   :root {
-    --scale-factor: 0.3; /* Adjust as needed */
+    --scale-factor: 0.4; /* Adjust as needed */
   }
   .pricedown {
     text-shadow: 1px 1px 0px black;
