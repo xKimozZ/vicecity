@@ -5,7 +5,7 @@
 .tipsContainer {
   z-index: 1;
   position: absolute;
-  top: 62%;
+  top: 63%;
   right: -1.8%;
   padding: 0.35em;
   min-width: 18em;
@@ -44,7 +44,7 @@ table td:nth-child(3) {
 
 @media screen and (max-width: 1280px) {
   .tipsContainer {
-    transform: translateX(10%) scale(0.9);
+    transform: translateX(15%) scale(0.9);
   }
   .tipsContent {
     font-size: 0.8em;
