@@ -26,14 +26,14 @@ const RADAR_CURSOR_FACTORS = {
 
 const SCREENPOS_CURSOR_FACTORS = {
   clipFactor: 7,
-  topFactor: 0.99,
+  topFactor: 1,
   maxTopFactor: 1,
-  leftFactor: 1.05,
-  maxLeftFactor: 1.06,
+  leftFactor: 1.02,
+  maxLeftFactor: 1.03,
   widthFactor: 0.95,
   minWidthFactor: 0.97,
-  minHeightFactor: 1.02,
-  heightFactor: 1.04,
+  minHeightFactor: 1,
+  heightFactor: 1.005,
 };
 
 const BRIGHTNESS_CURSOR_FACTORS = {
