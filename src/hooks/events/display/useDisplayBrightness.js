@@ -7,14 +7,6 @@ const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = action
 
 const { BRIGHTNESS_ID } = actionNames.DISPLAY;
 
-const DEFAULT_FACTORS = {
-  clipFactor: 3,
-  topFactor: 0.95,
-  leftFactor: 1,
-  widthFactor: 1.11,
-  heightFactor: 1.3,
-};
-
 const useDisplayBrightness = (globalHookFunctions) => {
   const { toggleBigHover, incrementBar, updateBrightness } = globalHookFunctions;
   const { playSoundAfterDelay } = useDebounce();
@@ -25,7 +17,7 @@ const useDisplayBrightness = (globalHookFunctions) => {
   const { displaySettings } = selectorAbstractor.miscState;
 
   const toggleBrightnessMode = () => {
-    toggleBigHover(DEFAULT_FACTORS);
+    toggleBigHover();
     playHover();
   };
 

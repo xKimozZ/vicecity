@@ -15,6 +15,7 @@ const Bar = ({
   actions = { trigger: "brightness" },
   id = "bar",
   parentId = "bar-parent",
+  cursorFactors,
 }) => {
   const { selectorAbstractor } = useReduxAbstractorContext();
   const { hoveredOption , activeButtonGroup ,bigHover } = selectorAbstractor.navigationState;
@@ -81,6 +82,7 @@ const Bar = ({
       id={id}
       parentId={parentId}
       renderById={true}
+      cursorFactors={cursorFactors}
       activeCondition={hoverableBehaviorActive}
     >
       <div className={styles.soundBarContainer} ref={barRef}>

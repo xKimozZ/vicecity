@@ -10,13 +10,6 @@ const { SCREENPOS_ID } = actionNames.DISPLAY;
 const { FRONTEND_ROOT_ID } = elementIds.FRONTEND;
 
 const MAX_VIEWPORT_RATIO = 0.5;
-const DEFAULT_FACTORS = {
-  clipFactor: 3,
-  topFactor: 0.95,
-  leftFactor: 1,
-  widthFactor: 1.11,
-  heightFactor: 1.3,
-};
 
 const useDisplayScPos = (globalHookFunctions) => {
   const { toggleBigHover } = globalHookFunctions;
@@ -67,7 +60,7 @@ const useDisplayScPos = (globalHookFunctions) => {
     // If just selected, create the border, else toggle off and delete it
     bigHover.active ? destroyFakeBorder() : createFakeBorder();
     
-    toggleBigHover(DEFAULT_FACTORS);
+    toggleBigHover();
     playSelect();
   };
 

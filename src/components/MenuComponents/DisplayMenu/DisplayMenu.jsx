@@ -24,6 +24,30 @@ const RADAR_CURSOR_FACTORS = {
   heightFactor: 1.18,
 };
 
+const SCREENPOS_CURSOR_FACTORS = {
+  clipFactor: 7,
+  topFactor: 0.99,
+  maxTopFactor: 1,
+  leftFactor: 1.05,
+  maxLeftFactor: 1.06,
+  widthFactor: 0.95,
+  minWidthFactor: 0.97,
+  minHeightFactor: 1.02,
+  heightFactor: 1.04,
+};
+
+const BRIGHTNESS_CURSOR_FACTORS = {
+  clipFactor: 4,
+  topFactor: 0.99,
+  maxTopFactor: 1,
+  leftFactor: 0.98,
+  maxLeftFactor: 1,
+  widthFactor: 1.05,
+  minWidthFactor: 1.04,
+  minHeightFactor: 1.07,
+  heightFactor: 1.12,
+};
+
 const DisplayMenu = () => {
   const { selectorAbstractor } = useReduxAbstractorContext();
   const { displaySettings } = selectorAbstractor.miscState;
@@ -89,8 +113,9 @@ const DisplayMenu = () => {
           actions={{ trigger: BRIGHTNESS_ID }}
           id={BRIGHTNESS_ID}
           parentId={BRIGHTNESS_WRAPPER}
+          cursorFactors={BRIGHTNESS_CURSOR_FACTORS}
           additionalClassnames={[styles.displayButtonHeight]}
-        />
+          />
         <Bar
           buttonNumber={BRIGHTNESS}
           buttonGroup={buttonGroups.DISPLAY}
@@ -98,6 +123,7 @@ const DisplayMenu = () => {
           id={BRIGHTNESS_ID}
           parentId={BRIGHTNESS_WRAPPER}
           value={displaySettings[BRIGHTNESS_ID]}
+          cursorFactors={BRIGHTNESS_CURSOR_FACTORS}
         />
       </div>
       <ColumnedList items={colonOptions} />
@@ -114,7 +140,7 @@ const DisplayMenu = () => {
             parentId={SCREENPOS_ID + "-parent"}
             actions={{ trigger: SCREENPOS_ID }}
             buttonGroup={buttonGroups.DISPLAY}
-            cursorFactors={RADAR_CURSOR_FACTORS}
+            cursorFactors={SCREENPOS_CURSOR_FACTORS}
             additionalClassnames={[
               styles.displayPadleft,
               styles.displayPadright,
