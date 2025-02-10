@@ -24,6 +24,7 @@
 
 table td:nth-child(1) {
   text-align: right;
+  min-width: 7em;
 }
 
 table td:nth-child(2) {
@@ -32,6 +33,7 @@ table td:nth-child(2) {
 
 table td:nth-child(3) {
   text-align: left;
+  min-width: 7em;
 }
 
 /* @media screen and (max-width: 1200px) {
