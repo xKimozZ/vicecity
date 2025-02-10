@@ -11,7 +11,7 @@ const menuOptions = [
       //buttonNumber: getGroupIndex(buttonGroups.MAP),
       buttonText: "map",
       component: SampleMenuComponent,
-      frameClip: `polygon(13.75% 3.88%, 89.06% 8.16%, 93.75% 81.88%, 9.53% 85%)`,
+      frameClip: `polygon(13.75% 3.88%, 87.06% 8.16%, 91.75% 81.88%, 9.53% 85%)`,
       buttonGroup: buttonGroups.MAIN,
       actions: {
         nextMenu: buttonGroups.MAP,
@@ -21,7 +21,7 @@ const menuOptions = [
       //buttonNumber: getGroupIndex(buttonGroups.BRIEF),
       buttonText: "brief",
       component: BriefMenu,
-      frameClip: `polygon(11.86% 12.38%, 89.06% 12.51%, 95.47% 76.61%, 15.63% 77.98%)`,
+      frameClip: `polygon(11.86% 12.38%, 86.06% 12.51%, 92.47% 76.61%, 15.63% 77.98%)`,
       buttonGroup: buttonGroups.MAIN,
       actions: {
         nextMenu: buttonGroups.BRIEF,
@@ -31,7 +31,7 @@ const menuOptions = [
       //buttonNumber: getGroupIndex(buttonGroups.LOAD),
       buttonText: "load",
       component: LoadMenu,
-      frameClip: `polygon(10.41% 13.43%, 90.25% 3.72%, 93.75% 80.37%, 8.49% 82.83%)`,
+      frameClip: `polygon(10.41% 13.43%, 89.25% 4.72%, 92.75% 80.37%, 8.49% 82.83%)`,
       buttonGroup: buttonGroups.MAIN,
       actions: {
         nextMenu: buttonGroups.LOAD,
@@ -61,7 +61,7 @@ const menuOptions = [
       //buttonNumber: getGroupIndex(buttonGroups.AUDIO),
       buttonText: "audio",
       component: SampleMenuComponent,
-      frameClip: `polygon(16.32% 8.55%, 88.1% 3.63%, 95.44% 75.41%, 8.38% 84.84%)`,
+      frameClip: `polygon(16.32% 8.55%, 87.1% 4.63%, 92.44% 75.41%, 8.38% 84.84%)`,
       buttonGroup: buttonGroups.MAIN,
       actions: {
         nextMenu: buttonGroups.AUDIO,
@@ -71,7 +71,7 @@ const menuOptions = [
       //buttonNumber: getGroupIndex(buttonGroups.DISPLAY),
       buttonText: "display",
       component: DisplayMenu,
-      frameClip: `polygon(15.31% 10.36%, 83.75% 3.2%, 94.38% 84.67%, 15.75% 81.38%)`,
+      frameClip: `polygon(15.31% 10.36%, 83.75% 3.7%, 91.38% 84.67%, 15.75% 81.38%)`,
       buttonGroup: buttonGroups.MAIN,
       actions: {
         nextMenu: buttonGroups.DISPLAY,
@@ -81,7 +81,7 @@ const menuOptions = [
       //buttonNumber: getGroupIndex(buttonGroups.LANGUAGE),
       buttonText: "language",
       component: LanguageMenu,
-      frameClip: `polygon(15.63% 9.26%, 86.25% 2.42%, 95.16% 77.85%, 15.78% 84.57%)`,
+      frameClip: `polygon(15.63% 9.26%, 84.25% 4.42%, 92.16% 77.85%, 15.78% 84.57%)`,
       buttonGroup: buttonGroups.MAIN,
       actions: {
         nextMenu: buttonGroups.LANGUAGE,

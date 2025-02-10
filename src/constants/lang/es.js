@@ -1,7 +1,7 @@
 export const es = {
   nav: {
     button: "Botón",
-    select: "Seleccionar",
+    select: "Selec.",
     back: "Atrás",
     resume: "Reanudar",
     navigate: "Navegar",

@@ -1,12 +1,12 @@
 :root {
-  --tips-clippath: polygon(15% 12%, 84% 3%, 90% 100%, 17.5% 87%);
+  --tips-clippath: polygon(11% 12%, 84% 3%, 90% 97%, 13.5% 89%);
 }
 
 .tipsContainer {
   z-index: 1;
   position: absolute;
   top: 63%;
-  right: -1.8%;
+  right: 1.6%;
   padding: 0.35em;
   min-width: 18em;
   background-color: black;
@@ -50,9 +50,6 @@ table td:nth-child(3) {
   }
   .tipsContent {
     font-size: 0.8em;
-  }
-  :root {
-    --tips-clippath: polygon(15% 12%, 79% 3%, 84% 99%, 17.5% 87%);
   }
     
 }

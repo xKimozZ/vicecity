@@ -1,7 +1,7 @@
 export const de = {
   nav: {
     button: "-Taste",
-    select: "Auswählen",
+    select: "Auswähl",
     back: "Zurück",
     resume: "Fortsetzen",
     navigate: "Navigieren",
