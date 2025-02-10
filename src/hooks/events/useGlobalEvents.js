@@ -65,13 +65,10 @@ const useGlobalEvents = () => {
     cursorFunctions.changeLocation({...rectInPercentages, identityStruct});
   };
 
-  const toggleBigHover = ( cursorFactors ) => {
-    const { myId, parentId, active, always, twoStaged } = bigHover;
+  const toggleBigHover = () => {
+    const { active } = bigHover;
     const newBigHover = { ...bigHover, active: !active };
     navigationFunctions.setBigHover(newBigHover);
-    let targetParentId = parentId;
-    if (twoStaged && active) targetParentId = parentId + "2"; // This has `always` true since the highlight is not on myId itself
-    rerenderCursor(active && !always ? myId : targetParentId, cursorFactors );
   };
 
   const incrementBar = (currentValue, sign = 1 , playSoundAfterDelay) => {
