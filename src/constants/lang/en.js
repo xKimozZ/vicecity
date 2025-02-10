@@ -1,4 +1,13 @@
 export const en = {
+    nav: {
+      button: "Button",
+      select: "Select",
+      back: "Back",
+      resume: "Resume",
+      navigate: "Navigate",
+      scroll: "Scroll",
+      zoom: "Zoom",
+    },
     menu: {
       map: "Map",
       brief: "Brief",

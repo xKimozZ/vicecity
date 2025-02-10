@@ -1,4 +1,13 @@
 export const de = {
+  nav: {
+    button: "-Taste",
+    select: "Auswählen",
+    back: "Zurück",
+    resume: "Fortsetzen",
+    navigate: "Navigieren",
+    scroll: "Scrollen",
+    zoom: "Zoom",
+  },
   menu: {
     map: "Karte",
     brief: "Missionsinfo",

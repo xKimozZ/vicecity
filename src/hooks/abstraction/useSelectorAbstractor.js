@@ -9,7 +9,8 @@ import {
     stringLoadSelector, 
     stringStatsSelector, 
     stringLanguageSelector, 
-    stringDisplaySelector 
+    stringDisplaySelector,
+    stringNavSelector,
 } from "../../store/localizationSlice";
 
 const useSelectorAbstractor = () => {
@@ -21,11 +22,12 @@ const useSelectorAbstractor = () => {
     const stringStatsState = useSelector(stringStatsSelector);
     const stringLanguageState = useSelector(stringLanguageSelector);
     const stringDisplayState = useSelector(stringDisplaySelector);
+    const stringNavState = useSelector(stringNavSelector);
 
     const navigationState = useSelector(navigationSelector);
     const miscState = useSelector(miscSelector);
     const cursorState = useSelector(cursorSelector);
-    const localizationState = { languageState, stringMenuState, stringBriefState, stringLoadState, stringStatsState, stringLanguageState, stringDisplayState };
+    const localizationState = { languageState, stringMenuState, stringBriefState, stringLoadState, stringStatsState, stringLanguageState, stringDisplayState, stringNavState };
   
   return { navigationState, miscState, cursorState, localizationState };
 };

@@ -1,0 +1,56 @@
+:root {
+  --tips-clippath: polygon(15% 12%, 84% 3%, 90% 100%, 17.5% 87%);
+}
+
+.tipsContainer {
+  z-index: 1;
+  position: absolute;
+  top: 62%;
+  right: -1.8%;
+  padding: 0.35em;
+  min-width: 18em;
+  background-color: black;
+  clip-path: var(--tips-clippath);
+}
+
+.tipsContent {
+  display: flex;
+  padding-block: 0.9em;
+  justify-content: center;
+  background-color: var(--green);
+  clip-path: var(--tips-clippath);
+  font-size: 0.85em;
+}
+
+table td:nth-child(1) {
+  text-align: right;
+}
+
+table td:nth-child(2) {
+  text-align: center;
+}
+
+table td:nth-child(3) {
+  text-align: left;
+}
+
+/* @media screen and (max-width: 1200px) {
+  .tipsContainer {
+    transform: scale(0.8);
+    right: -10%;
+  }
+    
+} */
+
+@media screen and (max-width: 1280px) {
+  .tipsContainer {
+    transform: translateX(10%) scale(0.9);
+  }
+  .tipsContent {
+    font-size: 0.8em;
+  }
+  :root {
+    --tips-clippath: polygon(15% 12%, 79% 3%, 84% 99%, 17.5% 87%);
+  }
+    
+}

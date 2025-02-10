@@ -1,4 +1,13 @@
 export const fr = {
+  nav: {
+    button: "Touche",
+    select: "Sélectionner",
+    back: "Retour",
+    resume: "Reprendre",
+    navigate: "Explorer",
+    scroll: "Fait défiler",
+    zoom: "Zoom",
+  },
   menu: {
     map: "Carte",
     brief: "Briefing",

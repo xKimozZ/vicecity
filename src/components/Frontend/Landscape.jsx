@@ -10,6 +10,7 @@ import Cursor from '../Cursor/Cursor'
 import { imageImports } from '../../assets/imageImports';
 import { buttonGroups } from '../../constants/buttonGroups';
 import { elementIds } from '../../constants/elementIds';
+import NavigationTips from '../NavigationTips/NavigationTips';
 
 const { FRONTEND_CONTAINER_ID, FRONTEND_BACKGROUND_ID } = elementIds.FRONTEND;
 
@@ -100,6 +101,7 @@ const Landscape = () => {
       <div id={FRONTEND_BACKGROUND_ID} className="backgroundElement" style={{...clipPathStyle }}/>
       <div id={FRONTEND_CONTAINER_ID} className={` AppContainer `}>
       <img src={imageImports.global.vclogo1024} className="viceLogo" />
+      <NavigationTips />
       <Header />
       <div className="App">
           {renderHoveredComponent()}
