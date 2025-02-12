@@ -5,12 +5,13 @@
 .tipsContainer {
   z-index: 1;
   position: absolute;
-  top: 63%;
+  top: 64.7%;
   right: 1.6%;
   padding: 0.35em;
   min-width: 18em;
   background-color: black;
   clip-path: var(--tips-clippath);
+  line-height: 1em;
 }
 
 .tipsContent {

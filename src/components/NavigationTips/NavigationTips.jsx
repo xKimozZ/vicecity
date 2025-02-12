@@ -11,10 +11,10 @@ const NavigationTips = () => {
   const { activeButtonGroup } = navigationState;
   const { languageState: language, stringNavState: strings } = localizationState;
 
-  const rightArrow = <span>&#9654;</span>;
-  const leftArrow = <span>&#9664;</span>;
+  const rightArrow = <span>&#9654;&nbsp;</span>;
+  const leftArrow = <span>&#9664;&nbsp;</span>;
   const upArrow = <span>&#9650;</span>;
-  const downArrow = <span>&#9660;</span>;
+  const downArrow = <span>&#9660;&nbsp;</span>;
   const allArrows = [upArrow, downArrow, rightArrow, leftArrow];
 
   const boldButtonIcon = (button) => {
@@ -70,7 +70,7 @@ const NavigationTips = () => {
 
   const line = (left, right) => {
     return (
-      <tr style={{lineHeight: activeButtonGroup === MAP && "1.05"}}>
+      <tr style={{lineHeight: activeButtonGroup === MAP && "0.9em"}}>
         <td>{left}</td>
         <td>&nbsp;-&nbsp;</td>
         <td>{right} </td>
