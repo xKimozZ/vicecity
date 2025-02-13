@@ -51,7 +51,6 @@ const StatsMenu = () => {
   };
 
   const handleTouchMove = (event) => {
-    console.log(event)
     event.touches[0].clientY > touchY ? miscFunctions.incrementStatsTranslate(2) : miscFunctions.decrementStatsTranslate(2);
     event.preventDefault();
     event.stopPropagation();

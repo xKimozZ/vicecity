@@ -1,6 +1,6 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
 import { useEventHandlerContext } from "../../../context/EventHandlerContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./DisplayMenu.module.css";
 import Button from "../../Button/Button";
 import Bar from "../../Bar/Bar";
@@ -93,12 +93,12 @@ const DisplayMenu = () => {
     if (isChangingScreenPos) 
     {
       window.addEventListener("wheel", changePosWithWheel);
-      window.addEventListener("touchmove", changePosWithWheel);
+      // window.addEventListener("touchmove", changePosWithWheel);
     }
     
     return () => {
       window.removeEventListener("wheel", changePosWithWheel);
-      window.removeEventListener("touchmove", changePosWithWheel);
+      // window.removeEventListener("touchmove", changePosWithWheel);
     };
   }, [isChangingScreenPos, changePosWithWheel]);
   
