@@ -14,6 +14,7 @@ const StatsMenu = () => {
   const statsRef = useRef();
 
   const [cancelAnimation, setCancelAnimation] = useState(false);
+  const [touchY, setTouchY] = useState(null);
 
   useEffect(() => {
     if (lowerStatsLimit <= scroll || scroll <= -statsLimit )
@@ -21,10 +22,10 @@ const StatsMenu = () => {
     else setCancelAnimation(false);
   }, [cancelAnimation, scroll]);
 
-  // useEffect(()=>{
-  //   const {height} = statsRef.current.getBoundingClientRect();
-  //   miscFunctions.setStatsLimit(height + 30);
-  // },[]);
+  useEffect(()=>{
+    const {height} = statsRef.current.getBoundingClientRect();
+    miscFunctions.setStatsLimit(height + 30);
+  },[]);
 
   useEffect(() => {
     if (activeButtonGroup === buttonGroups.MAIN) {
@@ -41,10 +42,23 @@ const StatsMenu = () => {
     transform: `translate(0px, ${scroll}px)`,
   };
 
+  const isInTheMenu = (activeButtonGroup === buttonGroups.STATS);
+
   const handleWheel = (event) => {
-    if (activeButtonGroup === buttonGroups.STATS) { 
-      event.deltaY < 0 ? miscFunctions.incrementStatsTranslate(2) : miscFunctions.decrementStatsTranslate(2);
-    }
+    event.deltaY < 0 ? miscFunctions.incrementStatsTranslate(2) : miscFunctions.decrementStatsTranslate(2);
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  const handleTouchMove = (event) => {
+    console.log(event)
+    event.touches[0].clientY > touchY ? miscFunctions.incrementStatsTranslate(2) : miscFunctions.decrementStatsTranslate(2);
+    event.preventDefault();
+    event.stopPropagation();
+  };
+  
+  const handleTouchStart = (event) => {
+    setTouchY(event.touches[0].clientY);
     event.preventDefault();
     event.stopPropagation();
   };
@@ -53,7 +67,7 @@ const StatsMenu = () => {
     <div className={`${styles.statsContainer} arborcrest arborcrestS`}>
       <span className="pricedown pricedownM">{strings.crimra}</span>
       {strings.rating_1} [0]
-      <div onWheel={handleWheel} onTouchMove={handleWheel} className={styles.statsPanel}>
+      <div onWheel={isInTheMenu ? handleWheel : undefined} onTouchMove={isInTheMenu ? handleTouchMove : undefined} onTouchStart={isInTheMenu ? handleTouchStart : undefined} className={styles.statsPanel}>
         <div className={`${styles.statsFlex}
         ${activeButtonGroup === buttonGroups.MAIN ? styles.statsTransition : styles.statsTransition1}
         ${ cancelAnimation ? styles.cancel : ""}`}
