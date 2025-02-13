@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import styles from "./BuildInfo.module.css";
+import useSoundManager from "../../hooks/useSoundManager";
 
 const BuildInfo = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const { playInfo } = useSoundManager();
 
   const toggleVisibility = () => {
+    playInfo();
     setIsVisible(!isVisible);
   };
 
@@ -32,6 +35,7 @@ const BuildInfo = () => {
                     href="https://github.com/xKimozZ"
                     target="_blank"
                     rel="noopener noreferrer"
+                    tabIndex={0}
                   >
                     Built by xKimozZ{" "}
                   </a>
@@ -39,6 +43,7 @@ const BuildInfo = () => {
                     href="https://www.linkedin.com/in/karim-ayman-h/"
                     target="_blank"
                     rel="noopener noreferrer"
+                    tabIndex={0}
                   >
                     (Karim Ayman).{" "}
                   </a>
@@ -51,6 +56,7 @@ const BuildInfo = () => {
               href="https://www.rockstargames.com"
               target="_blank"
               rel="noopener noreferrer"
+              tabIndex={0}
             >
               Rockstar Games
             </a>{" "}
