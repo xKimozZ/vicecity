@@ -5,17 +5,17 @@ import { buttonGroups, buttonIndices } from "../../../constants/buttonGroups";
 import { actionNames } from "../../../constants/actionNames";
 
 const { CONFIG, MODE, VIB, FP } = buttonIndices.CONTROLS;
-const { CONFIG_ID, MODE_ID, VIB_ID, FP_ID,
-        CONFIG_1, CONFIG_2, CONFIG_3, CONFIG_4, MODE_CAR, MODE_FOOT } = actionNames.CONTROLS;
+const { CONFIG_ID, MODE_ID, VIB_ID, FP_ID, CONFIG_1, CONFIG_2, CONFIG_3, CONFIG_4, MODE_CAR, MODE_FOOT } = actionNames.CONTROLS;
 
-const RADAR_CURSOR_FACTORS = {
-  clipFactor: 7,
-  topFactor: 1,
-  leftFactor: 1,
-  maxLeftFactor: 1.03,
-  widthFactor: 1.01,
-  minHeightFactor: 1.12,
-  heightFactor: 1.18,
+const CONTROLS_CURSOR_FACTORS = {
+  clipFactor: 5,
+  topFactor: 1.005,
+  maxTopFactor: 1.01,
+  leftFactor: 1.095,
+  maxLeftFactor: 1.1,
+  widthFactor: 0.93,
+  minHeightFactor: 1,
+  heightFactor: 1.03,
 };
 
 const ControlsMenu = () => {
@@ -49,19 +49,19 @@ const ControlsMenu = () => {
   };
 
   const conf = [
-    { stringKey: "configuration", buttonNumber: CONFIG, buttonGroup: buttonGroups.CONTROLS, id: CONFIG_ID, isTwoStaged: true, dependencies: controlsSettings[CONFIG_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
+    { stringKey: "configuration", buttonNumber: CONFIG, buttonGroup: buttonGroups.CONTROLS, id: CONFIG_ID, isTwoStaged: true, dependencies: controlsSettings[CONFIG_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: CONTROLS_CURSOR_FACTORS },
   ];
   
   const mode = [
-    { stringKey: "mode", buttonNumber: MODE, buttonGroup: buttonGroups.CONTROLS, id: MODE_ID, isTwoStaged: false, dependencies: controlsSettings[MODE_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
+    { stringKey: "mode", buttonNumber: MODE, buttonGroup: buttonGroups.CONTROLS, id: MODE_ID, isTwoStaged: false, dependencies: controlsSettings[MODE_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: CONTROLS_CURSOR_FACTORS },
   ];
 
   const vib = [
-    { stringKey: "vibration", buttonNumber: VIB, buttonGroup: buttonGroups.CONTROLS, id: VIB_ID, isTwoStaged: false, dependencies: controlsSettings[VIB_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
+    { stringKey: "vibration", buttonNumber: VIB, buttonGroup: buttonGroups.CONTROLS, id: VIB_ID, isTwoStaged: false, dependencies: controlsSettings[VIB_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: CONTROLS_CURSOR_FACTORS },
   ];
 
   const fp = [
-    { stringKey: "invert", buttonNumber: FP, buttonGroup: buttonGroups.CONTROLS, id: FP_ID, isTwoStaged: false, dependencies: controlsSettings[FP_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: RADAR_CURSOR_FACTORS },
+    { stringKey: "invert", buttonNumber: FP, buttonGroup: buttonGroups.CONTROLS, id: FP_ID, isTwoStaged: false, dependencies: controlsSettings[FP_ID], getStatusString: Status, getOptionTextString: (key) => strings[key], cursorFactors: CONTROLS_CURSOR_FACTORS },
   ];
   
   return (
