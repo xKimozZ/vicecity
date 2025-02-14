@@ -8,7 +8,7 @@ const { CONFIG_ID, MODE_ID, VIB_ID, FP_ID } = actionNames.CONTROLS;
 
 const useControlsEvents = (globalHookFunctions) => {
 
-  const { toggleGenericOption, toggleConfigChangingMode, cycleConfigOptions } = useControlsGenerics(globalHookFunctions);
+  const { toggleGenericOption, toggleConfigChangingMode, cycleConfigOptions, toggleControlsMode } = useControlsGenerics(globalHookFunctions);
 
   const { selectorAbstractor } = useReduxAbstractorContext();
   const { bigHover, currentActions } = selectorAbstractor.navigationState;
@@ -20,6 +20,8 @@ const useControlsEvents = (globalHookFunctions) => {
         toggleConfigChangingMode();
         break;
       case MODE_ID:
+        toggleControlsMode();
+        break;
       case VIB_ID:
       case FP_ID:
         toggleGenericOption();

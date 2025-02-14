@@ -3,16 +3,17 @@ import styles from "./ControlsMenu.module.css";
 import ColumnedList from "../../ColumnedList/ColumnedList";
 import { buttonGroups, buttonIndices } from "../../../constants/buttonGroups";
 import { actionNames } from "../../../constants/actionNames";
+import ThePad from "./ThePad";
 
 const { CONFIG, MODE, VIB, FP } = buttonIndices.CONTROLS;
 const { CONFIG_ID, MODE_ID, VIB_ID, FP_ID, CONFIG_1, CONFIG_2, CONFIG_3, CONFIG_4, MODE_CAR, MODE_FOOT } = actionNames.CONTROLS;
 
 const CONTROLS_CURSOR_FACTORS = {
-  clipFactor: 5,
+  clipFactor: 4,
   topFactor: 1.005,
   maxTopFactor: 1.01,
-  leftFactor: 1.095,
-  maxLeftFactor: 1.1,
+  leftFactor: 1.04,
+  maxLeftFactor: 1.07,
   widthFactor: 0.93,
   minHeightFactor: 1,
   heightFactor: 1.03,
@@ -66,10 +67,13 @@ const ControlsMenu = () => {
   
   return (
     <div className={styles.controlsContainer}>
+      <div className={styles.controlsOptionsContainer}>
       <ColumnedList items={conf} />
       <ColumnedList items={mode} />
       <ColumnedList items={vib} />
       <ColumnedList items={fp} />
+      </div>
+      <ThePad />
     </div>
   );
 };

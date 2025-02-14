@@ -1,0 +1,45 @@
+
+.padImageContainer {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 256px;
+    pointer-events: none;
+    padding-block: 4em;
+    z-index: 1;
+  }
+
+.ThePad {
+    width: 300px;
+}
+
+@keyframes toggle1 {
+    0%, 50% {
+        opacity: 1;
+    }
+    50.01%, 100% {
+        opacity: 0;
+    }
+}
+
+@keyframes toggle2 {
+    0%, 50% {
+        opacity: 0;
+    }
+    50.01%, 100% {
+        opacity: 1;
+    }
+}
+
+.arrowsState1 {
+    animation: toggle1 2s infinite;
+    position: absolute;
+}
+
+.arrowsState2 {
+    animation: toggle2 2s infinite;
+    position: absolute;
+}

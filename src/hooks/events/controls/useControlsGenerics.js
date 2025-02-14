@@ -3,7 +3,7 @@ import useSoundManager from "../../useSoundManager";
 import { actionNames } from "../../../constants/actionNames";
 
 const { DIRECTION_RIGHT, DIRECTION_LEFT } = actionNames.ARROWS;
-const { CONFIG_ID, CONFIG_1, CONFIG_2, CONFIG_3, CONFIG_4 } = actionNames.CONTROLS;
+const { CONFIG_ID, MODE_ID, CONFIG_1, CONFIG_2, CONFIG_3, CONFIG_4, MODE_CAR, MODE_FOOT } = actionNames.CONTROLS;
 
 const useControlsGenerics = (globalHookFunctions) => {
   const { toggleBigHover } = globalHookFunctions;
@@ -25,6 +25,14 @@ const useControlsGenerics = (globalHookFunctions) => {
     miscFunctions.setControlsSettings(newControlsSettings);
     playSelect();
   }
+  
+  const toggleControlsMode = () => {
+    const oldMode = controlsSettings[MODE_ID];
+    let newMode = oldMode === MODE_CAR ? MODE_FOOT : MODE_CAR;
+    const newControlsSettings = { ...controlsSettings, [MODE_ID]: newMode };
+    miscFunctions.setControlsSettings(newControlsSettings);
+    playSelect();
+  }
 
   const cycleConfigOptions = (direction) => {
     // Only left or right allowed here!
@@ -43,7 +51,7 @@ const useControlsGenerics = (globalHookFunctions) => {
     playSelect();
   }
 
-  return { toggleConfigChangingMode, toggleGenericOption, cycleConfigOptions };
+  return { toggleConfigChangingMode, toggleGenericOption, cycleConfigOptions, toggleControlsMode };
 };
 
 export default useControlsGenerics;
