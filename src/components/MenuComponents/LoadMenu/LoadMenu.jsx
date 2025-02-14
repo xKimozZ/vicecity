@@ -27,13 +27,12 @@ const PANEL_BG_ID = "load-panel-background"
 
 const LOAD_CURSOR_FACTORS = {
   clipFactor: 9,
-  topFactor: 0.96,
-  maxTopFactor: 0.98,
-  leftFactor: 0.99,
-  widthFactor: 1.08,
-  minWidthFactor: 1.03,
-  heightFactor: 1.8,
-  minHeightFactor: 1.4,
+  topFactor: 1.005,
+  maxTopFactor: 1.01,
+  leftFactor: 1.005,
+  maxLeftFactor: 1.01,
+  widthFactor: 1,
+  heightFactor: 1.03,
 };
 
 const LoadMenu = () => {
