@@ -1,7 +1,10 @@
 
 .optionGrid {
     display: grid;
-    width: 100%;
     grid-template-columns: 0.5fr 0fr 0.5fr;
     align-items: baseline;
+}
+
+.optionMoreThanOne {
+    width: 100%;
 }

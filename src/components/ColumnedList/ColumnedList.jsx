@@ -3,7 +3,7 @@ import ColumnedItem from "./ColumnedItem";
 
 const ColumnedList = ({ items }) => {
   return (
-    <div className={styles.optionGrid}>
+    <div className={`${styles.optionGrid} ${items.length > 1 ? styles.optionsMoreThanOne : ""}`}>
       {items.map((option) => (
         <ColumnedItem
           stringKey={option.stringKey}
