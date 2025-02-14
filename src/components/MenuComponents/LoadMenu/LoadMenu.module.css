@@ -1,6 +1,6 @@
 .loadContainer {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 35% 65%;
     flex: 0.8 1;
     margin-top: 7.5%;
     height: 80%;
