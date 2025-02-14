@@ -9,6 +9,7 @@ import useLoadEvents from "./events/useLoadEvents";
 import useDisplayEvents from "./events/display/useDisplayEvents";
 import { actionNames } from "../constants/actionNames";
 import { buttonGroups, buttonIndices } from "../constants/buttonGroups";
+import useControlsEvents from "./events/controls/useControlsEvents";
 
 const { SELECT , HOVER, BACK, SPECIAL } = actionNames.GENERAL;
 
@@ -25,6 +26,7 @@ const useEventHandler = () => {
   const { handleLanguage } = useLanguageEvents(globalHookFunctions);
   const { handleLoad } = useLoadEvents(globalHookFunctions);
   const { handleDisplay } = useDisplayEvents(globalHookFunctions);
+  const { handleControls } = useControlsEvents(globalHookFunctions);
 
   // Initialize stuff
   useEffect(() => {
@@ -55,6 +57,10 @@ const useEventHandler = () => {
         if (buttonNumber > 0) break; // Only directions here!
         handleDisplay(HOVER, buttonNumber);
         return; // Need to play my own sound here inside
+      case buttonGroups.CONTROLS:
+        if (buttonNumber > 0) break;
+        handleControls(HOVER, buttonNumber);
+        return;
       default:
         break;
     }
@@ -104,6 +110,8 @@ const useEventHandler = () => {
       case buttonGroups.DISPLAY:
         handleDisplay(SELECT);
         break;
+      case buttonGroups.CONTROLS:
+        handleControls(SELECT);
       default:
         break;
     }

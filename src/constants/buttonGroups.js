@@ -50,4 +50,13 @@ export const buttonIndices = {
         LIST_START: 1,
         LIST_END: 7,
     },
+    CONTROLS: {
+        CONFIG: 1,
+        MODE: 2,
+        VIB: 3,
+        FP: 4,
+
+        LIST_START: 1,
+        LIST_END: 4,
+    },
 };

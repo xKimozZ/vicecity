@@ -154,7 +154,7 @@ export const fr = {
     onfoot: "À pied",
     incar: "En voiture",
     vibration: "Vibrations",
-    invert: "Vue inversée À la 1ère personne",
+    invert: "Vue inversée À la 1ere personne",
     actions: {
       next: "Faire defiler les armes vers la droite",
       prev: "Faire defiler les armes vers la gauche",

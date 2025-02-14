@@ -18,6 +18,7 @@ import {
   misc_toggleStatsDirection,
   misc_setDisplaySettings,
   misc_setBarLastUpdate,
+  misc_setControlsSettings,
 } from "../../store/miscSlice";
 import { cursor_changeLocation } from "../../store/cursorSlice";
 
@@ -49,9 +50,10 @@ const useDispatchAbstractor = () => {
       const setStatsLimit = (limit) => dispatch(misc_setStatsLimit(limit));
       const toggleStatsDirection = (direction) => dispatch(misc_toggleStatsDirection(direction));
       const setDisplaySettings = (settingsStruct) => dispatch(misc_setDisplaySettings(settingsStruct));
+      const setControlsSettings = (settingsStruct) => dispatch(misc_setControlsSettings(settingsStruct));
       const setBarLastUpdate = (time) => dispatch(misc_setBarLastUpdate(time));
       
-      const miscFunctions = {decrementStatsTranslate, incrementStatsTranslate, setDisplaySettings,
+      const miscFunctions = {decrementStatsTranslate, incrementStatsTranslate, setDisplaySettings, setControlsSettings,
         setBriefKey, setStatsLimit, toggleStatsDirection, setBarLastUpdate};
 
     // cursorSlice

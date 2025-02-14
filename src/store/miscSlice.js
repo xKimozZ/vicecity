@@ -3,7 +3,7 @@ import { getRandomKey } from "../utils/math/getRandomObject";
 import { menuStrings } from "../constants/menuStrings";
 import { actionNames } from "../constants/actionNames";
 
-const { DISPLAY } = actionNames;
+const { DISPLAY, CONTROLS } = actionNames;
 
 //const translateFactor = 10;
 const translateFactor = 1;
@@ -17,6 +17,7 @@ const initialState = {
   briefKey: getRandomKey(menuStrings.en.brief),
 
   barLastUpdate: 0,
+  
   displaySettings: {
     [DISPLAY.BRIGHTNESS_ID]: 15/16,
     [DISPLAY.TRAILS_ID]: true,
@@ -25,7 +26,14 @@ const initialState = {
     [DISPLAY.HUD_ID]: true,
     [DISPLAY.RADAR_ID]: DISPLAY.RADAR_MAPBLIPS,
     [DISPLAY.SCREENPOS_ID]: {x:0, y:0},
-  }
+  },
+
+  controlsSettings: {
+    [CONTROLS.CONFIG_ID]: CONTROLS.CONFIG_1,
+    [CONTROLS.MODE_ID]: CONTROLS.MODE_CAR,
+    [CONTROLS.VIB_ID]: false,
+    [CONTROLS.FP_ID]: true,
+  },
 };
 
 export const miscSlice = createSlice({
@@ -74,6 +82,10 @@ export const miscSlice = createSlice({
       const newDisplaySettings = payload;
       state.displaySettings = newDisplaySettings;
     },
+    misc_setControlsSettings: (state, { payload }) => {
+      const newControlsSettings = payload;
+      state.controlsSettings = newControlsSettings;
+    },
     misc_setBarLastUpdate: (state, { payload }) => {
       const newBarLastUpdate = payload;
       state.barLastUpdate = newBarLastUpdate;
@@ -91,6 +103,7 @@ export const {
   misc_setStatsLimit,
   misc_setBriefKey,
   misc_setDisplaySettings,
+  misc_setControlsSettings,
   misc_setBarLastUpdate,
 } = miscSlice.actions;
 export default miscSlice.reducer;

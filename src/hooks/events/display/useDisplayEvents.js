@@ -49,7 +49,7 @@ const useDisplayEvents = (globalHookFunctions) => {
   const hoverCase = (direction) => {
     switch (optionId) {
       case BRIGHTNESS_ID:
-        changeBrightness(direction);
+        if (bigHover.active) changeBrightness(direction);
         break;
       case RADAR_ID:
         if (bigHover.active) cycleRadarOptions(direction);

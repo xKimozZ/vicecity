@@ -92,6 +92,25 @@ export const handleArrowNavigation = (initialHover, initialGroup, initialBigHove
         }
         return;
 
+        case buttonGroups.CONTROLS:
+        {
+            const { LIST_START, LIST_END } = buttonIndices.CONTROLS;
+            if (direction === "down") {
+              if (bigHover && bigHover.active) {handleHover(actionNames.ARROWS.DIRECTION_DOWN); return;}
+              if (hoveredOption + 1 > LIST_END) handleHover(LIST_START);
+              else handleHover(hoveredOption + 1);
+            } else if (direction === "up") {
+              if (bigHover && bigHover.active) {handleHover(actionNames.ARROWS.DIRECTION_UP); return;}
+              if (hoveredOption - 1 < LIST_START) handleHover(LIST_END);
+              else handleHover(hoveredOption - 1);
+            } else if (direction === "left") {
+              handleHover(actionNames.ARROWS.DIRECTION_LEFT);
+            } else if (direction === "right") {
+              handleHover(actionNames.ARROWS.DIRECTION_RIGHT);
+            }
+        }
+        return;
+
       case buttonGroups.MAIN:
         if (direction === "right") {
           if (hoveredOption + 1 > secondRowEnd) handleHover(secondRowStart);

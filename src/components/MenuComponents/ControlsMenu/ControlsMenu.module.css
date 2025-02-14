@@ -1,0 +1,13 @@
+.controlsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 68%;
+  height: 80%;
+  margin-top: 3%;
+  margin-left: 6%;
+  z-index: 1;
+  line-height: 2.8em;
+
+  align-items: flex-start;
+  justify-content: center;
+}
