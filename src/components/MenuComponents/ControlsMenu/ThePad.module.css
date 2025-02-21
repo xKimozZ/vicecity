@@ -6,14 +6,20 @@
     justify-content: center;
     align-items: center;
     width: 50%;
-    height: 256px;
     pointer-events: none;
-    padding-block: 4em;
     z-index: 1;
   }
 
 .ThePad {
-    width: 300px;
+    width: 256px;
+    transform: scale(var(--scale-factor));
+    position: relative;
+}
+
+.ThePadArrows {
+    width: 256px;
+    position: absolute;
+    left: 0;
 }
 
 @keyframes toggle1 {
@@ -36,10 +42,8 @@
 
 .arrowsState1 {
     animation: toggle1 2s infinite;
-    position: absolute;
 }
 
 .arrowsState2 {
     animation: toggle2 2s infinite;
-    position: absolute;
 }
