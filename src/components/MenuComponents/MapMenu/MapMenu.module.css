@@ -1,0 +1,32 @@
+.mapContainer {
+  display: flex;
+  width: 80%;
+  height: 93%;
+  margin-top: 3%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapBound {
+  display: flex;
+  justify-content: center;
+  top:0;
+  position: fixed;
+  width: 100dvw;
+  height: 100dvh;
+}
+
+.mapGrid {
+  top: -7%;
+  z-index: 1;
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.mapCellSize {
+  width: calc(256px * var(--scale-factor));
+  height: calc(256px * var(--scale-factor));
+}

@@ -6,12 +6,13 @@ import BriefMenu from "../components/MenuComponents/BriefMenu/BriefMenu";
 import LoadMenu from "../components/MenuComponents/LoadMenu/LoadMenu";
 import DisplayMenu from "../components/MenuComponents/DisplayMenu/DisplayMenu";
 import ControlsMenu from "../components/MenuComponents/ControlsMenu/ControlsMenu";
+import MapMenu from "../components/MenuComponents/MapMenu/MapMenu";
 
 const menuOptions = [
     {
       //buttonNumber: getGroupIndex(buttonGroups.MAP),
       buttonText: "map",
-      component: SampleMenuComponent,
+      component: MapMenu,
       frameClip: `polygon(13.75% 3.88%, 87.06% 8.16%, 91.75% 81.88%, 9.53% 85%)`,
       buttonGroup: buttonGroups.MAIN,
       actions: {

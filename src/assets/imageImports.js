@@ -6,6 +6,16 @@ import arrows2 from './images/controls/fe_arrows2.png'
 import arrows3 from './images/controls/fe_arrows3.png'
 import arrows4 from './images/controls/fe_arrows4.png'
 
+import mapTop01 from './images/map/mapTop01.png'
+import mapTop02 from './images/map/mapTop02.png'
+import mapTop03 from './images/map/mapTop03.png'
+import mapMid01 from './images/map/mapMid01.png'
+import mapMid02 from './images/map/mapMid02.png'
+import mapMid03 from './images/map/mapMid03.png'
+import mapBot01 from './images/map/mapBot01.png'
+import mapBot02 from './images/map/mapBot02.png'
+import mapBot03 from './images/map/mapBot03.png'
+
 export const imageImports = {
   global: {
     vclogo1024,
@@ -14,7 +24,15 @@ export const imageImports = {
 
   },
   gameMap: {
-
+    mapTop01,
+    mapTop02,
+    mapTop03,
+    mapMid01,
+    mapMid02,
+    mapMid03,
+    mapBot01,
+    mapBot02,
+    mapBot03,
   },
   miscImages: {
     scsize,
