@@ -1,4 +1,5 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
+import { useEventHandlerContext } from "../../../context/EventHandlerContext";
 import { useEffect } from "react";
 import Button from "../../Button/Button";
 import styles from "./LoadMenu.module.css";
@@ -37,7 +38,9 @@ const LOAD_CURSOR_FACTORS = {
 
 const LoadMenu = () => {
   const { selectorAbstractor } = useReduxAbstractorContext();
+  const { handleHover } = useEventHandlerContext();
   const strings = selectorAbstractor.localizationState.stringLoadState;
+  const hoveredOption = selectorAbstractor.navigationState.hoveredOption;
 
   useEffect(() => {
     const updatePosition = () => {
@@ -99,7 +102,7 @@ const LoadMenu = () => {
       />
       </div>
       </div>
-      <div id={PANEL_ID} className={styles.loadPanel}>
+      <div id={PANEL_ID} className={styles.loadPanel} onClick={hoveredOption < SAVE_SLOT_1 ? () => handleHover(SAVE_SLOT_1) : undefined}>
         <div className={styles.loadFlex}>
           <SaveGame buttonNumber={SAVE_SLOT_1} slotNumber={1} saveFile={{name: "In the beginning...", date: new Date("2002-10-26 18:46:13")}}/>
           <SaveGame buttonNumber={SAVE_SLOT_2} slotNumber={2}/>

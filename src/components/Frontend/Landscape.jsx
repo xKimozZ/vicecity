@@ -103,10 +103,10 @@ const Landscape = () => {
       <img src={imageImports.global.vclogo1024} className="viceLogo" />
       <NavigationTips />
       <Header />
-      <div className="App">
+      <div className="App" onClick={ activeButtonGroup === buttonGroups.MAIN ? ()=>handleSelect() : undefined}>
           {renderHoveredComponent()}
       </div>
-      <div className='bottomButtonContainer' onClick={()=> {if (activeButtonGroup !== buttonGroups.MAIN) handleBack(1)}}>
+      <div className='bottomButtonContainer' onClick={ activeButtonGroup !== buttonGroups.MAIN ? ()=>handleBack(1) : undefined }>
       <div className="bottomButtonRow">
           {renderButtons(0, optionsPerRow[0]) }
         </div>
