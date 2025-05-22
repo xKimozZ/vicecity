@@ -7,6 +7,7 @@ import LoadMenu from "../components/MenuComponents/LoadMenu/LoadMenu";
 import DisplayMenu from "../components/MenuComponents/DisplayMenu/DisplayMenu";
 import ControlsMenu from "../components/MenuComponents/ControlsMenu/ControlsMenu";
 import MapMenu from "../components/MenuComponents/MapMenu/MapMenu";
+import AudioMenu from "../components/MenuComponents/AudioMenu/AudioMenu";
 
 const menuOptions = [
     {
@@ -62,7 +63,7 @@ const menuOptions = [
     {
       //buttonNumber: getGroupIndex(buttonGroups.AUDIO),
       buttonText: "audio",
-      component: SampleMenuComponent,
+      component: AudioMenu,
       frameClip: `polygon(16.32% 8.55%, 87.1% 4.63%, 92.44% 75.41%, 8.38% 84.84%)`,
       buttonGroup: buttonGroups.MAIN,
       actions: {

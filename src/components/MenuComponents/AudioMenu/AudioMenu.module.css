@@ -1,0 +1,16 @@
+.briefContainer {
+    margin-left: 5%;
+    height: 70%;
+    width: 70%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.briefLine {
+ width: 90%;
+}
