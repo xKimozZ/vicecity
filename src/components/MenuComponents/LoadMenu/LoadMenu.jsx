@@ -38,7 +38,7 @@ const LOAD_CURSOR_FACTORS = {
 
 const LoadMenu = () => {
   const { selectorAbstractor } = useReduxAbstractorContext();
-  const { handleHover } = useEventHandlerContext();
+  const { handleHover, handleBack } = useEventHandlerContext();
   const strings = selectorAbstractor.localizationState.stringLoadState;
   const hoveredOption = selectorAbstractor.navigationState.hoveredOption;
 
@@ -78,10 +78,15 @@ const LoadMenu = () => {
     };
   }, []);
 
+  const isChoosingSaveGames = hoveredOption >= SAVE_SLOT_1;
+  const isPhase1 = () => {
+    return !isChoosingSaveGames;
+  };
+
   return (
     <div className={styles.loadContainer}>
       <div className={styles.loadButtonContainer}>
-      <div className={styles.loadButton}>
+      <div className={styles.loadButton} onClick={isChoosingSaveGames ? () => handleBack() : undefined}>
       <Button
         buttonNumber={LOAD_GAME}
         buttonGroup={buttonGroups.LOAD}
@@ -89,9 +94,10 @@ const LoadMenu = () => {
         buttonText={strings.loadgame}
         actions={{trigger: actionNames.LOAD.LOADGAME }}
         cursorFactors={LOAD_CURSOR_FACTORS}
+        activeCondition={()=> isPhase1()}
         />
       </div>
-      <div className={styles.loadButton}>
+      <div className={styles.loadButton} onClick={isChoosingSaveGames ? () => handleBack() : undefined}>
       <Button
         buttonNumber={NEW_GAME}
         buttonGroup={buttonGroups.LOAD}
@@ -99,10 +105,11 @@ const LoadMenu = () => {
         buttonText={strings.newgame}
         actions={{trigger: actionNames.LOAD.NEWGAME }}
         cursorFactors={LOAD_CURSOR_FACTORS}
+        activeCondition={()=> isPhase1()}
       />
       </div>
       </div>
-      <div id={PANEL_ID} className={styles.loadPanel} onClick={hoveredOption < SAVE_SLOT_1 ? () => handleHover(SAVE_SLOT_1) : undefined}>
+      <div id={PANEL_ID} className={styles.loadPanel} onClick={!isChoosingSaveGames ? () => handleHover(SAVE_SLOT_1) : undefined}>
         <div className={styles.loadFlex}>
           <SaveGame buttonNumber={SAVE_SLOT_1} slotNumber={1} saveFile={{name: "In the beginning...", date: new Date("2002-10-26 18:46:13")}}/>
           <SaveGame buttonNumber={SAVE_SLOT_2} slotNumber={2}/>

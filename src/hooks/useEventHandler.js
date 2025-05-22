@@ -34,12 +34,6 @@ const useEventHandler = () => {
   }, []);
 
   const handleHover = (buttonNumber) => {
-    // special case to prevent hovering over 'load game' and 'new game' when you are navigating across savegames
-    if (
-      activeButtonGroup === buttonGroups.LOAD &&
-      hoveredOption > buttonIndices.LOAD.PHASE1_LIST_END &&
-      buttonNumber <= buttonIndices.LOAD.PHASE1_LIST_END
-    ) return;
 
     // Negative numbers are dedicated for special inputs like arrows in certain options
     if (buttonNumber && buttonNumber > 0) navigationFunctions.setHoveredOption(buttonNumber);
@@ -77,11 +71,7 @@ const useEventHandler = () => {
     // This will shift the hover onto the unhovered yet just selected button
     if (triggeredBy) {
       if (triggeredBy !== hoveredOption) {
-        // If click on 'load game' or 'new game' while navigating across savegames
-        if (activeButtonGroup === buttonGroups.LOAD && hoveredOption > 2) {
-          handleBack();
-          handleHover(triggeredBy);
-        }
+
         if (bigHover.active) {
           navigationFunctions.setHoveredOption(triggeredBy);
           playHover();
@@ -91,6 +81,7 @@ const useEventHandler = () => {
           handleHover(triggeredBy);
         }
         return;
+
       }
     }
     
