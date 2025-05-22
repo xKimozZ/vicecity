@@ -69,21 +69,15 @@ const useEventHandler = () => {
     // Because if a click happens on any button that belongs to the current group but not hovered on
     // It will trigger the hovered button's event anyway
     // This will shift the hover onto the unhovered yet just selected button
-    if (triggeredBy) {
-      if (triggeredBy !== hoveredOption) {
-
+      if (triggeredBy && triggeredBy !== hoveredOption) {
+        
         if (bigHover.active) {
           navigationFunctions.setHoveredOption(triggeredBy);
-          playHover();
           navigationFunctions.setBigHover({...bigHover, active: false});
         }
-        if (activeButtonGroup === buttonGroups.MAIN) {
-          handleHover(triggeredBy);
-        }
+        handleHover(triggeredBy);
         return;
-
       }
-    }
     
     switch (activeButtonGroup) {
       case buttonGroups.MAIN:
