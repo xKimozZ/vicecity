@@ -40,7 +40,7 @@ const LoadMenu = () => {
   const { selectorAbstractor } = useReduxAbstractorContext();
   const { handleHover, handleBack } = useEventHandlerContext();
   const strings = selectorAbstractor.localizationState.stringLoadState;
-  const hoveredOption = selectorAbstractor.navigationState.hoveredOption;
+  const { hoveredOption, activeButtonGroup } = selectorAbstractor.navigationState;
 
   useEffect(() => {
     const updatePosition = () => {
@@ -78,7 +78,7 @@ const LoadMenu = () => {
     };
   }, []);
 
-  const isChoosingSaveGames = hoveredOption >= SAVE_SLOT_1;
+  const isChoosingSaveGames = hoveredOption >= SAVE_SLOT_1 && activeButtonGroup === buttonGroups.LOAD;
   const isPhase1 = () => {
     return !isChoosingSaveGames;
   };
