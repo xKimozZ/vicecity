@@ -82,7 +82,7 @@ body {
   z-index: 0;
   width: 100dvw;
   height: 100dvh;
-  background-image: url('./assets/images/background256_ps2.png');
+  background-image: url('./assets/images/background256_ps2.webp');
   /* filter: blur(0.6px); */
 }
 

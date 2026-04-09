@@ -100,7 +100,7 @@ const Landscape = () => {
       <Cursor />
       <div id={FRONTEND_BACKGROUND_ID} className="backgroundElement" style={{...clipPathStyle }}/>
       <div id={FRONTEND_CONTAINER_ID} className={` AppContainer `}>
-      <img src={imageImports.global.vclogo1024} className="viceLogo" />
+      <img src={imageImports.global.vclogosvg} className="viceLogo" />
       <NavigationTips />
       <Header />
       <div className="App" onClick={ activeButtonGroup === buttonGroups.MAIN ? ()=>handleSelect() : undefined}>

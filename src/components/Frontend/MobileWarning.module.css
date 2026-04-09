@@ -33,7 +33,7 @@
     animation: portraitBackgroundGoIn forwards 1.5s;
 
     clip-path: polygon(4% 9%, 100% 12%, 100% 100%, 7% 100%);
-    background-image: url("../../assets/images/background_portrait.jpg");
+    background-image: url("../../assets/images/background_portrait.webp");
     background-position: -9em 0px;
     background-size: cover;
     background-repeat: no-repeat;
