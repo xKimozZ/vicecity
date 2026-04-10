@@ -1,7 +1,7 @@
 import vclogo1024 from './images/vclogo1024.png'
 import vclogosvg from './images/vclogo.svg'
 
-import scsize from './images/scsize.png'
+import scsize from './images/scsize.svg'
 import controller from './images/controls/controller.webp'
 import arrows1 from './images/controls/fe_arrows1.svg'
 import arrows2 from './images/controls/fe_arrows2.svg'
