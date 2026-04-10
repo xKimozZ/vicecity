@@ -16,6 +16,11 @@
     position: relative;
 }
 
+.ThePadSprite {
+    height: 256px;
+    width: 256px;
+}
+
 .ThePadArrows {
     width: 256px;
     position: absolute;

@@ -31,7 +31,7 @@ const ThePad = () => {
     return(
         <div className={`${styles.padImageContainer} controllerPadHeight`}>
             <div className={styles.ThePad} >
-        <img src={imageImports.miscImages.controller}/>
+        <img src={imageImports.miscImages.controller} className={styles.ThePadSprite}/>
         { mode === MODE_CAR ? vehicleArrows() : footArrows() }
         <PadText mode={mode} strings={strings} config={config}/>
             </div>
