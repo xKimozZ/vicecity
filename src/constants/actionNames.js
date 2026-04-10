@@ -29,6 +29,9 @@ export const actionNames = {
     CONFIG_3: 2,
     CONFIG_4: 3,
   },
+  MAP: {
+    LEGEND_ID: "legend",
+  },
   ARROWS: {
     DIRECTION_RIGHT: -1,
     DIRECTION_LEFT: -2,

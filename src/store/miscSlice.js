@@ -3,7 +3,7 @@ import { getRandomKey } from "../utils/math/getRandomObject";
 import { menuStrings } from "../constants/menuStrings";
 import { actionNames } from "../constants/actionNames";
 
-const { DISPLAY, CONTROLS } = actionNames;
+const { DISPLAY, CONTROLS, MAP } = actionNames;
 
 //const translateFactor = 10;
 const translateFactor = 1;
@@ -33,6 +33,10 @@ const initialState = {
     [CONTROLS.MODE_ID]: CONTROLS.MODE_CAR,
     [CONTROLS.VIB_ID]: false,
     [CONTROLS.FP_ID]: true,
+  },
+
+  mapSettings: {
+    [MAP.LEGEND_ID]: true,
   },
 };
 
@@ -86,6 +90,10 @@ export const miscSlice = createSlice({
       const newControlsSettings = payload;
       state.controlsSettings = newControlsSettings;
     },
+    misc_setMapSettings: (state, { payload }) => {
+      const newMapSettings = payload;
+      state.mapSettings = newMapSettings;
+    },
     misc_setBarLastUpdate: (state, { payload }) => {
       const newBarLastUpdate = payload;
       state.barLastUpdate = newBarLastUpdate;
@@ -105,5 +113,6 @@ export const {
   misc_setDisplaySettings,
   misc_setControlsSettings,
   misc_setBarLastUpdate,
+  misc_setMapSettings,
 } = miscSlice.actions;
 export default miscSlice.reducer;

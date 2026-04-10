@@ -191,4 +191,9 @@ export const fr = {
       l3: "[touche L3]",
     },
   },
+  map: {
+    legend: "Légende",
+    on: "Activé",
+    off: "Désactivé",
+  },
 };

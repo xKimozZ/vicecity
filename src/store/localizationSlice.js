@@ -57,6 +57,11 @@ export const stringControlsSelector = createSelector(
   (state) => state.strings[state.language]?.controls || {}
 );
 
+export const stringMapSelector = createSelector(
+  selectSelf,
+  (state) => state.strings[state.language]?.map || {}
+);
+
 export const stringNavSelector = createSelector(
   selectSelf,
   (state) => state.strings[state.language]?.nav || {}

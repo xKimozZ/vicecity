@@ -8,6 +8,13 @@
   justify-content: center;
 }
 
+.legend {
+  position: absolute;
+  bottom: 5%;
+  left: 7%;
+  z-index: 2;
+}
+
 .mapBound {
   display: flex;
   justify-content: center;

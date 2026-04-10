@@ -7,6 +7,7 @@ import useMainEvents from "./events/useMainEvents";
 import useLanguageEvents from "./events/useLanguageEvents";
 import useLoadEvents from "./events/useLoadEvents";
 import useDisplayEvents from "./events/display/useDisplayEvents";
+import useMapEvents from "./events/useMapEvents";
 import { actionNames } from "../constants/actionNames";
 import { buttonGroups, buttonIndices } from "../constants/buttonGroups";
 import useControlsEvents from "./events/controls/useControlsEvents";
@@ -27,6 +28,8 @@ const useEventHandler = () => {
   const { handleLoad } = useLoadEvents(globalHookFunctions);
   const { handleDisplay } = useDisplayEvents(globalHookFunctions);
   const { handleControls } = useControlsEvents(globalHookFunctions);
+  const { handleMap } = useMapEvents(globalHookFunctions);
+
 
   // Initialize stuff
   useEffect(() => {
@@ -97,6 +100,9 @@ const useEventHandler = () => {
         break;
       case buttonGroups.CONTROLS:
         handleControls(SELECT);
+      case buttonGroups.MAP:
+        handleMap(SELECT, hoveredOption);
+        break;
       default:
         break;
     }

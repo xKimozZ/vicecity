@@ -59,4 +59,7 @@ export const buttonIndices = {
         LIST_START: 1,
         LIST_END: 4,
     },
+    MAP: {
+        LEGEND: 1,
+    },
 };

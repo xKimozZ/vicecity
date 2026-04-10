@@ -191,4 +191,9 @@ export const es = {
       l3: "[botón L3]",
     },
   },
+  map: {
+    legend: "Leyenda",
+    on: "On",
+    off: "Off",
+  },
 };

@@ -191,4 +191,9 @@ export const it = {
       l3: "[tasto L3]",
     },
   },
+  map: {
+    legend: "Legenda",
+    on: "On",
+    off: "Off",
+  },
 };

@@ -191,4 +191,9 @@ export const de = {
       l3: "[L3-Taste]",
     },
   },
+  map: {
+    legend: "Legende",
+    on: "AN",
+    off: "AUS",
+  },
 };
