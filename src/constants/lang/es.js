@@ -193,6 +193,7 @@ export const es = {
   },
   map: {
     legend: "Leyenda",
+    maplegend: "Leyenda del mapa",
     on: "On",
     off: "Off",
   },

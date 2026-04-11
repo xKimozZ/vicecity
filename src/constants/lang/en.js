@@ -193,6 +193,7 @@ export const en = {
     },
     map: {
       legend: "Legend",
+      maplegend: "Map Legend",
       on: "On",
       off: "Off",
     },

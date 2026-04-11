@@ -4,7 +4,7 @@ import styles from "./MapMenu.module.css";
 import { buttonGroups, buttonIndices } from "../../../constants/buttonGroups";
 import { actionNames } from "../../../constants/actionNames";
 import ColumnedList from "../../ColumnedList/ColumnedList";
-import TheMap from "./TheMap";
+import Legend from "./Legend";
 
   const MAP_CURSOR_FACTORS = {
   clipFactor: 4,
@@ -34,7 +34,9 @@ const MapMenu = () => {
   
   return (
     <div className={styles.mapContainer}>
-      <div></div>
+      <div className={styles.legendBoxAlign}>
+        { mapSettings[actionNames.MAP.LEGEND_ID] && <Legend /> }
+      </div>
       <div className={styles.legendButtonAlign}>
       <ColumnedList items={legendData} />
       </div>

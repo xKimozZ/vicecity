@@ -193,6 +193,7 @@ export const fr = {
   },
   map: {
     legend: "Légende",
+    maplegend: "Legende de la carte",
     on: "Activé",
     off: "Désactivé",
   },

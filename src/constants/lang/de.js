@@ -193,6 +193,7 @@ export const de = {
   },
   map: {
     legend: "Legende",
+      maplegend: "Kartenlegende",
     on: "AN",
     off: "AUS",
   },

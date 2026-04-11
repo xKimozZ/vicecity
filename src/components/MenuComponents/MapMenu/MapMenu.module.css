@@ -8,6 +8,12 @@
   grid-template-rows: 89% 11%;
 }
 
+.legendBoxAlign {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .legendButtonAlign {
   display: flex;
   align-items: flex-start;
