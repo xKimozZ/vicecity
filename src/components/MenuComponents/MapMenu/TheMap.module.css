@@ -20,3 +20,9 @@
   width: calc(256px * var(--scale-factor));
   height: calc(256px * var(--scale-factor));
 }
+
+@media screen and (max-width: 640px) {
+  .mapBound {
+    display: none;
+  }
+}
