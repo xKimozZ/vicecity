@@ -11,6 +11,7 @@ import { imageImports } from '../../assets/imageImports';
 import { buttonGroups } from '../../constants/buttonGroups';
 import { elementIds } from '../../constants/elementIds';
 import NavigationTips from '../NavigationTips/NavigationTips';
+import TheMap from '../MenuComponents/MapMenu/TheMap';
 
 const { FRONTEND_CONTAINER_ID, FRONTEND_BACKGROUND_ID } = elementIds.FRONTEND;
 
@@ -99,6 +100,9 @@ const Landscape = () => {
     <>
       <Cursor />
       <div id={FRONTEND_BACKGROUND_ID} className="backgroundElement" style={{...clipPathStyle }}/>
+      {/* UGLY SHIT BUT NEEDED SO THAT THE CURSOR IS ABOVE THE MAP IN Z HIERARCHY
+      ALSO BECAUSE THIS IS A REACT ELEMENT AND CANT BE JUST CREATED AND APPENEDED TO ROOT*/}
+      { nextButtonGroup === buttonGroups.MAP && <TheMap /> }
       <div id={FRONTEND_CONTAINER_ID} className={` AppContainer `}>
       <img src={imageImports.global.vclogosvg} className="viceLogo" />
       <NavigationTips />

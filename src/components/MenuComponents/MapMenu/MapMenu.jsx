@@ -22,7 +22,6 @@ const MapMenu = () => {
   
   return (
     <div className={styles.mapContainer}>
-      <TheMap />
       <ColumnedList items={legendData} />
     </div>
   );
