@@ -1,11 +1,17 @@
 .mapContainer {
-  display: flex;
+  display: grid;
   width: 80%;
   height: 93%;
   margin-top: 3%;
   position: relative;
-  align-items: center;
-  justify-content: center;
+
+  grid-template-rows: 89% 11%;
+}
+
+.legendButtonAlign {
+  display: flex;
+  align-items: flex-start;
+  padding-left: 17%;
 }
 
 .legend {
