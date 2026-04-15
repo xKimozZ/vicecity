@@ -1,70 +1,126 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Vice City PS2 Frontend: React Recreation
 
-## Available Scripts
+*"Welcome to the 80s."*
 
-In the project directory, you can run:
+A pixel-faithful recreation of the GTA: Vice City PS2 pause menu -- 
+built from scratch with React and Redux, down to the fonts, the sounds, and the tiniest details,
+by yours truly, <strong><span style="color:#198246">xKimozZ (Karim Ayman)</span></strong>.
 
-### `npm start`
+[![React](https://img.shields.io/badge/React-18.3.1-ff95df?style=flat-square&logo=react&logoColor=white)](https://react.dev)
+[![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.2.7-1b5982?style=flat-square&logo=redux&logoColor=white)](https://redux-toolkit.js.org)
+[![React Router](https://img.shields.io/badge/React_Router-7.1.3-61c2f7?style=flat-square&logo=reactrouter&logoColor=white)](https://reactrouter.com)
+[![use-sound](https://img.shields.io/badge/use--sound-4.0.4-198246?style=flat-square&logoColor=white)](https://github.com/joshwcomeau/use-sound)
+[![Status](https://img.shields.io/badge/status-pre--alpha-ff95df?style=flat-square)]()
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+</div>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## <span style="color:#ff95df">About</span>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Born from nostalgia and a desire to challenge myself, this is an opportunity to study the original menu's behavior and aesthetics down to the tiniest detail, and recreate it as closely as the web allows. This wasn't just programming menu logic, but using creative CSS and JS tricks to maneuver around the limitations of browsers to bring a feature to life on par with the original, spending hours exploring every use case, and remastering the original assets. I can guarantee that if you test this recreation and the original game's menu side-by-side, you will find that at least 95% of the behaviors are identical.
 
-### `npm run build`
+For instance, the green trapezoidal cursor alone is its own system. It generates a randomized `clip-path` polygon on each hover -- slightly jittering corners bounded within a configurable clip percentage -- which is how the original game's highlight on options is not deterministic. The keyboard navigation is equally specific: the Load screen has two independent navigation phases (New Game / slot selection), the Stats screen has a held-key scroll with translation animation, and the Display screen lets you nudge screen position one unit at a time, just like calibrating an old CRT. None of that was strictly necessary to make something that "looks like" Vice City, but that's exactly why it's there.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## <span style="color:#61c2f7">Getting Started</span>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm install
+npm start
+```
 
-### `npm run eject`
+Open [http://localhost:3000](http://localhost:3000). Desktop only -- a warning is shown on mobile viewports.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## <span style="color:#61c2f7">Available Scripts</span>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Command | Description |
+|---|---|
+| `npm start` | Development mode with hot reload |
+| `npm test` | Jest test runner in watch mode |
+| `npm run build` | Optimized production build to `build/` |
+| `npm run eject` | Ejects from CRA -- irreversible |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+<details>
+<summary><strong><span style="color:#ff95df">Project Structure</span></strong></summary>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+src/
+|-- assets/          # Fonts, images, sounds, global CSS variables
+|-- components/
+|   |-- Frontend/    # Root layout + landscape orchestrator
+|   |-- MenuComponents/
+|   |   |-- AudioMenu/     # (coming soon)
+|   |   |-- BriefMenu/     # Mission briefing narrative
+|   |   |-- ControlsMenu/  # Control configuration
+|   |   |-- DisplayMenu/   # Brightness, widescreen, HUD, screen position
+|   |   |-- LanguageMenu/  # EN / FR / DE / IT / ES
+|   |   |-- LoadMenu/      # New Game + 8 save slots (two-phase nav)
+|   |   |-- MapMenu/       # (in progress)
+|   |   `-- StatsMenu/     # 50+ scrollable game stats
+|   |-- Button/      # Reusable button with hover effects
+|   |-- Cursor/      # Procedurally clipped custom cursor
+|   `-- ...
+|-- constants/
+|   `-- lang/        # en / fr / de / it / es
+|-- context/         # EventHandlerContext / ReduxAbstractorContext
+|-- hooks/           # useEventHandler / useKeyNavigation / useSoundManager
+|   `-- events/      # Per-menu event hooks
+|-- store/           # Redux slices
+`-- utils/           # Key navigation logic, math helpers
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+</details>
 
-### Code Splitting
+<details>
+<summary><strong><span style="color:#ff95df">Architecture</span></strong></summary>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### State Management
 
-### Analyzing the Bundle Size
+Four Redux slices power the whole app:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+| Slice | Responsibility |
+|---|---|
+| `navigationSlice` | Active button group, hovered option, key press state |
+| `miscSlice` | Game settings (display, controls) + scroll animation offset |
+| `cursorSlice` | Cursor position, clip-path polygon, randomization factors |
+| `localizationSlice` | Current language + all translated strings |
 
-### Making a Progressive Web App
+Components reach Redux through `ReduxAbstractorContext`, which wraps every selector and dispatcher for readability -- no prop drilling, no direct store imports in UI code.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Navigation Model
 
-### Advanced Configuration
+Navigation is entirely state-driven. Button groups determine which menu is active:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+`MAIN` > `MAP` / `BRIEF` / `LOAD` / `STATS` / `CONTROLS` / `AUDIO` / `DISPLAY` / `LANGUAGE`
 
-### Deployment
+### Input Handling
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+`useKeyNavigation` manages debounced arrow key, Enter, and Escape events. `useEventHandler` routes them to per-menu hooks (`useMainEvents`, `useStatsEvents`, `useLoadEvents`, etc.), each with its own navigation rules.
 
-### `npm run build` fails to minify
+### Cursor System
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+On every hover, `generateRandomClipPath` produces a quadrilateral `polygon()` with corners randomized within a configurable boundary -- replicating the subtle jitter of the original game's selection highlight.
+
+### Localization
+
+All strings live in `constants/lang/`. The `localizationSlice` holds the active set and re-supplies components on language change. Five languages supported out of the box.
+
+</details>
+
+---
+
+## <span style="color:#198246">Current Status</span>
+
+| Menu | Status |
+|---|---|
+| Main, Brief, Load, Stats, Controls, Display, Language | Feature-complete |
+| Map | In progress |
+| Audio | Coming soon -- last feature before Alpha |
