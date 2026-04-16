@@ -1,0 +1,71 @@
+/* Vice City Landing - Button Styles */
+
+/* Button base */
+.landing-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--text-base);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+/* Primary button */
+.landing-btn-primary {
+  background: var(--accent-primary);
+}
+
+.landing-root a.landing-btn-primary {
+  color: white;
+  text-decoration: none;
+}
+
+.landing-root a.landing-btn-primary:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.landing-btn-primary:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Secondary button */
+.landing-btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-color);
+}
+
+.landing-root a.landing-btn-secondary,
+.landing-root a.landing-btn-secondary:hover {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.landing-btn-secondary:hover {
+  background: var(--btn-secondary-hover);
+  transform: translateY(-1px);
+}
+
+/* Size variants */
+.landing-btn-sm {
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--text-sm);
+}
+
+.landing-btn-lg {
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--text-lg);
+}
+
+/* Icon-only button */
+.landing-btn-icon {
+  padding: var(--space-sm);
+  aspect-ratio: 1;
+}

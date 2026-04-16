@@ -1,0 +1,35 @@
+.header {
+  margin-bottom: var(--space-2xl);
+}
+
+.centered {
+  text-align: center;
+}
+
+.title {
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  margin: var(--space-md) 0;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.centered .subtitle {
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: var(--text-2xl);
+  }
+  
+  .subtitle {
+    font-size: var(--text-base);
+  }
+}

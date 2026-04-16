@@ -1,0 +1,12 @@
+.cursor {
+  position: absolute;
+  z-index: 0;
+  background-color: var(--cursor-bg);
+  box-shadow: 0 0 12px var(--cursor-glow);
+  pointer-events: none;
+  transition: 
+    left var(--transition-fast),
+    top var(--transition-fast),
+    width var(--transition-fast),
+    height var(--transition-fast);
+}

@@ -1,7 +1,6 @@
 body {
   background-color: black;
   cursor: url('./assets/images/mouse64.png'),auto;
-  overflow: hidden;
 }
 
 #root {

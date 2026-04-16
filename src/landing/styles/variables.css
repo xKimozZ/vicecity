@@ -1,0 +1,161 @@
+/* Vice City Landing - Theme Variables */
+/* Based on the original Vice City color palette */
+
+:root {
+  /* Core palette (unchanged between themes) */
+  --vc-pink: #ff95df;
+  --vc-green: #198246;
+  --vc-cyan: #61c2f7;
+  --vc-navy: #1b5982;
+  
+  /* Accent variations */
+  --vc-pink-soft: #ffb8e8;
+  --vc-pink-muted: #c97ab0;
+  --vc-cyan-soft: #8ed4f9;
+  --vc-green-soft: #2ba85e;
+  
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  
+  /* Typography scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3rem;
+  
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.2);
+  
+  /* Layout */
+  --header-height: 64px;
+  --max-width: 1200px;
+  --content-padding: var(--space-lg);
+}
+
+/* Dark theme (default for Vice City aesthetic) */
+[data-theme="dark"] {
+  --bg-primary: #0d0d0d;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #262626;
+  --bg-elevated: #2a2a2a;
+  --bg-hero: linear-gradient(135deg, #1a0a14 0%, #0d1a20 50%, #0d0d0d 100%);
+  
+  --text-primary: #f0f0f0;
+  --text-secondary: #c4c4c4;
+  --text-muted: #909090;
+  
+  --border-color: #333333;
+  --border-subtle: #262626;
+  
+  --accent-primary: var(--vc-pink);
+  --accent-secondary: var(--vc-cyan);
+  --accent-tertiary: var(--vc-green);
+  
+  --btn-primary-hover: var(--vc-cyan);
+  --btn-secondary-hover: var(--bg-tertiary);
+  
+  --cursor-bg: var(--vc-green);
+  --cursor-glow: rgba(25, 130, 70, 0.3);
+  
+  --status-warning: #f59e0b;
+  --status-info: var(--vc-cyan);
+  --status-success: var(--vc-green);
+  
+  --card-bg: var(--bg-secondary);
+  --card-border: var(--border-color);
+  --card-hover: var(--bg-tertiary);
+  
+  --code-bg: #1e1e1e;
+  --code-border: #333333;
+
+  /* Page-specific hero gradients */
+  --bg-hero-about: linear-gradient(135deg, #0d1a0f 0%, #0d150d 50%, #0d0d0d 100%);
+  --bg-hero-devlog: linear-gradient(135deg, #0d0d1a 0%, #111528 50%, #0d0d0d 100%);
+  --bg-hero-demo: linear-gradient(135deg, #1a100d 0%, #140d1a 50%, #0d0d0d 100%);
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --bg-primary: #fafafa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f0f0f0;
+  --bg-elevated: #ffffff;
+  --bg-hero: linear-gradient(135deg, #fff5fa 0%, #f0f9ff 50%, #fafafa 100%);
+  
+  --text-primary: #0a0a0a;
+  --text-secondary: #2a2a2a;
+  --text-muted: #4a4a4a;
+  
+  --border-color: #d0d0d0;
+  --border-subtle: #e5e5e5;
+  
+  --accent-primary: #d64a9e;
+  --accent-secondary: #2889c4;
+  --accent-tertiary: #147a3e;
+  
+  --btn-primary-hover: #2889c4;
+  --btn-secondary-hover: #e5e5e5;
+  
+  --cursor-bg: var(--vc-green);
+  --cursor-glow: rgba(25, 130, 70, 0.2);
+  
+  --status-warning: #d97706;
+  --status-info: #0284c7;
+  --status-success: #147a3e;
+  
+  --card-bg: var(--bg-secondary);
+  --card-border: var(--border-color);
+  --card-hover: var(--bg-tertiary);
+  
+  --code-bg: #f4f4f5;
+  --code-border: #d4d4d8;
+
+  /* Page-specific hero gradients */
+  --bg-hero-about: linear-gradient(135deg, #f0fff5 0%, #f5fff8 50%, #fafafa 100%);
+  --bg-hero-devlog: linear-gradient(135deg, #f0f4ff 0%, #f5f0ff 50%, #fafafa 100%);
+  --bg-hero-demo: linear-gradient(135deg, #fff8f0 0%, #fdf0ff 50%, #fafafa 100%);
+}
+
+/* Mobile breakpoints */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 56px;
+    --content-padding: var(--space-md);
+    --text-4xl: 2rem;
+    --text-5xl: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --content-padding: var(--space-sm);
+    --text-3xl: 1.5rem;
+    --text-4xl: 1.75rem;
+    --text-5xl: 2rem;
+  }
+}
