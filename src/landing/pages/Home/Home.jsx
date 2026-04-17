@@ -1,12 +1,7 @@
-import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 import demoVideo from "../../demo.webm";
-
-const ArrowIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M5 12h14M12 5l7 7-7 7" />
-  </svg>
-);
+import LinkButton from "../../components/LinkButton/LinkButton";
+import { ArrowIcon } from "../../components";
 
 const features = [
   {
@@ -59,12 +54,8 @@ const Home = () => {
               Built from scratch with React, down to the tiniest details.
             </p>
             <div className={styles.heroActions}>
-              <Link to="/demo" className="landing-btn landing-btn-primary">
-                Try the Demo <ArrowIcon />
-              </Link>
-              <Link to="/devlog" className="landing-btn landing-btn-secondary">
-                Read the Devlog
-              </Link>
+              <LinkButton content={<><span>Try the Demo</span> <ArrowIcon /></>} rank="primary" href="/demo" />
+              <LinkButton content="Read the Devlog" rank="secondary" href="/devlog" />
             </div>
           </div>
           <div className={styles.heroPreview}>
@@ -157,9 +148,7 @@ const Home = () => {
             <p className={styles.ctaDesc}>
               Grab a keyboard and see how close it feels to the real thing.
             </p>
-            <Link to="/demo" className="landing-btn landing-btn-primary">
-              Launch Demo <ArrowIcon />
-            </Link>
+            <LinkButton content={<><span>Launch Demo</span> <ArrowIcon /></>} rank="primary" href="/demo" />
           </div>
         </div>
       </section>

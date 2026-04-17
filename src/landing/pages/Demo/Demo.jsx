@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import styles from "./Demo.module.css";
 import demoVideo from "../../demo.webm";
+import LinkButton from "../../components/LinkButton/LinkButton";
+import { ArrowIcon } from "../../components";
 
 const KeyIcon = ({ children }) => (
   <span className={styles.keyIcon}>{children}</span>
@@ -68,9 +70,7 @@ const Demo = () => {
           </div>
 
           <div className={styles.actions}>
-            <a href="/app" className="landing-btn landing-btn-primary">
-              Enter Demo →
-            </a>
+            <LinkButton content={<><span>Enter Demo</span> <ArrowIcon /></>} rank="primary" href="/app" />
             <Link to="/" className="landing-btn landing-btn-secondary">
               ← Back to Home
             </Link>

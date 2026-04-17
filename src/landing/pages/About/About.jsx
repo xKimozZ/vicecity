@@ -1,5 +1,6 @@
 import styles from "./About.module.css";
 import cvFile from "../../KarimAymanCV.pdf";
+import LinkButton from "../../components/LinkButton/LinkButton";
 
 const techStack = [
   { name: "React", version: "18.3.1", purpose: "UI framework" },
@@ -8,6 +9,12 @@ const techStack = [
   { name: "use-sound", version: "4.0.4", purpose: "Audio playback" },
   { name: "CSS Modules", version: "-", purpose: "Scoped styling" },
 ];
+
+const profileLinks = [
+  { name: "GitHub", url: "https://github.com/xKimozZ", rank: "secondary" },
+  { name: "LinkedIn", url: "https://linkedin.com/in/karim-ayman-h", rank: "secondary" },
+  { name: "CV", url: cvFile, rank: "primary" },
+]
 
 const About = () => {
   return (
@@ -43,30 +50,7 @@ const About = () => {
                   I couldn't shake the memory of navigating that menu as a kid.
                 </p>
                 <div className={styles.authorLinks}>
-                  <a 
-                    href="https://github.com/xKimozZ" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="landing-btn landing-btn-secondary"
-                  >
-                    GitHub
-                  </a>
-                  <a 
-                    href="https://linkedin.com/in/karim-ayman-h" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="landing-btn landing-btn-secondary"
-                  >
-                    LinkedIn
-                  </a>
-                  <a
-                    href={cvFile}
-                    download="KarimAyman_CV.pdf"
-                    className="landing-btn landing-btn-primary"
-                  >
-                    CV
-                  </a>
-                  {/* Add more links as needed */}
+                  {profileLinks.map((link) => <LinkButton key={link.name} content={link.name} rank={link.rank} href={link.url} isRouter={false} />)}
                 </div>
               </div>
             </div>
