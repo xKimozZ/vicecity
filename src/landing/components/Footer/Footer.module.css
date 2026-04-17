@@ -19,8 +19,16 @@
 
 @media (max-width: 768px) {
   .footerGrid {
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
+    grid-template-columns: 1fr 0.5fr 0.5fr;
+    gap: var(--space-3xl);
+  }
+
+  .footerSection {
+    text-align: center;
+  }
+
+  .footerSection h3 {
+    margin: 0;
   }
 }
 
