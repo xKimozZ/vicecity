@@ -145,31 +145,6 @@
   color: var(--text-secondary);
 }
 
-/* Features Grid */
-.featuresGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--space-lg);
-}
-
-.featureIcon {
-  font-size: var(--text-3xl);
-  display: block;
-  margin-bottom: var(--space-sm);
-}
-
-.featureTitle {
-  font-size: var(--text-lg);
-  font-weight: 600;
-  margin: 0 0 var(--space-xs) 0;
-}
-
-.featureDesc {
-  font-size: var(--text-sm);
-  color: var(--text-secondary);
-  margin: 0;
-}
-
 /* Status Section */
 .statusSection {
   background: var(--bg-secondary);

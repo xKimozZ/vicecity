@@ -1,7 +1,7 @@
 import styles from "./Home.module.css";
 import demoVideo from "../../demo.webm";
 import LinkButton from "../../components/LinkButton/LinkButton";
-import { ArrowIcon, SectionHeader, StatusBadge } from "../../components";
+import { ArrowIcon, FeaturesGrid, SectionHeader, StatusBadge } from "../../components";
 
 const features = [
   {
@@ -104,15 +104,7 @@ const Home = () => {
       <section className="landing-section">
         <div className="landing-container">
           <SectionHeader title="What Makes This Special" subtitle="This isn't a loose 'inspired by' project. It's an obsessive recreation." />
-          <div className={styles.featuresGrid}>
-            {features.map((feature, index) => (
-              <div key={index} className="landing-card">
-                <span className={styles.featureIcon}>{feature.icon}</span>
-                <h3 className={styles.featureTitle}>{feature.title}</h3>
-                <p className={styles.featureDesc}>{feature.description}</p>
-              </div>
-            ))}
-          </div>
+          <FeaturesGrid features={features} />
         </div>
       </section>
 

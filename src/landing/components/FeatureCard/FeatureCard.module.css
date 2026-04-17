@@ -3,12 +3,13 @@
   border: 1px solid var(--card-border);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
-  text-align: center;
+  /* text-align: center; */
   transition: all var(--transition-base);
 }
 
 .card:hover {
   transform: translateY(-4px);
+  background: var(--card-hover);
   border-color: var(--accent-primary);
   box-shadow: var(--shadow-lg);
 }
@@ -37,5 +38,23 @@
   font-size: var(--text-sm);
   color: var(--text-secondary);
   line-height: 1.6;
+  margin: 0;
+}
+
+.featureIcon {
+  font-size: var(--text-3xl);
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.featureTitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.featureDesc {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
   margin: 0;
 }

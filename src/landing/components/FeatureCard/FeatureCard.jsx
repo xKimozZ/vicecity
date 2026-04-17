@@ -11,13 +11,14 @@ const FeatureCard = ({
   return (
     <div className={`${styles.card} ${className}`}>
       {icon && (
-        <div className={styles.iconWrapper}>
-          {icon}
-        </div>
+        // <div className={styles.iconWrapper}>
+        //   {icon}
+        // </div>
+      <span className={styles.featureIcon}>{icon}</span>
       )}
-      <h3 className={styles.title}>{title}</h3>
+      <h3 className={styles.featureTitle}>{title}</h3>
       {description && (
-        <p className={styles.description}>{description}</p>
+        <p className={styles.featureDesc}>{description}</p>
       )}
       {children}
     </div>
