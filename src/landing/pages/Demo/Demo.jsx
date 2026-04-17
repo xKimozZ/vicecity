@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./Demo.module.css";
 import demoVideo from "../../demo.webm";
 import LinkButton from "../../components/LinkButton/LinkButton";
-import { ArrowIcon, StatusBadge } from "../../components";
+import { ArrowIcon, LeftArrowIcon, StatusBadge } from "../../components";
 
 const KeyIcon = ({ children }) => (
   <span className={styles.keyIcon}>{children}</span>
@@ -73,7 +73,7 @@ const Demo = () => {
           <div className={styles.actions}>
             <LinkButton content={<><span>Enter Demo</span> <ArrowIcon /></>} rank="primary" href="/app" />
             <Link to="/" className="landing-btn landing-btn-secondary">
-              ← Back to Home
+              <LeftArrowIcon /> Back to Home
             </Link>
           </div>
 
