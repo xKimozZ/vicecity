@@ -69,7 +69,7 @@ const BuildInfo = () => {
             More info will be available soon. You can toggle the visibility of
             this header by clicking on the top of the page. <br />
             <div style={{ color: "var(--pink)", textAlign: "center" }}>
-              <Link to="/">
+              <Link to="/demo">
               {" "}
               Click here to go back to the landing page :){" "}</Link>
             </div>
