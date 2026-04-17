@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./BuildInfo.module.css";
 import useSoundManager from "../../hooks/useSoundManager";
+import { Link } from "react-router";
 
 const BuildInfo = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -68,8 +69,9 @@ const BuildInfo = () => {
             More info will be available soon. You can toggle the visibility of
             this header by clicking on the top of the page. <br />
             <div style={{ color: "var(--pink)", textAlign: "center" }}>
+              <Link to="/">
               {" "}
-              Feel free to check the code using browser developer tools until the repo goes public! :)
+              Click here to go back to the landing page :){" "}</Link>
             </div>
           </div>
         </div>
