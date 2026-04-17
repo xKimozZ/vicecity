@@ -48,6 +48,7 @@ const Demo = () => {
               <div className={styles.controlItem}>
                 <div className={styles.keys}>
                   <KeyIcon>Esc</KeyIcon>
+                  <KeyIcon>Backspace</KeyIcon>
                 </div>
                 <span className={styles.controlDesc}>Back / Cancel</span>
               </div>
