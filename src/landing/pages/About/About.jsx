@@ -17,6 +17,21 @@ const profileLinks = [
 ]
 
 const About = () => {
+  
+  const TechEntry = ({ name, version, purpose }) => {
+    return (
+      <div key={name} className={styles.techCard}>
+        <div className={styles.techHeader}>
+          <span className={styles.techName}>{name}</span>
+          {version !== "-" && (
+            <span className={styles.techVersion}>{version}</span>
+          )}
+        </div>
+        <span className={styles.techPurpose}>{purpose}</span>
+      </div>
+    );
+  };
+
   return (
     <div className={styles.about}>
       <header className={styles.header}>
@@ -88,15 +103,7 @@ const About = () => {
           <h2 className={styles.sectionTitle}>Built With</h2>
           <div className={styles.techGrid}>
             {techStack.map((tech) => (
-              <div key={tech.name} className={styles.techCard}>
-                <div className={styles.techHeader}>
-                  <span className={styles.techName}>{tech.name}</span>
-                  {tech.version !== "-" && (
-                    <span className={styles.techVersion}>{tech.version}</span>
-                  )}
-                </div>
-                <span className={styles.techPurpose}>{tech.purpose}</span>
-              </div>
+              <TechEntry key={tech.name} name={tech.name} version={tech.version} purpose={tech.purpose} />
             ))}
           </div>
         </section>
@@ -114,6 +121,7 @@ const About = () => {
             No copyright infringement is intended.
           </p>
         </section>
+        
       </div>
       </div>
     </div>
