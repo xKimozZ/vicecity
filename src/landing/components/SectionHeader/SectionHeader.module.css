@@ -38,11 +38,11 @@
 .sectionHeader {
   text-align: center;
   margin-bottom: var(--space-2xl);
-  text-transform: capitalize;
 }
 
 .sectionTitle {
   font-size: var(--text-3xl);
   font-weight: 700;
   margin: 0 0 var(--space-sm) 0;
+  text-transform: capitalize;
 }
