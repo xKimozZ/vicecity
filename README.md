@@ -5,8 +5,10 @@
 *"Welcome to the 80s."*
 
 A pixel-faithful recreation of the GTA: Vice City PS2 pause menu -- 
-built from scratch with React and Redux, down to the fonts, the sounds, and the tiniest details,
-by yours truly, <strong><span style="color:#198246">xKimozZ (Karim Ayman)</span></strong>.
+built from scratch with React and Redux, down to the fonts, the sounds, and the tiniest details --
+by yours truly -- <strong><span style="color:#198246">xKimozZ (Karim Ayman)</span></strong>.
+
+Deployed at [vicecitymenu.vercel.app](https://vicecitymenu.vercel.app)
 
 [![React](https://img.shields.io/badge/React-18.3.1-ff95df?style=flat-square&logo=react&logoColor=white)](https://react.dev)
 [![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.2.7-1b5982?style=flat-square&logo=redux&logoColor=white)](https://redux-toolkit.js.org)
@@ -22,7 +24,7 @@ by yours truly, <strong><span style="color:#198246">xKimozZ (Karim Ayman)</span>
 
 Born from nostalgia and a desire to challenge myself, this is an opportunity to study the original menu's behavior and aesthetics down to the tiniest detail, and recreate it as closely as the web allows. This wasn't just programming menu logic, but using creative CSS and JS tricks to maneuver around the limitations of browsers to bring a feature to life on par with the original, spending hours exploring every use case, and remastering the original assets. I can guarantee that if you test this recreation and the original game's menu side-by-side, you will find that at least 95% of the behaviors are identical.
 
-For instance, the green trapezoidal cursor alone is its own system. It generates a randomized `clip-path` polygon on each hover -- slightly jittering corners bounded within a configurable clip percentage -- which is how the original game's highlight on options is not deterministic. The keyboard navigation is equally specific: the Load screen has two independent navigation phases (New Game / slot selection), the Stats screen has a held-key scroll with translation animation, and the Display screen lets you nudge screen position one unit at a time, just like calibrating an old CRT. None of that was strictly necessary to make something that "looks like" Vice City, but that's exactly why it's there.
+For instance, the green trapezoidal cursor alone is its own system. It generates a randomized `clip-path` polygon on each hover -- slightly jittering corners bounded within a configurable clip percentage -- which is identical to how the original game's highlight on options is not deterministic. The keyboard navigation is equally specific: the Load screen has two independent navigation phases (New Game / slot selection), the Stats screen has a held-key scroll with translation animation, and the Display screen lets you nudge screen position one unit at a time, just like calibrating an old CRT. None of that was strictly necessary to make something that "looks like" Vice City, but that's exactly why it's there.
 
 ---
 
