@@ -1,4 +1,5 @@
 import styles from "./Devlog.module.css";
+import { StatusBadge } from "../../components";
 
 // Placeholder entries - replace with actual content
 const entries = [
@@ -55,7 +56,7 @@ const Devlog = () => {
       <div className={styles.body}>
         <div className="landing-container">
           <div className={styles.comingSoon}>
-          <span className="landing-badge landing-badge-info">Coming Soon</span>
+          <StatusBadge type="info" children={"Coming Soon"}/>
           <p>
             Detailed write-ups are in progress. Below are planned topics.
           </p>

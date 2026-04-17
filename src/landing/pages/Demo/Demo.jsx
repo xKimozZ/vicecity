@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./Demo.module.css";
 import demoVideo from "../../demo.webm";
 import LinkButton from "../../components/LinkButton/LinkButton";
-import { ArrowIcon } from "../../components";
+import { ArrowIcon, StatusBadge } from "../../components";
 
 const KeyIcon = ({ children }) => (
   <span className={styles.keyIcon}>{children}</span>
@@ -20,7 +20,7 @@ const Demo = () => {
         <div className={styles.content}>
           
           <div className={styles.warningCard}>
-            <span className="landing-badge landing-badge-warning">Important</span>
+            <StatusBadge type="warning" children={"Important"}/>
             <p>
               The demo is optimized for <strong>desktop browsers</strong> with a keyboard. 
               Mobile devices are not currently supported.

@@ -47,36 +47,6 @@
   }
 }
 
-/* Status badges */
-.landing-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding: var(--space-xs) var(--space-sm);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-radius: var(--radius-sm);
-
-  max-width: fit-content;
-}
-
-.landing-badge-warning {
-  background: rgba(245, 158, 11, 0.15);
-  color: var(--status-warning);
-}
-
-.landing-badge-info {
-  background: rgba(97, 194, 247, 0.15);
-  color: var(--status-info);
-}
-
-.landing-badge-success {
-  background: rgba(25, 130, 70, 0.15);
-  color: var(--status-success);
-}
-
 /* Responsive visibility */
 @media (max-width: 768px) {
   .hide-mobile {

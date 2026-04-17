@@ -1,7 +1,7 @@
 import styles from "./Home.module.css";
 import demoVideo from "../../demo.webm";
 import LinkButton from "../../components/LinkButton/LinkButton";
-import { ArrowIcon } from "../../components";
+import { ArrowIcon, StatusBadge } from "../../components";
 
 const features = [
   {
@@ -39,6 +39,21 @@ const menuStatus = [
 ];
 
 const Home = () => {
+
+  const generateBadge = (status) => {
+    switch (status) {
+      case "complete":
+        return <StatusBadge type="success" children={"Complete"} />;
+      case "wip":
+        return <StatusBadge type="warning" children={"In Progress"} />;
+      case "planned":
+        return <StatusBadge type="info" children={"Planned"} />;
+      default:
+        return null;
+    }
+  };
+
+
   return (
     <div className={styles.home}>
       {/* Hero Section */}
@@ -76,7 +91,7 @@ const Home = () => {
       <section className={styles.statusBanner}>
         <div className="landing-container">
           <div className={styles.bannerContent}>
-            <span className="landing-badge landing-badge-warning">Pre-Alpha</span>
+            <StatusBadge type="warning" children={"Pre-Alpha"} />
             <p>
               This project is still in development. Some menus are incomplete and 
               mobile devices are not currently supported.
@@ -119,21 +134,7 @@ const Home = () => {
             {menuStatus.map((menu) => (
               <div key={menu.name} className={styles.statusItem}>
                 <span className={styles.statusName}>{menu.name}</span>
-                <span
-                  className={`landing-badge ${
-                    menu.status === "complete"
-                      ? "landing-badge-success"
-                      : menu.status === "wip"
-                      ? "landing-badge-warning"
-                      : "landing-badge-info"
-                  }`}
-                >
-                  {menu.status === "complete"
-                    ? "Complete"
-                    : menu.status === "wip"
-                    ? "In Progress"
-                    : "Planned"}
-                </span>
+                {generateBadge(menu.status)}
               </div>
             ))}
           </div>
