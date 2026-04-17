@@ -1,7 +1,7 @@
 import styles from "./Home.module.css";
 import demoVideo from "../../demo.webm";
 import LinkButton from "../../components/LinkButton/LinkButton";
-import { ArrowIcon, StatusBadge } from "../../components";
+import { ArrowIcon, SectionHeader, StatusBadge } from "../../components";
 
 const features = [
   {
@@ -103,12 +103,7 @@ const Home = () => {
       {/* Features Section */}
       <section className="landing-section">
         <div className="landing-container">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>What Makes This Special</h2>
-            <p className="text-secondary">
-              This isn't a loose "inspired by" project. It's an obsessive recreation.
-            </p>
-          </div>
+          <SectionHeader title="What Makes This Special" subtitle="This isn't a loose 'inspired by' project. It's an obsessive recreation." />
           <div className={styles.featuresGrid}>
             {features.map((feature, index) => (
               <div key={index} className="landing-card">
@@ -124,12 +119,7 @@ const Home = () => {
       {/* Menu Status Section */}
       <section className={`landing-section ${styles.statusSection}`}>
         <div className="landing-container">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Implementation Status</h2>
-            <p className="text-secondary">
-              Track progress on each menu component.
-            </p>
-          </div>
+          <SectionHeader title="Implementation Status" subtitle="Track progress on each menu component." />
           <div className={styles.statusGrid}>
             {menuStatus.map((menu) => (
               <div key={menu.name} className={styles.statusItem}>

@@ -1,28 +1,33 @@
-import React from 'react';
 import styles from './SectionHeader.module.css';
 
 const SectionHeader = ({ 
   title, 
   subtitle, 
-  badge, 
-  badgeType = 'info', // 'info', 'warning', 'success'
-  centered = true,
-  className = '' 
+  // badge, 
+  // badgeType = 'info', // 'info', 'warning', 'success'
+  // centered = true,
+  // className = '' 
 }) => {
   return (
-    <div className={`${styles.header} ${centered ? styles.centered : ''} ${className}`}>
-      {badge && (
-        <span className={`landing-badge landing-badge-${badgeType}`}>
-          {badge}
-        </span>
-      )}
-      <h2 className={styles.title}>
-        <span className="text-gradient">{title}</span>
-      </h2>
-      {subtitle && (
-        <p className={styles.subtitle}>{subtitle}</p>
-      )}
-    </div>
+    // <div className={`${styles.header} ${centered ? styles.centered : ''} ${className}`}>
+    //   {badge && (
+    //     <span className={`landing-badge landing-badge-${badgeType}`}>
+    //       {badge}
+    //     </span>
+    //   )}
+    //   <h2 className={styles.title}>
+    //     <span className="text-gradient">{title}</span>
+    //   </h2>
+    //   {subtitle && (
+    //     <p className={styles.subtitle}>{subtitle}</p>
+    //   )}
+    // </div>
+  <div className={styles.sectionHeader}>
+    <h2 className={styles.sectionTitle}>{title}</h2>
+    <p className="text-secondary">
+      {subtitle}
+    </p>
+  </div>
   );
 };
 
