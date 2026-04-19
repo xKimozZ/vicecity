@@ -1,6 +1,7 @@
 import styles from "./About.module.css";
 import cvFile from "../../KarimAymanCV.pdf";
 import LinkButton from "../../components/LinkButton/LinkButton";
+import { CvIcon, GithubIcon, LinkedInIcon, EmailIcon } from "../../components";
 
 const techStack = [
   { name: "React", version: "18.3.1", purpose: "UI framework" },
@@ -11,9 +12,10 @@ const techStack = [
 ];
 
 const profileLinks = [
-  { name: "GitHub", url: "https://github.com/xKimozZ", rank: "secondary" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/karim-ayman-h", rank: "secondary" },
-  { name: "CV", url: cvFile, rank: "primary" },
+  { name: <><GithubIcon /> GitHub</>, url: "https://github.com/xKimozZ", rank: "secondary" },
+  { name: <><LinkedInIcon /> LinkedIn</>, url: "https://linkedin.com/in/karim-ayman-h", rank: "secondary" },
+  { name: <><CvIcon /> CV</>, url: cvFile, rank: "primary" },
+  { name: <><EmailIcon /> Email</>, url: "mailto:karim.hasseb02@eng-st.cu.edu.eg", rank: "primary" }
 ]
 
 const About = () => {
