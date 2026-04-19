@@ -1,46 +1,39 @@
+import { Link } from "react-router-dom";
 import styles from "./Devlog.module.css";
 import { StatusBadge } from "../../components";
-
-// Placeholder entries - replace with actual content
-const entries = [
-/*  {
-    id: 1,
-    date: "Coming Soon",
-    title: "The Cursor Conundrum",
-    excerpt: "How I recreated the trapezoidal selection box with random clip-paths, and why CSS doesn't want you to do this.",
-    tags: ["CSS", "clip-path", "animation"],
-  },
-  {
-    id: 2,
-    date: "Coming Soon",
-    title: "Keyboard Navigation: More Complex Than It Looks",
-    excerpt: "The Load menu has two navigation phases. The Stats menu scrolls on held keys. Every menu has its own rules.",
-    tags: ["React", "hooks", "UX"],
-  },
-  {
-    id: 3,
-    date: "Coming Soon",
-    title: "Asset Archaeology",
-    excerpt: "Extracting, upscaling, and recreating assets from a 2002 PS2 game. SVGs, AI upscalers, and manual pixel work.",
-    tags: ["assets", "design", "tools"],
-  },
-  {
-    id: 4,
-    date: "Coming Soon",
-    title: "The 16:9 Problem",
-    excerpt: "The original was 4:3 at 640x480. Modern screens have different proportions. How do you fill the space without breaking the feel?",
-    tags: ["layout", "responsive", "design"],
-  },
-  {
-    id: 5,
-    date: "Coming Soon",
-    title: "State Management: Redux Was the Right Call",
-    excerpt: "Why I chose Redux Toolkit, the abstraction layer I built on top of it, and whether I'd do it again.",
-    tags: ["Redux", "architecture", "React"],
-  },*/
-];
+import entries from "./entries";
 
 const Devlog = () => {
+
+  const EntryOption = ({ entry }) => {
+    return (
+            <Link
+              key={entry.id}
+              to={`/devlog/${entry.slug}`}
+              className={styles.entry}
+            >
+              <div className={styles.entryMeta}>
+                <span className={styles.entryDate}>{entry.date}</span>
+                <div className={styles.entryTags}>
+                  {entry.status === "draft" && (
+                    <span className={styles.draftBadge}>Draft</span>
+                  )}
+                  {entry.tags.map((tag) => (
+                    <span key={tag} className={styles.tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <h2 className={styles.entryTitle}>{entry.title}</h2>
+              <p className={styles.entryExcerpt}>{entry.excerpt}</p>
+              <span className={styles.readMore}>
+                {entry.content ? "Read more →" : "Preview →"}
+              </span>
+            </Link>
+    )
+  };
+
   return (
     <div className={styles.devlog}>
       <header className={styles.header}>
@@ -56,33 +49,15 @@ const Devlog = () => {
       <div className={styles.body}>
         <div className="landing-container">
           <div className={styles.comingSoon}>
-          <StatusBadge type="info" children={"Coming Soon"}/>
+          <StatusBadge type="info" children={`${entries.length} entries`}/>
           <p>
-            Detailed write-ups are in progress. Below are planned topics.
+            Click any entry to read the full write-up.
           </p>
         </div>
 
         <div className={styles.entriesList}>
           {entries.map((entry) => (
-            <article key={entry.id} className={styles.entry}>
-              <div className={styles.entryMeta}>
-                <span className={styles.entryDate}>{entry.date}</span>
-                <div className={styles.entryTags}>
-                  {entry.tags.map((tag) => (
-                    <span key={tag} className={styles.tag}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <h2 className={styles.entryTitle}>{entry.title}</h2>
-              <p className={styles.entryExcerpt}>{entry.excerpt}</p>
-              <div className={styles.entryPlaceholder}>
-                <div className="landing-placeholder" style={{ aspectRatio: "21/9" }}>
-                  Article illustration
-                </div>
-              </div>
-            </article>
+            <EntryOption key={entry.id} entry={entry} />
           ))}
         </div>
 

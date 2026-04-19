@@ -5,6 +5,7 @@ import Layout from "./landing/components/Layout/Layout";
 import Home from "./landing/pages/Home/Home";
 import Demo from "./landing/pages/Demo/Demo";
 import Devlog from "./landing/pages/Devlog/Devlog";
+import EntryPage from "./landing/pages/Devlog/EntryPage";
 import About from "./landing/pages/About/About";
 import Disclaimer from "./landing/pages/Disclaimer/Disclaimer";
 
@@ -20,6 +21,7 @@ const TheRoutes = createBrowserRouter([
             { index: true, element: <Home /> },
             { path: "demo", element: <Demo /> },
             { path: "devlog", element: <Devlog /> },
+            { path: "devlog/:slug", element: <EntryPage /> },
             { path: "about", element: <About /> },
             { path: "disclaimer", element: <Disclaimer /> },
         ],
