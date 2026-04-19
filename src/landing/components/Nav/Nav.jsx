@@ -8,6 +8,7 @@ const navItems = [
   { path: "/demo", label: "Demo" },
   { path: "/devlog", label: "Devlog" },
   { path: "/about", label: "About" },
+  { path: "/disclaimer", label: "Disclaimer & Legal" }
 ];
 
 const getCursorStyleFromRef = (itemRef, navRef) => {

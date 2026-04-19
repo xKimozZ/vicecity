@@ -1,0 +1,136 @@
+.disclaimer {
+  padding: 0;
+}
+
+/* Header */
+.header {
+  padding: var(--space-3xl) 0 var(--space-2xl);
+  text-align: center;
+  background: var(--bg-hero);
+  position: relative;
+  overflow: hidden;
+}
+
+.title {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Body */
+.body {
+  padding: var(--space-3xl) 0;
+}
+
+.prose {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+/* Sections */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.heading {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section p {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.section a {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.section a:hover {
+  color: var(--accent-secondary);
+}
+
+/* Lists */
+.list {
+  margin: 0;
+  padding-left: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.list li {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.table th,
+.table td {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table th {
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+.table td {
+  color: var(--text-secondary);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.note {
+  font-size: var(--text-sm) !important;
+  color: var(--text-muted) !important;
+  font-style: italic;
+}
+
+/* Back link */
+.backRow {
+  padding-top: var(--space-lg);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .title {
+    font-size: var(--text-2xl);
+  }
+
+  .table th,
+  .table td {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--text-xs);
+  }
+}

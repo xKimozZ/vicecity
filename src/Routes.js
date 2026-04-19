@@ -6,6 +6,7 @@ import Home from "./landing/pages/Home/Home";
 import Demo from "./landing/pages/Demo/Demo";
 import Devlog from "./landing/pages/Devlog/Devlog";
 import About from "./landing/pages/About/About";
+import Disclaimer from "./landing/pages/Disclaimer/Disclaimer";
 
 // The actual Vice City app (uses Redux)
 import AppWrapper from "./AppWrapper";
@@ -20,6 +21,7 @@ const TheRoutes = createBrowserRouter([
             { path: "demo", element: <Demo /> },
             { path: "devlog", element: <Devlog /> },
             { path: "about", element: <About /> },
+            { path: "disclaimer", element: <Disclaimer /> },
         ],
     },
     // The actual Vice City demo (with Redux)

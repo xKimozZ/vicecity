@@ -31,6 +31,7 @@ const Footer = () => {
             <ul className={styles.footerLinks}>
               <li><a href="https://github.com/xKimozZ" target="_blank" rel="noopener noreferrer">GitHub</a></li>
               <li><Link to="/demo">Live Demo</Link></li>
+              <li><Link to="/disclaimer">Disclaimer &amp; Legal</Link></li>
             </ul>
           </div>
         </div>
