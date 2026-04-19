@@ -124,10 +124,17 @@
 }
 
 .authorLinks {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-sm);
   justify-content: center;
   margin-top: var(--space-sm);
+}
+
+@media (max-width: 868px) {
+  .authorLinks {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Project section */
