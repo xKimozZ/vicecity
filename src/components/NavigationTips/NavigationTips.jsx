@@ -108,7 +108,7 @@ const NavigationTips = () => {
   return (
     <div className={`${styles.tipsContainer} arborcrest arborcrestS`}>
       <div className={styles.tipsContent}>
-        <table>
+        <table className={styles.table}>
           <tbody>{getInstructions()}</tbody>
         </table>
       </div>
