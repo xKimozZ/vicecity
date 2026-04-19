@@ -10,14 +10,17 @@ import Cursor from '../Cursor/Cursor'
 import { imageImports } from '../../assets/imageImports';
 import { buttonGroups } from '../../constants/buttonGroups';
 import { elementIds } from '../../constants/elementIds';
+import { actionNames } from '../../constants/actionNames';
 import NavigationTips from '../NavigationTips/NavigationTips';
 import TheMap from '../MenuComponents/MapMenu/TheMap';
 
 const { FRONTEND_CONTAINER_ID, FRONTEND_BACKGROUND_ID } = elementIds.FRONTEND;
+const { SCREENPOS_ID, CHANGING_POS } = actionNames.DISPLAY;
 
 const Landscape = () => {
   const { selectorAbstractor } = useReduxAbstractorContext();
   const { hoveredOption, nextButtonGroup, activeButtonGroup } = selectorAbstractor.navigationState;
+  const { displaySettings } = selectorAbstractor.miscState;
   const menuButtonStrings = selectorAbstractor.localizationState.stringMenuState;
   
   const { handleHover, handleSelect, handleError, handleBack, handleInfo } = useEventHandlerContext();
@@ -96,28 +99,53 @@ const Landscape = () => {
     });
   },[nextButtonGroup]);
 
+  const fakeScreenPosStyle = {
+    position: "fixed",
+    top: "6px",
+    left: "6px",
+    height: "calc(99.3vh - 12px)",
+    width: "calc(99.3vw - 12px)",
+    border: "6px solid yellow",
+  };
+
+  const screenPosStyle = {
+    transform: `translate(${displaySettings[SCREENPOS_ID].x}px, ${displaySettings[SCREENPOS_ID].y}px)`
+  };
+
+  const FakeScreenEl = () => {
+    return displaySettings[CHANGING_POS] ? <div style={{...fakeScreenPosStyle, ...screenPosStyle}} /> : null;
+  };
+  const BackgroundEl = () => {
+    return <div id={FRONTEND_BACKGROUND_ID} className="backgroundElement" style={{...clipPathStyle, ...screenPosStyle }} />
+  }
+  const MapWrapper = () => {
+    return nextButtonGroup === buttonGroups.MAP ? <TheMap screenPosStyle={screenPosStyle} /> : null;
+  }
+
   return (
     <>
       <Cursor />
-      <div id={FRONTEND_BACKGROUND_ID} className="backgroundElement" style={{...clipPathStyle }}/>
+      <FakeScreenEl />
+      <BackgroundEl />
+      <MapWrapper />
       {/* UGLY SHIT BUT NEEDED SO THAT THE CURSOR IS ABOVE THE MAP IN Z HIERARCHY
       ALSO BECAUSE THIS IS A REACT ELEMENT AND CANT BE JUST CREATED AND APPENEDED TO ROOT*/}
-      { nextButtonGroup === buttonGroups.MAP && <TheMap /> }
-      <div id={FRONTEND_CONTAINER_ID} className={` AppContainer `}>
-      <img src={imageImports.global.vclogosvg} className="viceLogo" />
-      <NavigationTips />
-      <Header />
-      <div className="App" onClick={ activeButtonGroup === buttonGroups.MAIN ? ()=>handleSelect() : undefined}>
-          {renderHoveredComponent()}
-      </div>
-      <div className='bottomButtonContainer' onClick={ activeButtonGroup !== buttonGroups.MAIN ? ()=>handleBack(1) : undefined }>
-      <div className="bottomButtonRow">
-          {renderButtons(0, optionsPerRow[0]) }
+
+      <div id={FRONTEND_CONTAINER_ID} className={` AppContainer `} style={{...screenPosStyle}}>
+        <img src={imageImports.global.vclogosvg} className="viceLogo" />
+        <NavigationTips />
+        <Header />
+        <div className="App" onClick={ activeButtonGroup === buttonGroups.MAIN ? ()=>handleSelect() : undefined}>
+            {renderHoveredComponent()}
         </div>
+        <div className='bottomButtonContainer' onClick={ activeButtonGroup !== buttonGroups.MAIN ? ()=>handleBack(1) : undefined }>
         <div className="bottomButtonRow">
-          {renderButtons(optionsPerRow[1], menuOptions.length) }
+            {renderButtons(0, optionsPerRow[0]) }
+          </div>
+          <div className="bottomButtonRow">
+            {renderButtons(optionsPerRow[1], menuOptions.length) }
+          </div>
         </div>
-      </div>
     </div>
     </>
   );

@@ -3,11 +3,9 @@ import useSoundManager from "../../useSoundManager";
 import { useEffect } from "react";
 import { actionNames } from "../../../constants/actionNames";
 import { buttonGroups } from "../../../constants/buttonGroups";
-import { elementIds } from "../../../constants/elementIds";
 
 const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = actionNames.ARROWS;
-const { SCREENPOS_ID } = actionNames.DISPLAY;
-const { FRONTEND_ROOT_ID } = elementIds.FRONTEND;
+const { SCREENPOS_ID, CHANGING_POS } = actionNames.DISPLAY;
 
 const MAX_VIEWPORT_RATIO = 0.5;
 
@@ -21,31 +19,6 @@ const useDisplayScPos = (globalHookFunctions) => {
   const { bigHover, activeButtonGroup } = selectorAbstractor.navigationState;
   const { displaySettings } = selectorAbstractor.miscState;
 
-  const FAKE_BORDER_ID = "fake-border";
-  const fakeScreenPosStyle = {
-    position: "fixed",
-    top: "6px",
-    left: "6px",
-    height: "calc(99.3vh - 12px)",
-    width: "calc(99.3vw - 12px)",
-    border: "6px solid yellow",
-    transform: `translate(${displaySettings[SCREENPOS_ID].x}px, ${displaySettings[SCREENPOS_ID].y}px)`,
-  };
-
-  const createFakeBorder = () => {
-    const newElement = document.createElement("div");
-    newElement.id = FAKE_BORDER_ID;
-    Object.assign(newElement.style, fakeScreenPosStyle);
-
-    const rootElement = document.getElementById(FRONTEND_ROOT_ID);
-    rootElement.appendChild(newElement);
-  };
-
-  const destroyFakeBorder = () => {
-    const existingElement = document.getElementById(FAKE_BORDER_ID);
-    existingElement && existingElement.remove();
-  };
-
   const getScreenLimits = () => {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
@@ -58,7 +31,8 @@ const useDisplayScPos = (globalHookFunctions) => {
 
   const toggleScreenPosMode = () => {
     // If just selected, create the border, else toggle off and delete it
-    bigHover.active ? destroyFakeBorder() : createFakeBorder();
+    let isChanging = bigHover.active ? false : true;
+    miscFunctions.setDisplaySettings({...displaySettings, [CHANGING_POS]: isChanging});
     
     toggleBigHover();
     playSelect();
@@ -93,13 +67,8 @@ const useDisplayScPos = (globalHookFunctions) => {
   // Did user exit the menu or otherwise clicked on another option thus should cancel the screen position mode?
   useEffect(() => {
     if (activeButtonGroup !== buttonGroups.DISPLAY || !bigHover.active)
-      destroyFakeBorder();
+      miscFunctions.setDisplaySettings({...displaySettings, [CHANGING_POS]: false});
   }, [activeButtonGroup, bigHover]);
-
-  // Reflect the latest changes
-  useEffect(() => {
-    globalHookFunctions.updateScreenPos();
-  }, [displaySettings[SCREENPOS_ID]]);
 
   return { toggleScreenPosMode, changeScreenPos };
 };

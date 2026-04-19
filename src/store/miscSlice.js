@@ -19,6 +19,7 @@ const initialState = {
   barLastUpdate: 0,
   
   displaySettings: {
+    [DISPLAY.CHANGING_POS]: false,
     [DISPLAY.BRIGHTNESS_ID]: 15/16,
     [DISPLAY.TRAILS_ID]: true,
     [DISPLAY.SUBTITLES_ID]: true,

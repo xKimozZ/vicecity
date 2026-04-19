@@ -2,13 +2,14 @@ import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorConte
 import menuOptions from "../../../constants/menuOptions";
 import styles from "./TheMap.module.css";
 import { imageImports } from "../../../assets/imageImports";
+import { elementIds } from "../../../constants/elementIds";
 
-const TheMap = () => {
+const TheMap = ({ screenPosStyle }) => {
   const { selectorAbstractor } = useReduxAbstractorContext();
   const { mapSettings } = selectorAbstractor.miscState;
   
   return (
-      <div className={styles.mapBound} style={{ clipPath: menuOptions[0].frameClip }}>
+      <div className={styles.mapBound} id={elementIds.FRONTEND.FRONTEND_MAP_ID} style={{ clipPath: menuOptions[0].frameClip, ...screenPosStyle }}>
         <div className={styles.mapGrid} style={{ transform: 'scale(0.75)' }}>
           <img className={styles.mapCellSize} src={imageImports.gameMap.mapTop01} />
           <img className={styles.mapCellSize} src={imageImports.gameMap.mapTop02} />

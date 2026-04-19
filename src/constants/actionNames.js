@@ -11,6 +11,7 @@ export const actionNames = {
     RADAR_ID: "radar",
     HUD_ID: "hud",
     SCREENPOS_ID: "screenpos",
+    CHANGING_POS: "changingpos",
     RADAR_MAPBLIPS: 0,
     RADAR_BLIPSONLY: 1,
     RADAR_OFF: 2,

@@ -3,10 +3,8 @@ import { buttonGroups } from "../../constants/buttonGroups";
 import { actionNames } from "../../constants/actionNames";
 import { elementIds } from "../../constants/elementIds";
 
-const { BRIGHTNESS_ID, SCREENPOS_ID } = actionNames.DISPLAY;
-const { FRONTEND_ROOT_ID, FRONTEND_BACKGROUND_ID, FRONTEND_CONTAINER_ID } = elementIds.FRONTEND;
-
-const FAKE_BORDER_ID = "fake-border"
+const { BRIGHTNESS_ID } = actionNames.DISPLAY;
+const { FRONTEND_ROOT_ID } = elementIds.FRONTEND;
 
 const useGlobalEvents = () => {
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
@@ -89,22 +87,8 @@ const useGlobalEvents = () => {
     rootElement.style.filter = `brightness(${ brightnessValue + 0.08})`;
   }
 
-  const updateScreenPos = (newValue) => {
-    let screenPosValue = newValue && newValue.x && newValue.y ? newValue : displaySettings[SCREENPOS_ID];
-
-    const borderElement = document.getElementById(FAKE_BORDER_ID);
-    const appContainerElement = document.getElementById(FRONTEND_CONTAINER_ID);
-    const backgroundElement = document.getElementById(FRONTEND_BACKGROUND_ID);
-
-    if (!borderElement || !appContainerElement || !backgroundElement) return;
-
-    borderElement.style.transform = `translate(${screenPosValue.x}px, ${screenPosValue.y}px)`;
-    appContainerElement.style.transform = `translate(${screenPosValue.x}px, ${screenPosValue.y}px)`;
-    backgroundElement.style.transform = `translate(${screenPosValue.x}px, ${screenPosValue.y}px)`;
-  }
-
   return {backToNavigation, triggerMenu, setNextMenu, rectangleBuilder, rerenderCursor, toggleBigHover,
-     incrementBar, updateBrightness, updateScreenPos};
+     incrementBar, updateBrightness};
 };
 
 export default useGlobalEvents;
