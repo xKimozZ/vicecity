@@ -100,6 +100,7 @@ const useEventHandler = () => {
         break;
       case buttonGroups.CONTROLS:
         handleControls(SELECT);
+        break;
       case buttonGroups.MAP:
         handleMap(SELECT, hoveredOption);
         break;
