@@ -24,7 +24,7 @@ const SectionHeader = ({
     // </div>
   <div className={styles.sectionHeader}>
     <h2 className={styles.sectionTitle}>{title}</h2>
-    <p className="text-secondary">
+    <p className={`${styles.sectionSubtitle} text-secondary`}>
       {subtitle}
     </p>
   </div>

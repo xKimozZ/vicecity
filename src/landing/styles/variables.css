@@ -54,7 +54,8 @@
   /* Layout */
   --header-height: 64px;
   --max-width: 1200px;
-  --content-padding: var(--space-lg);
+  /* --content-padding: var(--space-lg); */
+  --content-padding: var(--space-xl);
 }
 
 /* Dark theme (default for Vice City aesthetic) */
@@ -145,17 +146,30 @@
 @media (max-width: 768px) {
   :root {
     --header-height: 56px;
-    --content-padding: var(--space-md);
-    --text-4xl: 2rem;
-    --text-5xl: 2.5rem;
+    --content-padding: var(--space-2xl);
+    --text-xs: 0.875rem;
+    --text-base: 1.125rem;
+    --text-sm: 1rem;
+    --text-lg: 1.25rem;
+    --text-xl: 1.5rem;
+    --text-2xl: 1.75rem;
+    --text-3xl: 2rem;
+    --text-4xl: 3rem;
+    --text-5xl: 3.25rem;
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --content-padding: var(--space-sm);
-    --text-3xl: 1.5rem;
-    --text-4xl: 1.75rem;
-    --text-5xl: 2rem;
+    /* --content-padding: var(--space-3xl); */
+    --text-xs: 1rem;
+    --text-base: 1.25rem;
+    --text-sm: 1.125rem;
+    --text-lg: 1.25rem;
+    --text-xl: 1.5rem;
+    --text-2xl: 1.75rem;
+    --text-3xl: 2rem;
+    --text-4xl: 2.5rem;
+    --text-5xl: 2.75rem;
   }
 }

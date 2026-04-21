@@ -166,6 +166,7 @@
   background: var(--bg-primary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
+  font-size: var(--text-base);
 }
 
 .statusName {

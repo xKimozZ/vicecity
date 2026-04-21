@@ -51,6 +51,7 @@
   max-width: 300px;
 }
 
+
 .footerHeading {
   font-size: var(--text-sm);
   font-weight: 600;
@@ -74,6 +75,9 @@
   color: var(--text-secondary);
   transition: color var(--transition-fast);
 }
+
+
+
 
 .footerLinks a:hover {
   color: var(--accent-primary);
@@ -100,4 +104,15 @@
   font-size: var(--text-xs);
   color: var(--text-muted);
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .footerDesc {
+    font-size: var(--text-xs);
+  }
+
+  .footerLinks a {
+    font-size: var(--text-xs);
+  }
+
 }

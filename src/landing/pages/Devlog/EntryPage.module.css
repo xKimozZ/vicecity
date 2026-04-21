@@ -101,7 +101,7 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-lg);
 }
 
 .sectionHeading {
@@ -237,4 +237,19 @@
   .navRight {
     text-align: left;
   }
+}
+
+@media (max-width: 768px) {
+    .section {
+      gap: var(--space-xl);
+    }
+  }
+
+@media (max-width: 480px) {
+  .section p {
+    font-size: var(--text-lg);
+  }
+  .section {
+    gap: var(--space-2xl);
+}
 }

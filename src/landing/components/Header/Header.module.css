@@ -98,8 +98,14 @@
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
   .menuButton {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .logoText {
+    font-size: var(--text-lg);
   }
 }
