@@ -16,10 +16,10 @@
 }
 
 .navMobile .navList {
-  justify-content: center;
-  gap: var(--space-xs);
-  flex-wrap: wrap;
-  padding: var(--space-sm) 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: 0;
 }
 
 .navItem {
@@ -39,8 +39,9 @@
 }
 
 .navMobile .navLink {
-  padding: var(--space-sm) var(--space-md);
-  font-size: var(--text-sm);
+  padding: var(--space-md);
+  font-size: var(--text-xl);
+  font-weight: bold;
 }
 
 .navLink:hover {

@@ -1,3 +1,17 @@
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -77,25 +91,29 @@
   cursor: pointer;
 }
 
-.mobileMenu {
-  position: absolute;
-  top: var(--header-height);
-  left: 0;
-  right: 0;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
-  animation: slideDown var(--transition-fast) ease-out;
+.mobileMenuOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 149;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  animation: fadeIn var(--transition-base);
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 150;
+  width: 280px;
+  height: 100vh;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-color);
+  padding: var(--space-lg);
+  padding-top: var(--space-3xl);
+  overflow-y: auto;
+  animation: slideInRight var(--transition-base);
 }
 
 @media (min-width: 768px) {

@@ -9,13 +9,22 @@ const Header = () => {
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const closeMobileMenu = () => setMobileMenuOpen(false);
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    document.body.style.overflow = "auto";
+  }
+
+  const openMobileMenu = () => {
+    setMobileMenuOpen(true);
+    document.body.style.overflow = "hidden";
+  }
 
   // Close mobile menu when viewport exceeds mobile breakpoint
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768 && mobileMenuOpen) {
         setMobileMenuOpen(false);
+        document.body.style.overflow = "auto";
       }
     };
 
@@ -44,7 +53,7 @@ const Header = () => {
 
           <button
             className={`${styles.menuButton} hide-desktop`}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={openMobileMenu}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
@@ -52,11 +61,14 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile drawer overlay + panel */}
       {mobileMenuOpen && (
-        <div className={styles.mobileMenu}>
-          <Nav isMobile onNavClick={closeMobileMenu} />
-        </div>
+        <>
+          <div className={styles.mobileMenuOverlay} onClick={closeMobileMenu} />
+          <div className={styles.mobileMenu}>
+            <Nav isMobile onNavClick={closeMobileMenu} />
+          </div>
+        </>
       )}
     </header>
   );
