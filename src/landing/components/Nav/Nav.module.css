@@ -30,7 +30,7 @@
   position: relative;
   z-index: 1;
   display: block;
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-sm) var(--space-lg);
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--text-secondary);
@@ -46,6 +46,15 @@
 
 .navLink:hover {
   color: var(--text-primary);
+}
+
+.navMobile .navItem {
+  width: 100%;
+  border-bottom: 2px solid var(--border-subtle);
+}
+
+.navMobile .navItem:first-child {
+  border-top: 2px solid var(--border-subtle);
 }
 
 .navLinkActive {
