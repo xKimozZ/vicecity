@@ -2,6 +2,27 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-primary) var(--bg-secondary);
+}
+
+.layout::-webkit-scrollbar {
+  width: 6px;
+}
+
+.layout::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+.layout::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 3px;
+}
+
+.layout::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
 }
 
 .main {

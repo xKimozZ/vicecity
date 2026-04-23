@@ -11,12 +11,10 @@ const Header = () => {
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
-    document.body.style.overflow = "auto";
   }
 
   const openMobileMenu = () => {
     setMobileMenuOpen(true);
-    document.body.style.overflow = "hidden";
   }
 
   // Close mobile menu when viewport exceeds mobile breakpoint
@@ -24,7 +22,6 @@ const Header = () => {
     const handleResize = () => {
       if (window.innerWidth > 768 && mobileMenuOpen) {
         setMobileMenuOpen(false);
-        document.body.style.overflow = "auto";
       }
     };
 
