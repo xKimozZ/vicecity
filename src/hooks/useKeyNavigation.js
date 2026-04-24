@@ -73,6 +73,8 @@ const useKeyNavigation = (optionsPerRow) => {
     return ( delta > 200 || event.key === lastKey ) && !statsScrollCondition(event) && !barCondition(event) && !screenPosCondition(event) && !mapScrollCondition(event);
   }
 
+  const willUseDiagonal = (event) => mapScrollCondition(event) || screenPosCondition(event);
+
   const handleKeyDown = (event) => {
     if (!keyPressed) {
       navigationFunctions.setLastKeyPressedTime(Date.now());
@@ -85,7 +87,7 @@ const useKeyNavigation = (optionsPerRow) => {
       navigationFunctions.setKeyPressed(true); // Set the flag to prevent continuous keydown events
 
       // Diagonal map panning — check if two arrows are held simultaneously
-      if (activeButtonGroup === buttonGroups.MAP && ["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(event.key)) {
+      if (willUseDiagonal(event)) {
         const diagonal = getMapDiagonalDirection(event.key);
         if (diagonal) {
           handleHover(diagonal);

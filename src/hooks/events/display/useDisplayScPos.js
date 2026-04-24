@@ -4,7 +4,16 @@ import { useEffect } from "react";
 import { actionNames } from "../../../constants/actionNames";
 import { buttonGroups } from "../../../constants/buttonGroups";
 
-const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = actionNames.ARROWS;
+const {
+  DIRECTION_RIGHT,
+  DIRECTION_LEFT,
+  DIRECTION_UP,
+  DIRECTION_DOWN,
+  DIRECTION_UP_RIGHT,
+  DIRECTION_UP_LEFT,
+  DIRECTION_DOWN_RIGHT,
+  DIRECTION_DOWN_LEFT,
+} = actionNames.ARROWS;
 const { SCREENPOS_ID, CHANGING_POS } = actionNames.DISPLAY;
 
 const MAX_VIEWPORT_RATIO = 0.5;
@@ -39,17 +48,40 @@ const useDisplayScPos = (globalHookFunctions) => {
   };
 
   const changeScreenPos = (direction) => {
-    const isInX = direction === DIRECTION_LEFT || direction === DIRECTION_RIGHT;
-    const isInY = direction === DIRECTION_UP || direction === DIRECTION_DOWN;
-    
-    const sign = direction === DIRECTION_LEFT || direction === DIRECTION_UP ? -1 : 1;
-
     const { x: oldX, y: oldY } = displaySettings[SCREENPOS_ID];
     let newX = oldX;
     let newY = oldY;
 
-    if (isInX) newX = oldX + sign;
-    if (isInY) newY = oldY + sign;
+    switch (direction) {
+      case DIRECTION_UP:
+        newY = oldY - 1;
+        break;
+      case DIRECTION_UP_RIGHT:
+        newY = oldY - 1;
+        newX = oldX + 1;
+        break;
+      case DIRECTION_UP_LEFT:
+        newY = oldY - 1;
+        newX = oldX - 1;
+        break;
+      case DIRECTION_DOWN:
+        newY = oldY + 1;
+        break;
+      case DIRECTION_DOWN_RIGHT:
+        newY = oldY + 1;
+        newX = oldX + 1;
+        break;
+      case DIRECTION_DOWN_LEFT:
+        newY = oldY + 1;
+        newX = oldX - 1;
+        break;
+      case DIRECTION_LEFT:
+        newX = oldX - 1;
+        break;
+      case DIRECTION_RIGHT:
+        newX = oldX + 1;
+        break;
+    }
 
     const {x: limitX, y: limitY} = getScreenLimits();
 
