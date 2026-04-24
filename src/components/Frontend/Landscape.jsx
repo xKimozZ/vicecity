@@ -116,16 +116,12 @@ const Landscape = () => {
     return displaySettings[CHANGING_POS] ? <div style={{...fakeScreenPosStyle, ...screenPosStyle}} /> : null;
   };
 
-  const MapWrapper = () => {
-    return nextButtonGroup === buttonGroups.MAP ? <TheMap screenPosStyle={screenPosStyle} /> : null;
-  }
-
   return (
     <>
       <Cursor />
       <FakeScreenEl />
       <div id={FRONTEND_BACKGROUND_ID} className="backgroundElement" style={{...clipPathStyle, ...screenPosStyle }} />
-      <MapWrapper />
+      {nextButtonGroup === buttonGroups.MAP && <TheMap auxilaryStyles={{...screenPosStyle, ...clipPathStyle}} />}
       {/* UGLY SHIT BUT NEEDED SO THAT THE CURSOR IS ABOVE THE MAP IN Z HIERARCHY
       ALSO BECAUSE THIS IS A REACT ELEMENT AND CANT BE JUST CREATED AND APPENEDED TO ROOT*/}
 

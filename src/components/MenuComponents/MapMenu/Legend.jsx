@@ -1,16 +1,36 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
 import styles from "./Legend.module.css";
 import { imageImports } from "../../../assets/imageImports";
+import DestinationIcon from "./DestinationIcon";
+
+const { mapIcons } = imageImports;
 
 const Legend = () => {
   const { selectorAbstractor } = useReduxAbstractorContext();
-  const { mapSettings } = selectorAbstractor.miscState;
   const strings = selectorAbstractor.localizationState.stringMapState;
 
-  const Entry = ({text, icon = imageImports.miscImages.controller}) => {
+  const col1 = [
+    { text: strings.gun, icon: mapIcons.gun },
+    { text: strings.hardware, icon: mapIcons.hardware },
+    { text: strings.spray, icon: mapIcons.spray },
+  ]
+
+  const col2 = [
+    {text: strings.destination, icon: null, isDestination: true},
+    {text: strings.player, icon: mapIcons.arrow },
+  ]
+
+
+  const Entry = ({text, icon, isDestination = false}) => {
     return (
       <div className={styles.entry}>
-        <img className={styles.icon} src={icon} />
+        {isDestination ? (
+          <div className={styles.iconBox}>
+            <DestinationIcon animated={true} size={16} />
+          </div>
+        ) : (
+          <img className={styles.icon} src={icon} />
+        )}
         <span className="arborcrest arborcrestS">{text}</span>
       </div>
     );
@@ -21,13 +41,14 @@ const Legend = () => {
         <span className="pricedown pricedownM">{strings.maplegend}</span>
         <div className={styles.iconsGrid}>
         <div>
-        <Entry text={"Ammu-Nation"}  />
-        <Entry text={"Hardware Store"} />
-        <Entry text={"Pay 'n' Spray"} />
+          {col1.map((entry, index) => (
+            <Entry key={index} text={entry.text} icon={entry.icon} />
+          ))}
         </div>
         <div>
-        <Entry text={"Destination"} />
-        <Entry text={"Player Position"} />
+          {col2.map((entry, index) => (
+            <Entry key={index} text={entry.text} icon={entry.icon} isDestination={entry.isDestination} />
+          ))}
         </div>
         </div>
     </div>

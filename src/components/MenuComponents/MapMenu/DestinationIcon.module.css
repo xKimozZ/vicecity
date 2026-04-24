@@ -1,0 +1,25 @@
+.destPath {
+  d: path("M 2.4 2.4 L 13.6 2.4 L 13.6 13.6 L 2.4 13.6 Z");
+}
+
+.destSquare {
+  d: path("M 2.4 2.4 L 13.6 2.4 L 13.6 13.6 L 2.4 13.6 Z");
+}
+
+.destUp {
+  d: path("M 8 0 L 0 16 L 16 16 L 8 0 Z");
+}
+
+.destDown {
+  d: path("M 8 16 L 0 0 L 16 0 L 8 16 Z");
+}
+
+.destAnimated {
+  animation: destinationCycle 1.5s steps(1) infinite;
+}
+
+@keyframes destinationCycle {
+  0%   { d: path("M 2.4 2.4 L 13.6 2.4 L 13.6 13.6 L 2.4 13.6 Z"); }
+  33%  { d: path("M 8 0 L 0 16 L 16 16 L 8 0 Z"); }
+  66%  { d: path("M 8 16 L 0 0 L 16 0 L 8 16 Z"); }
+}

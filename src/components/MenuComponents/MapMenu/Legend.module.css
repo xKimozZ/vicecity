@@ -25,3 +25,12 @@
     height: 20px;
     margin-right: 0.5em;
 }
+
+.iconBox {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
