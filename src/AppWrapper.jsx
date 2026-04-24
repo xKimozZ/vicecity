@@ -5,6 +5,7 @@ import { EventHandlerProvider } from "./context/EventHandlerContext";
 import { ReduxAbstractorProvider } from "./context/ReduxAbstractorContext";
 import Frontend from "./components/Frontend/Frontend";
 import BuildInfo from "./components/BuildInfo/BuildInfo";
+import mouseCursor from "./assets/images/mouse64.png";
 
 /**
  * Wrapper for the Vice City demo app.
@@ -14,8 +15,10 @@ const AppWrapper = () => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
     document.title = "Vice City PS2 Menu";
+    document.body.style.cursor = `url(${mouseCursor}), auto`;
     return () => {
       document.body.style.overflow = "";
+      document.body.style.cursor = "";
     };
   }, []);
 
