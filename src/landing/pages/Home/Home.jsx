@@ -34,7 +34,7 @@ const menuStatus = [
   { name: "Controls", status: "complete" },
   { name: "Display", status: "complete" },
   { name: "Language", status: "complete" },
-  { name: "Map", status: "wip" },
+  { name: "Map", status: "complete" },
   { name: "Audio", status: "planned" },
 ];
 
