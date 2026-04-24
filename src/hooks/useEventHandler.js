@@ -7,7 +7,7 @@ import useMainEvents from "./events/useMainEvents";
 import useLanguageEvents from "./events/useLanguageEvents";
 import useLoadEvents from "./events/useLoadEvents";
 import useDisplayEvents from "./events/display/useDisplayEvents";
-import useMapEvents from "./events/useMapEvents";
+import useMapEvents from "./events/map/useMapEvents";
 import { actionNames } from "../constants/actionNames";
 import { buttonGroups, buttonIndices } from "../constants/buttonGroups";
 import useControlsEvents from "./events/controls/useControlsEvents";
@@ -57,6 +57,10 @@ const useEventHandler = () => {
       case buttonGroups.CONTROLS:
         if (buttonNumber > 0) break;
         handleControls(HOVER, buttonNumber);
+        return;
+      case buttonGroups.MAP:
+        if (buttonNumber > 0) break;
+        handleMap(HOVER, buttonNumber);
         return;
       default:
         break;
@@ -113,6 +117,9 @@ const useEventHandler = () => {
     switch (activeButtonGroup) {
       case buttonGroups.DISPLAY:
         handleDisplay(SPECIAL, triggeredBy);
+        break;
+      case buttonGroups.MAP:
+        handleMap(SPECIAL, triggeredBy);
         break;
       default:
         console.log("INVALID SPECIAL EVENT!");

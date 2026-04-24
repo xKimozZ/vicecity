@@ -73,6 +73,18 @@ export const handleArrowNavigation = (initialHover, initialGroup, initialBigHove
         }
         return;
 
+      case buttonGroups.MAP:
+        if (direction === "down") {
+          handleHover(actionNames.ARROWS.DIRECTION_DOWN);
+        } else if (direction === "up") {
+          handleHover(actionNames.ARROWS.DIRECTION_UP);
+        } else if (direction === "left") {
+          handleHover(actionNames.ARROWS.DIRECTION_LEFT);
+        } else if (direction === "right") {
+          handleHover(actionNames.ARROWS.DIRECTION_RIGHT);
+        }
+        return;
+
       case buttonGroups.DISPLAY:
         {
             const { LIST_START, LIST_END } = buttonIndices.DISPLAY;

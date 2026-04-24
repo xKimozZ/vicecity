@@ -1,6 +1,6 @@
 import { useReduxAbstractorContext } from "../context/ReduxAbstractorContext";
 import { useEventHandlerContext } from "../context/EventHandlerContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { handleArrowNavigation } from "../utils/buttonGroupKeyNavigation";
 import { buttonGroups } from "../constants/buttonGroups";
 import { actionNames } from "../constants/actionNames";
@@ -12,11 +12,14 @@ const useKeyNavigation = (optionsPerRow) => {
   const { navigationFunctions } = dispatchAbstractor;
   const { hoveredOption, activeButtonGroup, keyPressed, lastKeyPressedTime, lastKeyUnpressedTime, bigHover } = selectorAbstractor.navigationState;
 
-  const { handleHover, handleSelect, handleError, handleBack } = useEventHandlerContext();
+  const { handleHover, handleSelect, handleError, handleBack, handleSpecial } = useEventHandlerContext();
   const { updateParams, handleInput } = handleArrowNavigation(hoveredOption, activeButtonGroup, bigHover, handleHover, optionsPerRow);
 
   const [keyDownActive, setKeyDownActive] = useState(true);
   const [lastKey, setLastKey] = useState(null);
+
+  // Track currently held arrow keys for diagonal map panning
+  const heldKeysRef = useRef(new Set());
 
   useEffect(() => {
     updateParams(hoveredOption, activeButtonGroup, bigHover);
@@ -24,6 +27,10 @@ const useKeyNavigation = (optionsPerRow) => {
 
   const statsScrollCondition = (event) => {
     return activeButtonGroup === buttonGroups.STATS && (event.key === "ArrowDown" || event.key === "ArrowUp");
+  }
+
+  const mapScrollCondition = (event) => {
+    return activeButtonGroup === buttonGroups.MAP && (event.key === "ArrowDown" || event.key === "ArrowUp" || event.key === "ArrowLeft" || event.key === "ArrowRight" || event.key === "PageUp" || event.key === "PageDown");
   }
 
   const barCondition = (event) => {
@@ -34,6 +41,21 @@ const useKeyNavigation = (optionsPerRow) => {
     return activeButtonGroup === buttonGroups.DISPLAY && (event.key === "ArrowLeft" || event.key === "ArrowRight" || event.key === "ArrowUp" || event.key === "ArrowDown") && bigHover.active && bigHover.myId === SCREENPOS_ID;
   }
 
+  const getMapDiagonalDirection = (key) => {
+    const held = heldKeysRef.current;
+    held.add(key);
+    const up = held.has("ArrowUp");
+    const down = held.has("ArrowDown");
+    const left = held.has("ArrowLeft");
+    const right = held.has("ArrowRight");
+    const { ARROWS } = actionNames;
+    if (up && right) return ARROWS.DIRECTION_UP_RIGHT;
+    if (up && left) return ARROWS.DIRECTION_UP_LEFT;
+    if (down && right) return ARROWS.DIRECTION_DOWN_RIGHT;
+    if (down && left) return ARROWS.DIRECTION_DOWN_LEFT;
+    return null;
+  };
+
   const keyHandlers = {
     ArrowRight: () => handleInput("right"),
     ArrowLeft: () => handleInput("left"),
@@ -42,11 +64,13 @@ const useKeyNavigation = (optionsPerRow) => {
     Escape: handleBack,
     Backspace: handleBack,
     Enter: () => handleSelect(),
+    PageUp: () => handleSpecial("zoomIn"),
+    PageDown: () => handleSpecial("zoomOut"),
   };
 
   const willNotAccept = (event) => {
     const delta = Date.now() - lastKeyPressedTime;
-    return ( delta > 200 || event.key === lastKey ) && !statsScrollCondition(event) && !barCondition(event) && !screenPosCondition(event);
+    return ( delta > 200 || event.key === lastKey ) && !statsScrollCondition(event) && !barCondition(event) && !screenPosCondition(event) && !mapScrollCondition(event);
   }
 
   const handleKeyDown = (event) => {
@@ -59,12 +83,24 @@ const useKeyNavigation = (optionsPerRow) => {
      // if (Date.now() - lastKeyUnpressedTime < 150) return;
     
       navigationFunctions.setKeyPressed(true); // Set the flag to prevent continuous keydown events
+
+      // Diagonal map panning — check if two arrows are held simultaneously
+      if (activeButtonGroup === buttonGroups.MAP && ["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(event.key)) {
+        const diagonal = getMapDiagonalDirection(event.key);
+        if (diagonal) {
+          handleHover(diagonal);
+          setLastKey(event.key);
+          return;
+        }
+      }
+
       const handler = keyHandlers[event.key];
       if (handler) handler();
       setLastKey(event.key);
   };
 
-  const handleKeyUp = () => {
+  const handleKeyUp = (event) => {
+    heldKeysRef.current.delete(event.key);
     navigationFunctions.setKeyPressed(false);
     setKeyDownActive(true);
   }
