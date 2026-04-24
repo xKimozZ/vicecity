@@ -38,6 +38,9 @@ const initialState = {
 
   mapSettings: {
     [MAP.LEGEND_ID]: true,
+    [MAP.ZOOM]: 1,
+    [MAP.PAN_X]: 0,
+    [MAP.PAN_Y]: 0,
   },
 };
 

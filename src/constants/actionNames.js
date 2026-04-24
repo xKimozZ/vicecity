@@ -32,12 +32,19 @@ export const actionNames = {
   },
   MAP: {
     LEGEND_ID: "legend",
+    ZOOM: "mapZoom",
+    PAN_X: "mapPanX",
+    PAN_Y: "mapPanY",
   },
   ARROWS: {
     DIRECTION_RIGHT: -1,
     DIRECTION_LEFT: -2,
     DIRECTION_UP: -3,
     DIRECTION_DOWN: -4,
+    DIRECTION_UP_RIGHT: -5,
+    DIRECTION_UP_LEFT: -6,
+    DIRECTION_DOWN_RIGHT: -7,
+    DIRECTION_DOWN_LEFT: -8,
   },
   GENERAL: {
     SELECT: 0,
