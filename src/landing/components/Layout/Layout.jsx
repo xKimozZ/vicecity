@@ -16,7 +16,7 @@ const Layout = () => {
       case "/about": return "About";
       case "/demo": return "Demo";
       case "/devlog": return "Devlog";
-      case "/disclaimer": return "Legal & Disclaimer";
+      case "/disclaimer": return "Disclaimer & Legal";
       default: return "Page Not Found";
     }
   }
