@@ -8,7 +8,27 @@ const KeyIcon = ({ children }) => (
   <span className={styles.keyIcon}>{children}</span>
 );
 
+const ControlItem = ({ control }) => {
+  return (
+    <div className={styles.controlItem}>
+      <div className={styles.keys}>
+        {control.keys.map((key) => (
+          <KeyIcon key={key}>{key}</KeyIcon>
+        ))}
+      </div>
+      <span className={styles.controlDesc}>{control.description}</span>
+    </div>
+  );
+}
+
 const Demo = () => {
+
+  const moveControls = { keys: ["↑", "↓", "←", "→"], description: "Navigate menus" };
+  const selectControl = { keys: ["Enter"], description: "Select / Confirm" };
+  const backControl = { keys: ["Esc", "Backspace"], description: "Back / Cancel" };
+  const mouseControl = { keys: ["Mouse"], description: "Hover to highlight" };
+  const zoomControl = { keys: ["PgDn", "PgUp"], description: "Zoom in / out (map menu)" };
+
   return (
     <div className={styles.demo}>
       <section className={styles.heroSection}>
@@ -30,34 +50,11 @@ const Demo = () => {
           <div className={styles.controls}>
             <h2 className={styles.controlsTitle}>Controls</h2>
             <div className={styles.controlsGrid}>
-              <div className={styles.controlItem}>
-                <div className={styles.keys}>
-                  <KeyIcon>↑</KeyIcon>
-                  <KeyIcon>↓</KeyIcon>
-                  <KeyIcon>←</KeyIcon>
-                  <KeyIcon>→</KeyIcon>
-                </div>
-                <span className={styles.controlDesc}>Navigate menus</span>
-              </div>
-              <div className={styles.controlItem}>
-                <div className={styles.keys}>
-                  <KeyIcon>Enter</KeyIcon>
-                </div>
-                <span className={styles.controlDesc}>Select / Confirm</span>
-              </div>
-              <div className={styles.controlItem}>
-                <div className={styles.keys}>
-                  <KeyIcon>Esc</KeyIcon>
-                  <KeyIcon>Backspace</KeyIcon>
-                </div>
-                <span className={styles.controlDesc}>Back / Cancel</span>
-              </div>
-              <div className={styles.controlItem}>
-                <div className={styles.keys}>
-                  <KeyIcon>Mouse</KeyIcon>
-                </div>
-                <span className={styles.controlDesc}>Hover to highlight</span>
-              </div>
+                <ControlItem control={moveControls} />
+                <ControlItem control={selectControl} />
+                <ControlItem control={backControl} />
+                <ControlItem control={mouseControl} />
+                <ControlItem control={zoomControl} />
             </div>
           </div>
 
