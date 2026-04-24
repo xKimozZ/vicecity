@@ -2,64 +2,56 @@ import styles from "./MapMarker.module.css";
 import { imageImports } from "../../../assets/imageImports";
 import DestinationIcon from "./DestinationIcon";
 
-// Tweak in 0.01 steps — scales text-shadow offset relative to text size
 const PLAYER_TEXT_SHADOW_FACTOR = 0.07;
+
+// Base sizes in grid-coordinate pixels.
+// Screen pixels = base × scaleFactor — constant at all zoom levels.
+const BASE_ARROW_SIZE = 80;
+const BASE_POI_SIZE = 24;
 
 /**
  * MapMarker component — renders a single icon on the map.
  * Position is absolute relative to the map grid (percentage-based).
- * Size scales inversely with zoom for general-area-to-precise effect.
+ * markerScale = 1/effectiveScale cancels out the parent grid's transform,
+ * keeping every marker at a constant apparent screen size regardless of zoom.
  */
-const MapMarker = ({ marker, zoom, scaleFactor, strings }) => {
-  const iconScale = Math.max(0.5, 1.4 / zoom);
-  const baseSize = 25 * scaleFactor * iconScale;
+const MapMarker = ({ marker, markerScale, scaleFactor, strings }) => {
 
-  const markerStyle = {
-    position: "absolute",
-    left: `${marker.x}%`,
-    // top: `${marker.y}%`,
-    bottom: `${100 - marker.y}%`,
-    width: `${baseSize}px`,
-    height: `${baseSize}px`,
-    transform: "translate(-50%, -50%)",
-    pointerEvents: "none",
-  };
-
-  // Player marker — apparent size stays constant on screen by dividing by zoom
-  // (markers are inside the scaled map grid, so jsSize × effectiveScale = screen size)
-  // zoom=1: arrow=105*sf, text=48*sf  |  zoom=3: arrow≈35*sf, text≈16*sf
+  // Player marker — tip (bottom-left of container) anchored to map coordinate
   if (marker.type === "player") {
-    const arrowSize = (80 * scaleFactor) / zoom;
-    const textSize = (120 * scaleFactor * 0.5275) / zoom;
+    const arrowSize = BASE_ARROW_SIZE * scaleFactor * 0.7; // arrow is slightly smaller than POIs for visual clarity
+    const textSize = BASE_ARROW_SIZE * scaleFactor * 0.5275;
     const shadowPx = (textSize * PLAYER_TEXT_SHADOW_FACTOR).toFixed(2);
-    const playerStyle = {
-      position: "absolute",
-      left: `${marker.x}%`,
-      bottom: `${100 - marker.y}%`,
-      height: `${arrowSize}px`,
-      display: "flex",
-      alignItems: "center",
-      overflow: "visible",
-      pointerEvents: "none",
-    };
-    const arrowStyle = {
-      width: `${arrowSize}px`,
-      height: `${arrowSize}px`,
-      marginRight: `${arrowSize * 0.5}px`,
-      filter: `drop-shadow(${arrowSize * 0.025}px ${arrowSize * 0.05}px 0px rgba(0,0,0,1))`,
-      flexShrink: 0,
-    };
     return (
-      <div style={playerStyle} className={styles.playerMarker}>
+      <div
+        className={styles.playerMarker}
+        style={{
+          position: "absolute",
+          left: `${marker.x}%`,
+          bottom: `${100 - marker.y}%`,
+          display: "flex",
+          alignItems: "center",
+          overflow: "visible",
+          pointerEvents: "none",
+          transformOrigin: "0% 100%",
+          transform: `scale(${markerScale})`,
+        }}
+      >
         <img
           src={imageImports.mapIcons.arrow}
           alt=""
           className={styles.playerMarkerArrow}
-          style={arrowStyle}
+          style={{
+            width: `${arrowSize}px`,
+            height: `${arrowSize}px`,
+            marginRight: `${arrowSize * 0.35}px`,
+            filter: `drop-shadow(${arrowSize * 0.025}px ${arrowSize * 0.05}px 0px rgba(0,0,0,1))`,
+            flexShrink: 0,
+          }}
         />
         <div
           className={`${styles.youAreHere} pricedown`}
-          style={{ fontSize: `${textSize}px`, textShadow: `${shadowPx}px ${shadowPx}px 0 #000`, letterSpacing: `${(-1 + (zoom - 1) * 0.25).toFixed(2)}px` }}
+          style={{ fontSize: `${textSize}px`, textShadow: `${shadowPx}px ${shadowPx}px 0 #000`, letterSpacing: "-1px" }}
         >
           {strings.youAreHere}
         </div>
@@ -67,18 +59,31 @@ const MapMarker = ({ marker, zoom, scaleFactor, strings }) => {
     );
   }
 
+  // Shared style for POI and destination — bottom-center anchored to map coordinate
+  const size = BASE_POI_SIZE * scaleFactor;
+  const baseStyle = {
+    position: "absolute",
+    left: `calc(${marker.x}% - ${size / 2}px)`,
+    bottom: `${100 - marker.y}%`,
+    width: `${size}px`,
+    height: `${size}px`,
+    transformOrigin: "50% 100%",
+    transform: `scale(${markerScale})`,
+    pointerEvents: "none",
+  };
+
   // Destination marker — frozen SVG shape on map (phase: "square"|"up"|"down")
   if (marker.type === "destination") {
     return (
-      <div style={{ ...markerStyle, width: `${baseSize / 3 * 2}px`, height: `${baseSize / 3 * 2}px` }}>
-        <DestinationIcon size={baseSize / 3 * 2} phase={marker.phase || "square"} animated={false} />
+      <div style={baseStyle}>
+        <DestinationIcon size={size * 2 / 3} phase={marker.phase || "square"} animated={false} />
       </div>
     );
   }
 
   // POI icon — uses the image from marker.icon
   return (
-    <div className={styles.poiMarker} style={markerStyle}>
+    <div className={styles.poiMarker} style={baseStyle}>
       <img
         src={marker.icon}
         alt=""

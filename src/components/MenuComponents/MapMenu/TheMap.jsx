@@ -18,17 +18,17 @@ const TheMap = ({ auxilaryStyles }) => {
     // Map markers — modular data passed as prop to TheMap
     // Positions are percentages relative to the map grid (0-100)
     const markers = [
-      { id: "player", x: 67.6, y: 84.3, type: "player" },
-      { id: "ammu1", x: 42.6, y: 14, type: "poi", icon: imageImports.mapIcons.gun },
-      { id: "ammu2", x: 72.4, y: 18.7, type: "poi", icon: imageImports.mapIcons.gun },
-      { id: "spray1", x: 70.8, y: 35.6, type: "poi", icon: imageImports.mapIcons.spray },
-      { id: "spray2", x: 37.2, y: 50.6, type: "poi", icon: imageImports.mapIcons.spray },
-      { id: "spray3", x: 37.2, y: 83.2, type: "poi", icon: imageImports.mapIcons.spray },
-      { id: "spray4", x: 62, y: 83, type: "poi", icon: imageImports.mapIcons.spray },
-      { id: "hardware1", x: 72.4, y: 16.6, type: "poi", icon: imageImports.mapIcons.hardware },
-      { id: "hardware2", x: 35.4, y: 67.4, type: "poi", icon: imageImports.mapIcons.hardware },
-      { id: "hardware3", x: 67.5, y: 61.4, type: "poi", icon: imageImports.mapIcons.hardware },
-      { id: "destination", x: 67.4, y: 85.2, type: "destination", phase: "down" },
+      { id: "player", x: 67.6, y: 84.7, type: "player" },
+      { id: "ammu1", x: 43.09, y: 13.4, type: "poi", icon: imageImports.mapIcons.gun },
+      { id: "ammu2", x: 72, y: 17.8, type: "poi", icon: imageImports.mapIcons.gun },
+      { id: "spray1", x: 70.8, y: 34.8, type: "poi", icon: imageImports.mapIcons.spray },
+      { id: "spray2", x: 37.4, y: 50.1, type: "poi", icon: imageImports.mapIcons.spray },
+      { id: "spray3", x: 36.7, y: 82.4, type: "poi", icon: imageImports.mapIcons.spray },
+      { id: "spray4", x: 61.6, y: 82.55, type: "poi", icon: imageImports.mapIcons.spray },
+      { id: "hardware1", x: 72, y: 16.82, type: "poi", icon: imageImports.mapIcons.hardware },
+      { id: "hardware2", x: 35.2, y: 66.4, type: "poi", icon: imageImports.mapIcons.hardware },
+      { id: "hardware3", x: 67.35, y: 60.3, type: "poi", icon: imageImports.mapIcons.hardware },
+      { id: "destination", x: 67.7, y: 85.1, type: "destination", phase: "down" },
       // { id: "tshirt1", x: 38, y: 55, type: "poi", icon: imageImports.mapIcons.tshirt },
       // { id: "save1", x: 55, y: 42, type: "poi", icon: imageImports.mapIcons.save },
       // { id: "property1", x: 65, y: 60, type: "poi", icon: imageImports.mapIcons.property },
@@ -72,7 +72,7 @@ const TheMap = ({ auxilaryStyles }) => {
         {/* Map markers layer — positioned absolutely over the grid */}
         <div className={styles.markersLayer}>
           {markers.map((marker) => (
-            <MapMarker key={marker.id} marker={marker} zoom={zoom} scaleFactor={scaleFactor} strings={strings} />
+            <MapMarker key={marker.id} marker={marker} markerScale={1 / effectiveScale} scaleFactor={scaleFactor} strings={strings} />
           ))}
         </div>
       </div>
