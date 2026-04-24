@@ -13,6 +13,7 @@ import BuildInfo from "./components/BuildInfo/BuildInfo";
 const AppWrapper = () => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    document.title = "Vice City PS2 Menu";
     return () => {
       document.body.style.overflow = "";
     };
