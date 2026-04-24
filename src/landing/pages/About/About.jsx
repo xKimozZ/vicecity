@@ -1,7 +1,8 @@
 import styles from "./About.module.css";
-import cvFile from "../../KarimAymanCV.pdf";
 import LinkButton from "../../components/LinkButton/LinkButton";
 import { CvIcon, GithubIcon, LinkedInIcon, EmailIcon } from "../../components";
+
+const cvUrl = process.env.REACT_APP_CV_URL || "#";
 
 const techStack = [
   { name: "React", version: "18.3.1", purpose: "UI framework" },
@@ -14,12 +15,12 @@ const techStack = [
 const profileLinks = [
   { name: <><GithubIcon /> GitHub</>, url: "https://github.com/xKimozZ", rank: "secondary" },
   { name: <><LinkedInIcon /> LinkedIn</>, url: "https://linkedin.com/in/karim-ayman-h", rank: "secondary" },
-  { name: <><CvIcon /> CV</>, url: cvFile, rank: "primary" },
+  { name: <><CvIcon /> CV</>, url: cvUrl, rank: "primary" },
   { name: <><EmailIcon /> Email</>, url: "mailto:karim.hasseb02@eng-st.cu.edu.eg", rank: "primary" }
 ]
 
 const About = () => {
-  
+
   const TechEntry = ({ name, version, purpose }) => {
     return (
       <div key={name} className={styles.techCard}>
