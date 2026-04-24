@@ -28,7 +28,7 @@ const MapMarker = ({ marker, zoom, scaleFactor, strings }) => {
   // (markers are inside the scaled map grid, so jsSize × effectiveScale = screen size)
   // zoom=1: arrow=105*sf, text=48*sf  |  zoom=3: arrow≈35*sf, text≈16*sf
   if (marker.type === "player") {
-    const arrowSize = (120 * scaleFactor) / zoom;
+    const arrowSize = (80 * scaleFactor) / zoom;
     const textSize = (120 * scaleFactor * 0.5275) / zoom;
     const shadowPx = (textSize * PLAYER_TEXT_SHADOW_FACTOR).toFixed(2);
     const playerStyle = {
@@ -41,13 +41,20 @@ const MapMarker = ({ marker, zoom, scaleFactor, strings }) => {
       overflow: "visible",
       pointerEvents: "none",
     };
+    const arrowStyle = {
+      width: `${arrowSize}px`,
+      height: `${arrowSize}px`,
+      marginRight: `${arrowSize * 0.5}px`,
+      filter: `drop-shadow(${arrowSize * 0.025}px ${arrowSize * 0.05}px 0px rgba(0,0,0,1))`,
+      flexShrink: 0,
+    };
     return (
       <div style={playerStyle} className={styles.playerMarker}>
         <img
           src={imageImports.mapIcons.arrow}
           alt=""
           className={styles.playerMarkerArrow}
-          style={{ width: `${arrowSize}px`, height: `${arrowSize}px`, imageRendering: "pixelated", flexShrink: 0 }}
+          style={arrowStyle}
         />
         <div
           className={`${styles.youAreHere} pricedown`}

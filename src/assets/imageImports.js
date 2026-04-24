@@ -18,7 +18,7 @@ import mapBot01 from './images/map/mapBot01.png'
 import mapBot02 from './images/map/mapBot02.png'
 import mapBot03 from './images/map/mapBot03.png'
 
-import mapArrow from './images/map/icons/arrow.png'
+import mapArrow from './images/map/icons/arrow.svg'
 import mapGun from './images/map/icons/gun.png'
 import mapHardware from './images/map/icons/hardware.png'
 import mapSpray from './images/map/icons/spray.png'
