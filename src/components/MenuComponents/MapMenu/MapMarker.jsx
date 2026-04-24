@@ -17,7 +17,8 @@ const MapMarker = ({ marker, zoom, scaleFactor, strings }) => {
   const markerStyle = {
     position: "absolute",
     left: `${marker.x}%`,
-    top: `${marker.y}%`,
+    // top: `${marker.y}%`,
+    bottom: `${100 - marker.y}%`,
     width: `${baseSize}px`,
     height: `${baseSize}px`,
     transform: "translate(-50%, -50%)",
@@ -69,7 +70,7 @@ const MapMarker = ({ marker, zoom, scaleFactor, strings }) => {
   // Destination marker — frozen SVG shape on map (phase: "square"|"up"|"down")
   if (marker.type === "destination") {
     return (
-      <div style={{ ...markerStyle, width: `${baseSize}px`, height: `${baseSize}px` }}>
+      <div style={{ ...markerStyle, width: `${baseSize / 3 * 2}px`, height: `${baseSize / 3 * 2}px` }}>
         <DestinationIcon size={baseSize / 3 * 2} phase={marker.phase || "square"} animated={false} />
       </div>
     );
