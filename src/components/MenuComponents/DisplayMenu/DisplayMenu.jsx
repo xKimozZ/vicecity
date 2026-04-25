@@ -1,6 +1,6 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
 import { useEventHandlerContext } from "../../../context/EventHandlerContext";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./DisplayMenu.module.css";
 import Button from "../../Button/Button";
 import Bar from "../../Bar/Bar";
@@ -52,6 +52,7 @@ const DisplayMenu = () => {
   const { selectorAbstractor } = useReduxAbstractorContext();
   const { displaySettings } = selectorAbstractor.miscState;
   const { bigHover, currentActions } = selectorAbstractor.navigationState;
+  const shiftPressed = useRef(false);
   const strings = selectorAbstractor.localizationState.stringDisplayState;
 
   const { handleHover } = useEventHandlerContext();
@@ -85,7 +86,7 @@ const DisplayMenu = () => {
     event.stopPropagation();
     if (isChangingScreenPos) { 
       if (event.deltaY !== 0) event.deltaY > 0 ? handleHover(DIRECTION_DOWN) : handleHover(DIRECTION_UP);
-      if (event.deltaX !== 0) event.deltaX > 0 ? handleHover(DIRECTION_LEFT) : handleHover(DIRECTION_RIGHT);
+      if (event.deltaX !== 0 || shiftPressed.current) event.deltaX > 0 || event.deltaY > 0 ? handleHover(DIRECTION_LEFT) : handleHover(DIRECTION_RIGHT);
     }
   };
 
@@ -93,11 +94,23 @@ const DisplayMenu = () => {
     if (isChangingScreenPos) 
     {
       window.addEventListener("wheel", changePosWithWheel);
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Shift") shiftPressed.current = true;
+      });
+      window.addEventListener("keyup", (event) => {
+        if (event.key === "Shift") shiftPressed.current = false;
+      });
       // window.addEventListener("touchmove", changePosWithWheel);
     }
     
     return () => {
       window.removeEventListener("wheel", changePosWithWheel);
+      window.removeEventListener("keydown", (event) => {
+        if (event.key === "Shift") shiftPressed.current = true;
+      });
+      window.removeEventListener("keyup", (event) => {
+        if (event.key === "Shift") shiftPressed.current = false;
+      });
       // window.removeEventListener("touchmove", changePosWithWheel);
     };
   }, [isChangingScreenPos, changePosWithWheel]);
