@@ -14,10 +14,12 @@ import mouseCursor from "./assets/images/mouse64.png";
 const AppWrapper = () => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    document.body.style.userSelect = "none";
     document.title = "Vice City PS2 Menu";
     document.body.style.cursor = `url(${mouseCursor}), auto`;
     return () => {
       document.body.style.overflow = "";
+      document.body.style.userSelect = "";
       document.body.style.cursor = "";
     };
   }, []);

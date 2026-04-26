@@ -23,6 +23,7 @@
 
 .header:hover .disclaimer {
   display: flex;
+  cursor: url("./../../assets/images/ee.jpg"), auto;
   animation: scrollIn .7s;
 }
 
