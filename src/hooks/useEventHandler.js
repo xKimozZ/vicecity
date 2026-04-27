@@ -11,6 +11,7 @@ import useMapEvents from "./events/map/useMapEvents";
 import { actionNames } from "../constants/actionNames";
 import { buttonGroups, buttonIndices } from "../constants/buttonGroups";
 import useControlsEvents from "./events/controls/useControlsEvents";
+import useAudioEvents from "./events/audio/useAudioEvents";
 
 const { SELECT , HOVER, BACK, SPECIAL } = actionNames.GENERAL;
 
@@ -29,6 +30,7 @@ const useEventHandler = () => {
   const { handleDisplay } = useDisplayEvents(globalHookFunctions);
   const { handleControls } = useControlsEvents(globalHookFunctions);
   const { handleMap } = useMapEvents(globalHookFunctions);
+  const { handleAudio } = useAudioEvents(globalHookFunctions);
 
 
   // Initialize stuff
@@ -61,6 +63,10 @@ const useEventHandler = () => {
       case buttonGroups.MAP:
         if (buttonNumber > 0) break;
         handleMap(HOVER, buttonNumber);
+        return;
+      case buttonGroups.AUDIO:
+        if (buttonNumber > 0) break;
+        handleAudio(HOVER, buttonNumber);
         return;
       default:
         break;
@@ -108,6 +114,9 @@ const useEventHandler = () => {
       case buttonGroups.MAP:
         handleMap(SELECT, hoveredOption);
         break;
+      case buttonGroups.AUDIO:
+        handleAudio(SELECT, hoveredOption);
+        break;
       default:
         break;
     }
@@ -120,6 +129,9 @@ const useEventHandler = () => {
         break;
       case buttonGroups.MAP:
         handleMap(SPECIAL, triggeredBy);
+        break;
+      case buttonGroups.AUDIO:
+        handleAudio(SPECIAL, triggeredBy);
         break;
       default:
         console.log("INVALID SPECIAL EVENT!");

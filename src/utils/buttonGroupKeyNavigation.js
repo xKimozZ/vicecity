@@ -123,6 +123,34 @@ export const handleArrowNavigation = (initialHover, initialGroup, initialBigHove
         }
         return;
 
+      case buttonGroups.AUDIO:
+        {
+          const { RADIO, MUSIC, SFX, OUTPUT } = buttonIndices.AUDIO;
+          if (direction === "down") {
+            if (bigHover && bigHover.active) return
+            if (hoveredOption === RADIO) handleHover(MUSIC);
+            else if (hoveredOption === OUTPUT) handleHover(SFX);
+            else handleHover(hoveredOption + 2);
+
+          } else if (direction === "up") {
+            if (bigHover && bigHover.active) return;
+            if (hoveredOption === MUSIC) handleHover(RADIO);
+            else if (hoveredOption === SFX) handleHover(OUTPUT);
+            else handleHover(hoveredOption - 2);
+          } else if (direction === "left") {
+            if (bigHover && bigHover.active) {handleHover(actionNames.ARROWS.DIRECTION_LEFT); return;}
+            if (hoveredOption === RADIO) handleHover(OUTPUT);
+            else if (hoveredOption === MUSIC) handleHover(SFX);
+            else handleHover(hoveredOption - 1);
+          } else if (direction === "right") {
+            if (bigHover && bigHover.active) {handleHover(actionNames.ARROWS.DIRECTION_RIGHT); return;}
+            if (hoveredOption === OUTPUT) handleHover(RADIO);
+            else if (hoveredOption === SFX) handleHover(MUSIC);
+            else handleHover(hoveredOption + 1);
+          }
+        }
+        return;
+
       case buttonGroups.MAIN:
         if (direction === "right") {
           if (hoveredOption + 1 > secondRowEnd) handleHover(secondRowStart);

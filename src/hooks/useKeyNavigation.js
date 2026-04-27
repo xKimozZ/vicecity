@@ -37,6 +37,15 @@ const useKeyNavigation = (optionsPerRow) => {
     return activeButtonGroup === buttonGroups.DISPLAY && (event.key === "ArrowLeft" || event.key === "ArrowRight") && bigHover.active && bigHover.myId === BRIGHTNESS_ID;
   }
 
+  const audioBarCondition = (event) => {
+    return activeButtonGroup === buttonGroups.AUDIO && (event.key === "ArrowLeft" || event.key === "ArrowRight") && bigHover.active && (bigHover.myId === actionNames.AUDIO.MUSIC_ID || bigHover.myId === actionNames.AUDIO.SFX_ID);
+  }
+
+  const radioCondition = (event) => {
+    return activeButtonGroup === buttonGroups.AUDIO && (event.key === "ArrowLeft" || event.key === "ArrowRight") && bigHover.active && bigHover.myId === actionNames.AUDIO.RADIO_ID;
+
+  }
+
   const screenPosCondition = (event) => {
     return activeButtonGroup === buttonGroups.DISPLAY && (event.key === "ArrowLeft" || event.key === "ArrowRight" || event.key === "ArrowUp" || event.key === "ArrowDown") && bigHover.active && bigHover.myId === SCREENPOS_ID;
   }
@@ -70,7 +79,7 @@ const useKeyNavigation = (optionsPerRow) => {
 
   const willNotAccept = (event) => {
     const delta = Date.now() - lastKeyPressedTime;
-    return ( delta > 200 || event.key === lastKey ) && !statsScrollCondition(event) && !barCondition(event) && !screenPosCondition(event) && !mapScrollCondition(event);
+    return ( delta > 200 || event.key === lastKey ) && !statsScrollCondition(event) && !barCondition(event) && !screenPosCondition(event) && !mapScrollCondition(event) && !audioBarCondition(event) && !radioCondition(event);
   }
 
   const willUseDiagonal = (event) => mapScrollCondition(event) || screenPosCondition(event);
