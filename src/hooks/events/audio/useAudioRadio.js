@@ -1,6 +1,4 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
-import useSoundManager from "../../useSoundManager";
-import useDebounce from "../useDebounce";
 import { actionNames } from "../../../constants/actionNames";
 import { useState } from "react";
 
@@ -9,8 +7,7 @@ const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = action
 const { RADIO_ID, RADIO_LIST_START, RADIO_LIST_END } = actionNames.AUDIO;
 
 const useAudioRadio = (globalHookFunctions) => {
-  const { playSoundAfterDelay } = useDebounce();
-  const { playSelect } = useSoundManager();
+  const { playSelect } = globalHookFunctions;
   const [lastKeyPressedTime, setLastKeyPressedTime] = useState(0);
 
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();

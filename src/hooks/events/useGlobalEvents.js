@@ -2,6 +2,7 @@ import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext"
 import { buttonGroups } from "../../constants/buttonGroups";
 import { actionNames } from "../../constants/actionNames";
 import { elementIds } from "../../constants/elementIds";
+import useSoundManager from "../useSoundManager";
 
 const { BRIGHTNESS_ID } = actionNames.DISPLAY;
 const { FRONTEND_ROOT_ID } = elementIds.FRONTEND;
@@ -11,6 +12,7 @@ const useGlobalEvents = () => {
   const { bigHover, activeButtonGroup, hoveredOption } = selectorAbstractor.navigationState;
   const { displaySettings } = selectorAbstractor.miscState;
   const { navigationFunctions, cursorFunctions, miscFunctions } = dispatchAbstractor;
+  const sounds = useSoundManager();
 
   const backToNavigation = () => {
     navigationFunctions.setBigHover({
@@ -69,7 +71,7 @@ const useGlobalEvents = () => {
     navigationFunctions.setBigHover(newBigHover);
   };
 
-  const incrementBar = (currentValue, sign = 1 , playSoundAfterDelay) => {
+  const incrementBar = (currentValue, sign = 1) => {
     const increment = 1 / 16;
     let newValue = currentValue + sign * increment;
     if (newValue < 0 || newValue > 1) {
@@ -77,7 +79,6 @@ const useGlobalEvents = () => {
     }
     const time = Date.now();
     miscFunctions.setBarLastUpdate(time);
-    playSoundAfterDelay(time);
     return newValue;
   };
 
@@ -88,7 +89,7 @@ const useGlobalEvents = () => {
   }
 
   return {backToNavigation, triggerMenu, setNextMenu, rectangleBuilder, rerenderCursor, toggleBigHover,
-     incrementBar, updateBrightness};
+     incrementBar, updateBrightness, ...sounds};
 };
 
 export default useGlobalEvents;

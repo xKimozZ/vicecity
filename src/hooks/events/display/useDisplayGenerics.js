@@ -1,13 +1,11 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
-import useSoundManager from "../../useSoundManager";
 import { actionNames } from "../../../constants/actionNames";
 
 const { DIRECTION_RIGHT, DIRECTION_LEFT } = actionNames.ARROWS;
 const { RADAR_ID, RADAR_MAPBLIPS, RADAR_OFF } = actionNames.DISPLAY;
 
 const useDisplayGenerics = (globalHookFunctions) => {
-  const { toggleBigHover } = globalHookFunctions;
-  const { playHover, playSelect } = useSoundManager();
+  const { toggleBigHover, playHover, playSelect } = globalHookFunctions;
 
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
   const { miscFunctions } = dispatchAbstractor;

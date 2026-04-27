@@ -1,4 +1,3 @@
-import useSoundManager from "../useSoundManager";
 import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
 import { actionNames } from "../../constants/actionNames";
 
@@ -6,10 +5,9 @@ const { HOVER, SELECT, BACK } = actionNames.GENERAL;
 const { DIRECTION_UP, DIRECTION_DOWN } = actionNames.ARROWS;
 
 const useStatsEvents = (globalHookFunctions) => {
-  const { playHover } = useSoundManager();
+  const { playHover, backToNavigation } = globalHookFunctions;
   const { dispatchAbstractor } = useReduxAbstractorContext();
   const { miscFunctions } = dispatchAbstractor;
-  const { backToNavigation } = globalHookFunctions;
 
   const scrollUp = () => {
     miscFunctions.incrementStatsTranslate(1);

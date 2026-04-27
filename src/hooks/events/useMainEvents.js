@@ -1,13 +1,11 @@
 import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
-import useSoundManager from "../useSoundManager";
 import { actionNames } from "../../constants/actionNames";
 import menuOptions from "../../constants/menuOptions";
 
 const { HOVER, SELECT, BACK } = actionNames.GENERAL;
 
 const useMainEvents = (globalHookFunctions) => {
-  const { playSelect } = useSoundManager();
-  const { triggerMenu, setNextMenu } = globalHookFunctions;
+  const { playSelect, triggerMenu, setNextMenu } = globalHookFunctions;
 
   const { selectorAbstractor } = useReduxAbstractorContext();
   const { currentActions } = selectorAbstractor.navigationState;

@@ -1,12 +1,11 @@
 import { actionNames } from "../../../constants/actionNames";
-import useSoundManager from "../../useSoundManager";
 import useMapGenerics from "./useMapGenerics";
 
 const { HOVER, SELECT, BACK, SPECIAL } = actionNames.GENERAL;
 const { LEGEND_ID } = actionNames.MAP;
 
 const useMapEvents = (globalHookFunctions) => {
-  const { playSelect } = useSoundManager();
+  const { playSelect } = globalHookFunctions;
   const { panMap, zoomMap, mapSettingsRef, setMapSettings } = useMapGenerics();
 
   const handleMap = (eventType, param) => {

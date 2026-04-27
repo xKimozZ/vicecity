@@ -1,5 +1,4 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
-import useSoundManager from "../../useSoundManager";
 import { useEffect } from "react";
 import { actionNames } from "../../../constants/actionNames";
 import { buttonGroups } from "../../../constants/buttonGroups";
@@ -19,8 +18,7 @@ const { SCREENPOS_ID, CHANGING_POS } = actionNames.DISPLAY;
 const MAX_VIEWPORT_RATIO = 0.5;
 
 const useDisplayScPos = (globalHookFunctions) => {
-  const { toggleBigHover } = globalHookFunctions;
-  const { playSelect } = useSoundManager();
+  const { toggleBigHover, playSelect } = globalHookFunctions;
 
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
 

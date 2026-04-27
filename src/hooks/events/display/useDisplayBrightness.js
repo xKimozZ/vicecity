@@ -1,5 +1,4 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
-import useSoundManager from "../../useSoundManager";
 import useDebounce from "../useDebounce";
 import { actionNames } from "../../../constants/actionNames";
 
@@ -8,9 +7,8 @@ const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = action
 const { BRIGHTNESS_ID } = actionNames.DISPLAY;
 
 const useDisplayBrightness = (globalHookFunctions) => {
-  const { toggleBigHover, incrementBar, updateBrightness } = globalHookFunctions;
-  const { playSoundAfterDelay } = useDebounce();
-  const { playHover, playSelect } = useSoundManager();
+  const { toggleBigHover, incrementBar, updateBrightness, playHover, playSelect } = globalHookFunctions;
+  const { playSoundAfterDelay } = useDebounce(playSelect);
 
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
   const { miscFunctions } = dispatchAbstractor;
@@ -26,7 +24,8 @@ const useDisplayBrightness = (globalHookFunctions) => {
     if (direction === DIRECTION_UP || direction === DIRECTION_DOWN) return;
     let sign = direction === DIRECTION_LEFT ? -1 : 1;
 
-    const newBrightness = incrementBar(currentBrightness, sign, playSoundAfterDelay);
+    const newBrightness = incrementBar(currentBrightness, sign);
+    playSoundAfterDelay();
     updateBrightness(newBrightness);
 
     const newDisplaySettings = {

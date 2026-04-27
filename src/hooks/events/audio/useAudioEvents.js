@@ -1,6 +1,5 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
 import { actionNames } from "../../../constants/actionNames";
-import useSoundManager from "../../useSoundManager";
 import useAudioBars from "./useAudioBars";
 import useAudioRadio from "./useAudioRadio";
 
@@ -13,7 +12,7 @@ const useAudioEvents = (globalHookFunctions) => {
   const { bigHover, currentActions } = selectorAbstractor.navigationState;
   const { toggleBarMode, changeVolume, directClickOnBar } = useAudioBars(globalHookFunctions);
   const { changeStation } = useAudioRadio(globalHookFunctions);
-  const { playHover, playSelect } = useSoundManager();
+  const { playHover, playSelect } = globalHookFunctions;
   const { trigger: optionId } = currentActions;
 
   const selectCase = () => {

@@ -1,12 +1,11 @@
 import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
-import useSoundManager from "../useSoundManager";
 import { actionNames } from "../../constants/actionNames";
 import { languageMap } from "../../constants/menuStrings";
 
 const { HOVER, SELECT, BACK } = actionNames.GENERAL;
 
-const useLanguageEvents = () => {
-  const { playHover } = useSoundManager();
+const useLanguageEvents = (globalHookFunctions) => {
+  const { playHover } = globalHookFunctions;
 
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
   const { localizationFunctions } = dispatchAbstractor;

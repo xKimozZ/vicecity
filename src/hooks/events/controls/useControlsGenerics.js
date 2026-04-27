@@ -1,13 +1,11 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
-import useSoundManager from "../../useSoundManager";
 import { actionNames } from "../../../constants/actionNames";
 
 const { DIRECTION_RIGHT, DIRECTION_LEFT } = actionNames.ARROWS;
 const { CONFIG_ID, MODE_ID, CONFIG_1, CONFIG_2, CONFIG_3, CONFIG_4, MODE_CAR, MODE_FOOT } = actionNames.CONTROLS;
 
 const useControlsGenerics = (globalHookFunctions) => {
-  const { toggleBigHover } = globalHookFunctions;
-  const { playHover, playSelect } = useSoundManager();
+  const { toggleBigHover, playHover, playSelect } = globalHookFunctions;
 
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
   const { miscFunctions } = dispatchAbstractor;

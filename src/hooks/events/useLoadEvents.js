@@ -1,5 +1,4 @@
 import { useReduxAbstractorContext } from "../../context/ReduxAbstractorContext";
-import useSoundManager from "../useSoundManager";
 import { actionNames } from "../../constants/actionNames";
 import { buttonIndices } from "../../constants/buttonGroups";
 
@@ -9,8 +8,7 @@ const { LOADGAME } = actionNames.LOAD;
 const { PHASE1_LIST_START, PHASE2_LIST_START } = buttonIndices.LOAD;
 
 const useLoadEvents = (globalHookFunctions) => {
-  const { backToNavigation } = globalHookFunctions;
-  const { playHover, playSelect, playBack, playError } = useSoundManager();
+  const { backToNavigation, playHover, playSelect, playBack, playError } = globalHookFunctions;
 
   const { selectorAbstractor, dispatchAbstractor } = useReduxAbstractorContext();
   const { navigationFunctions } = dispatchAbstractor;

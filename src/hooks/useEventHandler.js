@@ -1,6 +1,5 @@
 import { useReduxAbstractorContext } from "../context/ReduxAbstractorContext";
 import { useEffect } from "react";
-import useSoundManager from "./useSoundManager";
 import useGlobalEvents from "./events/useGlobalEvents";
 import useStatsEvents from "./events/useStatsEvents";
 import useMainEvents from "./events/useMainEvents";
@@ -20,8 +19,8 @@ const useEventHandler = () => {
   const { navigationFunctions } = dispatchAbstractor;
   const { activeButtonGroup, hoveredOption, keyPressed, bigHover} =selectorAbstractor.navigationState;
   
-  const { playHover, playBack, playError, playInfo } = useSoundManager();
   const globalHookFunctions = useGlobalEvents();
+  const { playHover, playBack, playError, playInfo } = globalHookFunctions;
 
   const { handleMain } = useMainEvents(globalHookFunctions);
   const { handleStats } = useStatsEvents(globalHookFunctions);

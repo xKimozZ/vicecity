@@ -1,5 +1,4 @@
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
-import useSoundManager from "../../useSoundManager";
 import useDebounce from "../useDebounce";
 import { actionNames } from "../../../constants/actionNames";
 
@@ -8,9 +7,8 @@ const { DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_UP, DIRECTION_DOWN } = action
 const { SFX_ID, MUSIC_ID } = actionNames.AUDIO;
 
 const useAudioBars = (globalHookFunctions) => {
-  const { toggleBigHover, incrementBar } = globalHookFunctions;
-  const { playSoundAfterDelay } = useDebounce();
-  const { playHover, playSelect } = useSoundManager();
+  const { toggleBigHover, incrementBar, playHover, playSelect } = globalHookFunctions;
+  const { playSoundAfterDelay } = useDebounce(playSelect);
 
   const { dispatchAbstractor, selectorAbstractor } = useReduxAbstractorContext();
   const { miscFunctions } = dispatchAbstractor;
@@ -28,7 +26,8 @@ const useAudioBars = (globalHookFunctions) => {
     if (direction === DIRECTION_UP || direction === DIRECTION_DOWN) return;
     let sign = direction === DIRECTION_LEFT ? -1 : 1;
 
-    const newVolume = incrementBar(currentVolume, sign, playSoundAfterDelay);
+    const newVolume = incrementBar(currentVolume, sign);
+    playSoundAfterDelay();
 
     const newAudioSettings = {
       ...audioSettings,
