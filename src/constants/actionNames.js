@@ -36,6 +36,26 @@ export const actionNames = {
     PAN_X: "mapPanX",
     PAN_Y: "mapPanY",
   },
+  AUDIO: {
+    SFX_ID: "sfx",
+    MUSIC_ID: "music",
+    RADIO_ID: "radio",
+    OUTPUT_ID: "output",
+
+    RADIO_FLASH: 0,
+    RADIO_KCHAT: 1,
+    RADIO_FEVER: 2,
+    RADIO_VROCK: 3,
+    RADIO_VCPR: 4,
+    RADIO_ESPANTOSO: 5,
+    RADIO_EMOTION: 6,
+    RADIO_WAVE: 7,
+    RADIO_WILDSTYLE: 8,
+    RADIO_DELMUNDO: 9, // Hi Talal
+
+    RADIO_LIST_START: 0,
+    RADIO_LIST_END: 8,
+  },
   ARROWS: {
     DIRECTION_RIGHT: -1,
     DIRECTION_LEFT: -2,

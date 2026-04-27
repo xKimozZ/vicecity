@@ -20,6 +20,7 @@ import {
   misc_setBarLastUpdate,
   misc_setControlsSettings,
   misc_setMapSettings,
+  misc_setAudioSettings,
 } from "../../store/miscSlice";
 import { cursor_changeLocation } from "../../store/cursorSlice";
 
@@ -54,9 +55,10 @@ const useDispatchAbstractor = () => {
       const setControlsSettings = (settingsStruct) => dispatch(misc_setControlsSettings(settingsStruct));
       const setBarLastUpdate = (time) => dispatch(misc_setBarLastUpdate(time));
       const setMapSettings = (settingsStruct) => dispatch(misc_setMapSettings(settingsStruct));
-      
+      const setAudioSettings = (settingsStruct) => dispatch(misc_setAudioSettings(settingsStruct));
+
       const miscFunctions = {decrementStatsTranslate, incrementStatsTranslate, setDisplaySettings, setControlsSettings,
-        setBriefKey, setStatsLimit, toggleStatsDirection, setBarLastUpdate, setMapSettings};
+        setBriefKey, setStatsLimit, toggleStatsDirection, setBarLastUpdate, setMapSettings, setAudioSettings};
 
     // cursorSlice
     const changeLocation = (rectParams) => dispatch(cursor_changeLocation(rectParams));

@@ -3,7 +3,7 @@ import { getRandomKey } from "../utils/math/getRandomObject";
 import { menuStrings } from "../constants/menuStrings";
 import { actionNames } from "../constants/actionNames";
 
-const { DISPLAY, CONTROLS, MAP } = actionNames;
+const { DISPLAY, CONTROLS, MAP, AUDIO } = actionNames;
 
 //const translateFactor = 10;
 const translateFactor = 1;
@@ -41,6 +41,13 @@ const initialState = {
     [MAP.ZOOM]: 1,
     [MAP.PAN_X]: 0,
     [MAP.PAN_Y]: 0,
+  },
+
+  audioSettings: {
+    [AUDIO.SFX_ID]: 13/16,
+    [AUDIO.MUSIC_ID]: 13/16,
+    [AUDIO.RADIO_ID]: AUDIO.RADIO_FLASH,
+    [AUDIO.OUTPUT_ID]: false, // Stereo or DTS
   },
 };
 
@@ -98,6 +105,10 @@ export const miscSlice = createSlice({
       const newMapSettings = payload;
       state.mapSettings = newMapSettings;
     },
+    misc_setAudioSettings: (state, { payload }) => {
+      const newAudioSettings = payload;
+      state.audioSettings = newAudioSettings;
+    },
     misc_setBarLastUpdate: (state, { payload }) => {
       const newBarLastUpdate = payload;
       state.barLastUpdate = newBarLastUpdate;
@@ -116,6 +127,7 @@ export const {
   misc_setBriefKey,
   misc_setDisplaySettings,
   misc_setControlsSettings,
+  misc_setAudioSettings,
   misc_setBarLastUpdate,
   misc_setMapSettings,
 } = miscSlice.actions;

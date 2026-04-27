@@ -62,4 +62,10 @@ export const buttonIndices = {
     MAP: {
         LEGEND: 1,
     },
+    AUDIO: {
+        SFX: 1,
+        MUSIC: 2,
+        RADIO: 3,
+        OUTPUT: 4,
+    }
 };
