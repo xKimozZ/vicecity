@@ -64,8 +64,16 @@ const Bar = ({
     };
 
     if (!barNotHovered) {
+      const timeout = setTimeout(() => {
       window.addEventListener("wheel", handleWheel);
       window.addEventListener("click", handleClick);
+      }, 100);
+
+      return () => {
+        clearTimeout(timeout);
+        window.removeEventListener("wheel", handleWheel);
+        window.removeEventListener("click", handleClick);
+      }
     }
     
     return () => {
