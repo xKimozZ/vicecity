@@ -27,10 +27,15 @@
 
 .alignRight {
   text-align: right;
-  margin-left: 2.2em;
+  margin-left: 2em;
 }
 
 .radioText {
   margin-top: 0.5em;
   height: 1.3em;
+}
+
+.outputPadding {
+  padding-inline: 0.9em;
+  height: max-content;
 }

@@ -31,6 +31,16 @@ const RADIO_CURSOR_FACTORS = {
   heightFactor: 1.08,
 };
 
+const OUTPUT_CURSOR_FACTORS = {
+  clipFactor: 7,
+  topFactor: 1,
+  leftFactor: 0.99,
+  maxLeftFactor: 1.02,
+  widthFactor: 1.01,
+  minHeightFactor: 1.06,
+  heightFactor: 1.09,
+};
+
 const MUSIC_WRAPPER = "music-wrapper";
 const SFX_WRAPPER = "sfx-wrapper";
 const RADIO_WRAPPER = "radio-wrapper";
@@ -152,7 +162,8 @@ const AudioMenu = () => {
           actions={{ trigger: OUTPUT_ID }}
           topClassName={"pricedown pricedownM"}
           topStyles={{ textAlign: "center" }}
-          cursorFactors={RADIO_CURSOR_FACTORS}
+          cursorFactors={OUTPUT_CURSOR_FACTORS}
+          additionalClassnames={[styles.outputPadding]}
         >
           <div style={{ paddingLeft: "0.2em" }}>{strings.output}</div>
           <div>{audioSettings[OUTPUT_ID] ? strings.dts : strings.stereo}</div>
