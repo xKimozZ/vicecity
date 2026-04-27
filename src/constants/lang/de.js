@@ -239,4 +239,30 @@ export const de = {
     stripclub: "Stripper-Bar",
     target: "Ziel",
   },
+  audio: {
+    sfx: "SFX",
+    music: "Musik",
+    radio: "Radiosender",
+    output: "Ausgabe",
+    stereo: "Stereo",
+    dts: "DTS",
+
+    flash: "FLASH FM",
+    kchat: "KCHAT",
+    fever: "FEVER 105",
+    vrock: "VROCK",
+    vcpr: "VCPR",
+    espantoso: "ESPANTOSO",
+    emotion: "EMOTION 98.3",
+    wave: "WAVE 103",
+    wildstyle: "WILDSTYLE",
+  },
+  generic: {
+    warning: "Achtung! Für diesen Modus muss DTS-kompatible Hardware angeschlossen sein. Fortfahren?",
+    changing: "Achtung! Sie schalten die Tonausgabe von STEREO auf DTS um. Bitte warten...",
+    changing2: "Tonausgabe wird auf STEREO umgeschaltet.",
+    pleasewait: "Bitte warten...",
+    on: "AN",
+    off: "AUS",
+  }
 };

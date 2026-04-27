@@ -239,4 +239,30 @@ export const es = {
     stripclub: "Club de Striptease",
     target: "Objetivo",
   },
+  audio: {
+    sfx: "EFECTOS",
+    music: "Música",
+    radio: "Emisora de radio",
+    output: "Salida",
+    stereo: "Estéreo",
+    dts: "DTS",
+
+    flash: "FLASH FM",
+    kchat: "KCHAT",
+    fever: "FEVER 105",
+    vrock: "VROCK",
+    vcpr: "VCPR",
+    espantoso: "ESPANTOSO",
+    emotion: "EMOTION 98.3",
+    wave: "WAVE 103",
+    wildstyle: "WILDSTYLE",
+  },
+  generic: {
+    warning: "¡Aviso! Esta característica requiere que el dispositivo compatible DTS esté conectado. ¿Continuar?",
+    changing: "¡Aviso! Estás cambiando la salida de ESTÉREO a DTS. Por favor espera...",
+    changing2: "Cambiando la salida de audio a ESTÉREO.",
+    pleasewait: "Por favor espera...",
+    on: "ON",
+    off: "OFF",
+  }
 };

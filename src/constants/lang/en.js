@@ -239,4 +239,30 @@ export const en = {
       stripclub: "Strip Club",
       target: "Target",
     },
+    audio: {
+      sfx: "SFX",
+      music: "Music",
+      radio: "Radio station",
+      output: "Output",
+      stereo: "Stereo",
+      dts: "DTS",
+
+      flash: "FLASH FM",
+      kchat: "KCHAT",
+      fever: "FEVER 105",
+      vrock: "VROCK",
+      vcpr: "VCPR",
+      espantoso: "ESPANTOSO",
+      emotion: "EMOTION 98.3",
+      wave: "WAVE 103",
+      wildstyle: "WILDSTYLE",
+    },
+    generic: {
+      warning: "Warning! This feature requires DTS compatible hardware to be connected. Proceed?",
+      changing: "Warning! You are changing from STEREO output to DTS. Please wait...",
+      changing2: "Changing audio output to STEREO.",
+      pleasewait: "Please wait...",
+      on: "ON",
+      off: "OFF",
+    }
 };

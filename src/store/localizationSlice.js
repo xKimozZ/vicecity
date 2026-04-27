@@ -62,6 +62,11 @@ export const stringMapSelector = createSelector(
   (state) => state.strings[state.language]?.map || {}
 );
 
+export const stringAudioSelector = createSelector(
+  selectSelf,
+  (state) => state.strings[state.language]?.audio || {}
+);
+
 export const stringNavSelector = createSelector(
   selectSelf,
   (state) => state.strings[state.language]?.nav || {}

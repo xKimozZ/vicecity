@@ -239,4 +239,30 @@ export const it = {
     stripclub: "Club a luci rosse",
     target: "Bersaglio",
   },
+  audio: {
+    sfx: "Effetti",
+    music: "Musica",
+    radio: "Stazione radio",
+    output: "Uscita",
+    stereo: "Stereo",
+    dts: "DTS",
+
+    flash: "FLASH FM",
+    kchat: "KCHAT",
+    fever: "FEVER 105",
+    vrock: "VROCK",
+    vcpr: "VCPR",
+    espantoso: "ESPANTOSO",
+    emotion: "EMOTION 98.3",
+    wave: "WAVE 103",
+    wildstyle: "WILDSTYLE",
+  },
+  generic: {
+    warning: "Attenzione! Questa caratteristica richiede delle periferiche compatibili DTS. Vuoi procedere?",
+    changing: "Attenzione! Modifica uscita audio da STEREO a DTS. Attendere...",
+    changing2: "Modifica uscita audio in STEREO.",
+    pleasewait: "Attendere...",
+    on: "ON",
+    off: "OFF",
+  }
 };

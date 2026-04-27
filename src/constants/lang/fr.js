@@ -239,4 +239,30 @@ export const fr = {
     stripclub: "Boîte de striptease",
     target: "Cible",
   },
+  audio: {
+    sfx: "Sons",
+    music: "Musique",
+    radio: "Station de radio",
+    output: "Sortie",
+    stereo: "Stéréo",
+    dts: "DTS",
+
+    flash: "FLASH FM",
+    kchat: "KCHAT",
+    fever: "FEVER 105",
+    vrock: "VROCK",
+    vcpr: "VCPR",
+    espantoso: "ESPANTOSO",
+    emotion: "EMOTION 98.3",
+    wave: "ONDE 103",
+    wildstyle: "WILDSTYLE",
+  },
+  generic: {
+    warning: "Attention! Un équipement matériel compatible DTS est requis pour cette fonction. Continuer?",
+    changing: "Attention! Tu es en train de passer du mode STEREO au mode DTS. Patiente un instant...",
+    changing2: "Passage en mode STEREO.",
+    pleasewait: "Patiente un instant...",
+    on: "Activé",
+    off: "Désactivé",
+  }
 };
