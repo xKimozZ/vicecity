@@ -28,7 +28,7 @@ const RADIO_CURSOR_FACTORS = {
   maxLeftFactor: 1.01,
   widthFactor: 1.01,
   minHeightFactor: 1.06,
-  heightFactor: 1.08,
+  heightFactor: 1.1,
 };
 
 const OUTPUT_CURSOR_FACTORS = {
