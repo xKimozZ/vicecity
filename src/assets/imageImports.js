@@ -48,13 +48,31 @@ import mapPhil from './images/map/icons/radar_phil.png'
 import mapSave from './images/map/icons/radar_save.png'
 import mapStrip from './images/map/icons/radar_strip.png'
 
+import radioFlash from './images/radio/flash.png'
+import radioEmotion from './images/radio/emotion.png'
+import radioEspantoso from './images/radio/espantoso.png'
+import radioFever from './images/radio/fever.png'
+import radioKchat from './images/radio/kchat.png'
+import radioVcpr from './images/radio/vcpr.png'
+import radioWave from './images/radio/wave103.png'
+import radioVrock from './images/radio/vrock.png'
+import radioWildstyle from './images/radio/wildstyle.png'
+
 export const imageImports = {
   global: {
     vclogo1024,
     vclogosvg,
   },
   radioStations: {
-
+    flash: radioFlash,
+    emotion: radioEmotion,
+    espantoso: radioEspantoso,
+    fever: radioFever,
+    kchat: radioKchat,
+    vcpr: radioVcpr,
+    wave: radioWave,
+    vrock: radioVrock,
+    wildstyle: radioWildstyle,
   },
   gameMap: {
     mapTop01,
