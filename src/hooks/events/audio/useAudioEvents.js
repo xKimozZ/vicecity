@@ -7,7 +7,7 @@ const { HOVER, SELECT, BACK, SPECIAL } = actionNames.GENERAL;
 
 const { RADIO_ID, MUSIC_ID, SFX_ID, OUTPUT_ID } = actionNames.AUDIO;
 
-const useAudioEvents = (globalHookFunctions) => {
+const useAudioEvents = (globalHookFunctions, pauseRadio) => {
   const { selectorAbstractor } = useReduxAbstractorContext();
   const { bigHover, currentActions } = selectorAbstractor.navigationState;
   const { toggleBarMode, changeVolume, directClickOnBar } = useAudioBars(globalHookFunctions);
@@ -59,6 +59,11 @@ const useAudioEvents = (globalHookFunctions) => {
         specialCase(param);
         break;
       case BACK:
+        // Pause radio here so normal exit stops playback.
+        // If the user somehow leaves via the output-option exploit, this BACK never fires,
+        // intentionally replicating the original game bug where audio bleeds into the frontend.
+        pauseRadio();
+        break;
       default:
         break;
     }

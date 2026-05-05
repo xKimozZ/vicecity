@@ -83,13 +83,22 @@ const useRadioPlayer = () => {
 
     clearTimeout(playTimerRef.current);
 
-    // Left the audio menu — stop immediately
-    if (!isInAudioMenu) {
-      if (wasInMenu && playerRef.current) {
-        playerRef.current.pause();
+    // INTENTIONAL BUG REPLICA: The original Vice City had a bug where leaving the audio menu
+    // via the "output" option exploit would let radio audio bleed into the rest of the frontend.
+    // Stopping on menu exit is therefore the responsibility of the BACK handler in useAudioEvents,
+    // NOT this reactive effect. If the player leaves through any other means, audio keeps playing.
+    // eslint-disable-next-line no-constant-condition
+    if (false) {
+      // Left the audio menu — stop immediately
+      if (!isInAudioMenu) {
+        if (wasInMenu && playerRef.current) {
+          playerRef.current.pause();
+        }
+        return;
       }
-      return;
     }
+
+    if (!isInAudioMenu) return;
 
     const justEntered = !wasInMenu;
     const stationChanged = wasInMenu && prevStation !== station;
@@ -138,6 +147,13 @@ const useRadioPlayer = () => {
       }
     }, PLAY_DELAY);
   }, [isInAudioMenu, station]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const pauseRadio = () => {
+    clearTimeout(playTimerRef.current);
+    if (playerRef.current) playerRef.current.pause();
+  };
+
+  return { pauseRadio };
 };
 
 export default useRadioPlayer;

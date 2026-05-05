@@ -30,8 +30,8 @@ const useEventHandler = () => {
   const { handleDisplay } = useDisplayEvents(globalHookFunctions);
   const { handleControls } = useControlsEvents(globalHookFunctions);
   const { handleMap } = useMapEvents(globalHookFunctions);
-  const { handleAudio } = useAudioEvents(globalHookFunctions);
-  useRadioPlayer();
+  const { pauseRadio } = useRadioPlayer();
+  const { handleAudio } = useAudioEvents(globalHookFunctions, pauseRadio);
 
 
   // Initialize stuff
@@ -145,6 +145,11 @@ const useEventHandler = () => {
       switch (activeButtonGroup) {
         case buttonGroups.LOAD:
           handleLoad(BACK, overRide);
+          break;
+        case buttonGroups.AUDIO:
+          handleAudio(BACK);
+          globalHookFunctions.backToNavigation();
+          playBack();
           break;
         default:
           globalHookFunctions.backToNavigation();
