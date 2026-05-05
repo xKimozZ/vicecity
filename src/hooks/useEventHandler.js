@@ -11,6 +11,7 @@ import { actionNames } from "../constants/actionNames";
 import { buttonGroups, buttonIndices } from "../constants/buttonGroups";
 import useControlsEvents from "./events/controls/useControlsEvents";
 import useAudioEvents from "./events/audio/useAudioEvents";
+import useRadioPlayer from "./useRadioPlayer";
 
 const { SELECT , HOVER, BACK, SPECIAL } = actionNames.GENERAL;
 
@@ -30,6 +31,7 @@ const useEventHandler = () => {
   const { handleControls } = useControlsEvents(globalHookFunctions);
   const { handleMap } = useMapEvents(globalHookFunctions);
   const { handleAudio } = useAudioEvents(globalHookFunctions);
+  useRadioPlayer();
 
 
   // Initialize stuff
