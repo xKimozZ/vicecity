@@ -5,6 +5,7 @@ import { buttonGroups, buttonIndices } from "../../../constants/buttonGroups";
 import { actionNames } from "../../../constants/actionNames";
 import { useReduxAbstractorContext } from "../../../context/ReduxAbstractorContext";
 import Hoverable from "../../Hoverable/Hoverable";
+import RadioCarousel from "./RadioCarousel";
 
 const { SFX, MUSIC, RADIO, OUTPUT } = buttonIndices.AUDIO;
 const { SFX_ID, MUSIC_ID, RADIO_ID, OUTPUT_ID } = actionNames.AUDIO;
@@ -126,8 +127,8 @@ const AudioMenu = () => {
           />
         </div>
       </div>
-      <div className={styles.barsRow} style={{ gap: "10em" }}>
-        <div>
+      <div className={styles.barsRow2}>
+        <div className={styles.radioFlex}>
           <div id={RADIO_WRAPPER}>
             <Button
               buttonText={strings.radio}
@@ -154,6 +155,7 @@ const AudioMenu = () => {
               {strings[getRadioString(audioSettings[RADIO_ID])]}
             </Hoverable>
           </div>
+          <RadioCarousel />
         </div>
 
         <Hoverable
