@@ -20,7 +20,7 @@ const initialState = {
   
   displaySettings: {
     [DISPLAY.CHANGING_POS]: false,
-    [DISPLAY.BRIGHTNESS_ID]: 15/16,
+    [DISPLAY.BRIGHTNESS_ID]: 11/16,
     [DISPLAY.TRAILS_ID]: true,
     [DISPLAY.SUBTITLES_ID]: true,
     [DISPLAY.WIDESCREEN_ID]: true,

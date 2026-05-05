@@ -85,7 +85,7 @@ const useGlobalEvents = () => {
   const updateBrightness = (newValue) => {
     let brightnessValue = newValue !== undefined ? newValue : displaySettings[BRIGHTNESS_ID];
     const rootElement = document.getElementById(FRONTEND_ROOT_ID);
-    rootElement.style.filter = `brightness(${ brightnessValue + 0.08})`;
+    rootElement.style.filter = `brightness(${ brightnessValue * 0.04 * 16 + 0.56})`;
   }
 
   return {backToNavigation, triggerMenu, setNextMenu, rectangleBuilder, rerenderCursor, toggleBigHover,
