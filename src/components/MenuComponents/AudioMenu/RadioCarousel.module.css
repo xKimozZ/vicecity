@@ -1,0 +1,118 @@
+:root {
+    --shift-distance: 19.5%;
+    --anim-time: 0.39s;
+}
+
+@keyframes cycleRight {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(-1 * var(--shift-distance)));
+    }
+}
+
+@keyframes cycleLeft {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(var(--shift-distance));
+    }
+}
+
+:root {
+    --clipoff: 0.8;
+    --trapezoid-top-left: calc(9/320 * 100% );
+    --trapezoid-top-left-mid: calc(69/320 * 100%);
+    --trapezoid-bottom-left-mid: calc(60/320 * 100%);
+    --trapezoid-top-right-mid: calc(260/320 * 100% );
+    --trapezoid-bottom-right: calc(311/320 * 100% );
+    --trapezoid-bottom-right-mid: calc(251/320 * 100% );
+
+    /* --trapezoid-top-left: calc(9/320 * 100% );
+    --trapezoid-top-left-mid: calc(57/320 * 100%);
+    --trapezoid-bottom-left-mid: calc(48/320 * 100%);
+    --trapezoid-top-right-mid: calc(272/320 * 100% );
+    --trapezoid-bottom-right: calc(311/320 * 100% );
+    --trapezoid-bottom-right-mid: calc(263/320 * 100% ); */
+}
+
+.panel {
+    background-color: var(--lightblue);
+    margin-top: 0.8em;
+    z-index: 3;
+    padding-block: 0.75em;
+    position: relative;
+    display: flex;;
+    justify-content: center;
+    width: 100%;
+    min-height: 128px;
+    /* clip-path: polygon(2.8125% 0% , 100% 0%, 97.875% 100%, 0% 100%); */
+    clip-path: polygon(var(--trapezoid-top-left) 0% , 100% 0%, var(--trapezoid-bottom-right) 100%, 0 100%);
+}
+
+.panelLeft {
+    z-index: 3;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--navy);
+    clip-path: polygon(var(--trapezoid-top-left) 0% , var(--trapezoid-top-left-mid) 0%, var(--trapezoid-bottom-left-mid) 100%, 0 100%);
+}
+
+.panelRight {
+    z-index: 3;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--navy);
+    clip-path: polygon(var(--trapezoid-top-right-mid) 0% , 100% 0%, var(--trapezoid-bottom-right) 100%, var(--trapezoid-bottom-right-mid) 100%);
+}
+
+.radioIcon {
+    z-index: 1;
+    opacity: 0.4;
+    transform: scale(0.9);
+    filter: blur(1px);
+}
+
+.radioIconSelected {
+    z-index: 2;
+    opacity: 1;
+    transform: scale(1.25);
+    filter: none;
+}
+
+.radioList {
+    display: flex;
+    gap: 1.5em;
+    z-index: 1;
+}
+
+.radioSlideRight {
+    animation: cycleRight var(--anim-time);
+}
+
+.radioSlideLeft {
+    animation: cycleLeft var(--anim-time);
+}
+
+.triangle {
+    z-index: 5;
+    position: absolute;
+}
+
+.triangleLeft {
+    left: 3%;
+    filter: drop-shadow(4px 6px 0px black);
+}
+
+.triangleRight {
+    right: 3%;
+    filter: drop-shadow(-4px 6px 0px black);
+}
