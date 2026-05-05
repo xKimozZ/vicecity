@@ -41,7 +41,7 @@ const RadioCarousel = () => {
   const { selectorAbstractor } = useReduxAbstractorContext();
   const { audioSettings } = selectorAbstractor.miscState;
   const { activeButtonGroup, bigHover, hoveredOption} = selectorAbstractor.navigationState;
-  const { handleHover } = useEventHandlerContext();
+  const { handleHover, handleSelect } = useEventHandlerContext();
   const [currentRadio, setCurrentRadio] = useState(audioSettings[RADIO_ID]);
   const [changeDirection, setChangeDirection] = useState(null); // 'left' or 'right'
   const [isChangingRadio, setIsChangingRadio] = useState(false);
@@ -75,9 +75,16 @@ const RadioCarousel = () => {
   const currentIcon = radioIcons[currentRadio];
   const nextIcon = radioIcons[(currentRadio + 1) % 9];
   const nextNextIcon = radioIcons[(currentRadio + 2) % 9];
+  const isActive = activeButtonGroup === AUDIO && hoveredOption === RADIO;
 
 const EquilateralTriangle = ({ deg, position }) => {
-  const isActive = activeButtonGroup === AUDIO && hoveredOption === RADIO && bigHover.active;
+  const handleClick = (event) => {
+    event.stopPropagation();
+    if (isActive && bigHover.active) {
+      handleHover(position === "left" ? DIRECTION_LEFT : DIRECTION_RIGHT);
+    }
+  };
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +92,7 @@ const EquilateralTriangle = ({ deg, position }) => {
       width="120"
       height="120"
       className={`${styles.triangle} ${position === "left" ? styles.triangleLeft : styles.triangleRight}`}
-      onClick={isActive ? () => handleHover(position === "left" ? DIRECTION_LEFT : DIRECTION_RIGHT) : undefined}
+      onClick={handleClick}
     >
       <polygon
         points="100,20 169.2820323027551,140 30.717967697244916,140.00000000000003"
@@ -99,8 +106,15 @@ const EquilateralTriangle = ({ deg, position }) => {
   );
   };
 
+  const handleClick = (event) => {
+    event.stopPropagation();
+    if (isActive ) {
+      handleSelect();
+    } else if (activeButtonGroup === AUDIO) handleHover(RADIO);
+  };
+
   return (
-    <div className={styles.panel}>
+    <div className={styles.panel} onClick={handleClick}>
       <div className={styles.panelLeft} />
       <div className={styles.panelRight} />
       <EquilateralTriangle deg={90} position="right" />
