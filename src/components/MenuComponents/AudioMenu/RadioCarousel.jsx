@@ -107,7 +107,6 @@ const EquilateralTriangle = ({ deg, position }) => {
   };
 
   const handleClick = (event) => {
-    event.stopPropagation();
     if (isActive ) {
       handleSelect();
     } else if (activeButtonGroup === AUDIO) handleHover(RADIO);
