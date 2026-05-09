@@ -61,9 +61,9 @@ const Demo = () => {
           <div className={styles.incompleteCard}>
             <h3>Currently Incomplete</h3>
             <ul>
-              <li><strong>Map Menu</strong> — Legend, map navigation features in progress</li>
+              <li><strong>General</strong> — Optimisation, accessibility, and responsivity improvements in progress</li>
               <li><strong>Load Menu</strong> — Dummy loading sequence coming soon</li>
-              <li><strong>Audio Menu</strong> — Coming soon</li>
+              <li><strong>Audio Menu</strong> — Dummy output menu coming soon</li>
             </ul>
           </div>
 

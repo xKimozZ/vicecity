@@ -10,9 +10,9 @@ const features = [
     icon: "🎮",
   },
   {
-    title: "Custom Cursor System",
-    description: "Real-time generated clip-path polygons that jitter just like the original selection box.",
-    icon: "🎯",
+    title: "Radio Station System",
+    description: "Featuring 9+ hours of iconic 80s music, hilarious talk shows, and amusing commercials.",
+    icon: "🎵",
   },
   {
     title: "Full Keyboard Navigation",
@@ -35,7 +35,7 @@ const menuStatus = [
   { name: "Display", status: "complete" },
   { name: "Language", status: "complete" },
   { name: "Map", status: "complete" },
-  { name: "Audio", status: "planned" },
+  { name: "Audio", status: "wip" },
 ];
 
 const Home = () => {
