@@ -199,3 +199,52 @@
   color: rgba(255, 255, 255, 0.7);
   margin: 0 0 var(--space-xl) 0;
 }
+
+/* info Section */
+.infoSection {
+  background: var(--bg-secondary);
+}
+
+.infoText {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-xl) 0;
+  line-height: 1.8;
+}
+
+.infoText em {
+  color: var(--accent-secondary);
+  font-style: normal;
+}
+
+.infoText i {
+  color: var(--accent-primary);
+  font-style: normal;
+}
+
+.infoText b {
+  font-weight: 900;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  font-size: var(--text-lg);
+  color: var(--accent-secondary);
+  font-weight: 600;
+}
+
+.infoList li {
+  padding-left: var(--space-lg);
+}
+
+.infoSublist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+.infoSublist li {
+  font-weight: 500;
+}

@@ -100,6 +100,45 @@ const Home = () => {
         </div>
       </section>
 
+      {/* What Am I supposed to Do here anyway Section */}
+      <section className={`landing-section ${styles.infoSection}`}>
+        <div className="landing-container">
+          <SectionHeader title="What Am I Supposed to Do Here Anyway?" subtitle="Glad you asked. In short, life is what you make it." />
+          <p className={styles.infoText}>
+            <em><b>Fun fact:</b></em> when the radio station feature was implemented, it marked a milestone.
+            I found myself subconciously entering my deployed site, going to the Audio menu, intermittently switching radio stations, and studying for my finals with the music, goofy commercials, and DJ banter playing in the background.
+          </p>
+          <p className={styles.infoText}>
+            What I just described was an unintentional side effect. This project was quite challenging, intimidating, and caused me to doubt myself at times. Beneath what you see is many hours of research, trial and error, blood, sweat, and tears. At the time of writing this, the project was still in pre-alpha with 90% of feature-complete criteria fulfilled.
+          </p>
+          <p className={styles.infoText}>
+           The moment I could browse to my pre-alpha demo on demand, listen to Michael Jackson on Fever 105 or Flash FM, switch over to nostalgic new wave on Wave 103, then listen to emotionally resonant ballads on Emotion 98.3, all with the lore-specific commercials and DJ banter,<br/>
+          </p>
+          <p className={styles.infoText} style={{ textAlign: "center", fontSize: "var(--text-xl)" }}><i><b>was the moment the line between what I used to do on an emulator/PlayStation AND on this project blurred.</b></i></p>
+          <p className={styles.infoText}>
+            Really, I could not tell the difference. It was a euphoric moment, and it felt like I found the Key of the Twilight. The soundtrack is indisputably the soul of this game. Anyway, let me list down things you might find yourself doing on this site:
+          </p>
+          <ul className={styles.infoList}>
+            <li>Entering the audio menu and:
+              <ul className={styles.infoSublist}>
+                <li>Cycling through stations when you get bored of one.</li>
+                <li>Hesitating to choose a station when <b><i>Billie Jean</i></b> and <b><i>Never Too Much</i></b> are both on.</li>
+                <li>Worrying about leaving the menu so you don't miss a favorite track.</li>
+                <li>Keeping the tab open while your favorite station plays, just like leaving the console idle to listen to music.</li>
+              </ul>
+            </li>
+            <li>Obsessively selecting and backing out to trigger the frontend sounds, like you're fiddling with a soundboard.</li>
+            <li>Curiously exploring what the PS2 rendition looked like.</li>
+            <li>Carrying out research if you are a content creator.</li>
+            <li>Looking for inspiration as a developer or a UI/UX specialist.</li>
+            <li>Keenfully analyzing behaviors if you have a sharp eye for details.</li>
+          </ul>
+          <p className={styles.infoText}>
+            With this project, I wanted to create something that could evoke the same feelings as the original game, and be a fun little experience for fans and developers alike. As Talk Talk's <i>Life's What You Make It</i> suggests, the menu is what you make it. You can use it as a fun diversion, a research tool, or a source of inspiration. I hope you enjoy exploring it as much as I enjoyed creating it.
+          </p>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="landing-section">
         <div className="landing-container">
